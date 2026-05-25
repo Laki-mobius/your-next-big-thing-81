@@ -187,7 +187,7 @@ export default function AssetRepository() {
 
       {/* Filter grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
-        <FilterBlock icon={Globe} label="Region" options={regionOptions} selected={regions} onChange={setRegions} />
+        <FilterBlock icon={Globe} label="Region" options={regionOptions} selected={regions} onChange={setRegions} search />
         <FilterBlock icon={MapPin} label="Country" options={countryOptions} selected={countries} onChange={setCountries} search />
         <FilterBlock icon={Layers} label="Source Type" options={typeOptions} selected={sourceTypes} onChange={setSourceTypes} />
         <FilterBlock icon={FileText} label="Source Name" options={nameOptions} selected={sourceNames} onChange={setSourceNames} search />

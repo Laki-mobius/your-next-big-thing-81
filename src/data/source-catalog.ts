@@ -4427,53 +4427,6 @@ export const sourceCatalog: SourceRecord[] = [
       "Website",
       "NAICS and SIC codes"
     ]
-  },
-  {
-    "sourceType": "Company page",
-    "sourceName": "Company page",
-    "sourceUrl": "domain",
-    "region": "All",
-    "country": "All",
-    "workflows": [
-      "Company page"
-    ],
-    "attributes": []
-  },
-  {
-    "sourceType": "Primary Source",
-    "sourceName": "Company webpage",
-    "sourceUrl": "(varies by company — no fixed URL)",
-    "region": "Global",
-    "country": "Global",
-    "workflows": [
-      "New listing creation",
-      "Data exchange/update",
-      "Scoring & Refresh",
-      "Quality check",
-      "Data consolidation"
-    ],
-    "attributes": [
-      "Company Name",
-      "Website",
-      "Street Address",
-      "Postal/Zip Code",
-      "City",
-      "State/Province",
-      "Country",
-      "Phone Number",
-      "Number of Employees",
-      "Executive Name",
-      "Executive Title",
-      "Executive Phone",
-      "Executive Email ID",
-      "Board of Directors Name",
-      "Board of Directors Title",
-      "Subsidiaries",
-      "Parent company",
-      "Announcements",
-      "Competitors",
-      "Foundation Year"
-    ]
   }
 ];
 
