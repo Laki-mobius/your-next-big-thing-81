@@ -72,8 +72,9 @@ export default function Sidebar({ collapsed, activeItem, onItemClick }: SidebarP
         />
         <SidebarItem
           icon={<svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.4" /><path d="M8 5v3.2l2.2 1.4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" /></svg>}
-          label="Job status"
+          label="Job configuration"
           badge={{ value: 3, variant: 'amber' }}
+          active={activeItem === 'jobs'}
           collapsed={collapsed}
           onClick={() => onItemClick('jobs')}
         />
@@ -151,6 +152,14 @@ export default function Sidebar({ collapsed, activeItem, onItemClick }: SidebarP
             </div>
           </div>
         )}
+
+        <SidebarItem
+          icon={<svg viewBox="0 0 16 16" fill="none"><rect x="2.5" y="2.5" width="4.5" height="4.5" rx="0.8" stroke="currentColor" strokeWidth="1.4" /><rect x="9" y="2.5" width="4.5" height="4.5" rx="0.8" stroke="currentColor" strokeWidth="1.4" /><rect x="2.5" y="9" width="4.5" height="4.5" rx="0.8" stroke="currentColor" strokeWidth="1.4" /><rect x="9" y="9" width="4.5" height="4.5" rx="0.8" stroke="currentColor" strokeWidth="1.4" /></svg>}
+          label="Asset repository"
+          active={activeItem === 'assets'}
+          collapsed={collapsed}
+          onClick={() => onItemClick('assets')}
+        />
       </div>
       <div className="p-2 pb-1.5 border-b border-border">
         <div className={cn('text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.07em] px-2.5 pb-[7px] whitespace-nowrap transition-opacity', collapsed && 'opacity-0 h-0 p-0')}>
