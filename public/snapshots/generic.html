@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Source Document</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; color: #222; font-size: 14px; }
+  header { background: #2c3e50; color: #fff; padding: 16px 24px; display: flex; align-items: center; gap: 16px; }
+  header .logo { width: 40px; height: 40px; background: #3498db; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+  header h1 { margin: 0; font-size: 20px; }
+  header .sub { font-size: 12px; opacity: 0.8; }
+  .container { max-width: 1100px; margin: 24px auto; padding: 0 24px; }
+  .doc { background: #fff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); padding: 28px 32px; }
+  h2 { color: #2c3e50; font-size: 18px; border-bottom: 2px solid #3498db; padding-bottom: 6px; margin-top: 28px; }
+  h2:first-child { margin-top: 0; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 32px; }
+  .row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #e5e8ee; font-size: 13px; }
+  .row .lbl { color: #6b7280; }
+  .row .val { font-weight: 600; color: #1f2937; text-align: right; }
+  footer { text-align: center; padding: 18px; color: #6b7280; font-size: 11px; }
+  .__xdas_hl__ {
+    background: #fde047 !important;
+    outline: 2px solid #f59e0b !important;
+    border-radius: 3px !important;
+    padding: 1px 3px !important;
+    box-shadow: 0 0 0 4px rgba(253, 224, 71, 0.35) !important;
+  }
+  @keyframes __xdas_pulse__ { 0%,100% { box-shadow: 0 0 0 4px rgba(253, 224, 71, 0.35);} 50% { box-shadow: 0 0 0 10px rgba(253, 224, 71, 0.15);} }
+  .__xdas_hl_pulse__ { animation: __xdas_pulse__ 1.4s ease-in-out infinite; }
+</style>
+</head>
+<body>
+  <header>
+    <div class="logo">DOC</div>
+    <div>
+      <h1>Source Document Viewer</h1>
+      <div class="sub">Reference: <span data-field="documentType">Data Pack</span> &middot; <span data-field="reportingPeriod">Q2 2025</span></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="doc">
+      <h2>Company Identification</h2>
+      <div class="grid">
+        <div class="row"><span class="lbl">Company Name</span><span class="val" data-field="companyName">__COMPANY__</span></div>
+        <div class="row"><span class="lbl">Legal Name</span><span class="val" data-field="legalName">__COMPANY__</span></div>
+        <div class="row"><span class="lbl">Trade Name</span><span class="val" data-field="tradeName">__SHORT__ Corp</span></div>
+        <div class="row"><span class="lbl">Registration ID</span><span class="val" data-field="registrationId">REG-2024-00847</span></div>
+        <div class="row"><span class="lbl">Ticker</span><span class="val" data-field="ticker">__TICKER__</span></div>
+        <div class="row"><span class="lbl">Exchange</span><span class="val" data-field="exchange">NYSE</span></div>
+        <div class="row"><span class="lbl">Status</span><span class="val" data-field="entityStatus">Active</span></div>
+        <div class="row"><span class="lbl">Org Type</span><span class="val" data-field="orgType">Public Corporation</span></div>
+      </div>
+
+      <h2>Contact &amp; Location</h2>
+      <div class="grid">
+        <div class="row"><span class="lbl">Country</span><span class="val" data-field="country">United States</span></div>
+        <div class="row"><span class="lbl">Address</span><span class="val" data-field="address">123 Main St, New York, NY 10001</span></div>
+        <div class="row"><span class="lbl">City</span><span class="val" data-field="city">New York</span></div>
+        <div class="row"><span class="lbl">State</span><span class="val" data-field="state">NY</span></div>
+        <div class="row"><span class="lbl">Postal Code</span><span class="val" data-field="postalCode">10001</span></div>
+        <div class="row"><span class="lbl">Phone</span><span class="val" data-field="phone">+1 (212) 555-0100</span></div>
+        <div class="row"><span class="lbl">Fax</span><span class="val" data-field="fax">+1 (212) 555-0101</span></div>
+        <div class="row"><span class="lbl">Email</span><span class="val" data-field="email">info@example.com</span></div>
+        <div class="row"><span class="lbl">Website</span><span class="val" data-field="website">https://example.com</span></div>
+        <div class="row"><span class="lbl">Social Media</span><span class="val" data-field="socialMedia">LinkedIn, Twitter</span></div>
+      </div>
+
+      <h2>Operational Details</h2>
+      <div class="grid">
+        <div class="row"><span class="lbl">Foundation Year</span><span class="val" data-field="foundationYear">1998</span></div>
+        <div class="row"><span class="lbl">Employees</span><span class="val" data-field="numEmployees">12,400</span></div>
+        <div class="row"><span class="lbl">NAICS / SIC</span><span class="val" data-field="naicsSic">7372 / 5112</span></div>
+        <div class="row"><span class="lbl">Fiscal Year End</span><span class="val" data-field="fiscalYearEnd">December 31</span></div>
+        <div class="row" style="grid-column: span 2;"><span class="lbl">Business Description</span><span class="val" data-field="description" style="text-align:right; max-width:60%;">Technology &amp; data services provider</span></div>
+      </div>
+
+      <h2>Financial Summary</h2>
+      <div class="grid">
+        <div class="row"><span class="lbl">Revenue (USD)</span><span class="val" data-field="revenue">$4.2B</span></div>
+        <div class="row"><span class="lbl">Assets</span><span class="val" data-field="assets">$12.8B</span></div>
+        <div class="row"><span class="lbl">Liabilities</span><span class="val" data-field="liabilities">$7.1B</span></div>
+        <div class="row"><span class="lbl">Net Income</span><span class="val" data-field="netIncome">$890M</span></div>
+      </div>
+
+      <h2>Corporate Hierarchy</h2>
+      <div class="grid">
+        <div class="row"><span class="lbl">Ultimate Parent</span><span class="val" data-field="ultimateParent">__COMPANY__ Holdings plc</span></div>
+        <div class="row"><span class="lbl">Subsidiary</span><span class="val" data-field="subsidiary">__COMPANY__ consolidated inco</span></div>
+        <div class="row"><span class="lbl">Entity Type</span><span class="val" data-field="entityType">Operating Subsidiary</span></div>
+        <div class="row"><span class="lbl">Hierarchy Level</span><span class="val" data-field="hierarchyLevel">2</span></div>
+        <div class="row"><span class="lbl">Hierarchy Country</span><span class="val" data-field="hierCountry">United States</span></div>
+        <div class="row"><span class="lbl">Relationship Type</span><span class="val" data-field="relationshipType">Wholly Owned</span></div>
+        <div class="row"><span class="lbl">Performance</span><span class="val" data-field="perfExpectation">Above Average</span></div>
+      </div>
+    </div>
+    <footer>Confidential &middot; For validation purposes only</footer>
+  </div>
+</body>
+</html>

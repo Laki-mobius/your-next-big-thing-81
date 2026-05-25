@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>NYSE: Listed Company</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Helvetica Neue', Arial, sans-serif; background: #fff; color: #1a1a1a; font-size: 14px; }
+  .ribbon { background: #000; color: #fff; padding: 6px 24px; font-size: 11px; display: flex; justify-content: space-between; }
+  header.main { background: #fff; border-bottom: 1px solid #ddd; padding: 14px 24px; display: flex; align-items: center; gap: 24px; }
+  header.main .logo { color: #2266b6; font-size: 28px; font-weight: 900; letter-spacing: -1px; }
+  header.main nav a { color: #1a1a1a; text-decoration: none; margin-right: 20px; font-size: 13px; font-weight: 600; }
+  .hero { background: linear-gradient(135deg, #002b5c, #0a4f9c); color: #fff; padding: 28px 24px; }
+  .hero h1 { margin: 0 0 4px; font-size: 28px; }
+  .hero .meta { font-size: 13px; opacity: 0.9; }
+  .ticker-strip { background: #f5f7fa; border-bottom: 1px solid #e2e6eb; padding: 12px 24px; display: flex; gap: 32px; }
+  .ticker-strip .stat { font-size: 12px; }
+  .ticker-strip .stat .lbl { color: #666; display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .ticker-strip .stat .val { font-size: 18px; font-weight: bold; color: #1a1a1a; }
+  .ticker-strip .up { color: #00a651; }
+  .layout { max-width: 1180px; margin: 0 auto; padding: 24px; display: grid; grid-template-columns: 1fr 300px; gap: 28px; }
+  section h2 { font-size: 18px; border-left: 4px solid #2266b6; padding-left: 10px; margin: 0 0 12px; }
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; background: #fff; border: 1px solid #e2e6eb; padding: 16px 20px; border-radius: 4px; }
+  .info-grid .row { display: flex; justify-content: space-between; border-bottom: 1px dashed #eef0f3; padding: 6px 0; font-size: 13px; }
+  .info-grid .row:last-child { border-bottom: none; }
+  .info-grid .lbl { color: #666; }
+  .info-grid .val { font-weight: 600; }
+  aside.right { font-size: 12px; }
+  aside.right .card { background: #f5f7fa; border: 1px solid #e2e6eb; padding: 14px; border-radius: 4px; margin-bottom: 14px; }
+  aside.right .card h4 { margin: 0 0 8px; font-size: 12px; text-transform: uppercase; color: #2266b6; }
+  footer { background: #000; color: #ccc; padding: 18px 24px; font-size: 11px; text-align: center; margin-top: 40px; }
+  .__xdas_hl__ {
+    background: #fde047 !important;
+    outline: 2px solid #f59e0b !important;
+    border-radius: 3px !important;
+    padding: 1px 3px !important;
+    box-shadow: 0 0 0 4px rgba(253, 224, 71, 0.35) !important;
+  }
+  @keyframes __xdas_pulse__ { 0%,100% { box-shadow: 0 0 0 4px rgba(253, 224, 71, 0.35);} 50% { box-shadow: 0 0 0 10px rgba(253, 224, 71, 0.15);} }
+  .__xdas_hl_pulse__ { animation: __xdas_pulse__ 1.4s ease-in-out infinite; }
+</style>
+</head>
+<body>
+  <div class="ribbon"><span>NYSE Group</span><span>Markets &middot; Listings &middot; Data &middot; Solutions</span></div>
+  <header class="main">
+    <div class="logo">NYSE</div>
+    <nav><a href="#">Markets</a><a href="#">Listings</a><a href="#">Indices</a><a href="#">Data Services</a><a href="#">News</a></nav>
+  </header>
+  <div class="hero">
+    <h1 data-field="companyName">__COMPANY__</h1>
+    <div class="meta">Common Stock &middot; <span data-field="exchange">NYSE</span>: <span data-field="ticker">__TICKER__</span> &middot; Listed since 1998</div>
+  </div>
+  <div class="ticker-strip">
+    <div class="stat"><span class="lbl">Last Price</span><span class="val up">$184.27</span></div>
+    <div class="stat"><span class="lbl">Change</span><span class="val up">+2.41 (+1.32%)</span></div>
+    <div class="stat"><span class="lbl">Volume</span><span class="val">4.82M</span></div>
+    <div class="stat"><span class="lbl">Market Cap</span><span class="val">$2.28T</span></div>
+    <div class="stat"><span class="lbl">52W Range</span><span class="val">$142.30 — $198.40</span></div>
+  </div>
+
+  <div class="layout">
+    <section>
+      <h2>Company Profile</h2>
+      <div class="info-grid">
+        <div class="row"><span class="lbl">Legal Name</span><span class="val" data-field="legalName">__COMPANY__</span></div>
+        <div class="row"><span class="lbl">Trade Name</span><span class="val" data-field="tradeName">__SHORT__ Corp</span></div>
+        <div class="row"><span class="lbl">Ticker</span><span class="val" data-field="ticker">__TICKER__</span></div>
+        <div class="row"><span class="lbl">Exchange</span><span class="val" data-field="exchange">NYSE</span></div>
+        <div class="row"><span class="lbl">Country</span><span class="val" data-field="country">United States</span></div>
+        <div class="row"><span class="lbl">Headquarters</span><span class="val" data-field="address">123 Main St, New York, NY 10001</span></div>
+        <div class="row"><span class="lbl">City</span><span class="val" data-field="city">New York</span></div>
+        <div class="row"><span class="lbl">State</span><span class="val" data-field="state">NY</span></div>
+        <div class="row"><span class="lbl">Postal Code</span><span class="val" data-field="postalCode">10001</span></div>
+        <div class="row"><span class="lbl">Phone</span><span class="val" data-field="phone">+1 (212) 555-0100</span></div>
+        <div class="row"><span class="lbl">Website</span><span class="val" data-field="website">https://example.com</span></div>
+        <div class="row"><span class="lbl">Email (IR)</span><span class="val" data-field="email">info@example.com</span></div>
+        <div class="row"><span class="lbl">Founded</span><span class="val" data-field="foundationYear">1998</span></div>
+        <div class="row"><span class="lbl">Employees</span><span class="val" data-field="numEmployees">12,400</span></div>
+        <div class="row"><span class="lbl">Organization Type</span><span class="val" data-field="orgType">Public Corporation</span></div>
+        <div class="row"><span class="lbl">Status</span><span class="val" data-field="entityStatus">Active</span></div>
+        <div class="row"><span class="lbl">SIC Code</span><span class="val" data-field="naicsSic">7372 / 5112</span></div>
+        <div class="row"><span class="lbl">Fiscal Year End</span><span class="val" data-field="fiscalYearEnd">December 31</span></div>
+      </div>
+
+      <h2 style="margin-top:24px;">Business Description</h2>
+      <p data-field="description" style="background:#fff; border:1px solid #e2e6eb; padding:14px 18px; border-radius:4px; line-height:1.6;">
+        Technology &amp; data services provider engaged in software development, cloud infrastructure, and enterprise data solutions for Fortune 500 customers worldwide.
+      </p>
+
+      <h2 style="margin-top:24px;">Corporate Hierarchy</h2>
+      <div class="info-grid">
+        <div class="row"><span class="lbl">Ultimate Parent</span><span class="val" data-field="ultimateParent">__COMPANY__ Holdings plc</span></div>
+        <div class="row"><span class="lbl">Subsidiary</span><span class="val" data-field="subsidiary">__COMPANY__ consolidated inco</span></div>
+        <div class="row"><span class="lbl">Entity Type</span><span class="val" data-field="entityType">Operating Subsidiary</span></div>
+        <div class="row"><span class="lbl">Hierarchy Level</span><span class="val" data-field="hierarchyLevel">2</span></div>
+        <div class="row"><span class="lbl">Country</span><span class="val" data-field="hierCountry">United States</span></div>
+        <div class="row"><span class="lbl">Relationship Type</span><span class="val" data-field="relationshipType">Wholly Owned</span></div>
+      </div>
+    </section>
+
+    <aside class="right">
+      <div class="card">
+        <h4>Document</h4>
+        <div><strong data-field="documentType">Data Pack</strong></div>
+        <div style="margin-top:6px;">Period: <span data-field="reportingPeriod">Q2 2025</span></div>
+      </div>
+      <div class="card">
+        <h4>Financial Snapshot</h4>
+        <div>Revenue: <strong data-field="revenue">$4.2B</strong></div>
+        <div>Assets: <strong data-field="assets">$12.8B</strong></div>
+        <div>Liabilities: <strong data-field="liabilities">$7.1B</strong></div>
+        <div>Net Income: <strong data-field="netIncome">$890M</strong></div>
+      </div>
+      <div class="card">
+        <h4>Social</h4>
+        <div data-field="socialMedia">LinkedIn, Twitter</div>
+      </div>
+    </aside>
+  </div>
+  <footer>&copy; 2025 NYSE Group, Inc. All rights reserved. NYSE and New York Stock Exchange are trademarks of NYSE Group, Inc.</footer>
+</body>
+</html>

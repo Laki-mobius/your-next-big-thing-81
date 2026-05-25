@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 150 8% 97%;
+    --foreground: 150 40% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 150 40% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 150 40% 10%;
+
+    --primary: 152 64% 29%;
+    --primary-foreground: 0 0% 100%;
+    --primary-dark: 152 64% 22%;
+
+    --secondary: 150 14% 95%;
+    --secondary-foreground: 150 40% 10%;
+
+    --muted: 150 14% 95%;
+    --muted-foreground: 150 16% 42%;
+
+    --accent: 150 14% 95%;
+    --accent-foreground: 150 40% 10%;
+
+    --destructive: 4 68% 46%;
+    --destructive-foreground: 0 0% 100%;
+    --destructive-light: 4 80% 96%;
+
+    --border: 150 16% 90%;
+    --input: 150 16% 90%;
+    --ring: 152 64% 29%;
+
+    --radius: 0.5rem;
+    --radius-lg: 0.75rem;
+
+    /* Brand colors */
+    --brand: 152 64% 29%;
+    --brand-dark: 152 64% 22%;
+    --brand-light: 148 50% 94%;
+    --brand-mid: 150 36% 74%;
+
+    /* Status colors */
+    --amber: 36 100% 39%;
+    --amber-light: 45 100% 95%;
+    --amber-mid: 45 100% 76%;
+
+    --red: 6 63% 46%;
+    --red-light: 6 80% 97%;
+
+    --blue: 210 71% 37%;
+    --blue-light: 210 70% 95%;
+
+    --purple: 244 40% 50%;
+    --purple-light: 244 70% 96%;
+
+    /* Grays */
+    --gray-300: 150 14% 77%;
+    --gray-400: 150 12% 61%;
+    --gray-500: 150 14% 42%;
+    --gray-900: 150 40% 10%;
+
+    /* Layout */
+    --header-height: 54px;
+    --sidebar-width: 220px;
+    --sidebar-collapsed: 56px;
+
+    --surface: 150 14% 95%;
+    --header-bg: 0 0% 100%;
+    --sidebar-bg: 0 0% 100%;
+  }
+
+  .dark {
+    --background: 215 28% 7%;
+    --foreground: 210 20% 93%;
+
+    --card: 215 25% 11%;
+    --card-foreground: 210 20% 93%;
+
+    --popover: 215 25% 11%;
+    --popover-foreground: 210 20% 93%;
+
+    --primary: 152 64% 29%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 215 18% 14%;
+    --secondary-foreground: 210 20% 93%;
+
+    --muted: 215 18% 14%;
+    --muted-foreground: 215 12% 58%;
+
+    --accent: 215 18% 14%;
+    --accent-foreground: 210 20% 93%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 20% 93%;
+
+    --border: 215 12% 21%;
+    --input: 215 12% 21%;
+    --ring: 152 64% 29%;
+
+    --brand-light: 152 38% 16%;
+    --brand-mid: 152 42% 21%;
+    --amber-light: 40 70% 9%;
+    --blue-light: 210 60% 12%;
+    --red-light: 0 50% 11%;
+    --purple-light: 250 30% 14%;
+    --gray-300: 215 10% 32%;
+    --gray-400: 215 8% 45%;
+    --gray-500: 215 10% 58%;
+    --gray-900: 210 20% 93%;
+
+    --surface: 215 20% 13%;
+    --header-bg: 215 25% 11%;
+    --sidebar-bg: 215 25% 11%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    transition: background-color 0.2s, color 0.2s;
+  }
+}

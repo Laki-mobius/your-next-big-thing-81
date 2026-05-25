@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Annual Report 2024.pdf</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: #525659;
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    color: #1a1a1a;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── PDF Reader Chrome (Chrome/Edge built-in viewer style) ───── */
+  .pdf-toolbar {
+    position: sticky; top: 0; z-index: 20;
+    background: #323639; color: #e8eaed;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 12px; height: 40px;
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif; font-size: 13px;
+    border-bottom: 1px solid #1a1c1e;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.3);
+  }
+  .pdf-toolbar .group { display: flex; align-items: center; gap: 4px; }
+  .pdf-toolbar .filename {
+    display: flex; align-items: center; gap: 8px;
+    max-width: 420px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .pdf-toolbar .filename svg { width: 16px; height: 16px; flex-shrink: 0; color: #f28b82; }
+  .pdf-toolbar .pageinput {
+    background: #202124; border: 1px solid #5f6368; color: #e8eaed;
+    width: 36px; height: 22px; text-align: center; border-radius: 2px; font-size: 12px;
+  }
+  .pdf-toolbar .of { font-size: 12px; opacity: 0.7; margin: 0 4px; }
+  .pdf-toolbar .zoom {
+    background: #202124; border: 1px solid #5f6368; color: #e8eaed;
+    height: 22px; padding: 0 6px; border-radius: 2px; font-size: 12px;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .pdf-toolbar button {
+    background: transparent; border: none; color: #e8eaed;
+    width: 28px; height: 28px; border-radius: 50%; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: background 0.15s;
+  }
+  .pdf-toolbar button:hover { background: rgba(255,255,255,0.08); }
+  .pdf-toolbar button svg { width: 16px; height: 16px; }
+
+  /* ── Pages container ───────────────────────────────────────── */
+  .pages-wrap {
+    padding: 16px 0 64px;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+  }
+
+  .page {
+    width: 816px;            /* US Letter @ 96dpi: 8.5in × 96 */
+    max-width: calc(100% - 24px);
+    min-height: 1056px;      /* 11in × 96 */
+    background: #ffffff;
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,0.08),
+      0 2px 4px rgba(0,0,0,0.25),
+      0 8px 24px rgba(0,0,0,0.35);
+    padding: 84px 88px 96px;
+    position: relative;
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #111827;
+  }
+
+  .page-num {
+    position: absolute; bottom: 36px; left: 0; right: 0;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 10pt; color: #4b5563;
+    font-style: italic;
+  }
+  .page-header {
+    position: absolute; top: 36px; left: 88px; right: 88px;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 9pt; color: #6b7280;
+    border-bottom: 0.5px solid #d1d5db;
+    padding-bottom: 6px;
+    letter-spacing: 0.3px;
+  }
+  .page-header .left { font-variant: small-caps; letter-spacing: 1px; }
+  .page-header .right { font-style: italic; }
+
+  /* ── COVER PAGE ───────────────────────────────────────────── */
+  .cover {
+    padding: 0;
+    display: flex; flex-direction: column;
+    background:
+      radial-gradient(circle at 50% 0%, #f8fafc 0%, #ffffff 40%),
+      #ffffff;
+  }
+  .cover-band-top {
+    height: 14px;
+    background: linear-gradient(90deg, #1e3a8a 0%, #1e40af 50%, #1e3a8a 100%);
+  }
+  .cover-band-thin {
+    height: 3px; background: #c9a227; margin-top: 4px;
+  }
+  .cover-inner {
+    flex: 1;
+    padding: 80px 88px 64px;
+    display: flex; flex-direction: column;
+  }
+  .cover .crest {
+    width: 110px; height: 110px; margin: 24px auto 28px;
+    border: 2.5px solid #1e3a8a; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Garamond', 'Times New Roman', serif;
+    font-weight: bold; color: #1e3a8a; font-size: 30pt; letter-spacing: 1px;
+    background: radial-gradient(circle at 30% 30%, #ffffff 0%, #f1f5f9 100%);
+    box-shadow: inset 0 0 0 6px #ffffff, 0 1px 2px rgba(0,0,0,0.1);
+  }
+  .cover h1 {
+    text-align: center;
+    font-family: 'Garamond', 'Times New Roman', serif;
+    font-size: 32pt; color: #0f172a; margin: 8px 0 6px;
+    letter-spacing: 1px; font-weight: 600;
+  }
+  .cover .subtitle {
+    text-align: center; font-size: 12pt; color: #475569;
+    font-style: italic; margin-bottom: 56px;
+    font-family: 'Garamond', 'Times New Roman', serif;
+  }
+  .cover .report-title {
+    text-align: center;
+    font-family: 'Garamond', 'Times New Roman', serif;
+    font-size: 18pt; font-weight: 400; color: #1e3a8a;
+    margin-bottom: 0; letter-spacing: 12px; padding-left: 12px;
+    text-transform: uppercase;
+  }
+  .cover .report-year {
+    text-align: center;
+    font-family: 'Garamond', 'Times New Roman', serif;
+    font-size: 88pt; color: #1e3a8a; font-weight: 700;
+    margin: 8px 0 12px; letter-spacing: 2px; line-height: 1;
+  }
+  .cover .fy-line {
+    text-align: center; color: #475569;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 11pt; font-style: italic;
+    margin-top: 16px;
+  }
+  .cover .ornament {
+    text-align: center; color: #c9a227; font-size: 18pt;
+    margin: 32px 0 8px; letter-spacing: 8px;
+  }
+  .cover-spacer { flex: 1; }
+  .cover .footer-info {
+    border-top: 1.5px solid #1e3a8a; padding-top: 14px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 9.5pt; color: #475569;
+    display: flex; justify-content: space-between;
+    font-style: italic;
+  }
+  .cover-band-bottom {
+    height: 14px;
+    background: linear-gradient(90deg, #1e3a8a 0%, #1e40af 50%, #1e3a8a 100%);
+  }
+
+  /* ── Content typography ──────────────────────────────────── */
+  h2.section {
+    font-family: 'Garamond', 'Times New Roman', serif;
+    color: #0f172a;
+    font-size: 18pt; font-weight: 600;
+    border-bottom: 1.5px solid #1e3a8a;
+    padding-bottom: 6px; margin: 0 0 18px;
+    letter-spacing: 0.3px;
+  }
+  h3.subhead {
+    font-family: 'Garamond', 'Times New Roman', serif;
+    color: #1e3a8a;
+    font-size: 11.5pt; margin: 22px 0 8px;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    font-weight: 600;
+  }
+  p {
+    margin: 0 0 12px; text-align: justify;
+    text-indent: 0;
+    hyphens: auto;
+  }
+  p + p { text-indent: 1.5em; }
+
+  /* Drop cap on first paragraph of a section */
+  .lead::first-letter {
+    font-family: 'Garamond', 'Times New Roman', serif;
+    font-size: 36pt; font-weight: 700; color: #1e3a8a;
+    float: left; line-height: 0.9; padding: 4px 8px 0 0;
+  }
+
+  table.entity-table {
+    width: 100%; border-collapse: collapse; margin-top: 8px;
+    font-size: 10.5pt; font-family: 'Times New Roman', Times, serif;
+  }
+  table.entity-table th, table.entity-table td {
+    border: 0.75px solid #94a3b8; padding: 7px 10px;
+    text-align: left; vertical-align: top;
+  }
+  table.entity-table th {
+    background: #1e3a8a; color: #ffffff;
+    font-family: 'Garamond', 'Times New Roman', serif;
+    font-size: 10pt; text-transform: uppercase; letter-spacing: 0.6px;
+    font-weight: 600;
+  }
+  table.entity-table tbody tr:nth-child(even) td { background: #f8fafc; }
+  table.entity-table td.lbl {
+    background: #eef2f7 !important; font-weight: 600; width: 38%;
+    color: #334155;
+    font-family: 'Garamond', 'Times New Roman', serif;
+    font-size: 10.5pt;
+  }
+  ul.subs { padding-left: 20px; margin: 4px 0 12px; }
+  ul.subs li { margin-bottom: 4px; }
+
+  .pull-quote {
+    border-left: 3px solid #c9a227;
+    padding: 6px 0 6px 16px;
+    color: #1e3a8a;
+    font-style: italic;
+    margin: 16px 0;
+    font-size: 12pt;
+    font-family: 'Garamond', 'Times New Roman', serif;
+  }
+
+  .signature {
+    margin-top: 40px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 10.5pt; color: #334155;
+  }
+  .signature .name {
+    font-weight: bold; color: #0f172a;
+    font-family: 'Garamond', 'Times New Roman', serif;
+  }
+  .sig-line {
+    width: 240px; border-bottom: 1px solid #1f2937;
+    margin: 32px 0 6px;
+    font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+    font-size: 22pt; color: #1e3a8a;
+    line-height: 1; padding-bottom: 2px;
+  }
+
+  /* Subtle paper texture */
+  .page::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.012) 0px, rgba(0,0,0,0.012) 1px, transparent 1px, transparent 3px);
+    opacity: 0.6;
+  }
+
+  /* Highlight styles applied by parent frame */
+  .__xdas_hl__ {
+    background: #fde047 !important;
+    outline: 2px solid #f59e0b !important;
+    border-radius: 3px !important;
+    padding: 1px 3px !important;
+    box-shadow: 0 0 0 4px rgba(253, 224, 71, 0.35) !important;
+  }
+  @keyframes __xdas_pulse__ { 0%,100% { box-shadow: 0 0 0 4px rgba(253, 224, 71, 0.35);} 50% { box-shadow: 0 0 0 10px rgba(253, 224, 71, 0.15);} }
+  .__xdas_hl_pulse__ { animation: __xdas_pulse__ 1.4s ease-in-out infinite; }
+</style>
+</head>
+<body>
+
+<div class="pdf-toolbar">
+  <div class="group">
+    <button title="Sidebar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+    </button>
+    <div class="filename">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" opacity="0.85"/><path fill="#fff" d="M8.5 13h1.2c.9 0 1.4.5 1.4 1.3 0 .8-.5 1.3-1.4 1.3H9.2v1.5h-.7V13zm.7 2h.5c.5 0 .7-.2.7-.7s-.2-.7-.7-.7h-.5V15zm3.1-2h1.3c1.1 0 1.7.7 1.7 2s-.6 2-1.7 2h-1.3v-4zm.7 3.4h.5c.7 0 1.1-.4 1.1-1.4s-.4-1.4-1.1-1.4h-.5v2.8z" font-size="3"/></svg>
+      <span><span data-field="companyName">__COMPANY__</span>_Annual_Report_2024.pdf</span>
+    </div>
+  </div>
+  <div class="group">
+    <button title="Previous page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg></button>
+    <input class="pageinput" value="1" />
+    <span class="of">/ 4</span>
+    <button title="Next page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+  </div>
+  <div class="group">
+    <span class="zoom">100% <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><polyline points="6 9 12 15 18 9"/></svg></span>
+    <button title="Zoom out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+    <button title="Zoom in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+  </div>
+  <div class="group">
+    <button title="Rotate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
+    <button title="Print"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></button>
+    <button title="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+    <button title="More"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></button>
+  </div>
+</div>
+
+<div class="pages-wrap">
+
+  <!-- PAGE 1 — COVER -->
+  <div class="page cover">
+    <div class="cover-band-top"></div>
+    <div class="cover-band-thin"></div>
+    <div class="cover-inner">
+      <div class="crest"><span data-field="ticker">__TICKER__</span></div>
+      <h1 data-field="companyName">__COMPANY__</h1>
+      <div class="subtitle"><span data-field="legalName">__COMPANY__</span></div>
+
+      <div class="ornament">❖ ❖ ❖</div>
+      <div class="report-title">Annual Report</div>
+      <div class="report-year">2024</div>
+
+      <div class="fy-line">
+        For the fiscal year ended <span data-field="fiscalYearEnd">December 31, 2024</span>
+      </div>
+
+      <div class="cover-spacer"></div>
+
+      <div class="footer-info">
+        <span>Filed pursuant to applicable disclosure regulations</span>
+        <span>Registration No. <span data-field="registrationId">REG-2024-00847</span></span>
+      </div>
+    </div>
+    <div class="cover-band-thin"></div>
+    <div class="cover-band-bottom"></div>
+    <div class="page-num">— i —</div>
+  </div>
+
+  <!-- PAGE 2 — ABOUT THE COMPANY -->
+  <div class="page">
+    <div class="page-header">
+      <span class="left"><span data-field="companyName">__COMPANY__</span> · Annual Report 2024</span>
+      <span class="right">About the Company</span>
+    </div>
+
+    <h2 class="section">1. About the Company</h2>
+    <p class="lead">
+      <span data-field="legalName">__COMPANY__</span> (operating under the trade name
+      <span data-field="tradeName">__SHORT__</span>) is a publicly listed corporation
+      organised as a <span data-field="orgType">Public Limited Company</span> and registered in
+      <span data-field="country">United States</span>. The Company was founded in
+      <span data-field="foundationYear">1995</span> and currently employs approximately
+      <span data-field="numEmployees">12,400</span> people across its global operations.
+    </p>
+
+    <h3 class="subhead">1.1  Business Description</h3>
+    <p data-field="description">
+      __COMPANY__ designs, develops and markets a portfolio of enterprise software and
+      cloud-based services for businesses worldwide. Its principal segments include
+      productivity platforms, data infrastructure, and intelligent automation, with
+      go-to-market operations across North America, EMEA and Asia-Pacific.
+    </p>
+
+    <h3 class="subhead">1.2  Industry Classification</h3>
+    <p>The Company is classified under NAICS / SIC code <span data-field="naicsSic">541512 / 7372</span> —
+       Computer Systems Design Services / Prepackaged Software.</p>
+
+    <h3 class="subhead">1.3  Registered Office</h3>
+    <table class="entity-table">
+      <tr><td class="lbl">Address</td><td><span data-field="address">100 Market Street, Suite 4200</span></td></tr>
+      <tr><td class="lbl">City</td><td><span data-field="city">San Francisco</span></td></tr>
+      <tr><td class="lbl">State / Province</td><td><span data-field="state">CA</span></td></tr>
+      <tr><td class="lbl">Postal Code</td><td><span data-field="postalCode">94105</span></td></tr>
+      <tr><td class="lbl">Country</td><td><span data-field="country">United States</span></td></tr>
+      <tr><td class="lbl">Telephone</td><td><span data-field="phone">+1 (415) 555-0100</span></td></tr>
+      <tr><td class="lbl">Facsimile</td><td><span data-field="fax">+1 (415) 555-0199</span></td></tr>
+      <tr><td class="lbl">Investor Email</td><td><span data-field="email">investor.relations@__SHORT__.com</span></td></tr>
+      <tr><td class="lbl">Website</td><td><span data-field="website">https://www.__SHORT__.com</span></td></tr>
+    </table>
+    <div class="page-num">— 2 —</div>
+  </div>
+
+  <!-- PAGE 3 — CORPORATE STRUCTURE -->
+  <div class="page">
+    <div class="page-header">
+      <span class="left"><span data-field="companyName">__COMPANY__</span> · Annual Report 2024</span>
+      <span class="right">Corporate Structure</span>
+    </div>
+
+    <h2 class="section">2. Corporate Structure &amp; Subsidiaries</h2>
+    <p class="lead">
+      The Company forms part of a broader corporate group. The ultimate parent of the
+      group is <span data-field="ultimateParent">__COMPANY__ Holdings PLC</span>, with the
+      relationship classified as a <span data-field="relationshipType">Wholly-Owned Subsidiary</span>
+      at <span data-field="hierarchyLevel">Level 2</span> of the consolidated hierarchy.
+    </p>
+
+    <div class="pull-quote">
+      “Performance against parent-set targets is rated as
+      <span data-field="perfExpectation">Meeting Expectations</span> for the reporting period.”
+    </div>
+
+    <h3 class="subhead">2.1  Principal Subsidiaries (extract)</h3>
+    <table class="entity-table">
+      <thead>
+        <tr><th>Subsidiary Name</th><th>Entity Type</th><th>Jurisdiction</th><th>Holding</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span data-field="subsidiary">__SHORT__ Cloud Services LLC</span></td><td><span data-field="entityType">Limited Liability Company</span></td><td>Delaware, US</td><td>100%</td></tr>
+        <tr><td>__SHORT__ Software India Pvt. Ltd.</td><td>Private Limited</td><td>Karnataka, India</td><td>100%</td></tr>
+        <tr><td>__SHORT__ Europe SARL</td><td>Société à Responsabilité Limitée</td><td>Luxembourg</td><td>100%</td></tr>
+        <tr><td>__SHORT__ Asia Pacific Pte. Ltd.</td><td>Private Limited</td><td>Singapore</td><td>92%</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">2.2  Stock Exchange Information</h3>
+    <table class="entity-table">
+      <tr><td class="lbl">Listed on</td><td><span data-field="exchange">NYSE</span></td></tr>
+      <tr><td class="lbl">Ticker Symbol</td><td><span data-field="ticker">__TICKER__</span></td></tr>
+      <tr><td class="lbl">Entity Status</td><td><span data-field="entityStatus">Active</span></td></tr>
+    </table>
+    <div class="page-num">— 3 —</div>
+  </div>
+
+  <!-- PAGE 4 — FINANCIAL HIGHLIGHTS & SIGN-OFF -->
+  <div class="page">
+    <div class="page-header">
+      <span class="left"><span data-field="companyName">__COMPANY__</span> · Annual Report 2024</span>
+      <span class="right">Financial Highlights</span>
+    </div>
+
+    <h2 class="section">3. Financial Highlights</h2>
+    <p class="lead">
+      The Directors are pleased to present the audited financial results for the fiscal
+      year ended <span data-field="fiscalYearEnd">December 31, 2024</span>. All figures are
+      reported in millions of US Dollars unless otherwise indicated.
+    </p>
+
+    <table class="entity-table">
+      <thead>
+        <tr><th>Metric</th><th>FY 2024</th><th>FY 2023</th><th>YoY Change</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="lbl">Total Revenue</td><td><span data-field="revenue">$ 4,820</span></td><td>$ 4,210</td><td>+14.5%</td></tr>
+        <tr><td class="lbl">Total Assets</td><td><span data-field="assets">$ 12,430</span></td><td>$ 11,180</td><td>+11.2%</td></tr>
+        <tr><td class="lbl">Total Liabilities</td><td><span data-field="liabilities">$ 5,210</span></td><td>$ 4,890</td><td>+6.5%</td></tr>
+        <tr><td class="lbl">Net Income</td><td><span data-field="netIncome">$ 1,140</span></td><td>$ 980</td><td>+16.3%</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead">3.1  Social &amp; Digital Presence</h3>
+    <p>
+      Investors and stakeholders may follow the Company across its official channels:
+      <span data-field="socialMedia">linkedin.com/company/__SHORT__, twitter.com/__SHORT__, youtube.com/@__SHORT__</span>.
+    </p>
+
+    <h3 class="subhead">3.2  Directors’ Statement</h3>
+    <p>
+      The Board of Directors confirms that, to the best of its knowledge, the financial
+      statements give a true and fair view of the assets, liabilities, financial position
+      and profit of the Company, prepared in accordance with applicable accounting standards.
+    </p>
+
+    <div class="signature">
+      <p class="name">For and on behalf of the Board of Directors</p>
+      <div class="sig-line">J. Whitfield</div>
+      <p>Chair of the Board · <span data-field="companyName">__COMPANY__</span></p>
+      <p style="color:#64748b; font-style: italic;">Dated: 28 February 2025</p>
+    </div>
+    <div class="page-num">— 4 —</div>
+  </div>
+
+</div>
+
+</body>
+</html>

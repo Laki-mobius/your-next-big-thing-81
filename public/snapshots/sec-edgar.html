@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>EDGAR | Company Filings</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: #212121; background: #fff; font-size: 14px; line-height: 1.45; }
+  .top-bar { background: #14467c; color: #fff; padding: 8px 20px; font-size: 12px; display: flex; justify-content: space-between; }
+  .top-bar a { color: #fff; text-decoration: none; margin-left: 16px; }
+  .header { background: #fff; border-bottom: 4px solid #14467c; padding: 14px 20px; display: flex; align-items: center; gap: 16px; }
+  .header .seal { width: 52px; height: 52px; border-radius: 50%; background: #14467c; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 11px; text-align: center; }
+  .header h1 { margin: 0; font-size: 22px; color: #14467c; }
+  .header .sub { font-size: 12px; color: #555; }
+  nav.crumbs { background: #f0f3f7; padding: 6px 20px; font-size: 12px; color: #555; border-bottom: 1px solid #d4dae2; }
+  nav.crumbs a { color: #14467c; text-decoration: none; }
+  .layout { display: grid; grid-template-columns: 220px 1fr; gap: 20px; padding: 20px; max-width: 1200px; margin: 0 auto; }
+  aside { font-size: 12px; }
+  aside h3 { font-size: 12px; text-transform: uppercase; color: #14467c; border-bottom: 1px solid #d4dae2; padding-bottom: 4px; margin-top: 0; }
+  aside ul { list-style: none; padding: 0; margin: 0 0 16px; }
+  aside li { padding: 4px 0; }
+  aside a { color: #14467c; text-decoration: none; }
+  main h2 { font-size: 18px; color: #14467c; border-bottom: 2px solid #14467c; padding-bottom: 4px; margin-top: 0; }
+  .company-card { background: #f8f9fb; border: 1px solid #d4dae2; padding: 14px 16px; margin-bottom: 16px; }
+  .company-card .row { display: flex; gap: 30px; margin: 4px 0; font-size: 13px; }
+  .company-card .label { font-weight: bold; color: #555; min-width: 140px; }
+  table.filings { width: 100%; border-collapse: collapse; font-size: 12px; }
+  table.filings th { background: #14467c; color: #fff; text-align: left; padding: 6px 8px; font-weight: 600; }
+  table.filings td { padding: 6px 8px; border-bottom: 1px solid #e5e8ee; }
+  table.filings tr:nth-child(even) td { background: #f8f9fb; }
+  .filing-link { color: #14467c; text-decoration: underline; cursor: pointer; }
+  footer { background: #14467c; color: #fff; padding: 14px 20px; font-size: 11px; text-align: center; margin-top: 40px; }
+  /* Highlight injected from parent */
+  .__xdas_hl__ {
+    background: #fde047 !important;
+    outline: 2px solid #f59e0b !important;
+    border-radius: 3px !important;
+    padding: 1px 3px !important;
+    box-shadow: 0 0 0 4px rgba(253, 224, 71, 0.35) !important;
+    transition: background 0.2s ease;
+  }
+  @keyframes __xdas_pulse__ { 0%,100% { box-shadow: 0 0 0 4px rgba(253, 224, 71, 0.35);} 50% { box-shadow: 0 0 0 10px rgba(253, 224, 71, 0.15);} }
+  .__xdas_hl_pulse__ { animation: __xdas_pulse__ 1.4s ease-in-out infinite; }
+</style>
+</head>
+<body>
+  <div class="top-bar">
+    <span>U.S. SECURITIES AND EXCHANGE COMMISSION</span>
+    <span><a href="#">EDGAR</a><a href="#">Filings</a><a href="#">About</a><a href="#">Contact</a></span>
+  </div>
+  <header class="header">
+    <div class="seal">SEC</div>
+    <div>
+      <h1>EDGAR | Company Filings</h1>
+      <div class="sub">Electronic Data Gathering, Analysis, and Retrieval system</div>
+    </div>
+  </header>
+  <nav class="crumbs"><a href="#">Home</a> &rsaquo; <a href="#">Filings</a> &rsaquo; Company Search Results</nav>
+
+  <div class="layout">
+    <aside>
+      <h3>Filing Tools</h3>
+      <ul>
+        <li><a href="#">Full-Text Search</a></li>
+        <li><a href="#">Boolean Search</a></li>
+        <li><a href="#">XBRL Viewer</a></li>
+        <li><a href="#">RSS Feeds</a></li>
+      </ul>
+      <h3>Filing Categories</h3>
+      <ul>
+        <li><a href="#">Annual (10-K)</a></li>
+        <li><a href="#">Quarterly (10-Q)</a></li>
+        <li><a href="#">Current (8-K)</a></li>
+        <li><a href="#">Proxy (DEF 14A)</a></li>
+        <li><a href="#">Insider (Form 4)</a></li>
+      </ul>
+    </aside>
+
+    <main>
+      <h2>Company Filings Detail</h2>
+
+      <div class="company-card">
+        <div class="row"><span class="label">Company Name:</span><span data-field="companyName" data-legal-name>__COMPANY__</span></div>
+        <div class="row"><span class="label">Legal Name:</span><span data-field="legalName">__COMPANY__</span></div>
+        <div class="row"><span class="label">CIK Number:</span><span data-field="registrationId">0000847284</span></div>
+        <div class="row"><span class="label">Ticker Symbol:</span><span data-field="ticker">__TICKER__</span></div>
+        <div class="row"><span class="label">Stock Exchange:</span><span data-field="exchange">NYSE</span></div>
+        <div class="row"><span class="label">SIC Code:</span><span data-field="naicsSic">7372 / Services - Prepackaged Software</span></div>
+        <div class="row"><span class="label">State of Incorporation:</span><span data-field="state">Delaware</span></div>
+        <div class="row"><span class="label">Business Address:</span><span data-field="address">123 Main Street, New York, NY 10001</span></div>
+        <div class="row"><span class="label">Mailing Address:</span><span>P.O. Box 4421, New York, NY 10001</span></div>
+        <div class="row"><span class="label">Phone:</span><span data-field="phone">+1 (212) 555-0100</span></div>
+        <div class="row"><span class="label">Fiscal Year End:</span><span data-field="fiscalYearEnd">December 31</span></div>
+        <div class="row"><span class="label">Fiscal Year-End Status:</span><span data-field="entityStatus">Active</span></div>
+      </div>
+
+      <h2>Recent Filings</h2>
+      <table class="filings">
+        <thead>
+          <tr><th>Form Type</th><th>Filing Date</th><th>Period</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="filing-link">10-Q</span></td><td>2025-08-12</td><td><span data-field="reportingPeriod">Q2 2025</span></td><td>Quarterly Report</td></tr>
+          <tr><td><span class="filing-link">8-K</span></td><td>2025-07-28</td><td>—</td><td>Material Definitive Agreement</td></tr>
+          <tr><td><span class="filing-link">10-K</span></td><td>2025-02-25</td><td>FY 2024</td><td>Annual Report</td></tr>
+          <tr><td><span class="filing-link">DEF 14A</span></td><td>2025-04-04</td><td>FY 2024</td><td>Definitive Proxy Statement</td></tr>
+          <tr><td><span class="filing-link">10-Q</span></td><td>2025-05-08</td><td>Q1 2025</td><td>Quarterly Report</td></tr>
+        </tbody>
+      </table>
+
+      <h2 style="margin-top:24px;">Selected Financial Highlights</h2>
+      <div class="company-card">
+        <div class="row"><span class="label">Revenue (USD):</span><span data-field="revenue">$4.2B</span></div>
+        <div class="row"><span class="label">Total Assets:</span><span data-field="assets">$12.8B</span></div>
+        <div class="row"><span class="label">Total Liabilities:</span><span data-field="liabilities">$7.1B</span></div>
+        <div class="row"><span class="label">Net Income:</span><span data-field="netIncome">$890M</span></div>
+        <div class="row"><span class="label">Number of Employees:</span><span data-field="numEmployees">12,400</span></div>
+        <div class="row"><span class="label">Date of Foundation:</span><span data-field="foundationYear">1998</span></div>
+      </div>
+
+      <h2 style="margin-top:24px;">Document Information</h2>
+      <div class="company-card">
+        <div class="row"><span class="label">Document Type:</span><span data-field="documentType">Form 10-Q</span></div>
+        <div class="row"><span class="label">Reporting Period:</span><span data-field="reportingPeriod">Q2 2025</span></div>
+        <div class="row"><span class="label">Filed:</span><span>August 12, 2025</span></div>
+        <div class="row"><span class="label">Accession Number:</span><span>0000847284-25-000042</span></div>
+      </div>
+    </main>
+  </div>
+
+  <footer>U.S. Securities and Exchange Commission &middot; 100 F Street, NE &middot; Washington, DC 20549</footer>
+</body>
+</html>
