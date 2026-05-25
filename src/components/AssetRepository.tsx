@@ -1,15 +1,24 @@
 import { useMemo, useState, useEffect } from "react";
 import {
   Boxes, Filter, Globe, MapPin, Layers, FileText, Link2, Tags, Workflow, CheckCircle2, RotateCcw, Save,
+  Bookmark, Pencil, Trash2, Check, X, FolderOpen, RefreshCw,
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
+} from "@/components/ui/dialog";
+import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
+  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { sourceCatalog, filterSources, allRegions } from "@/data/source-catalog";
-import { useAssetSelection } from "@/contexts/AssetSelectionContext";
+import { useAssetSelection, type AssetSelection } from "@/contexts/AssetSelectionContext";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
@@ -72,16 +81,31 @@ function FilterBlock({
 }
 
 export default function AssetRepository() {
-  const { selection, setSelection } = useAssetSelection();
+  const {
+    savedConfigs, activeConfigId, saveConfig, updateConfig, renameConfig, deleteConfig, loadConfig,
+  } = useAssetSelection();
   const { toast } = useToast();
 
-  const [regions, setRegions] = useState<string[]>(selection.regions);
-  const [countries, setCountries] = useState<string[]>(selection.countries);
-  const [sourceTypes, setSourceTypes] = useState<string[]>(selection.sourceTypes);
-  const [sourceNames, setSourceNames] = useState<string[]>(selection.sourceNames);
-  const [sourceUrls, setSourceUrls] = useState<string[]>(selection.sourceUrls);
-  const [attributes, setAttributes] = useState<string[]>(selection.attributes);
-  const [workflows, setWorkflows] = useState<string[]>(selection.workflows);
+  const [regions, setRegions] = useState<string[]>([]);
+  const [countries, setCountries] = useState<string[]>([]);
+  const [sourceTypes, setSourceTypes] = useState<string[]>([]);
+  const [sourceNames, setSourceNames] = useState<string[]>([]);
+  const [sourceUrls, setSourceUrls] = useState<string[]>([]);
+  const [attributes, setAttributes] = useState<string[]>([]);
+  const [workflows, setWorkflows] = useState<string[]>([]);
+
+  // Save dialog state
+  const [saveOpen, setSaveOpen] = useState(false);
+  const [saveName, setSaveName] = useState("");
+  const [saveError, setSaveError] = useState<string | null>(null);
+
+  // Rename dialog state
+  const [renameTarget, setRenameTarget] = useState<string | null>(null);
+  const [renameValue, setRenameValue] = useState("");
+  const [renameError, setRenameError] = useState<string | null>(null);
+
+  // Delete confirm state
+  const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
 
   // Cascading option lists
   const countryOptions = useMemo(() => {
@@ -127,7 +151,6 @@ export default function AssetRepository() {
   useEffect(() => { setAttributes(a => a.filter(x => attrOptions.includes(x))); }, [attrOptions]);
   useEffect(() => { setWorkflows(w => w.filter(x => workflowOptions.includes(x))); }, [workflowOptions]);
 
-  // Preview cards filtered by all selections
   const previewCards = useMemo(() => {
     let pool = matched;
     if (sourceUrls.length) pool = pool.filter(s => sourceUrls.includes(s.sourceUrl));
@@ -139,12 +162,88 @@ export default function AssetRepository() {
     regions.length + countries.length + sourceTypes.length + sourceNames.length +
     sourceUrls.length + attributes.length + workflows.length;
 
-  const handleSave = () => {
-    setSelection({ regions, countries, sourceTypes, sourceNames, sourceUrls, attributes, workflows });
-    toast({
-      title: "Assets saved",
-      description: `${previewCards.length} sources scoped for Job Configuration.`,
-    });
+  const currentSelection = (): AssetSelection => ({
+    regions, countries, sourceTypes, sourceNames, sourceUrls, attributes, workflows,
+  });
+
+  const applySelection = (s: AssetSelection) => {
+    setRegions(s.regions); setCountries(s.countries); setSourceTypes(s.sourceTypes);
+    setSourceNames(s.sourceNames); setSourceUrls(s.sourceUrls);
+    setAttributes(s.attributes); setWorkflows(s.workflows);
+  };
+
+  const summarize = (s: AssetSelection) => {
+    const parts: string[] = [];
+    if (s.regions.length) parts.push(`${s.regions.length} reg`);
+    if (s.countries.length) parts.push(`${s.countries.length} ctry`);
+    if (s.sourceNames.length) parts.push(`${s.sourceNames.length} src`);
+    if (s.attributes.length) parts.push(`${s.attributes.length} attr`);
+    if (s.workflows.length) parts.push(`${s.workflows.length} wf`);
+    return parts.join(" · ") || "Empty";
+  };
+
+  // Save flow
+  const openSaveDialog = () => {
+    setSaveName("");
+    setSaveError(null);
+    setSaveOpen(true);
+  };
+
+  const handleSaveConfirm = () => {
+    const name = saveName.trim();
+    if (!name) { setSaveError("Please enter a configuration name."); return; }
+    if (savedConfigs.some(c => c.name.toLowerCase() === name.toLowerCase())) {
+      setSaveError("A configuration with this name already exists.");
+      return;
+    }
+    saveConfig(name, currentSelection());
+    setSaveOpen(false);
+    toast({ title: "Configuration saved", description: `“${name}” is now available in Job Configuration.` });
+  };
+
+  const handleOverwrite = (id: string) => {
+    const cfg = savedConfigs.find(c => c.id === id);
+    if (!cfg) return;
+    updateConfig(id, currentSelection());
+    toast({ title: "Configuration updated", description: `“${cfg.name}” has been overwritten.` });
+  };
+
+  const handleLoad = (id: string) => {
+    const cfg = savedConfigs.find(c => c.id === id);
+    if (!cfg) return;
+    applySelection(cfg.selection);
+    loadConfig(id);
+    toast({ title: "Configuration loaded", description: `“${cfg.name}” is now active.` });
+  };
+
+  // Rename flow
+  const openRename = (id: string) => {
+    const cfg = savedConfigs.find(c => c.id === id);
+    if (!cfg) return;
+    setRenameTarget(id);
+    setRenameValue(cfg.name);
+    setRenameError(null);
+  };
+  const handleRenameConfirm = () => {
+    if (!renameTarget) return;
+    const name = renameValue.trim();
+    if (!name) { setRenameError("Name cannot be empty."); return; }
+    if (savedConfigs.some(c => c.id !== renameTarget && c.name.toLowerCase() === name.toLowerCase())) {
+      setRenameError("A configuration with this name already exists.");
+      return;
+    }
+    renameConfig(renameTarget, name);
+    setRenameTarget(null);
+    toast({ title: "Renamed", description: `Configuration renamed to “${name}”.` });
+  };
+
+  // Delete flow
+  const handleDeleteConfirm = () => {
+    if (!deleteTarget) return;
+    const cfg = savedConfigs.find(c => c.id === deleteTarget);
+    deleteConfig(deleteTarget);
+    setDeleteTarget(null);
+    toast({ title: "Deleted", description: cfg ? `“${cfg.name}” removed.` : "Configuration removed." });
   };
 
   const handleReset = () => {
@@ -165,7 +264,7 @@ export default function AssetRepository() {
           <Button variant="outline" size="sm" className="h-8 text-[11px] gap-1.5" onClick={handleReset}>
             <RotateCcw className="w-3.5 h-3.5" /> Reset
           </Button>
-          <Button size="sm" className="h-8 text-[11px] gap-1.5" onClick={handleSave} disabled={previewCards.length === 0}>
+          <Button size="sm" className="h-8 text-[11px] gap-1.5" onClick={openSaveDialog} disabled={previewCards.length === 0}>
             <Save className="w-3.5 h-3.5" /> Save to Job Configuration
           </Button>
         </div>
@@ -181,7 +280,7 @@ export default function AssetRepository() {
           <span><span className="font-semibold">{previewCards.length}</span> matching source{previewCards.length !== 1 ? "s" : ""}</span>
         </div>
         <div className="text-[11px] text-muted-foreground">
-          Only saved selections flow into Job Configuration dropdowns.
+          Saved configurations populate Job Configuration when loaded.
         </div>
       </Card>
 
@@ -194,18 +293,66 @@ export default function AssetRepository() {
         <FilterBlock icon={Link2} label="Source URL" options={urlOptions} selected={sourceUrls} onChange={setSourceUrls} search />
         <FilterBlock icon={Tags} label="Data Attributes" options={attrOptions} selected={attributes} onChange={setAttributes} search />
         <FilterBlock icon={Workflow} label="Workflow" options={workflowOptions} selected={workflows} onChange={setWorkflows} />
-        <div className="border border-dashed border-border rounded-md bg-muted/10 p-2.5 flex flex-col justify-center">
-          <div className="flex items-center gap-1.5 mb-1.5">
-            <Boxes className="w-3.5 h-3.5 text-brand" />
-            <span className="text-[11px] font-semibold">Currently saved</span>
+
+        {/* Currently saved */}
+        <div className="border border-border rounded-md bg-card overflow-hidden flex flex-col">
+          <div className="flex items-center justify-between px-2.5 py-1.5 border-b bg-muted/20">
+            <div className="flex items-center gap-1.5">
+              <Bookmark className="w-3.5 h-3.5 text-brand" />
+              <span className="text-[11px] font-semibold">Currently saved</span>
+              <Badge variant="secondary" className="text-[9px] h-4 px-1.5">{savedConfigs.length}</Badge>
+            </div>
           </div>
-          <ul className="space-y-0.5 text-[10px] text-muted-foreground">
-            <li>Regions: <span className="text-foreground font-medium">{selection.regions.length}</span></li>
-            <li>Countries: <span className="text-foreground font-medium">{selection.countries.length}</span></li>
-            <li>Sources: <span className="text-foreground font-medium">{selection.sourceNames.length}</span></li>
-            <li>Attributes: <span className="text-foreground font-medium">{selection.attributes.length}</span></li>
-            <li>Workflows: <span className="text-foreground font-medium">{selection.workflows.length}</span></li>
-          </ul>
+          <ScrollArea className="h-[200px]">
+            <div className="p-1.5 space-y-1.5">
+              {savedConfigs.length === 0 && (
+                <div className="px-2 py-6 text-center text-[11px] text-muted-foreground">
+                  No saved configurations yet.<br/>Apply filters and click <span className="font-medium">Save to Job Configuration</span>.
+                </div>
+              )}
+              {savedConfigs.map(cfg => {
+                const isActive = cfg.id === activeConfigId;
+                return (
+                  <div
+                    key={cfg.id}
+                    className={cn(
+                      "border rounded-md p-2 text-[11px] transition-colors",
+                      isActive ? "border-brand bg-brand-light/30" : "border-border hover:bg-muted/30",
+                    )}
+                  >
+                    <div className="flex items-center justify-between gap-1.5">
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-1">
+                          <span className="font-semibold truncate">{cfg.name}</span>
+                          {isActive && <Check className="w-3 h-3 text-brand shrink-0" />}
+                        </div>
+                        <div className="text-[10px] text-muted-foreground truncate">{summarize(cfg.selection)}</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-1 mt-1.5">
+                      <Button size="sm" variant="outline" className="h-6 px-1.5 text-[10px] gap-1"
+                        onClick={() => handleLoad(cfg.id)}>
+                        <FolderOpen className="w-2.5 h-2.5" /> Load
+                      </Button>
+                      <Button size="sm" variant="outline" className="h-6 px-1.5 text-[10px] gap-1"
+                        onClick={() => handleOverwrite(cfg.id)} disabled={previewCards.length === 0}
+                        title="Overwrite with current filters">
+                        <RefreshCw className="w-2.5 h-2.5" /> Update
+                      </Button>
+                      <Button size="sm" variant="ghost" className="h-6 w-6 p-0"
+                        onClick={() => openRename(cfg.id)} title="Rename">
+                        <Pencil className="w-2.5 h-2.5" />
+                      </Button>
+                      <Button size="sm" variant="ghost" className="h-6 w-6 p-0 text-destructive hover:text-destructive"
+                        onClick={() => setDeleteTarget(cfg.id)} title="Delete">
+                        <Trash2 className="w-2.5 h-2.5" />
+                      </Button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </ScrollArea>
         </div>
       </div>
 
@@ -259,6 +406,89 @@ export default function AssetRepository() {
           )}
         </div>
       </div>
+
+      {/* Save dialog */}
+      <Dialog open={saveOpen} onOpenChange={setSaveOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-[15px]">Save configuration</DialogTitle>
+            <DialogDescription className="text-[12px]">
+              Name this filter configuration so you can load, update or rerun it later.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-2">
+            <Label htmlFor="cfg-name" className="text-[11px] font-semibold">Configuration Name</Label>
+            <Input
+              id="cfg-name"
+              autoFocus
+              value={saveName}
+              onChange={e => { setSaveName(e.target.value); setSaveError(null); }}
+              onKeyDown={e => { if (e.key === "Enter") handleSaveConfirm(); }}
+              placeholder="e.g. EU Stock Exchanges – Daily"
+              className="h-9 text-[13px]"
+              maxLength={80}
+            />
+            {saveError && (
+              <p className="text-[11px] text-destructive">{saveError}</p>
+            )}
+            <div className="rounded-md border bg-muted/20 px-2.5 py-2 text-[10px] text-muted-foreground">
+              <span className="font-semibold text-foreground">Summary:</span> {summarize(currentSelection())}
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" size="sm" onClick={() => setSaveOpen(false)}>
+              <X className="w-3.5 h-3.5 mr-1" /> Cancel
+            </Button>
+            <Button size="sm" onClick={handleSaveConfirm}>
+              <Save className="w-3.5 h-3.5 mr-1" /> Save
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Rename dialog */}
+      <Dialog open={!!renameTarget} onOpenChange={(o) => !o && setRenameTarget(null)}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-[15px]">Rename configuration</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-2">
+            <Label htmlFor="rename-name" className="text-[11px] font-semibold">Configuration Name</Label>
+            <Input
+              id="rename-name"
+              autoFocus
+              value={renameValue}
+              onChange={e => { setRenameValue(e.target.value); setRenameError(null); }}
+              onKeyDown={e => { if (e.key === "Enter") handleRenameConfirm(); }}
+              className="h-9 text-[13px]"
+              maxLength={80}
+            />
+            {renameError && <p className="text-[11px] text-destructive">{renameError}</p>}
+          </div>
+          <DialogFooter>
+            <Button variant="outline" size="sm" onClick={() => setRenameTarget(null)}>Cancel</Button>
+            <Button size="sm" onClick={handleRenameConfirm}>Save</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete confirm */}
+      <AlertDialog open={!!deleteTarget} onOpenChange={(o) => !o && setDeleteTarget(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete configuration?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This will permanently remove “{savedConfigs.find(c => c.id === deleteTarget)?.name}”. This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDeleteConfirm} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
