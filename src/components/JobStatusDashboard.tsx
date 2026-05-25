@@ -446,7 +446,7 @@ function ExecutionPane({ jobs, tick }: { jobs: RunJob[]; tick: number }) {
           <h3 className="text-[13px] font-bold text-foreground">Job Execution &amp; Progress</h3>
         </div>
         <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
-          <RefreshCw className="w-3 h-3 animate-spin-slow" />
+          <RefreshCw className="w-3 h-3 animate-spin [animation-duration:3s]" />
           <span>Live · {new Date(tick).toLocaleTimeString("en-US", { hour12: false })}</span>
         </div>
       </div>
