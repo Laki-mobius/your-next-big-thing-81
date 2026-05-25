@@ -10,7 +10,9 @@ import HITLReviewScreen from '@/components/HITLReviewScreen';
 import AttributeCategoryView from '@/components/hitl/AttributeCategoryView';
 import AccuracyModal from '@/components/AccuracyModal';
 import CompletenessModal from '@/components/CompletenessModal';
+import AssetRepository from '@/components/AssetRepository';
 import { ThemeProvider } from '@/contexts/ThemeContext';
+import { AssetSelectionProvider } from '@/contexts/AssetSelectionContext';
 
 function DashboardContent() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -78,6 +80,7 @@ function DashboardContent() {
           {activeItem === 'jobs' && <JobStatusDashboard />}
           {activeItem === 'hitl' && <HITLReviewScreen />}
           {activeItem === 'hitl-attribute' && <AttributeCategoryView />}
+          {activeItem === 'assets' && <AssetRepository />}
         </main>
       </div>
     </div>
@@ -86,7 +89,9 @@ function DashboardContent() {
 
 const Index = () => (
   <ThemeProvider>
-    <DashboardContent />
+    <AssetSelectionProvider>
+      <DashboardContent />
+    </AssetSelectionProvider>
   </ThemeProvider>
 );
 
