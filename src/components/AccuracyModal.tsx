@@ -7,10 +7,10 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
 // Only 4 POC attributes have data; remaining shown as 0
 const qcAttributes = [
-  { name: 'Website', accuracy: 95, correct: 441, total: 462, status: 'warning' as const, issues: '21 Broken / Redirected URLs' },
-  { name: 'Revenue Range', accuracy: 92, correct: 474, total: 514, status: 'warning' as const, issues: '40 Fiscal Year Missing' },
-  { name: 'Employee Count', accuracy: 89, correct: 483, total: 542, status: 'warning' as const, issues: '59 Outdated / Banded Ranges' },
-  { name: 'Executive Name', accuracy: 97, correct: 488, total: 503, status: 'passed' as const, issues: '15 Title Parse Warnings' },
+  { name: 'Website', accuracy: 98, correct: 451, total: 462, status: 'passed' as const, issues: '11 Broken / Redirected URLs' },
+  { name: 'Revenue Range', accuracy: 98, correct: 504, total: 514, status: 'passed' as const, issues: '10 Fiscal Year Missing' },
+  { name: 'Employee Count', accuracy: 98, correct: 532, total: 542, status: 'passed' as const, issues: '10 Outdated / Banded Ranges' },
+  { name: 'Executive Name', accuracy: 99, correct: 498, total: 503, status: 'passed' as const, issues: '5 Title Parse Warnings' },
   { name: 'Company Name', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
   { name: 'Headquarters Country', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
   { name: 'Foundation Year', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
