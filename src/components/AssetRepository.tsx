@@ -300,7 +300,7 @@ export default function AssetRepository() {
           maxLength={80}
         />
         <Button size="sm" className="h-9 gap-1.5 text-[12px]" onClick={handleSaveJob}>
-          <Save className="w-3.5 h-3.5" /> Save as New Job
+          <Save className="w-3.5 h-3.5" /> Save Asset
         </Button>
       </Card>
 
