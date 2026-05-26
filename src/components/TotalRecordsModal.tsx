@@ -108,7 +108,7 @@ export default function TotalRecordsModal({ onClose, inline = false }: { onClose
               <div className="flex items-end gap-0" style={{ height: 180 }}>
                 <div className="flex flex-col justify-between h-full pr-2 shrink-0" style={{ paddingBottom: 22 }}>
                   {yTicks.slice().reverse().map(t => (
-                    <span key={t} className="text-[11px] text-muted-foreground leading-none text-right min-w-[24px]">{t}M</span>
+                    <span key={t} className="text-[11px] text-muted-foreground leading-none text-right min-w-[24px]">{t}</span>
                   ))}
                 </div>
                 <div className="flex-1 flex items-end justify-between gap-[6px]" style={{ height: '100%', paddingBottom: 22, position: 'relative' }}>
