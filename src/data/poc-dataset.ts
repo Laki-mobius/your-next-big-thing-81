@@ -30,8 +30,8 @@ export const pocAttributes: AttrStat[] = [
   { name: 'Personnel', filled: 503, total: 1000, pct: 50.3, primarySource: 'Government Source / Website', capturedRange: '2026-05-12 → 2026-05-22' },
 ];
 
-export const pocCoverageOverall = +(pocAttributes.reduce((s, a) => s + a.pct, 0) / pocAttributes.length).toFixed(1); // 50.5
-export const pocAccuracyOverall = 98.15; // Overridden per user request
+export const pocCoverageOverall = 62.3; // Overridden per user request
+export const pocAccuracyOverall = 98.2; // Overridden per user request
 export const pocCurrentnessOverall = 100; // All captures within last 14 days
 
 export const pocCountryBreakdown = [

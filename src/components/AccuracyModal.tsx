@@ -95,7 +95,7 @@ export default function AccuracyModal({ onClose, inline = false }: { onClose: ()
         {/* Left Pane – Donut Charts */}
         <div className="w-[260px] shrink-0 flex flex-col gap-3">
           <div className="bg-surface border border-border rounded-lg p-2.5 flex items-center">
-            <CircularGauge value={98.15} label="Overall Quality" subtitle="Overall Record Accuracy" color="hsl(var(--brand))" icon={<ShieldCheck size={16} />} />
+            <CircularGauge value={98.2} label="Overall Quality" subtitle="Overall Record Accuracy" color="hsl(var(--brand))" icon={<ShieldCheck size={16} />} />
           </div>
           <div className="bg-surface border border-border rounded-lg p-2.5 flex items-center">
             <CircularGauge value={51} label="Attribute Fill Rate" subtitle="System Completeness" color="hsl(var(--blue))" icon={<BarChart3 size={16} />} />
