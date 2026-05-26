@@ -85,21 +85,23 @@ export default function AccuracyModal({ onClose, inline = false }: { onClose: ()
         {/* Left Pane – Donut Charts */}
         <div className="w-[260px] shrink-0 flex flex-col gap-3">
           <div className="bg-surface border border-border rounded-lg p-2.5 flex items-center">
-            <CircularGauge value={97} label="Overall Quality" subtitle="Overall Record Accuracy" color="hsl(var(--brand))" icon={<ShieldCheck size={16} />} />
+            <CircularGauge value={83} label="Match Success" subtitle="Matched + Possible / Total" color="hsl(var(--brand))" icon={<ShieldCheck size={16} />} />
           </div>
           <div className="bg-surface border border-border rounded-lg p-2.5 flex items-center">
-            <CircularGauge value={99} label="Attribute Fill Rate" subtitle="System Completeness" color="hsl(var(--blue))" icon={<BarChart3 size={16} />} />
+            <CircularGauge value={51} label="Avg Attribute Fill" subtitle="Across 4 POC attributes" color="hsl(var(--blue))" icon={<BarChart3 size={16} />} />
           </div>
           <div className="bg-surface border border-border rounded-lg p-2.5 flex items-center">
-            <CircularGauge value={98} label="Accuracy vs QC Flag" subtitle="Avg Attribute Correctness" color="hsl(var(--purple))" icon={<Target size={16} />} />
+            <CircularGauge value={93} label="QC Pass Rate" subtitle="Captured values free of exceptions" color="hsl(var(--purple))" icon={<Target size={16} />} />
           </div>
 
-          {/* Accuracy Split by Company Type */}
-          <SectionLabel>Accuracy split by company type</SectionLabel>
+          {/* Match status split */}
+          <SectionLabel>Match status breakdown</SectionLabel>
           <div className="space-y-2.5">
             {[
-              { label: 'Public Companies', pct: 98, count: '231 records', color: '#185FA5' },
-              { label: 'Private Companies', pct: 96, count: '961 records', color: '#1A7A4A' },
+              { label: 'Matched', pct: 66.2, count: '662 records', color: '#1A7A4A' },
+              { label: 'Matched – No Data', pct: 16.4, count: '164 records', color: '#C97A00' },
+              { label: 'No Match', pct: 13.5, count: '135 records', color: '#C0392B' },
+              { label: 'M&A / Closed / Possible', pct: 3.9, count: '39 records', color: '#534AB7' },
             ].map(item => (
               <div key={item.label} className="bg-surface border border-border rounded-md p-3">
                 <div className="flex items-center justify-between mb-1.5">
