@@ -288,9 +288,9 @@ export default function AssetRepository() {
           icon={Globe} />
       </div>
 
-      {/* Job Name row */}
+      {/* Asset Name row */}
       <Card className="p-3 flex items-center gap-3">
-        <Label htmlFor="job-name" className="text-[12px] font-semibold whitespace-nowrap">Job Name:</Label>
+        <Label htmlFor="job-name" className="text-[12px] font-semibold whitespace-nowrap">Asset Name:</Label>
         <Input
           id="job-name"
           value={jobName}
