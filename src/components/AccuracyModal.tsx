@@ -5,19 +5,20 @@ import { dataGroups } from '@/data/dashboard-data';
 import { cn } from '@/lib/utils';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
+// Only 4 POC attributes have data; remaining shown as 0
 const qcAttributes = [
-  { name: 'Company Name', accuracy: 99, correct: 990, total: 1000, status: 'passed' as const, issues: '10 Minor Typos' },
-  { name: 'Headquarters Country', accuracy: 98, correct: 980, total: 1000, status: 'passed' as const, issues: '20 Abbreviation Issues' },
-  { name: 'Foundation Year', accuracy: 95, correct: 841, total: 884, status: 'passed' as const, issues: '43 Null Values' },
-  { name: 'Industry Sector', accuracy: 92, correct: 838, total: 911, status: 'warning' as const, issues: '73 Misclassifications' },
-  { name: 'Employee Count', accuracy: 89, correct: 483, total: 542, status: 'warning' as const, issues: '59 Outdated / Banded Ranges' },
-  { name: 'Revenue Range', accuracy: 92, correct: 474, total: 514, status: 'warning' as const, issues: '40 Fiscal Year Missing' },
-  { name: 'Street Address', accuracy: 97, correct: 970, total: 1000, status: 'passed' as const, issues: '30 Formatting Issues' },
-  { name: 'Phone Number', accuracy: 88, correct: 627, total: 713, status: 'failed' as const, issues: '86 Invalid Formats' },
-  { name: 'NAICS Code', accuracy: 96, correct: 806, total: 839, status: 'passed' as const, issues: '33 Mapping Errors' },
   { name: 'Website', accuracy: 95, correct: 441, total: 462, status: 'warning' as const, issues: '21 Broken / Redirected URLs' },
-  { name: 'Net Income', accuracy: 96, correct: 658, total: 685, status: 'passed' as const, issues: '27 Rounding Errors' },
-  { name: 'Executive Name', accuracy: 97, correct: 486, total: 503, status: 'passed' as const, issues: '17 Title Parse Warnings' },
+  { name: 'Revenue Range', accuracy: 92, correct: 474, total: 514, status: 'warning' as const, issues: '40 Fiscal Year Missing' },
+  { name: 'Employee Count', accuracy: 89, correct: 483, total: 542, status: 'warning' as const, issues: '59 Outdated / Banded Ranges' },
+  { name: 'Executive Name', accuracy: 97, correct: 488, total: 503, status: 'passed' as const, issues: '15 Title Parse Warnings' },
+  { name: 'Company Name', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
+  { name: 'Headquarters Country', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
+  { name: 'Foundation Year', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
+  { name: 'Industry Sector', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
+  { name: 'Street Address', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
+  { name: 'Phone Number', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
+  { name: 'NAICS Code', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
+  { name: 'Net Income', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
 ];
 
 

@@ -12,20 +12,10 @@ export default function CoverageModal({ onClose, inline = false }: { onClose: ()
   const [companySize, setCompanySize] = useState('all');
   const [revenue, setRevenue] = useState('all');
 
-  // Ensure Company Name and Address appear first with 100% coverage
-  const adjustedCovData = useMemo(() => {
-    return covData.map(a => {
-      if (a.name === 'Company Name' || a.name === 'Street Address') {
-        return { ...a, v: 100, cnt: '1,000', st: 'good' as const };
-      }
-      return a;
-    });
-  }, []);
-
-
+  // Only 4 POC attributes have real values; pin them to the top
   const sorted = useMemo(() => {
-    const priority = ['Company Name', 'Street Address'];
-    return [...adjustedCovData].sort((a, b) => {
+    const priority = ['Website', 'Revenue', 'Number of Employees', 'Executive Name'];
+    return [...covData].sort((a, b) => {
       const aIdx = priority.indexOf(a.name);
       const bIdx = priority.indexOf(b.name);
       if (aIdx !== -1 && bIdx !== -1) return aIdx - bIdx;
@@ -33,7 +23,7 @@ export default function CoverageModal({ onClose, inline = false }: { onClose: ()
       if (bIdx !== -1) return 1;
       return 0;
     });
-  }, [adjustedCovData]);
+  }, []);
 
   const filtered = useMemo(() => {
     return sorted.filter(a =>
