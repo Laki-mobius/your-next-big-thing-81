@@ -130,7 +130,7 @@ export default function TotalRecordsModal({ onClose, inline = false }: { onClose
                         <div
                           className="w-full max-w-[36px] rounded-full shadow-sm"
                           style={{
-                            height: `${(g.count / 45) * 100}%`,
+                            height: `${(g.count / 200) * 100}%`,
                             minHeight: 8,
                             background: barGradient,
                           }}
