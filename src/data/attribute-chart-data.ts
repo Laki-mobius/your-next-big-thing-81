@@ -38,7 +38,7 @@ export const attributeRecords: AttributeRecord[] = [
 
   { attribute: 'Country', group: 'Basic Data', count: 48.9, accuracy: 99.1, lastRefresh: '2026-03-14', region: 'North America', tier: 'Tier 1', companyStatus: 'Public' },
   { attribute: 'Country', group: 'Basic Data', count: 33.4, accuracy: 98.7, lastRefresh: '2026-03-14', region: 'Europe', tier: 'Tier 1', companyStatus: 'Private' },
-  { attribute: 'Country', group: 'Basic Data', count: 11.9, accuracy: 97.3, lastRefresh: '2026-03-12', region: 'APAC', tier: 'Tier 2', companyStatus: 'Public' },
+  { attribute: 'Country', group: 'Basic Data', count: 11.9, accuracy: 99.3, lastRefresh: '2026-03-12', region: 'APAC', tier: 'Tier 2', companyStatus: 'Public' },
 
   { attribute: 'Phone Number', group: 'Basic Data', count: 34.8, accuracy: 88.4, lastRefresh: '2026-03-07', region: 'North America', tier: 'Tier 1', companyStatus: 'Public' },
   { attribute: 'Phone Number', group: 'Basic Data', count: 22.5, accuracy: 84.2, lastRefresh: '2026-03-04', region: 'Europe', tier: 'Tier 2', companyStatus: 'Private' },
