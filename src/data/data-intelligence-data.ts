@@ -65,7 +65,7 @@ export const dataGroups: DataGroup[] = [
       { parentName: 'Sovereign Capital SA', subsidiaryName: 'Sovereign Real Estate Holdings BV', entityType: 'Subsidiary', country: 'Netherlands', ownershipPct: 80, coverageScore: 90.2, lei: '213800SVREH0LDINGS55', incorporationDate: '2010-02-14', status: 'Active', sic: '6726', registrationNo: 'NL-KVK11223', jurisdiction: 'Rotterdam', ultimateParent: 'Sovereign Capital SA', hierarchyLevel: 2 },
       { parentName: 'Broadmark Corp', subsidiaryName: 'Broadmark Digital Pty Ltd', entityType: 'Subsidiary', country: 'Australia', ownershipPct: 100, coverageScore: 91.0, lei: '549300BRDMRKDIGTL033', incorporationDate: '2017-12-01', status: 'Active', sic: '7374', registrationNo: 'AU-ACN44556', jurisdiction: 'New South Wales', ultimateParent: 'Broadmark Corp', hierarchyLevel: 2 },
     ],
-    totalRecords: 4_800_000,
+    totalRecords: 9,
   },
   {
     id: 'executive-data',
@@ -107,7 +107,7 @@ export const dataGroups: DataGroup[] = [
       { name: 'Carlos Rivera', title: 'CEO', company: 'Hargrove Pharmaceuticals Ltd', country: 'Ireland', tenure: 9, education: 'Columbia MBA', compensation: '€5.1M', boardSeats: 3, age: 56, gender: 'Male', nationality: 'Irish', previousCompany: 'Pfizer', appointmentDate: '2017-11-01' },
       { name: 'Fatima Al-Hassan', title: 'COO', company: 'Elysium Group AG', country: 'UAE', tenure: 4, education: 'LBS MBA', compensation: '$3.7M', boardSeats: 2, age: 45, gender: 'Female', nationality: 'Emirati', previousCompany: 'BCG', appointmentDate: '2022-07-20' },
     ],
-    totalRecords: 2_100_000,
+    totalRecords: 5_351,
   },
   {
     id: 'news-events',
@@ -148,7 +148,7 @@ export const dataGroups: DataGroup[] = [
       { date: '2026-03-19', company: 'Elysium Group AG', eventType: 'Expansion', headline: 'Opens new regional HQ in Dubai', region: 'Middle East', source: 'Gulf News', sentiment: 'Positive', category: 'Expansion', impactScore: 61, relatedEntities: 'DIFC', language: 'English', articleUrl: 'gulfnews.com/...', author: 'N. Abbas' },
       { date: '2026-03-18', company: 'Vanguard Shipping Ltd', eventType: 'Regulatory', headline: 'IMO 2026 compliance certification obtained', region: 'APAC', source: 'Lloyd\'s List', sentiment: 'Neutral', category: 'Compliance', impactScore: 54, relatedEntities: 'IMO', language: 'English', articleUrl: 'lloydslist.com/...', author: 'T. Nakamura' },
     ],
-    totalRecords: 8_400_000,
+    totalRecords: 39,
   },
   {
     id: 'company-profile',
@@ -190,7 +190,7 @@ export const dataGroups: DataGroup[] = [
       { companyName: 'Elysium Group AG', country: 'Switzerland', industry: 'Consulting', type: 'Private', employees: 3400, revenue: '$710M', founded: 2003, hq: 'Geneva', ticker: '—', website: 'elysiumgroup.ch', lei: '213800ELYSGRP00AG11', sic: '7389', naics: '541611', marketCap: '—' },
       { companyName: 'Vanguard Shipping Ltd', country: 'Singapore', industry: 'Logistics', type: 'Public', employees: 9200, revenue: '$2.6B', founded: 1990, hq: 'Singapore', ticker: 'VGD.SI', website: 'vanguardshipping.sg', lei: '549300VGDSHPNG0LTD44', sic: '4412', naics: '483111', marketCap: '$4.9B' },
     ],
-    totalRecords: 98_700_000,
+    totalRecords: 1_000,
   },
 ];
 

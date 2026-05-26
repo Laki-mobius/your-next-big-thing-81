@@ -6,19 +6,20 @@ import { cn } from '@/lib/utils';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
 const qcAttributes = [
-  { name: 'Company Name', accuracy: 99, correct: 99, total: 100, status: 'passed' as const, issues: '1 Minor Typo' },
-  { name: 'Headquarters Country', accuracy: 98, correct: 98, total: 100, status: 'passed' as const, issues: '2 Abbreviation Issues' },
-  { name: 'Foundation Year', accuracy: 99, correct: 99, total: 100, status: 'passed' as const, issues: '1 Null Value' },
-  { name: 'Industry Sector', accuracy: 95, correct: 95, total: 100, status: 'warning' as const, issues: '5 Misclassifications' },
-  { name: 'Employee Count', accuracy: 91, correct: 91, total: 100, status: 'warning' as const, issues: '9 Outdated Data' },
-  { name: 'Revenue Range', accuracy: 96, correct: 96, total: 100, status: 'passed' as const, issues: '4 Formatting Errors' },
-  { name: 'Street Address', accuracy: 97, correct: 97, total: 100, status: 'passed' as const, issues: '3 Formatting Issues' },
-  { name: 'Phone Number', accuracy: 88, correct: 88, total: 100, status: 'failed' as const, issues: '12 Invalid Formats' },
-  { name: 'NAICS Code', accuracy: 96, correct: 96, total: 100, status: 'passed' as const, issues: '4 Mapping Errors' },
-  { name: 'Website', accuracy: 93, correct: 93, total: 100, status: 'warning' as const, issues: '7 Broken Links' },
-  { name: 'Net Income', accuracy: 97, correct: 97, total: 100, status: 'passed' as const, issues: '3 Rounding Errors' },
-  { name: 'Executive Name', accuracy: 89, correct: 89, total: 100, status: 'failed' as const, issues: '11 Outdated Records' },
+  { name: 'Company Name', accuracy: 99, correct: 990, total: 1000, status: 'passed' as const, issues: '10 Minor Typos' },
+  { name: 'Headquarters Country', accuracy: 98, correct: 980, total: 1000, status: 'passed' as const, issues: '20 Abbreviation Issues' },
+  { name: 'Foundation Year', accuracy: 95, correct: 841, total: 884, status: 'passed' as const, issues: '43 Null Values' },
+  { name: 'Industry Sector', accuracy: 92, correct: 838, total: 911, status: 'warning' as const, issues: '73 Misclassifications' },
+  { name: 'Employee Count', accuracy: 89, correct: 483, total: 542, status: 'warning' as const, issues: '59 Outdated / Banded Ranges' },
+  { name: 'Revenue Range', accuracy: 92, correct: 474, total: 514, status: 'warning' as const, issues: '40 Fiscal Year Missing' },
+  { name: 'Street Address', accuracy: 97, correct: 970, total: 1000, status: 'passed' as const, issues: '30 Formatting Issues' },
+  { name: 'Phone Number', accuracy: 88, correct: 627, total: 713, status: 'failed' as const, issues: '86 Invalid Formats' },
+  { name: 'NAICS Code', accuracy: 96, correct: 806, total: 839, status: 'passed' as const, issues: '33 Mapping Errors' },
+  { name: 'Website', accuracy: 95, correct: 441, total: 462, status: 'warning' as const, issues: '21 Broken / Redirected URLs' },
+  { name: 'Net Income', accuracy: 96, correct: 658, total: 685, status: 'passed' as const, issues: '27 Rounding Errors' },
+  { name: 'Executive Name', accuracy: 97, correct: 486, total: 503, status: 'passed' as const, issues: '17 Title Parse Warnings' },
 ];
+
 
 function CircularGauge({ value, label, subtitle, color, icon }: { value: number; label: string; subtitle: string; color: string; icon: React.ReactNode }) {
   const donutData = [
@@ -93,21 +94,21 @@ export default function AccuracyModal({ onClose, inline = false }: { onClose: ()
         {/* Left Pane – Donut Charts */}
         <div className="w-[260px] shrink-0 flex flex-col gap-3">
           <div className="bg-surface border border-border rounded-lg p-2.5 flex items-center">
-            <CircularGauge value={97} label="Overall Quality" subtitle="Overall Record Accuracy" color="hsl(var(--brand))" icon={<ShieldCheck size={16} />} />
+            <CircularGauge value={83} label="Overall Quality" subtitle="Overall Record Accuracy" color="hsl(var(--brand))" icon={<ShieldCheck size={16} />} />
           </div>
           <div className="bg-surface border border-border rounded-lg p-2.5 flex items-center">
-            <CircularGauge value={99} label="Attribute Fill Rate" subtitle="System Completeness" color="hsl(var(--blue))" icon={<BarChart3 size={16} />} />
+            <CircularGauge value={51} label="Attribute Fill Rate" subtitle="System Completeness" color="hsl(var(--blue))" icon={<BarChart3 size={16} />} />
           </div>
           <div className="bg-surface border border-border rounded-lg p-2.5 flex items-center">
-            <CircularGauge value={98} label="Accuracy vs QC Flag" subtitle="Avg Attribute Correctness" color="hsl(var(--purple))" icon={<Target size={16} />} />
+            <CircularGauge value={93} label="Accuracy vs QC Flag" subtitle="Avg Attribute Correctness" color="hsl(var(--purple))" icon={<Target size={16} />} />
           </div>
 
           {/* Accuracy Split by Company Type */}
           <SectionLabel>Accuracy split by company type</SectionLabel>
           <div className="space-y-2.5">
             {[
-              { label: 'Public Companies', pct: 98, count: '231 records', color: '#185FA5' },
-              { label: 'Private Companies', pct: 96, count: '961 records', color: '#1A7A4A' },
+              { label: 'Public Companies', pct: 88, count: '231 records', color: '#185FA5' },
+              { label: 'Private Companies', pct: 81, count: '769 records', color: '#1A7A4A' },
             ].map(item => (
               <div key={item.label} className="bg-surface border border-border rounded-md p-3">
                 <div className="flex items-center justify-between mb-1.5">
@@ -123,6 +124,7 @@ export default function AccuracyModal({ onClose, inline = false }: { onClose: ()
               </div>
             ))}
           </div>
+
 
           {/* Footer */}
           <div className="flex items-center pt-2 border-t border-border text-[10px] text-muted-foreground mt-auto">

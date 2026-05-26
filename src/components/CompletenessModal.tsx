@@ -6,22 +6,22 @@ import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 const currentnessData = [
-  { name: 'Company Name', g: 'Basic Data', ref: '2026-03-14', cnt: '98.5M', pct: '98.2%', geo: { US: '42.1M', UK: '8.2M', Europe: '22.4M', APAC: '18.6M', Other: '7.2M' } },
-  { name: 'Country', g: 'Basic Data', ref: '2026-03-14', cnt: '97.9M', pct: '97.6%', geo: { US: '41.8M', UK: '8.1M', Europe: '22.1M', APAC: '18.3M', Other: '7.6M' } },
-  { name: 'Street Address', g: 'Basic Data', ref: '2026-03-13', cnt: '90.3M', pct: '90.1%', geo: { US: '38.7M', UK: '7.5M', Europe: '20.4M', APAC: '16.9M', Other: '6.8M' } },
-  { name: 'City', g: 'Basic Data', ref: '2026-03-13', cnt: '91.2M', pct: '91.0%', geo: { US: '39.1M', UK: '7.6M', Europe: '20.6M', APAC: '17.1M', Other: '6.8M' } },
-  { name: 'Foundation Year', g: 'Basic Data', ref: '2026-03-08', cnt: '83.1M', pct: '82.9%', geo: { US: '35.6M', UK: '6.9M', Europe: '18.8M', APAC: '15.6M', Other: '6.2M' } },
-  { name: 'Phone Number', g: 'Basic Data', ref: '2026-03-07', cnt: '70.5M', pct: '70.3%', geo: { US: '30.2M', UK: '5.9M', Europe: '15.9M', APAC: '13.2M', Other: '5.3M' } },
-  { name: 'NAICS Code', g: 'Basic Data', ref: '2026-03-12', cnt: '82.9M', pct: '82.7%', geo: { US: '35.5M', UK: '6.9M', Europe: '18.7M', APAC: '15.5M', Other: '6.3M' } },
-  { name: 'Website', g: 'Basic Data', ref: '2026-02-22', cnt: '54.9M', pct: '54.8%', geo: { US: '23.5M', UK: '4.6M', Europe: '12.4M', APAC: '10.3M', Other: '4.1M' } },
-  { name: 'Revenue', g: 'Financial Data', ref: '2026-03-12', cnt: '81.6M', pct: '81.4%', geo: { US: '34.9M', UK: '6.8M', Europe: '18.4M', APAC: '15.3M', Other: '6.2M' } },
-  { name: 'Assets', g: 'Financial Data', ref: '2026-03-10', cnt: '73.3M', pct: '73.1%', geo: { US: '31.4M', UK: '6.1M', Europe: '16.6M', APAC: '13.7M', Other: '5.5M' } },
-  { name: 'Net Income', g: 'Financial Data', ref: '2026-03-09', cnt: '67.7M', pct: '67.5%', geo: { US: '29.0M', UK: '5.6M', Europe: '15.3M', APAC: '12.7M', Other: '5.1M' } },
-  { name: 'Ticker and Exchange', g: 'Financial Data', ref: '2026-03-14', cnt: '94.0M', pct: '93.8%', geo: { US: '40.3M', UK: '7.8M', Europe: '21.2M', APAC: '17.6M', Other: '7.1M' } },
-  { name: 'Executive Name', g: 'Corporate Hierarchy & Governance', ref: '2026-03-06', cnt: '62.6M', pct: '62.4%', geo: { US: '26.8M', UK: '5.2M', Europe: '14.1M', APAC: '11.7M', Other: '4.8M' } },
-  { name: 'Board of Directors', g: 'Corporate Hierarchy & Governance', ref: '2026-02-28', cnt: '57.6M', pct: '57.4%', geo: { US: '24.7M', UK: '4.8M', Europe: '13.0M', APAC: '10.8M', Other: '4.3M' } },
-  { name: 'Parent Company', g: 'Corporate Hierarchy & Governance', ref: '2026-02-25', cnt: '54.1M', pct: '54.0%', geo: { US: '23.2M', UK: '4.5M', Europe: '12.2M', APAC: '10.1M', Other: '4.1M' } },
-  { name: 'Mergers & Acquisition', g: 'Corporate Hierarchy & Governance', ref: '2026-02-20', cnt: '46.6M', pct: '46.5%', geo: { US: '20.0M', UK: '3.9M', Europe: '10.5M', APAC: '8.7M', Other: '3.5M' } },
+  { name: 'Company Name', g: 'Basic Data', ref: '2026-05-15', cnt: '985', pct: '100.0%', geo: { US: '421', UK: '82', Europe: '224', APAC: '186', Other: '72' } },
+  { name: 'Country', g: 'Basic Data', ref: '2026-05-15', cnt: '979', pct: '100.0%', geo: { US: '418', UK: '81', Europe: '221', APAC: '183', Other: '76' } },
+  { name: 'Street Address', g: 'Basic Data', ref: '2026-05-15', cnt: '903', pct: '100.0%', geo: { US: '387', UK: '75', Europe: '204', APAC: '169', Other: '68' } },
+  { name: 'City', g: 'Basic Data', ref: '2026-05-15', cnt: '912', pct: '100.0%', geo: { US: '391', UK: '76', Europe: '206', APAC: '171', Other: '68' } },
+  { name: 'Foundation Year', g: 'Basic Data', ref: '2026-05-15', cnt: '831', pct: '100.0%', geo: { US: '356', UK: '69', Europe: '188', APAC: '156', Other: '62' } },
+  { name: 'Phone Number', g: 'Basic Data', ref: '2026-05-15', cnt: '705', pct: '100.0%', geo: { US: '302', UK: '59', Europe: '159', APAC: '132', Other: '53' } },
+  { name: 'NAICS Code', g: 'Basic Data', ref: '2026-05-15', cnt: '829', pct: '100.0%', geo: { US: '355', UK: '69', Europe: '187', APAC: '155', Other: '63' } },
+  { name: 'Website', g: 'Basic Data', ref: '2026-05-15', cnt: '549', pct: '100.0%', geo: { US: '235', UK: '46', Europe: '124', APAC: '103', Other: '41' } },
+  { name: 'Revenue', g: 'Financial Data', ref: '2026-05-15', cnt: '816', pct: '100.0%', geo: { US: '349', UK: '68', Europe: '184', APAC: '153', Other: '62' } },
+  { name: 'Assets', g: 'Financial Data', ref: '2026-05-15', cnt: '733', pct: '100.0%', geo: { US: '314', UK: '61', Europe: '166', APAC: '137', Other: '55' } },
+  { name: 'Net Income', g: 'Financial Data', ref: '2026-05-15', cnt: '677', pct: '100.0%', geo: { US: '290', UK: '56', Europe: '153', APAC: '127', Other: '51' } },
+  { name: 'Ticker and Exchange', g: 'Financial Data', ref: '2026-05-15', cnt: '940', pct: '100.0%', geo: { US: '403', UK: '78', Europe: '212', APAC: '176', Other: '71' } },
+  { name: 'Executive Name', g: 'Corporate Hierarchy & Governance', ref: '2026-05-15', cnt: '626', pct: '100.0%', geo: { US: '268', UK: '52', Europe: '141', APAC: '117', Other: '48' } },
+  { name: 'Board of Directors', g: 'Corporate Hierarchy & Governance', ref: '2026-05-15', cnt: '576', pct: '100.0%', geo: { US: '247', UK: '48', Europe: '130', APAC: '108', Other: '43' } },
+  { name: 'Parent Company', g: 'Corporate Hierarchy & Governance', ref: '2026-05-15', cnt: '541', pct: '100.0%', geo: { US: '232', UK: '45', Europe: '122', APAC: '101', Other: '41' } },
+  { name: 'Mergers & Acquisition', g: 'Corporate Hierarchy & Governance', ref: '2026-05-15', cnt: '466', pct: '100.0%', geo: { US: '200', UK: '39', Europe: '105', APAC: '87', Other: '35' } },
 ];
 
 type DatePreset = 'week' | 'month' | '3months' | 'custom';
@@ -61,10 +61,10 @@ export default function CompletenessModal({ onClose, inline = false }: { onClose
   }, [search, group, dateRange]);
 
   const tiers = [
-    { label: 'T1', name: 'Public — US', value: '95.3%', width: '95.3%', color: '#185FA5', tierClass: 'bg-status-blue-light text-status-blue' },
-    { label: 'T2', name: 'Public — Non-US', value: '91.6%', width: '91.6%', color: '#1A7A4A', tierClass: 'bg-brand-light text-brand' },
-    { label: 'T3', name: 'Private — US', value: '91.2%', width: '91.2%', color: '#C97A00', tierClass: 'bg-status-amber-light text-status-amber' },
-    { label: 'T4', name: 'Private — Non-US', value: '89.3%', width: '89.3%', color: '#534AB7', tierClass: 'bg-status-purple-light text-status-purple' },
+    { label: 'T1', name: 'Public — US', value: '100%', width: '100%', color: '#185FA5', tierClass: 'bg-status-blue-light text-status-blue' },
+    { label: 'T2', name: 'Public — Non-US', value: '100%', width: '100%', color: '#1A7A4A', tierClass: 'bg-brand-light text-brand' },
+    { label: 'T3', name: 'Private — US', value: '100%', width: '100%', color: '#C97A00', tierClass: 'bg-status-amber-light text-status-amber' },
+    { label: 'T4', name: 'Private — Non-US', value: '100%', width: '100%', color: '#534AB7', tierClass: 'bg-status-purple-light text-status-purple' },
   ];
 
   const geoKeys = ['US', 'UK', 'Europe', 'APAC', 'Other'] as const;
@@ -81,8 +81,8 @@ export default function CompletenessModal({ onClose, inline = false }: { onClose
     <ModalShell id="modal-currentness" onClose={onClose} fullHeight inline={inline}>
       <div className="grid grid-cols-[280px_1fr] flex-1 overflow-hidden min-h-0">
         <div className="p-[18px_20px] overflow-y-auto border-r border-border">
-          <HeroCard label="Overall currentness" value="91.8%" subtitle="+0.8% vs previous month" ringPercent={91.8} />
-          <div className="mb-4"><SectionLabel>By segment</SectionLabel><SegmentCards pubLabel="Public" pubValue="93.5%" pubSub="Daily" prvValue="90.7%" prvSub="Weekly" showBars pubBar={93.5} prvBar={90.7} /></div>
+          <HeroCard label="Overall currentness" value="100%" subtitle="+0.8% vs previous month" ringPercent={100} />
+          <div className="mb-4"><SectionLabel>By segment</SectionLabel><SegmentCards pubLabel="Public" pubValue="100%" pubSub="Daily" prvValue="100%" prvSub="Weekly" showBars pubBar={100} prvBar={100} /></div>
           <div><SectionLabel>Tier breakdown</SectionLabel><TierBreakdown tiers={tiers} /></div>
         </div>
 

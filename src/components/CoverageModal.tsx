@@ -16,11 +16,12 @@ export default function CoverageModal({ onClose, inline = false }: { onClose: ()
   const adjustedCovData = useMemo(() => {
     return covData.map(a => {
       if (a.name === 'Company Name' || a.name === 'Street Address') {
-        return { ...a, v: 100, cnt: '98.7M', st: 'good' as const };
+        return { ...a, v: 100, cnt: '1,000', st: 'good' as const };
       }
       return a;
     });
   }, []);
+
 
   const sorted = useMemo(() => {
     const priority = ['Company Name', 'Street Address'];
@@ -43,11 +44,12 @@ export default function CoverageModal({ onClose, inline = false }: { onClose: ()
   }, [search, group, filter, sorted]);
 
   const tiers = [
-    { label: 'T1', name: 'Public — US', value: '98.2%', width: '98.2%', color: '#185FA5', tierClass: 'bg-status-blue-light text-status-blue' },
-    { label: 'T2', name: 'Public — Non-US', value: '95.4%', width: '95.4%', color: '#1A7A4A', tierClass: 'bg-brand-light text-brand' },
-    { label: 'T3', name: 'Private — US', value: '94.0%', width: '94%', color: '#C97A00', tierClass: 'bg-status-amber-light text-status-amber' },
-    { label: 'T4', name: 'Private — Non-US', value: '91.8%', width: '91.8%', color: '#534AB7', tierClass: 'bg-status-purple-light text-status-purple' },
+    { label: 'T1', name: 'Public — US', value: '58.4%', width: '58.4%', color: '#185FA5', tierClass: 'bg-status-blue-light text-status-blue' },
+    { label: 'T2', name: 'Public — Non-US', value: '53.1%', width: '53.1%', color: '#1A7A4A', tierClass: 'bg-brand-light text-brand' },
+    { label: 'T3', name: 'Private — US', value: '50.8%', width: '50.8%', color: '#C97A00', tierClass: 'bg-status-amber-light text-status-amber' },
+    { label: 'T4', name: 'Private — Non-US', value: '48.2%', width: '48.2%', color: '#534AB7', tierClass: 'bg-status-purple-light text-status-purple' },
   ];
+
 
   return (
     <ModalShell id="modal-coverage" onClose={onClose} fullHeight inline={inline}>
@@ -58,17 +60,18 @@ export default function CoverageModal({ onClose, inline = false }: { onClose: ()
           <div className="rounded-[11px] border border-border bg-surface p-3.5 flex items-center justify-between mb-3.5 transition-all hover:border-brand/40 hover:bg-brand-light hover:shadow-sm">
             <div>
               <div className="text-[10px] font-semibold text-brand uppercase tracking-[0.06em] mb-[3px]">Overall</div>
-              <div className="text-[30px] font-light text-brand tracking-[-1.5px] leading-none">94.2%</div>
+              <div className="text-[30px] font-light text-brand tracking-[-1.5px] leading-none">50.5%</div>
               <div className="text-[11px] text-muted-foreground mt-[3px]">+1.4% vs last month</div>
             </div>
             <div className="relative w-[66px] h-[66px] shrink-0">
               <svg viewBox="0 0 66 66" className="w-[66px] h-[66px] -rotate-90">
                 <circle cx="33" cy="33" r="26" fill="none" stroke="hsl(var(--border))" strokeWidth="6" />
-                <circle cx="33" cy="33" r="26" fill="none" stroke="hsl(var(--brand))" strokeWidth="6" strokeDasharray={2 * Math.PI * 26} strokeDashoffset={2 * Math.PI * 26 * (1 - 94.2 / 100)} strokeLinecap="round" />
+                <circle cx="33" cy="33" r="26" fill="none" stroke="hsl(var(--brand))" strokeWidth="6" strokeDasharray={2 * Math.PI * 26} strokeDashoffset={2 * Math.PI * 26 * (1 - 50.5 / 100)} strokeLinecap="round" />
               </svg>
-              <div className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-brand">94%</div>
+              <div className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-brand">51%</div>
             </div>
           </div>
+
           <div className="mb-4">
             <SectionLabel>By segment</SectionLabel>
             <div className="grid grid-cols-2 gap-2.5">
@@ -79,10 +82,10 @@ export default function CoverageModal({ onClose, inline = false }: { onClose: ()
                     <svg viewBox="0 0 12 12" fill="none" className="w-2.5 h-2.5"><path d="M2 9h8M3 9V5.5L6 3l3 2.5V9" stroke="#185FA5" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   </div>
                 </div>
-                <div className="text-[21px] font-light tracking-[-1px] leading-none text-status-blue mb-0.5">96.8%</div>
+                <div className="text-[21px] font-light tracking-[-1px] leading-none text-status-blue mb-0.5">53.2%</div>
                 <div className="text-[10px] text-muted-foreground">Daily</div>
                 <div className="h-[3px] bg-border rounded-sm overflow-hidden mt-1.5">
-                  <div className="h-full rounded-sm bg-status-blue" style={{ width: '96.8%' }} />
+                  <div className="h-full rounded-sm bg-status-blue" style={{ width: '53.2%' }} />
                 </div>
               </div>
               <div className="rounded-[10px] p-3 border border-border bg-surface transition-all hover:border-brand/40 hover:bg-brand-light hover:shadow-sm">
@@ -92,10 +95,10 @@ export default function CoverageModal({ onClose, inline = false }: { onClose: ()
                     <svg viewBox="0 0 12 12" fill="none" className="w-2.5 h-2.5"><rect x="2" y="5" width="8" height="6" rx="1" stroke="#1A7A4A" strokeWidth="1.2" /><path d="M4 5V4a2 2 0 1 1 4 0v1" stroke="#1A7A4A" strokeWidth="1.2" strokeLinecap="round" /></svg>
                   </div>
                 </div>
-                <div className="text-[21px] font-light tracking-[-1px] leading-none text-brand mb-0.5">93.1%</div>
+                <div className="text-[21px] font-light tracking-[-1px] leading-none text-brand mb-0.5">49.8%</div>
                 <div className="text-[10px] text-muted-foreground">Weekly</div>
                 <div className="h-[3px] bg-border rounded-sm overflow-hidden mt-1.5">
-                  <div className="h-full rounded-sm bg-brand" style={{ width: '93.1%' }} />
+                  <div className="h-full rounded-sm bg-brand" style={{ width: '49.8%' }} />
                 </div>
               </div>
             </div>
@@ -109,37 +112,38 @@ export default function CoverageModal({ onClose, inline = false }: { onClose: ()
         {/* Right Pane */}
         <div className="p-[18px_20px] overflow-y-auto flex flex-col gap-3.5">
           <div>
-            <SectionLabel>Record completeness — all 98.7M records</SectionLabel>
+            <SectionLabel>Record completeness — all 1,000 records</SectionLabel>
             <div className="flex items-center justify-between mb-2.5">
               <span className="text-[10px] text-muted-foreground">By field population level</span>
               <span className="text-[10px] text-muted-foreground italic">hover for details</span>
             </div>
             {/* Stacked bar */}
             <div className="flex h-6 rounded-md overflow-hidden mb-2.5 gap-0.5">
-              <div className="flex items-center justify-center text-[10px] font-semibold text-primary-foreground whitespace-nowrap px-[7px] cursor-pointer transition-[filter] hover:brightness-110 relative group" style={{ width: '5.4%', background: '#1A7A4A' }}>
-                5.3M
+              <div className="flex items-center justify-center text-[10px] font-semibold text-primary-foreground whitespace-nowrap px-[7px] cursor-pointer transition-[filter] hover:brightness-110 relative group" style={{ width: '30.8%', background: '#1A7A4A' }}>
+                308
                 <div className="absolute bottom-[calc(100%+7px)] left-1/2 -translate-x-1/2 bg-gray-900 border border-border rounded-md py-1.5 px-2.5 text-[11px] text-primary-foreground whitespace-nowrap pointer-events-none z-50 hidden group-hover:block text-center leading-relaxed">
-                  ✓ Fully filled<br /><strong>5.3M</strong> · 5.4%
+                  ✓ Fully filled<br /><strong>308</strong> · 30.8%
                 </div>
               </div>
-              <div className="flex items-center justify-center text-[10px] font-semibold text-primary-foreground whitespace-nowrap px-[7px] cursor-pointer transition-[filter] hover:brightness-110 relative group" style={{ width: '12.4%', background: '#C97A00' }}>
-                Partial 12.2M
+              <div className="flex items-center justify-center text-[10px] font-semibold text-primary-foreground whitespace-nowrap px-[7px] cursor-pointer transition-[filter] hover:brightness-110 relative group" style={{ width: '35.9%', background: '#C97A00' }}>
+                Partial 359
                 <div className="absolute bottom-[calc(100%+7px)] left-1/2 -translate-x-1/2 bg-gray-900 border border-border rounded-md py-1.5 px-2.5 text-[11px] text-primary-foreground whitespace-nowrap pointer-events-none z-50 hidden group-hover:block text-center leading-relaxed">
-                  ⚠ Partially filled<br /><strong>12.2M</strong> · 12.4%
+                  ⚠ Partially filled<br /><strong>359</strong> · 35.9%
                 </div>
               </div>
-              <div className="flex items-center justify-center text-[10px] font-semibold text-primary-foreground whitespace-nowrap px-[7px] cursor-pointer transition-[filter] hover:brightness-110 relative group" style={{ width: '82.2%', background: '#1E3A5A' }}>
-                Below threshold ≤60% — 82.2%
+              <div className="flex items-center justify-center text-[10px] font-semibold text-primary-foreground whitespace-nowrap px-[7px] cursor-pointer transition-[filter] hover:brightness-110 relative group" style={{ width: '33.3%', background: '#1E3A5A' }}>
+                Below threshold ≤60% — 33.3%
                 <div className="absolute bottom-[calc(100%+7px)] left-1/2 -translate-x-1/2 bg-gray-900 border border-border rounded-md py-1.5 px-2.5 text-[11px] text-primary-foreground whitespace-nowrap pointer-events-none z-50 hidden group-hover:block text-center leading-relaxed">
-                  ○ Below threshold<br /><strong>81.2M</strong> · 82.2%
+                  ○ Below threshold<br /><strong>333</strong> · 33.3%
                 </div>
               </div>
             </div>
             <div className="flex gap-3 flex-wrap">
-              <span className="flex items-center gap-[5px] text-[11px] text-muted-foreground"><span className="w-[9px] h-[9px] rounded-sm shrink-0" style={{ background: '#1A7A4A' }} />Fully filled: 5.3M (5.4%)</span>
-              <span className="flex items-center gap-[5px] text-[11px] text-muted-foreground"><span className="w-[9px] h-[9px] rounded-sm shrink-0" style={{ background: '#C97A00' }} />Partially filled: 12.2M (12.4%)</span>
-              <span className="flex items-center gap-[5px] text-[11px] text-muted-foreground"><span className="w-[9px] h-[9px] rounded-sm shrink-0" style={{ background: '#1E3A5A' }} />Below threshold: 81.2M (82.2%)</span>
+              <span className="flex items-center gap-[5px] text-[11px] text-muted-foreground"><span className="w-[9px] h-[9px] rounded-sm shrink-0" style={{ background: '#1A7A4A' }} />Fully filled: 308 (30.8%)</span>
+              <span className="flex items-center gap-[5px] text-[11px] text-muted-foreground"><span className="w-[9px] h-[9px] rounded-sm shrink-0" style={{ background: '#C97A00' }} />Partially filled: 359 (35.9%)</span>
+              <span className="flex items-center gap-[5px] text-[11px] text-muted-foreground"><span className="w-[9px] h-[9px] rounded-sm shrink-0" style={{ background: '#1E3A5A' }} />Below threshold: 333 (33.3%)</span>
             </div>
+
           </div>
 
           <div className="flex-1 min-h-0 flex flex-col">
