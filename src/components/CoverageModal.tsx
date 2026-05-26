@@ -12,10 +12,8 @@ export default function CoverageModal({ onClose, inline = false }: { onClose: ()
   const [companySize, setCompanySize] = useState('all');
   const [revenue, setRevenue] = useState('all');
 
-  // Sort by populated count (most-filled at top)
-  const sorted = useMemo(() => {
-    return [...covData].sort((a, b) => b.v - a.v);
-  }, []);
+  // Preserve display order defined in dashboard-data
+  const sorted = useMemo(() => covData, []);
 
   const filtered = useMemo(() => {
     return sorted.filter(a =>

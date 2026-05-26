@@ -25,69 +25,30 @@ export interface ColumnDef {
   align?: 'left' | 'right';
 }
 
-// ── Build sample rows from POC data ──────────────────────────────
-
-// Company Profile rows derived from POC dataset
-// Map revenue strings to currency / fiscal year columns
-function parseCurrency(rev: string): string {
-  const m = rev.match(/^([A-Z]{3})\s/);
-  return m ? m[1] : '—';
-}
+// ── Company Profile rows mirror the "Website, Revenue & Emp Count" sheet ─
 const companyProfileRows = pocCompanySamples.map(c => ({
   companyName: c.companyName,
   country: c.country,
-  type: c.matchStatus === 'Matched' ? 'Private' : '—',
-  employees: c.employees,
-  revenue: c.revenue,
-  revenueCurrency: parseCurrency(c.revenue),
   website: c.website,
-  revenueFiscalYear: c.fiscalYear,
-  annualReport: c.revenueSource === 'Annual Report' ? `${c.website}/annual-report` : '—',
-  hq: c.country,
-  industry: '—',
-  founded: '—',
-  ticker: '—',
-  lei: '—',
-  sic: '—',
-  naics: '—',
-  marketCap: '—',
+  revenue: c.revenue,
+  employees: c.employees,
+  fiscalYear: c.fiscalYear,
+  revenueSource: c.revenueSource,
+  employeeSource: c.employeeSource,
+  matchStatus: c.matchStatus,
+  lastCaptured: c.lastCaptured,
 }));
 
-// Executive (Personnel) rows derived from POC dataset — Executive Name split into parts
-function splitName(full: string): { first: string; middle: string; last: string; suffix: string } {
-  const suffixes = ['Jr', 'Jr.', 'Sr', 'Sr.', 'II', 'III', 'IV', 'PhD', 'MD'];
-  const parts = full.trim().split(/\s+/);
-  let suffix = '';
-  if (parts.length > 2 && suffixes.includes(parts[parts.length - 1])) {
-    suffix = parts.pop()!;
-  }
-  const first = parts.shift() || '';
-  const last = parts.length ? parts.pop()! : '';
-  const middle = parts.join(' ');
-  return { first, middle, last, suffix };
-}
-const executiveRows = pocExecSamples.map(e => {
-  const n = splitName(e.name);
-  return {
-    firstName: n.first,
-    lastName: n.last,
-    executiveTitle: e.title,
-    company: e.company,
-    country: e.country,
-    captureDate: e.captureDate,
-    middleName: n.middle || '—',
-    suffix: n.suffix || '—',
-    tenure: '—',
-    education: '—',
-    compensation: '—',
-    boardSeats: '—',
-    age: '—',
-    gender: '—',
-    nationality: e.country,
-    previousCompany: '—',
-    appointmentDate: e.captureDate,
-  };
-});
+// ── Executive rows mirror the "Personnel" sheet ───────────────────────────
+const executiveRows = pocExecSamples.map(e => ({
+  name: e.name,
+  title: e.title,
+  titleFormatted: e.titleFormatted,
+  company: e.company,
+  country: e.country,
+  source: e.source,
+  captureDate: e.captureDate,
+}));
 
 // News & Events synthesized from POC dataset events (M&A + match status)
 const newsRows = [
@@ -165,26 +126,15 @@ export const dataGroups: DataGroup[] = [
       { key: 'tier', label: 'Tier', options: ['All Tiers', 'Tier 1', 'Tier 2', 'Tier 3', 'Tier 4'] },
     ],
     columns: [
-      { key: 'firstName', label: 'First Name' },
-      { key: 'lastName', label: 'Last Name' },
-      { key: 'executiveTitle', label: 'Executive Title' },
+      { key: 'name', label: 'Name' },
+      { key: 'title', label: 'Title' },
+      { key: 'titleFormatted', label: 'Title Formatted' },
       { key: 'company', label: 'Company' },
       { key: 'country', label: 'Country' },
+      { key: 'source', label: 'Source' },
       { key: 'captureDate', label: 'Captured Date' },
     ],
-    extraColumns: [
-      { key: 'middleName', label: 'Middle Name' },
-      { key: 'suffix', label: 'Suffix' },
-      { key: 'tenure', label: 'Tenure (yrs)', align: 'right' },
-      { key: 'education', label: 'Education' },
-      { key: 'compensation', label: 'Compensation', align: 'right' },
-      { key: 'boardSeats', label: 'Board Seats', align: 'right' },
-      { key: 'age', label: 'Age', align: 'right' },
-      { key: 'gender', label: 'Gender' },
-      { key: 'nationality', label: 'Nationality' },
-      { key: 'previousCompany', label: 'Previous Company' },
-      { key: 'appointmentDate', label: 'Captured Date' },
-    ],
+    extraColumns: [],
     sampleRows: executiveRows,
     totalRecords: pocMetrics.personnelRows,
   },
@@ -231,24 +181,16 @@ export const dataGroups: DataGroup[] = [
     columns: [
       { key: 'companyName', label: 'Company Name' },
       { key: 'country', label: 'Country' },
-      { key: 'type', label: 'Type' },
-      { key: 'employees', label: 'Employees', align: 'right' },
-      { key: 'revenue', label: 'Revenue', align: 'right' },
-      { key: 'revenueCurrency', label: 'Revenue Currency' },
       { key: 'website', label: 'Website' },
+      { key: 'revenue', label: 'Revenue', align: 'right' },
+      { key: 'employees', label: 'Employees', align: 'right' },
+      { key: 'fiscalYear', label: 'Fiscal Year' },
+      { key: 'revenueSource', label: 'Revenue Source' },
+      { key: 'employeeSource', label: 'Employee Source' },
+      { key: 'matchStatus', label: 'Match Status' },
+      { key: 'lastCaptured', label: 'Last Captured' },
     ],
-    extraColumns: [
-      { key: 'revenueFiscalYear', label: 'Revenue Fiscal Year' },
-      { key: 'annualReport', label: 'Annual Report' },
-      { key: 'hq', label: 'HQ City' },
-      { key: 'industry', label: 'Industry' },
-      { key: 'founded', label: 'Founded', align: 'right' },
-      { key: 'ticker', label: 'Ticker' },
-      { key: 'lei', label: 'LEI' },
-      { key: 'sic', label: 'SIC Code' },
-      { key: 'naics', label: 'NAICS Code' },
-      { key: 'marketCap', label: 'Market Cap', align: 'right' },
-    ],
+    extraColumns: [],
     sampleRows: companyProfileRows,
     totalRecords: pocMetrics.totalRecords,
   },
