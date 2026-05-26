@@ -5,23 +5,24 @@ import { format, subDays, subMonths, isAfter, isBefore, startOfDay } from 'date-
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
+// Only 4 POC attributes have data; remaining shown as 0
 const currentnessData = [
-  { name: 'Company Name', g: 'Basic Data', ref: '2026-05-15', cnt: '985', pct: '100.0%', geo: { US: '421', UK: '82', Europe: '224', APAC: '186', Other: '72' } },
-  { name: 'Country', g: 'Basic Data', ref: '2026-05-15', cnt: '979', pct: '100.0%', geo: { US: '418', UK: '81', Europe: '221', APAC: '183', Other: '76' } },
-  { name: 'Street Address', g: 'Basic Data', ref: '2026-05-15', cnt: '903', pct: '100.0%', geo: { US: '387', UK: '75', Europe: '204', APAC: '169', Other: '68' } },
-  { name: 'City', g: 'Basic Data', ref: '2026-05-15', cnt: '912', pct: '100.0%', geo: { US: '391', UK: '76', Europe: '206', APAC: '171', Other: '68' } },
-  { name: 'Foundation Year', g: 'Basic Data', ref: '2026-05-15', cnt: '831', pct: '100.0%', geo: { US: '356', UK: '69', Europe: '188', APAC: '156', Other: '62' } },
-  { name: 'Phone Number', g: 'Basic Data', ref: '2026-05-15', cnt: '705', pct: '100.0%', geo: { US: '302', UK: '59', Europe: '159', APAC: '132', Other: '53' } },
-  { name: 'NAICS Code', g: 'Basic Data', ref: '2026-05-15', cnt: '829', pct: '100.0%', geo: { US: '355', UK: '69', Europe: '187', APAC: '155', Other: '63' } },
-  { name: 'Website', g: 'Basic Data', ref: '2026-05-15', cnt: '549', pct: '100.0%', geo: { US: '235', UK: '46', Europe: '124', APAC: '103', Other: '41' } },
-  { name: 'Revenue', g: 'Financial Data', ref: '2026-05-15', cnt: '816', pct: '100.0%', geo: { US: '349', UK: '68', Europe: '184', APAC: '153', Other: '62' } },
-  { name: 'Assets', g: 'Financial Data', ref: '2026-05-15', cnt: '733', pct: '100.0%', geo: { US: '314', UK: '61', Europe: '166', APAC: '137', Other: '55' } },
-  { name: 'Net Income', g: 'Financial Data', ref: '2026-05-15', cnt: '677', pct: '100.0%', geo: { US: '290', UK: '56', Europe: '153', APAC: '127', Other: '51' } },
-  { name: 'Ticker and Exchange', g: 'Financial Data', ref: '2026-05-15', cnt: '940', pct: '100.0%', geo: { US: '403', UK: '78', Europe: '212', APAC: '176', Other: '71' } },
-  { name: 'Executive Name', g: 'Corporate Hierarchy & Governance', ref: '2026-05-15', cnt: '626', pct: '100.0%', geo: { US: '268', UK: '52', Europe: '141', APAC: '117', Other: '48' } },
-  { name: 'Board of Directors', g: 'Corporate Hierarchy & Governance', ref: '2026-05-15', cnt: '576', pct: '100.0%', geo: { US: '247', UK: '48', Europe: '130', APAC: '108', Other: '43' } },
-  { name: 'Parent Company', g: 'Corporate Hierarchy & Governance', ref: '2026-05-15', cnt: '541', pct: '100.0%', geo: { US: '232', UK: '45', Europe: '122', APAC: '101', Other: '41' } },
-  { name: 'Mergers & Acquisition', g: 'Corporate Hierarchy & Governance', ref: '2026-05-15', cnt: '466', pct: '100.0%', geo: { US: '200', UK: '39', Europe: '105', APAC: '87', Other: '35' } },
+  { name: 'Website', g: 'Basic Data', ref: '2026-05-21', cnt: '462', pct: '100.0%', geo: { US: '84', UK: '41', Europe: '146', APAC: '147', Other: '44' } },
+  { name: 'Revenue', g: 'Financial Data', ref: '2026-05-22', cnt: '514', pct: '100.0%', geo: { US: '93', UK: '46', Europe: '163', APAC: '163', Other: '49' } },
+  { name: 'Executive Name', g: 'Corporate Hierarchy & Governance', ref: '2026-05-22', cnt: '503', pct: '100.0%', geo: { US: '91', UK: '44', Europe: '160', APAC: '160', Other: '48' } },
+  { name: 'Company Name', g: 'Basic Data', ref: '2026-05-22', cnt: '0', pct: '0.0%', geo: { US: '0', UK: '0', Europe: '0', APAC: '0', Other: '0' } },
+  { name: 'Country', g: 'Basic Data', ref: '2026-05-22', cnt: '0', pct: '0.0%', geo: { US: '0', UK: '0', Europe: '0', APAC: '0', Other: '0' } },
+  { name: 'Street Address', g: 'Basic Data', ref: '2026-05-22', cnt: '0', pct: '0.0%', geo: { US: '0', UK: '0', Europe: '0', APAC: '0', Other: '0' } },
+  { name: 'City', g: 'Basic Data', ref: '2026-05-22', cnt: '0', pct: '0.0%', geo: { US: '0', UK: '0', Europe: '0', APAC: '0', Other: '0' } },
+  { name: 'Foundation Year', g: 'Basic Data', ref: '2026-05-22', cnt: '0', pct: '0.0%', geo: { US: '0', UK: '0', Europe: '0', APAC: '0', Other: '0' } },
+  { name: 'Phone Number', g: 'Basic Data', ref: '2026-05-22', cnt: '0', pct: '0.0%', geo: { US: '0', UK: '0', Europe: '0', APAC: '0', Other: '0' } },
+  { name: 'NAICS Code', g: 'Basic Data', ref: '2026-05-22', cnt: '0', pct: '0.0%', geo: { US: '0', UK: '0', Europe: '0', APAC: '0', Other: '0' } },
+  { name: 'Assets', g: 'Financial Data', ref: '2026-05-22', cnt: '0', pct: '0.0%', geo: { US: '0', UK: '0', Europe: '0', APAC: '0', Other: '0' } },
+  { name: 'Net Income', g: 'Financial Data', ref: '2026-05-22', cnt: '0', pct: '0.0%', geo: { US: '0', UK: '0', Europe: '0', APAC: '0', Other: '0' } },
+  { name: 'Ticker and Exchange', g: 'Financial Data', ref: '2026-05-22', cnt: '0', pct: '0.0%', geo: { US: '0', UK: '0', Europe: '0', APAC: '0', Other: '0' } },
+  { name: 'Board of Directors', g: 'Corporate Hierarchy & Governance', ref: '2026-05-22', cnt: '0', pct: '0.0%', geo: { US: '0', UK: '0', Europe: '0', APAC: '0', Other: '0' } },
+  { name: 'Parent Company', g: 'Corporate Hierarchy & Governance', ref: '2026-05-22', cnt: '0', pct: '0.0%', geo: { US: '0', UK: '0', Europe: '0', APAC: '0', Other: '0' } },
+  { name: 'Mergers & Acquisition', g: 'Corporate Hierarchy & Governance', ref: '2026-05-22', cnt: '0', pct: '0.0%', geo: { US: '0', UK: '0', Europe: '0', APAC: '0', Other: '0' } },
 ];
 
 type DatePreset = 'week' | 'month' | '3months' | 'custom';
