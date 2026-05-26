@@ -101,7 +101,7 @@ export default function AccuracyModal({ onClose, inline = false }: { onClose: ()
             <CircularGauge value={51} label="Attribute Fill Rate" subtitle="System Completeness" color="hsl(var(--blue))" icon={<BarChart3 size={16} />} />
           </div>
           <div className="bg-surface border border-border rounded-lg p-2.5 flex items-center">
-            <CircularGauge value={93} label="Accuracy vs QC Flag" subtitle="Avg Attribute Correctness" color="hsl(var(--purple))" icon={<Target size={16} />} />
+            <CircularGauge value={98} label="Accuracy vs QC Flag" subtitle="Avg Attribute Correctness" color="hsl(var(--purple))" icon={<Target size={16} />} />
           </div>
 
           {/* Accuracy Split by Company Type */}
