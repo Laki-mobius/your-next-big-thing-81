@@ -350,29 +350,18 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
   useEffect(() => { setTypes(t => t.filter(x => typeOptions.includes(x))); }, [typeOptions]);
   useEffect(() => { setNames(n => n.filter(x => nameOptions.includes(x))); }, [nameOptions]);
 
-  // Source Name is the FINAL dropdown — URLs & attributes only show once it has selections
-  const namesPicked = names.length > 0;
-
-  const matched: SourceRecord[] = useMemo(
-    () => localFilter({ regions, countries, sourceTypes: types, sourceNames: names }),
-    [regions, countries, types, names, scopedSources],
-  );
+  // Sources are driven entirely by the Asset Repository scoped selection.
+  const matched: SourceRecord[] = scopedSources;
 
   const availableAttrs = useMemo(() => {
-    if (!namesPicked) return [];
     const set = new Set<string>();
     matched.forEach(s => s.attributes.forEach(a => set.add(a)));
     return Array.from(set).sort();
-  }, [matched, namesPicked]);
+  }, [matched]);
 
-  useEffect(() => {
-    setSelectedAttrs(prev => prev.filter(a => availableAttrs.includes(a)));
-  }, [availableAttrs]);
+  useEffect(() => { setSelectedAttrs(availableAttrs); }, [availableAttrs]);
 
-  const toggleAttr = (a: string) =>
-    setSelectedAttrs(prev => prev.includes(a) ? prev.filter(x => x !== a) : [...prev, a]);
-
-  const canRun = matched.length > 0 && selectedAttrs.length > 0 && jobName.trim().length > 0;
+  const canRun = matched.length > 0 && jobName.trim().length > 0;
 
   const handleRun = () => {
     onRun({
