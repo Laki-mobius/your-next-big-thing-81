@@ -92,7 +92,7 @@ export default function CoverageModal({ onClose, inline = false }: { onClose: ()
         {/* Right Pane */}
         <div className="p-[18px_20px] overflow-y-auto flex flex-col gap-3.5">
           <div>
-            <SectionLabel>Record completeness — all 98.7M records</SectionLabel>
+            <SectionLabel>Record completeness — 1,000 POC records</SectionLabel>
             <div className="flex items-center justify-between mb-2.5">
               <span className="text-[10px] text-muted-foreground">By field population level</span>
               <span className="text-[10px] text-muted-foreground italic">hover for details</span>
