@@ -449,21 +449,35 @@ export default function AssetRepository() {
                         return (
                           <div
                             key={`${s.sourceName}-${s.sourceUrl}`}
-                            className="group flex items-center gap-2 px-2 py-2 rounded-md hover:bg-brand-light/40 transition-colors"
+                            className={cn(
+                              "group flex items-center gap-2 px-2 py-2 rounded-md transition-colors",
+                              selected
+                                ? "bg-brand text-primary-foreground"
+                                : "hover:bg-brand-light/40",
+                            )}
                           >
                             <Checkbox
                               checked={selected}
                               onCheckedChange={() => toggleSource(s.sourceName)}
+                              className={cn(selected && "border-primary-foreground data-[state=checked]:bg-primary-foreground data-[state=checked]:text-brand")}
                             />
                             <div className="min-w-0 flex-1">
-                              <div className="text-[12px] font-semibold text-foreground truncate">{s.sourceName}</div>
-                              <div className="flex items-center gap-1.5 mt-0.5 text-[10px] text-muted-foreground">
+                              <div className={cn(
+                                "text-[12px] font-normal truncate",
+                                selected ? "text-primary-foreground" : "text-foreground",
+                              )}>{s.sourceName}</div>
+                              <div className={cn(
+                                "flex items-center gap-1.5 mt-0.5 text-[10px]",
+                                selected ? "text-primary-foreground/80" : "text-muted-foreground",
+                              )}>
                                 <MapPin className="w-2.5 h-2.5" />
                                 <span className="truncate">{s.country}</span>
                                 <span>•</span>
                                 <span className={cn(
                                   "font-medium",
-                                  isUpdating ? "text-primary" : "text-emerald-600 dark:text-emerald-400",
+                                  selected
+                                    ? "text-primary-foreground"
+                                    : isUpdating ? "text-primary" : "text-emerald-600 dark:text-emerald-400",
                                 )}>
                                   {isUpdating ? "Updating" : "Active"}
                                 </span>
@@ -475,12 +489,15 @@ export default function AssetRepository() {
                                 target="_blank"
                                 rel="noreferrer"
                                 onClick={e => e.stopPropagation()}
-                                className="text-primary hover:text-primary/80"
+                                className={cn(selected ? "text-primary-foreground hover:text-primary-foreground/80" : "text-primary hover:text-primary/80")}
                                 title="Visit source"
                               >
                                 <ExternalLink className="w-3.5 h-3.5" />
                               </a>
-                              <span className="text-[9px] font-mono text-muted-foreground tracking-tight">ID-{recId}</span>
+                              <span className={cn(
+                                "text-[9px] font-mono tracking-tight",
+                                selected ? "text-primary-foreground/80" : "text-muted-foreground",
+                              )}>ID-{recId}</span>
                             </div>
                           </div>
                         );
