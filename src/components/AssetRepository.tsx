@@ -1,8 +1,9 @@
 import { useMemo, useState } from "react";
 import {
   Archive, Workflow, Globe, Save, Filter as FilterIcon, Download, Search,
-  ExternalLink, Folder, FolderOpen, X, TrendingUp, ChevronDown, Check,
-  Bookmark, Pencil, Trash2,
+  ExternalLink, X, TrendingUp, ChevronDown, ChevronRight, Check,
+  Bookmark, Pencil, Trash2, MapPin, PlusCircle, ArrowLeftRight, ShieldCheck,
+  RefreshCw, GitMerge, FileText, Database, BarChart3, Briefcase, Users, Building2,
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -412,9 +413,9 @@ export default function AssetRepository() {
       </div>
 
       {/* Grouped list */}
-      <Card className="p-3">
+      <Card className="p-4">
         {tab === "sources" ? (
-          <div className="space-y-4">
+          <div className="space-y-6">
             {sourceGroups.length === 0 && (
               <div className="text-center py-10 text-[12px] text-muted-foreground">
                 No assets match the current filters.
@@ -424,44 +425,62 @@ export default function AssetRepository() {
               const collapsed = collapsedGroups.has(type);
               return (
                 <div key={type}>
-                  <button
-                    onClick={() => toggleGroup(type)}
-                    className="flex items-center gap-2 mb-2 w-full text-left"
-                  >
-                    <div className="w-7 h-7 rounded-md bg-brand-light/60 border border-brand-mid/40 flex items-center justify-center">
+                  <div className="flex items-center justify-between border-b border-border pb-2 mb-3">
+                    <button onClick={() => toggleGroup(type)} className="flex items-center gap-2 text-left">
                       {collapsed
-                        ? <Folder className="w-3.5 h-3.5 text-brand" />
-                        : <FolderOpen className="w-3.5 h-3.5 text-brand" />}
-                    </div>
-                    <span className="text-[12px] font-bold tracking-wide uppercase text-foreground">{type}</span>
-                    <span className="text-[11px] text-muted-foreground">({items.length} items)</span>
-                  </button>
+                        ? <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                        : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
+                      <span className="text-[12px] font-bold tracking-wide uppercase text-foreground">{type}</span>
+                      <Badge variant="secondary" className="text-[10px] h-5 px-2 bg-brand-light/60 text-brand border-0">
+                        {items.length} assets
+                      </Badge>
+                    </button>
+                    <button onClick={() => toggleGroup(type)} className="text-[11px] font-medium text-primary hover:underline">
+                      {collapsed ? "Expand" : "Collapse"}
+                    </button>
+                  </div>
                   {!collapsed && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-2 pl-9">
-                      {items.map(s => {
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-1">
+                      {items.map((s) => {
                         const selected = selectedSources.includes(s.sourceName);
+                        const hash = s.sourceName.split("").reduce((a, c) => a + c.charCodeAt(0), 0);
+                        const isUpdating = hash % 7 === 0;
+                        const recId = String(100 + ((hash * 31) % 900));
                         return (
-                          <div key={`${s.sourceName}-${s.sourceUrl}`} className="flex items-start gap-2">
+                          <div
+                            key={`${s.sourceName}-${s.sourceUrl}`}
+                            className="group flex items-center gap-2 px-2 py-2 rounded-md hover:bg-brand-light/40 transition-colors"
+                          >
                             <Checkbox
                               checked={selected}
                               onCheckedChange={() => toggleSource(s.sourceName)}
-                              className="mt-0.5"
                             />
                             <div className="min-w-0 flex-1">
-                              <div className="flex items-center gap-1.5 flex-wrap">
-                                <span className="text-[12px] font-semibold text-foreground truncate">{s.sourceName}</span>
-                                <a href={s.sourceUrl} target="_blank" rel="noreferrer"
-                                  onClick={e => e.stopPropagation()}
-                                  className="text-[10px] text-primary hover:underline inline-flex items-center gap-0.5">
-                                  Visit Source <ExternalLink className="w-2.5 h-2.5" />
-                                </a>
+                              <div className="text-[12px] font-semibold text-foreground truncate">{s.sourceName}</div>
+                              <div className="flex items-center gap-1.5 mt-0.5 text-[10px] text-muted-foreground">
+                                <MapPin className="w-2.5 h-2.5" />
+                                <span className="truncate">{s.country}</span>
+                                <span>•</span>
+                                <span className={cn(
+                                  "font-medium",
+                                  isUpdating ? "text-primary" : "text-emerald-600 dark:text-emerald-400",
+                                )}>
+                                  {isUpdating ? "Updating" : "Active"}
+                                </span>
                               </div>
-                              <div className="flex items-center gap-1.5 mt-0.5">
-                                <Badge variant="secondary" className="text-[9px] h-4 px-1.5 bg-brand-light/60 text-brand border-0">
-                                  {s.region}
-                                </Badge>
-                                <span className="text-[10px] text-muted-foreground">• {s.country}</span>
-                              </div>
+                            </div>
+                            <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+                              <a
+                                href={s.sourceUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                                onClick={e => e.stopPropagation()}
+                                className="text-primary hover:text-primary/80"
+                                title="Visit source"
+                              >
+                                <ExternalLink className="w-3.5 h-3.5" />
+                              </a>
+                              <span className="text-[9px] font-mono text-muted-foreground tracking-tight">ID-{recId}</span>
                             </div>
                           </div>
                         );
@@ -473,48 +492,47 @@ export default function AssetRepository() {
             })}
           </div>
         ) : (
-          <div className="space-y-4">
-            {workflowGroups.length === 0 && (
+          <div>
+            {workflowGroups.length === 0 ? (
               <div className="text-center py-10 text-[12px] text-muted-foreground">
                 No workflows match the current filters.
               </div>
-            )}
-            {workflowGroups.map(([wf, items]) => {
-              const collapsed = collapsedGroups.has(wf);
-              const selected = selectedWorkflows.includes(wf);
-              return (
-                <div key={wf}>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Checkbox checked={selected} onCheckedChange={() => toggleWorkflow(wf)} />
-                    <button onClick={() => toggleGroup(wf)} className="flex items-center gap-2 flex-1 text-left">
-                      <div className="w-7 h-7 rounded-md bg-brand-light/60 border border-brand-mid/40 flex items-center justify-center">
-                        {collapsed
-                          ? <Folder className="w-3.5 h-3.5 text-brand" />
-                          : <FolderOpen className="w-3.5 h-3.5 text-brand" />}
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                {workflowGroups.map(([wf, items]) => {
+                  const selected = selectedWorkflows.includes(wf);
+                  const Icon = workflowIconFor(wf);
+                  return (
+                    <button
+                      key={wf}
+                      type="button"
+                      onClick={() => toggleWorkflow(wf)}
+                      className={cn(
+                        "flex items-center gap-3 p-3 rounded-md border text-left transition-colors",
+                        selected
+                          ? "border-brand bg-brand-light/40"
+                          : "border-border bg-card hover:border-brand-mid/60 hover:bg-brand-light/20",
+                      )}
+                      title={`${items.length} sources`}
+                    >
+                      <div className="w-9 h-9 rounded-md bg-brand-light/60 border border-brand-mid/40 flex items-center justify-center shrink-0">
+                        <Icon className="w-4 h-4 text-brand" />
                       </div>
-                      <span className="text-[12px] font-bold tracking-wide uppercase text-foreground">{wf}</span>
-                      <span className="text-[11px] text-muted-foreground">({items.length} sources)</span>
+                      <span className="text-[12px] font-semibold text-foreground flex-1 leading-tight">{wf}</span>
+                      <Checkbox
+                        checked={selected}
+                        onCheckedChange={() => toggleWorkflow(wf)}
+                        onClick={e => e.stopPropagation()}
+                      />
                     </button>
-                  </div>
-                  {!collapsed && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-2 pl-9">
-                      {items.map(s => (
-                        <div key={`${wf}-${s.sourceName}`} className="flex items-start gap-2">
-                          <span className="text-[10px] text-muted-foreground mt-1">•</span>
-                          <div className="min-w-0 flex-1">
-                            <div className="text-[12px] font-medium text-foreground truncate">{s.sourceName}</div>
-                            <div className="text-[10px] text-muted-foreground">{s.sourceType} · {s.country}</div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+                  );
+                })}
+              </div>
+            )}
           </div>
         )}
       </Card>
+
 
       {/* Saved jobs */}
       {savedConfigs.length > 0 && (
@@ -600,6 +618,25 @@ export default function AssetRepository() {
       </AlertDialog>
     </div>
   );
+}
+
+// ---------- Workflow icon mapping ----------
+function workflowIconFor(name: string) {
+  const n = name.toLowerCase();
+  if (n.includes("annual report")) return FileText;
+  if (n.includes("financial")) return BarChart3;
+  if (n.includes("invoice")) return FileText;
+  if (n.includes("image") || n.includes("unstructured") || n.includes("idp")) return Database;
+  if (n.includes("uk company")) return Building2;
+  if (n.includes("us company")) return Building2;
+  if (n.includes("register")) return Briefcase;
+  if (n.includes("sourcing")) return Users;
+  if (n.includes("enrichment")) return PlusCircle;
+  if (n.includes("exchange") || n.includes("update")) return ArrowLeftRight;
+  if (n.includes("quality")) return ShieldCheck;
+  if (n.includes("refresh")) return RefreshCw;
+  if (n.includes("consolidation")) return GitMerge;
+  return Workflow;
 }
 
 // ---------- Reusable multi-pick block ----------
