@@ -41,10 +41,10 @@ export interface ScheduleItem {
 }
 
 export const summaryStats = {
-  totalToday: 6482,
-  running: 142,
-  completed: 6285,
-  failed: 55,
+  totalToday: 0,
+  running: 0,
+  completed: 0,
+  failed: 0,
 };
 
 export function formatNumber(n: number): string {
