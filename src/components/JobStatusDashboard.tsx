@@ -514,8 +514,6 @@ function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
             className="h-8 text-[12px]" />
         </div>
         <div className="grid grid-cols-2 gap-2">
-          <MultiSelect label="Region" options={allowedRegions} selected={regions} onChange={setRegions} />
-          <MultiSelect label="Country" options={countryOptions} selected={countries} onChange={setCountries} />
           <MultiSelect label="Workflow Type" options={wfTypeOptions} selected={wfTypes} onChange={setWfTypes} />
           <MultiSelect label="Workflow Name" options={wfNameOptions} selected={wfNames} onChange={setWfNames} />
         </div>
@@ -546,42 +544,6 @@ function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
                   );
                 })}
               </ul>
-            )}
-          </div>
-        </div>
-
-        <div>
-          <div className="flex items-center justify-between mb-1.5">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Data Attributes</span>
-            <div className="flex items-center gap-2">
-              <button className="text-[10px] text-primary hover:underline" onClick={() => setSelectedAttrs(availableAttrs)} disabled={!availableAttrs.length}>Select all</button>
-              <button className="text-[10px] text-muted-foreground hover:underline" onClick={() => setSelectedAttrs([])}>Clear</button>
-            </div>
-          </div>
-          <div className="border rounded-md max-h-48 overflow-y-auto">
-            {!namesPicked ? (
-              <div className="px-2.5 py-2 text-[11px] text-muted-foreground">Select Workflow Name(s) to reveal attributes.</div>
-            ) : availableAttrs.length === 0 ? (
-              <div className="px-2.5 py-2 text-[11px] text-muted-foreground">No attributes available.</div>
-            ) : (
-              <Table className="text-[11px]">
-                <TableHeader>
-                  <TableRow className="hover:bg-transparent">
-                    <TableHead className="h-7 w-8 px-2.5"></TableHead>
-                    <TableHead className="h-7 text-[10px] py-1">Attribute</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {availableAttrs.map(a => (
-                    <TableRow key={a} className="cursor-pointer" onClick={() => toggleAttr(a)}>
-                      <TableCell className="py-1 px-2.5">
-                        <Checkbox checked={selectedAttrs.includes(a)} onCheckedChange={() => toggleAttr(a)} />
-                      </TableCell>
-                      <TableCell className="py-1 text-[11px]">{a}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
             )}
           </div>
         </div>
