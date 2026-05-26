@@ -527,19 +527,26 @@ export default function AssetRepository() {
                       className={cn(
                         "flex items-center gap-3 p-3 rounded-md border text-left transition-colors",
                         selected
-                          ? "border-brand bg-brand-light/40"
+                          ? "border-brand bg-brand text-primary-foreground"
                           : "border-border bg-card hover:border-brand-mid/60 hover:bg-brand-light/20",
                       )}
                       title={`${items.length} sources`}
                     >
-                      <div className="w-9 h-9 rounded-md bg-brand-light/60 border border-brand-mid/40 flex items-center justify-center shrink-0">
-                        <Icon className="w-4 h-4 text-brand" />
+                      <div className={cn(
+                        "w-9 h-9 rounded-md border flex items-center justify-center shrink-0",
+                        selected ? "bg-primary-foreground/15 border-primary-foreground/30" : "bg-brand-light/60 border-brand-mid/40",
+                      )}>
+                        <Icon className={cn("w-4 h-4", selected ? "text-primary-foreground" : "text-brand")} />
                       </div>
-                      <span className="text-[12px] font-semibold text-foreground flex-1 leading-tight">{wf}</span>
+                      <span className={cn(
+                        "text-[12px] font-semibold flex-1 leading-tight",
+                        selected ? "text-primary-foreground" : "text-foreground",
+                      )}>{wf}</span>
                       <Checkbox
                         checked={selected}
                         onCheckedChange={() => toggleWorkflow(wf)}
                         onClick={e => e.stopPropagation()}
+                        className={cn(selected && "border-primary-foreground data-[state=checked]:bg-primary-foreground data-[state=checked]:text-brand")}
                       />
                     </button>
                   );
