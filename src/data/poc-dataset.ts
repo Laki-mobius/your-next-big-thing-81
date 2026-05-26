@@ -31,7 +31,7 @@ export const pocAttributes: AttrStat[] = [
 ];
 
 export const pocCoverageOverall = +(pocAttributes.reduce((s, a) => s + a.pct, 0) / pocAttributes.length).toFixed(1); // 50.5
-export const pocAccuracyOverall = +((pocMetrics.matched + pocMetrics.possibleMatch) / (pocMetrics.matched + pocMetrics.possibleMatch + pocMetrics.noMatch) * 100).toFixed(1); // 83.2
+export const pocAccuracyOverall = 98.15; // Overridden per user request
 export const pocCurrentnessOverall = 100; // All captures within last 14 days
 
 export const pocCountryBreakdown = [

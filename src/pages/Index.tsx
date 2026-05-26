@@ -50,7 +50,7 @@ function DashboardContent() {
                 />
                 <KpiCard
                   label="Accuracy metrics"
-                  value="83.2%"
+                  value="98.15%"
                   delta="0.3%"
                   subtitle="Data correctness rate"
                   icon={<svg viewBox="0 0 20 20" fill="none" className="w-[18px] h-[18px]"><path d="M10 3a7 7 0 1 0 0 14A7 7 0 0 0 10 3Z" stroke="currentColor" strokeWidth="1.4" /><path d="M7 10l2 2 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
