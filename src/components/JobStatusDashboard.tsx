@@ -372,14 +372,18 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
   const [schedule, setSchedule] = useState<ScheduleConfig | null>(null);
   const [entityFile, setEntityFile] = useState<File | null>(null);
 
-  const savedSourceNames = useMemo(
-    () => Array.from(new Set(scopedSources.map(s => s.sourceName))).sort(),
-    [scopedSources],
+  const sourceConfigs = useMemo(
+    () => savedConfigs.filter(c => c.selection.sourceNames.length > 0),
+    [savedConfigs],
   );
 
-  useEffect(() => {
-    setSelectedNames(prev => prev.filter(n => savedSourceNames.includes(n)));
-  }, [savedSourceNames]);
+  const activeIsSource = !!sourceConfigs.find(c => c.id === activeConfigId);
+
+  const selectedNames = useMemo(() => {
+    if (!activeIsSource) return [];
+    const cfg = sourceConfigs.find(c => c.id === activeConfigId);
+    return cfg ? cfg.selection.sourceNames : [];
+  }, [activeIsSource, activeConfigId, sourceConfigs]);
 
   const matched: SourceRecord[] = useMemo(
     () => scopedSources.filter(s => selectedNames.includes(s.sourceName)),
@@ -426,13 +430,14 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
             className="h-8 text-[12px]" />
         </div>
 
-        <MultiSelect
+        <SavedConfigSelect
           label="Saved Sources"
-          options={savedSourceNames}
-          selected={selectedNames}
-          onChange={setSelectedNames}
-          placeholder={savedSourceNames.length ? "Select sources to run" : "No saved sources"}
+          configs={sourceConfigs}
+          value={activeIsSource ? activeConfigId : null}
+          onLoad={loadConfig}
+          placeholder={sourceConfigs.length ? "Select a saved source" : "No saved sources"}
         />
+
 
         <EntityIdentifiersUpload file={entityFile} onFile={setEntityFile} />
       </div>
