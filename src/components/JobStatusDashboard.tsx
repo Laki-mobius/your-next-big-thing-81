@@ -367,7 +367,7 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
   const { toast } = useToast();
 
 
-  const [selectedNames, setSelectedNames] = useState<string[]>([]);
+  
   const [jobName, setJobName] = useState("");
   const [schedule, setSchedule] = useState<ScheduleConfig | null>(null);
   const [entityFile, setEntityFile] = useState<File | null>(null);
