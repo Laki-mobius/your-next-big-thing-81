@@ -319,6 +319,7 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
   const [selectedAttrs, setSelectedAttrs] = useState<string[]>([]);
   const [jobName, setJobName] = useState("");
   const [schedule, setSchedule] = useState<ScheduleConfig | null>(null);
+  const [entityFile, setEntityFile] = useState<File | null>(null);
 
   // Pool of available sources is scoped by the Asset Repository selection
   const scopedRegions = useMemo(
