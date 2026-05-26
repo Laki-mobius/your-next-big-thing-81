@@ -16,11 +16,12 @@ export default function CoverageModal({ onClose, inline = false }: { onClose: ()
   const adjustedCovData = useMemo(() => {
     return covData.map(a => {
       if (a.name === 'Company Name' || a.name === 'Street Address') {
-        return { ...a, v: 100, cnt: '98.7M', st: 'good' as const };
+        return { ...a, v: 100, cnt: '1,000', st: 'good' as const };
       }
       return a;
     });
   }, []);
+
 
   const sorted = useMemo(() => {
     const priority = ['Company Name', 'Street Address'];
