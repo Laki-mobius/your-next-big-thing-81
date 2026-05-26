@@ -66,8 +66,8 @@ export const attributeRecords: AttributeRecord[] = [
   { attribute: 'Revenue', group: 'Financial Data', count: 9.8, accuracy: 93.6, lastRefresh: '2026-03-08', region: 'APAC', tier: 'Tier 2', companyStatus: 'Public' },
   { attribute: 'Revenue', group: 'Financial Data', count: 5.6, accuracy: 84.1, lastRefresh: '2026-02-26', region: 'Latin America', tier: 'Tier 3', companyStatus: 'Private' },
 
-  { attribute: 'Sales', group: 'Financial Data', count: 37.1, accuracy: 95.4, lastRefresh: '2026-03-11', region: 'North America', tier: 'Tier 1', companyStatus: 'Public' },
-  { attribute: 'Sales', group: 'Financial Data', count: 24.9, accuracy: 92.8, lastRefresh: '2026-03-09', region: 'Europe', tier: 'Tier 1', companyStatus: 'Private' },
+  { attribute: 'Sales', group: 'Financial Data', count: 37.1, accuracy: 98.4, lastRefresh: '2026-03-11', region: 'North America', tier: 'Tier 1', companyStatus: 'Public' },
+  { attribute: 'Sales', group: 'Financial Data', count: 24.9, accuracy: 98.8, lastRefresh: '2026-03-09', region: 'Europe', tier: 'Tier 1', companyStatus: 'Private' },
   { attribute: 'Sales', group: 'Financial Data', count: 9.2, accuracy: 86.3, lastRefresh: '2026-03-04', region: 'APAC', tier: 'Tier 2', companyStatus: 'Public' },
   { attribute: 'Sales', group: 'Financial Data', count: 6.3, accuracy: 77.9, lastRefresh: '2026-02-20', region: 'Middle East', tier: 'Tier 3', companyStatus: 'Private' },
 
