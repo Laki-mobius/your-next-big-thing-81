@@ -33,7 +33,7 @@ export const attributeRecords: AttributeRecord[] = [
 
   { attribute: 'City', group: 'Basic Data', count: 45.3, accuracy: 96.2, lastRefresh: '2026-03-13', region: 'North America', tier: 'Tier 1', companyStatus: 'Public' },
   { attribute: 'City', group: 'Basic Data', count: 31.0, accuracy: 94.1, lastRefresh: '2026-03-12', region: 'Europe', tier: 'Tier 1', companyStatus: 'Private' },
-  { attribute: 'City', group: 'Basic Data', count: 10.2, accuracy: 89.4, lastRefresh: '2026-03-09', region: 'APAC', tier: 'Tier 2', companyStatus: 'Public' },
+  { attribute: 'City', group: 'Basic Data', count: 10.2, accuracy: 98.4, lastRefresh: '2026-03-09', region: 'APAC', tier: 'Tier 2', companyStatus: 'Public' },
   { attribute: 'City', group: 'Basic Data', count: 4.1, accuracy: 81.7, lastRefresh: '2026-03-01', region: 'Latin America', tier: 'Tier 3', companyStatus: 'Private' },
 
   { attribute: 'Country', group: 'Basic Data', count: 48.9, accuracy: 99.1, lastRefresh: '2026-03-14', region: 'North America', tier: 'Tier 1', companyStatus: 'Public' },
