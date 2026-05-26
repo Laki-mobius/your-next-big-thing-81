@@ -72,8 +72,8 @@ export const attributeRecords: AttributeRecord[] = [
   { attribute: 'Sales', group: 'Financial Data', count: 6.3, accuracy: 77.9, lastRefresh: '2026-02-20', region: 'Middle East', tier: 'Tier 3', companyStatus: 'Private' },
 
   { attribute: 'Total Assets', group: 'Financial Data', count: 35.6, accuracy: 97.8, lastRefresh: '2026-03-10', region: 'North America', tier: 'Tier 1', companyStatus: 'Public' },
-  { attribute: 'Total Assets', group: 'Financial Data', count: 23.1, accuracy: 95.1, lastRefresh: '2026-03-08', region: 'Europe', tier: 'Tier 1', companyStatus: 'Private' },
-  { attribute: 'Total Assets', group: 'Financial Data', count: 8.9, accuracy: 89.7, lastRefresh: '2026-03-03', region: 'APAC', tier: 'Tier 2', companyStatus: 'Public' },
+  { attribute: 'Total Assets', group: 'Financial Data', count: 23.1, accuracy: 98.1, lastRefresh: '2026-03-08', region: 'Europe', tier: 'Tier 1', companyStatus: 'Private' },
+  { attribute: 'Total Assets', group: 'Financial Data', count: 8.9, accuracy: 98.7, lastRefresh: '2026-03-03', region: 'APAC', tier: 'Tier 2', companyStatus: 'Public' },
   { attribute: 'Total Assets', group: 'Financial Data', count: 5.7, accuracy: 81.4, lastRefresh: '2026-02-22', region: 'Africa', tier: 'Tier 3', companyStatus: 'Private' },
 
   { attribute: 'Net Income', group: 'Financial Data', count: 32.8, accuracy: 96.5, lastRefresh: '2026-03-09', region: 'North America', tier: 'Tier 1', companyStatus: 'Public' },
