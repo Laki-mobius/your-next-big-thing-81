@@ -458,22 +458,25 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
 
 /* ───────────────── Pane: Run by Workflows ───────────────── */
 function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
-  const { scopedSources, selection } = useAssetSelection();
+  const { scopedSources, savedConfigs, activeConfigId, loadConfig } = useAssetSelection();
   const { toast } = useToast();
 
-  const [selectedWfs, setSelectedWfs] = useState<string[]>([]);
   const [jobName, setJobName] = useState("");
   const [schedule, setSchedule] = useState<ScheduleConfig | null>(null);
   const [entityFile, setEntityFile] = useState<File | null>(null);
 
-  const savedWorkflows = useMemo(
-    () => Array.from(new Set(selection.workflows)).sort(),
-    [selection.workflows],
+  const workflowConfigs = useMemo(
+    () => savedConfigs.filter(c => c.selection.workflows.length > 0),
+    [savedConfigs],
   );
 
-  useEffect(() => {
-    setSelectedWfs(prev => prev.filter(w => savedWorkflows.includes(w)));
-  }, [savedWorkflows]);
+  const activeIsWorkflow = !!workflowConfigs.find(c => c.id === activeConfigId);
+
+  const selectedWfs = useMemo(() => {
+    if (!activeIsWorkflow) return [];
+    const cfg = workflowConfigs.find(c => c.id === activeConfigId);
+    return cfg ? cfg.selection.workflows : [];
+  }, [activeIsWorkflow, activeConfigId, workflowConfigs]);
 
   const matched: SourceRecord[] = useMemo(
     () => scopedSources.filter(s => s.workflows.some(w => selectedWfs.includes(w))),
@@ -520,13 +523,14 @@ function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
             className="h-8 text-[12px]" />
         </div>
 
-        <MultiSelect
+        <SavedConfigSelect
           label="Saved Workflows"
-          options={savedWorkflows}
-          selected={selectedWfs}
-          onChange={setSelectedWfs}
-          placeholder={savedWorkflows.length ? "Select workflows to run" : "No saved workflows"}
+          configs={workflowConfigs}
+          value={activeIsWorkflow ? activeConfigId : null}
+          onLoad={loadConfig}
+          placeholder={workflowConfigs.length ? "Select a saved workflow" : "No saved workflows"}
         />
+
 
         <EntityIdentifiersUpload file={entityFile} onFile={setEntityFile} />
       </div>
