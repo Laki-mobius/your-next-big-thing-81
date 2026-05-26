@@ -17,10 +17,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Netherlands",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -42,10 +42,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Italy",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -67,10 +67,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Belgium",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -92,10 +92,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "France",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -117,10 +117,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Germany",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -142,10 +142,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Finland",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -167,10 +167,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "United Kingdom",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -192,10 +192,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Russia",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -217,10 +217,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Sweden",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -242,10 +242,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Switzerland",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -267,10 +267,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Bangladesh",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -292,10 +292,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "India",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -317,10 +317,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Indonesia",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -342,10 +342,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Israel",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -367,10 +367,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Japan",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -392,10 +392,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Malaysia",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -417,10 +417,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Philippines",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -442,10 +442,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Saudi Arabia",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -467,10 +467,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Singapore",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -492,10 +492,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "South Korea",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -517,10 +517,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Taiwan",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -542,10 +542,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Thailand",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -567,10 +567,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Vietnam",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -592,10 +592,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "North America",
     "country": "Canada",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -617,10 +617,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "North America",
     "country": "United States",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -642,10 +642,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "North America",
     "country": "United States",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -667,10 +667,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "North America",
     "country": "United States",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -692,10 +692,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Middle East",
     "country": "United Arab Emirates",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -717,10 +717,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "United Kingdom",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -742,10 +742,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Middle East",
     "country": "Jordan",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -767,10 +767,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "United Kingdom",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -792,10 +792,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Armenia",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -817,10 +817,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Kazakhstan",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -842,10 +842,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Greece",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -867,10 +867,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Oceania",
     "country": "Australia",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -892,10 +892,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Americas",
     "country": "Bahamas",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -917,10 +917,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Middle East",
     "country": "Bahrain",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -942,10 +942,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Bosnia and Herzegovina",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -967,10 +967,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Americas",
     "country": "Barbados",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -992,10 +992,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Spain",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1017,10 +1017,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Serbia",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1042,10 +1042,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Americas",
     "country": "Bermuda",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1067,10 +1067,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Spain",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1092,10 +1092,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Africa",
     "country": "Angola",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1117,10 +1117,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Spain",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1142,10 +1142,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Americas",
     "country": "Venezuela",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1167,10 +1167,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Americas",
     "country": "Panama",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1192,10 +1192,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Americas",
     "country": "Mexico",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1217,10 +1217,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Americas",
     "country": "Argentina",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1242,10 +1242,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Italy",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1267,10 +1267,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Germany",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1292,10 +1292,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Africa",
     "country": "Botswana",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1317,10 +1317,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Africa",
     "country": "Tunisia",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1342,10 +1342,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Africa",
     "country": "Ivory Coast",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1367,10 +1367,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Slovakia",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1392,10 +1392,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Romania",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1417,10 +1417,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Hungary",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1442,10 +1442,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Americas",
     "country": "Argentina",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1467,10 +1467,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Bulgaria",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1492,10 +1492,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Switzerland",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1517,10 +1517,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Americas",
     "country": "Cayman Islands",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1542,10 +1542,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "North America",
     "country": "United States",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1567,10 +1567,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "North America",
     "country": "United States",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1592,10 +1592,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Americas",
     "country": "Colombia",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1617,10 +1617,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Sri Lanka",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1642,10 +1642,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Denmark",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1667,10 +1667,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Cyprus",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1692,10 +1692,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Middle East",
     "country": "Syria",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1717,10 +1717,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Africa",
     "country": "Tanzania",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1742,10 +1742,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Germany",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1767,10 +1767,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Middle East",
     "country": "United Arab Emirates",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1792,10 +1792,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Germany",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1817,10 +1817,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Americas",
     "country": "Saint Kitts and Nevis",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1842,10 +1842,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Africa",
     "country": "Egypt",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1867,10 +1867,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Belgium",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1892,10 +1892,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Georgia",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1917,10 +1917,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Africa",
     "country": "Ghana",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1942,10 +1942,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Americas",
     "country": "Ecuador",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1967,10 +1967,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Germany",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -1992,10 +1992,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Vietnam",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2017,10 +2017,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Hong Kong",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2042,10 +2042,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Ireland",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2067,10 +2067,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Pakistan",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2092,10 +2092,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Turkey",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2117,10 +2117,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Africa",
     "country": "South Africa",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2142,10 +2142,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Africa",
     "country": "Sudan",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2167,10 +2167,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Malaysia",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2192,10 +2192,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Americas",
     "country": "Peru",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2217,10 +2217,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Slovenia",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2242,10 +2242,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Luxembourg",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2267,10 +2267,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Spain",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2292,10 +2292,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Africa",
     "country": "Malawi",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2317,10 +2317,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Mongolia",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2342,10 +2342,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Americas",
     "country": "Uruguay",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2367,10 +2367,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Africa",
     "country": "Morocco",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2392,10 +2392,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Middle East",
     "country": "Oman",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2417,10 +2417,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Africa",
     "country": "Kenya",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2442,10 +2442,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Denmark",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2467,10 +2467,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Middle East",
     "country": "United Arab Emirates",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2492,10 +2492,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Finland",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2517,10 +2517,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "North America",
     "country": "United States",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2542,10 +2542,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Latvia",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2567,10 +2567,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Latvia",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2592,10 +2592,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Estonia",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2617,10 +2617,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "China",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2642,10 +2642,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Nepal",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2667,10 +2667,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "India",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2692,10 +2692,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Oceania",
     "country": "New Zealand",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2717,10 +2717,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "North America",
     "country": "United States",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2742,10 +2742,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "North America",
     "country": "United States",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2767,10 +2767,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "North America",
     "country": "United States",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2792,10 +2792,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "North America",
     "country": "Canada",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2817,10 +2817,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "North America",
     "country": "United States",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2842,10 +2842,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "North America",
     "country": "United States",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2867,10 +2867,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Pakistan",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2892,10 +2892,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Middle East",
     "country": "Palestine",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2917,10 +2917,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Oceania",
     "country": "Papua New Guinea",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2942,10 +2942,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Czech Republic",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2967,10 +2967,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Americas",
     "country": "Brazil",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -2992,10 +2992,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Bhutan",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -3017,10 +3017,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Americas",
     "country": "Chile",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -3042,10 +3042,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Bosnia and Herzegovina",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -3067,10 +3067,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Africa",
     "country": "Papua New Guinea",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -3092,10 +3092,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Singapore",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -3117,10 +3117,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Oceania",
     "country": "Fiji",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -3142,10 +3142,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Africa",
     "country": "Mauritius",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -3167,10 +3167,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Germany",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -3192,10 +3192,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Middle East",
     "country": "Israel",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -3217,10 +3217,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Japan",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -3242,10 +3242,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "North America",
     "country": "Canada",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -3267,10 +3267,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "North America",
     "country": "Canada",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -3292,10 +3292,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Ukraine",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -3317,10 +3317,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Poland",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -3342,10 +3342,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Austria",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -3367,10 +3367,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Croatia",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -3392,10 +3392,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Africa",
     "country": "Zimbabwe",
     "workflows": [
-      "Stock exchanges",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "Company Data Enrichment",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -3417,10 +3417,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "North America",
     "country": "United States",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -3442,10 +3442,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "North America",
     "country": "United States",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -3467,11 +3467,11 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "North America",
     "country": "United States",
     "workflows": [
-      "SEC data",
-      "Data extraction from reports (8K, Annual reports, DEF14A)",
-      "New listing creation",
-      "Data exchange/update",
-      "Quality check"
+      "US Company Data Extraction",
+      "Annual Report Key Financial Data",
+      "UK Company Data Extraction",
+      "Image and Unstructured IDP",
+      "Invoice Data Extraction"
     ],
     "attributes": [
       "Company Name",
@@ -3509,9 +3509,9 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "North America",
     "country": "United States",
     "workflows": [
-      "Registry data",
-      "Third party data",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "Sourcing Annual Report",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -3525,10 +3525,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Oceania",
     "country": "Australia",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -3551,10 +3551,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Belgium",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -3577,10 +3577,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Americas",
     "country": "Bermuda",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -3603,10 +3603,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "North America",
     "country": "Canada",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -3629,10 +3629,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "North America",
     "country": "Canada",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -3655,10 +3655,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Americas",
     "country": "Cayman Islands",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -3681,10 +3681,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Americas",
     "country": "Chile",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -3707,10 +3707,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "China",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -3733,10 +3733,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Czech Republic",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -3759,10 +3759,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Denmark",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -3785,10 +3785,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Cyprus",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -3811,10 +3811,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Finland",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -3837,10 +3837,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "France",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -3863,10 +3863,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Germany",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -3889,10 +3889,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Guernsey",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -3915,10 +3915,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "India",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -3941,10 +3941,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "India",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -3967,10 +3967,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Isle of Man",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -3993,10 +3993,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Ireland",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -4019,10 +4019,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Italy",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -4045,10 +4045,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Jersey",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -4071,10 +4071,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Liechtenstein",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -4097,10 +4097,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Malta",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -4123,10 +4123,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Netherlands",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -4149,10 +4149,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Oceania",
     "country": "New Zealand",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -4175,10 +4175,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Norway",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -4201,10 +4201,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Poland",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -4227,10 +4227,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Portugal",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -4253,10 +4253,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Asia",
     "country": "Singapore",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -4279,10 +4279,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Africa",
     "country": "South Africa",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -4305,10 +4305,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Spain",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -4331,10 +4331,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Sweden",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -4357,10 +4357,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Switzerland",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -4383,10 +4383,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "Ukraine",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
@@ -4409,10 +4409,10 @@ export const sourceCatalog: SourceRecord[] = [
     "region": "Europe",
     "country": "United Kingdom",
     "workflows": [
-      "Registry data",
-      "New listing creation",
-      "Quality check",
-      "Data exchange/update"
+      "UK Company Register Data Extraction",
+      "UK Company Data Extraction",
+      "Invoice Data Extraction",
+      "Image and Unstructured IDP"
     ],
     "attributes": [
       "Company Name",
