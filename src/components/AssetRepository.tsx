@@ -1,8 +1,9 @@
 import { useMemo, useState } from "react";
 import {
   Archive, Workflow, Globe, Save, Filter as FilterIcon, Download, Search,
-  ExternalLink, Folder, FolderOpen, X, TrendingUp, ChevronDown, Check,
-  Bookmark, Pencil, Trash2,
+  ExternalLink, X, TrendingUp, ChevronDown, ChevronRight, Check,
+  Bookmark, Pencil, Trash2, MapPin, PlusCircle, ArrowLeftRight, ShieldCheck,
+  RefreshCw, GitMerge, FileText, Database, BarChart3, Briefcase, Users, Building2,
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
