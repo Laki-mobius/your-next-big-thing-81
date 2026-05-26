@@ -82,10 +82,10 @@ export default function CoverageModal({ onClose, inline = false }: { onClose: ()
                     <svg viewBox="0 0 12 12" fill="none" className="w-2.5 h-2.5"><path d="M2 9h8M3 9V5.5L6 3l3 2.5V9" stroke="#185FA5" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   </div>
                 </div>
-                <div className="text-[21px] font-light tracking-[-1px] leading-none text-status-blue mb-0.5">96.8%</div>
+                <div className="text-[21px] font-light tracking-[-1px] leading-none text-status-blue mb-0.5">53.2%</div>
                 <div className="text-[10px] text-muted-foreground">Daily</div>
                 <div className="h-[3px] bg-border rounded-sm overflow-hidden mt-1.5">
-                  <div className="h-full rounded-sm bg-status-blue" style={{ width: '96.8%' }} />
+                  <div className="h-full rounded-sm bg-status-blue" style={{ width: '53.2%' }} />
                 </div>
               </div>
               <div className="rounded-[10px] p-3 border border-border bg-surface transition-all hover:border-brand/40 hover:bg-brand-light hover:shadow-sm">
@@ -95,10 +95,10 @@ export default function CoverageModal({ onClose, inline = false }: { onClose: ()
                     <svg viewBox="0 0 12 12" fill="none" className="w-2.5 h-2.5"><rect x="2" y="5" width="8" height="6" rx="1" stroke="#1A7A4A" strokeWidth="1.2" /><path d="M4 5V4a2 2 0 1 1 4 0v1" stroke="#1A7A4A" strokeWidth="1.2" strokeLinecap="round" /></svg>
                   </div>
                 </div>
-                <div className="text-[21px] font-light tracking-[-1px] leading-none text-brand mb-0.5">93.1%</div>
+                <div className="text-[21px] font-light tracking-[-1px] leading-none text-brand mb-0.5">49.8%</div>
                 <div className="text-[10px] text-muted-foreground">Weekly</div>
                 <div className="h-[3px] bg-border rounded-sm overflow-hidden mt-1.5">
-                  <div className="h-full rounded-sm bg-brand" style={{ width: '93.1%' }} />
+                  <div className="h-full rounded-sm bg-brand" style={{ width: '49.8%' }} />
                 </div>
               </div>
             </div>
