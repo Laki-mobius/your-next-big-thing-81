@@ -363,6 +363,8 @@ const fmtDuration = (start: number, end?: number) => {
 
 /* ───────────────── Pane: Run by Sources ───────────────── */
 function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
+  const { scopedSources, savedConfigs, activeConfigId, loadConfig, selection } = useAssetSelection();
+
   const { scopedSources } = useAssetSelection();
   const { toast } = useToast();
 
