@@ -181,11 +181,14 @@ export const dataGroups: DataGroup[] = [
     columns: [
       { key: 'companyName', label: 'Company Name' },
       { key: 'country', label: 'Country' },
-      { key: 'type', label: 'Type' },
-      { key: 'employees', label: 'Employees', align: 'right' },
-      { key: 'revenue', label: 'Revenue', align: 'right' },
-      { key: 'revenueCurrency', label: 'Revenue Currency' },
       { key: 'website', label: 'Website' },
+      { key: 'revenue', label: 'Revenue', align: 'right' },
+      { key: 'employees', label: 'Employees', align: 'right' },
+      { key: 'fiscalYear', label: 'Fiscal Year' },
+      { key: 'revenueSource', label: 'Revenue Source' },
+      { key: 'employeeSource', label: 'Employee Source' },
+      { key: 'matchStatus', label: 'Match Status' },
+      { key: 'lastCaptured', label: 'Last Captured' },
     ],
     extraColumns: [
       { key: 'revenueFiscalYear', label: 'Revenue Fiscal Year' },
