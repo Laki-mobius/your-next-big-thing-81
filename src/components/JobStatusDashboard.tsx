@@ -312,54 +312,30 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
   const { scopedSources } = useAssetSelection();
   const { toast } = useToast();
 
-  const [regions, setRegions] = useState<string[]>([]);
-  const [countries, setCountries] = useState<string[]>([]);
-  const [types, setTypes] = useState<string[]>([]);
-  const [names, setNames] = useState<string[]>([]);
-  const [selectedAttrs, setSelectedAttrs] = useState<string[]>([]);
+  const [selectedNames, setSelectedNames] = useState<string[]>([]);
   const [jobName, setJobName] = useState("");
   const [schedule, setSchedule] = useState<ScheduleConfig | null>(null);
   const [entityFile, setEntityFile] = useState<File | null>(null);
 
-  // Pool of available sources is scoped by the Asset Repository selection
-  const scopedRegions = useMemo(
-    () => Array.from(new Set(scopedSources.map(s => s.region))).filter(r => r !== "Any").sort(),
+  const savedSourceNames = useMemo(
+    () => Array.from(new Set(scopedSources.map(s => s.sourceName))).sort(),
     [scopedSources],
   );
-  const allowedRegions = scopedRegions.length ? scopedRegions : rawRegions.filter(r => r !== "Any");
 
-  const localFilter = (opts: Parameters<typeof filterSources>[0]) =>
-    filterSources(opts).filter(s => scopedSources.includes(s));
+  useEffect(() => {
+    setSelectedNames(prev => prev.filter(n => savedSourceNames.includes(n)));
+  }, [savedSourceNames]);
 
-  const countryOptions = useMemo(() => {
-    const pool = localFilter({ regions });
-    return Array.from(new Set(pool.map(s => s.country))).sort();
-  }, [regions, scopedSources]);
-
-  const typeOptions = useMemo(() => {
-    const pool = localFilter({ regions, countries });
-    return Array.from(new Set(pool.map(s => s.sourceType))).sort();
-  }, [regions, countries, scopedSources]);
-
-  const nameOptions = useMemo(() => {
-    const pool = localFilter({ regions, countries, sourceTypes: types });
-    return Array.from(new Set(pool.map(s => s.sourceName))).sort();
-  }, [regions, countries, types, scopedSources]);
-
-  useEffect(() => { setCountries(c => c.filter(x => countryOptions.includes(x))); }, [countryOptions]);
-  useEffect(() => { setTypes(t => t.filter(x => typeOptions.includes(x))); }, [typeOptions]);
-  useEffect(() => { setNames(n => n.filter(x => nameOptions.includes(x))); }, [nameOptions]);
-
-  // Sources are driven entirely by the Asset Repository scoped selection.
-  const matched: SourceRecord[] = scopedSources;
+  const matched: SourceRecord[] = useMemo(
+    () => scopedSources.filter(s => selectedNames.includes(s.sourceName)),
+    [scopedSources, selectedNames],
+  );
 
   const availableAttrs = useMemo(() => {
     const set = new Set<string>();
     matched.forEach(s => s.attributes.forEach(a => set.add(a)));
     return Array.from(set).sort();
   }, [matched]);
-
-  useEffect(() => { setSelectedAttrs(availableAttrs); }, [availableAttrs]);
 
   const canRun = matched.length > 0 && jobName.trim().length > 0;
 
@@ -368,12 +344,12 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
       id: `SRC-${Date.now().toString(36).toUpperCase()}`,
       kind: "sources",
       jobName: jobName.trim(),
-      label: `${matched.length} source${matched.length !== 1 ? "s" : ""} · ${selectedAttrs.length} attribute${selectedAttrs.length !== 1 ? "s" : ""}`,
+      label: `${matched.length} source${matched.length !== 1 ? "s" : ""} · ${availableAttrs.length} attribute${availableAttrs.length !== 1 ? "s" : ""}`,
       status: "Queued",
       progress: 0,
       startedAt: Date.now(),
       sourcesCount: matched.length,
-      attributesCount: selectedAttrs.length,
+      attributesCount: availableAttrs.length,
       attributesExtracted: 0,
       errors: [],
       schedule,
@@ -395,19 +371,19 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
             className="h-8 text-[12px]" />
         </div>
 
-        <div className="rounded-md border bg-muted/10 px-2.5 py-2 text-[11px] text-muted-foreground">
-          {matched.length > 0 ? (
-            <>Using <span className="font-semibold text-foreground">{matched.length}</span> source{matched.length !== 1 ? "s" : ""} · <span className="font-semibold text-foreground">{availableAttrs.length}</span> attribute{availableAttrs.length !== 1 ? "s" : ""} from the saved Asset Repository selection.</>
-          ) : (
-            <>No assets selected yet. Configure and save assets in the Asset Repository.</>
-          )}
-        </div>
+        <MultiSelect
+          label="Saved Sources"
+          options={savedSourceNames}
+          selected={selectedNames}
+          onChange={setSelectedNames}
+          placeholder={savedSourceNames.length ? "Select sources to run" : "No saved sources"}
+        />
 
         <EntityIdentifiersUpload file={entityFile} onFile={setEntityFile} />
       </div>
       <div className="px-3 py-2.5 border-t bg-muted/10 flex items-center justify-between gap-2">
         <span className="text-[11px] text-muted-foreground truncate">
-          {matched.length} src · {selectedAttrs.length} attrs
+          {matched.length} src · {availableAttrs.length} attrs
         </span>
         <div className="flex items-center gap-2">
           <ScheduleButton value={schedule} onSave={setSchedule} />
@@ -422,77 +398,47 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
 
 /* ───────────────── Pane: Run by Workflows ───────────────── */
 function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
-  const { scopedSources } = useAssetSelection();
+  const { scopedSources, selection } = useAssetSelection();
   const { toast } = useToast();
 
-  const [regions, setRegions] = useState<string[]>([]);
-  const [countries, setCountries] = useState<string[]>([]);
-  const [wfTypes, setWfTypes] = useState<string[]>([]);
-  const [wfNames, setWfNames] = useState<string[]>([]);
-  const [selectedAttrs, setSelectedAttrs] = useState<string[]>([]);
+  const [selectedWfs, setSelectedWfs] = useState<string[]>([]);
   const [jobName, setJobName] = useState("");
   const [schedule, setSchedule] = useState<ScheduleConfig | null>(null);
   const [entityFile, setEntityFile] = useState<File | null>(null);
 
-  const scopedRegions = useMemo(
-    () => Array.from(new Set(scopedSources.map(s => s.region))).filter(r => r !== "Any").sort(),
-    [scopedSources],
+  const savedWorkflows = useMemo(
+    () => Array.from(new Set(selection.workflows)).sort(),
+    [selection.workflows],
   );
-  const allowedRegions = scopedRegions.length ? scopedRegions : rawRegions.filter(r => r !== "Any");
 
-  const localFilter = (opts: Parameters<typeof filterSources>[0]) =>
-    filterSources(opts).filter(s => scopedSources.includes(s));
-
-  const countryOptions = useMemo(() => {
-    const pool = localFilter({ regions });
-    return Array.from(new Set(pool.map(s => s.country))).sort();
-  }, [regions, scopedSources]);
-
-  const wfTypeOptions = useMemo(() => {
-    const pool = localFilter({ regions, countries });
-    return Array.from(new Set(pool.map(s => s.sourceType))).sort();
-  }, [regions, countries, scopedSources]);
-
-  const wfNameOptions = useMemo(() => {
-    const pool = localFilter({ regions, countries, sourceTypes: wfTypes });
-    const wfs = new Set<string>();
-    pool.forEach(p => p.workflows.forEach(w => wfs.add(w)));
-    return Array.from(wfs).sort();
-  }, [regions, countries, wfTypes, scopedSources]);
-
-  useEffect(() => { setCountries(c => c.filter(x => countryOptions.includes(x))); }, [countryOptions]);
-  useEffect(() => { setWfTypes(t => t.filter(x => wfTypeOptions.includes(x))); }, [wfTypeOptions]);
-  useEffect(() => { setWfNames(n => n.filter(x => wfNameOptions.includes(x))); }, [wfNameOptions]);
-
-  const namesPicked = wfNames.length > 0;
+  useEffect(() => {
+    setSelectedWfs(prev => prev.filter(w => savedWorkflows.includes(w)));
+  }, [savedWorkflows]);
 
   const matched: SourceRecord[] = useMemo(
-    () => localFilter({ regions, countries, sourceTypes: wfTypes, workflows: wfNames }),
-    [regions, countries, wfTypes, wfNames, scopedSources],
+    () => scopedSources.filter(s => s.workflows.some(w => selectedWfs.includes(w))),
+    [scopedSources, selectedWfs],
   );
 
   const availableAttrs = useMemo(() => {
-    if (!namesPicked) return [];
     const set = new Set<string>();
     matched.forEach(s => s.attributes.forEach(a => set.add(a)));
     return Array.from(set).sort();
-  }, [matched, namesPicked]);
+  }, [matched]);
 
-  useEffect(() => { setSelectedAttrs(availableAttrs); }, [availableAttrs]);
-
-  const canRun = wfNames.length > 0 && jobName.trim().length > 0;
+  const canRun = selectedWfs.length > 0 && jobName.trim().length > 0;
 
   const handleRun = () => {
     onRun({
       id: `WF-${Date.now().toString(36).toUpperCase()}`,
       kind: "workflows",
       jobName: jobName.trim(),
-      label: `${wfNames.length} workflow${wfNames.length !== 1 ? "s" : ""} · ${matched.length} source${matched.length !== 1 ? "s" : ""}`,
+      label: `${selectedWfs.length} workflow${selectedWfs.length !== 1 ? "s" : ""} · ${matched.length} source${matched.length !== 1 ? "s" : ""}`,
       status: "Queued",
       progress: 0,
       startedAt: Date.now(),
       sourcesCount: matched.length,
-      attributesCount: selectedAttrs.length,
+      attributesCount: availableAttrs.length,
       attributesExtracted: 0,
       errors: [],
       schedule,
@@ -513,46 +459,20 @@ function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
             placeholder="e.g. APAC Quality Checks - Weekly"
             className="h-8 text-[12px]" />
         </div>
-        <div className="grid grid-cols-2 gap-2">
-          <MultiSelect label="Workflow Type" options={wfTypeOptions} selected={wfTypes} onChange={setWfTypes} />
-          <MultiSelect label="Workflow Name" options={wfNameOptions} selected={wfNames} onChange={setWfNames} />
-        </div>
 
-        <div>
-          <div className="flex items-center justify-between mb-1.5">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Workflow Details · Associated Sources</span>
-            <Badge variant="secondary" className="text-[10px]">{namesPicked ? matched.length : 0}</Badge>
-          </div>
-          <div className="border rounded-md max-h-28 overflow-y-auto bg-muted/10">
-            {!namesPicked ? (
-              <div className="px-2.5 py-2 text-[11px] text-muted-foreground">Select Workflow Name(s) to reveal linked sources.</div>
-            ) : (
-              <ul className="divide-y">
-                {wfNames.map(w => {
-                  const linked = matched.filter(s => s.workflows.includes(w));
-                  return (
-                    <li key={w} className="px-2.5 py-1.5">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[11px] font-semibold text-foreground">{w}</span>
-                        <Badge variant="outline" className="text-[9px]">{linked.length} sources</Badge>
-                      </div>
-                      <div className="text-[10px] text-muted-foreground truncate">
-                        {linked.slice(0, 4).map(l => l.sourceName).join(" · ")}
-                        {linked.length > 4 && ` +${linked.length - 4}`}
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
-          </div>
-        </div>
+        <MultiSelect
+          label="Saved Workflows"
+          options={savedWorkflows}
+          selected={selectedWfs}
+          onChange={setSelectedWfs}
+          placeholder={savedWorkflows.length ? "Select workflows to run" : "No saved workflows"}
+        />
 
         <EntityIdentifiersUpload file={entityFile} onFile={setEntityFile} />
       </div>
       <div className="px-3 py-2.5 border-t bg-muted/10 flex items-center justify-between gap-2">
         <span className="text-[11px] text-muted-foreground truncate">
-          {wfNames.length} wf · {selectedAttrs.length} attrs
+          {selectedWfs.length} wf · {availableAttrs.length} attrs
         </span>
         <div className="flex items-center gap-2">
           <ScheduleButton value={schedule} onSave={setSchedule} />
