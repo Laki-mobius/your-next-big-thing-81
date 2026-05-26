@@ -5,27 +5,20 @@ import { dataGroups } from '@/data/dashboard-data';
 import { cn } from '@/lib/utils';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
-// POC attributes — sorted by populated count (most-filled first)
+// POC attributes — ordered per requested display sequence
 const qcAttributes = [
-  { name: 'Employee Count', accuracy: 98, correct: 532, total: 542, status: 'passed' as const, issues: '10 Outdated / Banded Ranges' },
-  { name: 'Revenue Range', accuracy: 98, correct: 504, total: 514, status: 'passed' as const, issues: '10 Fiscal Year Missing' },
-  { name: 'Revenue Currency', accuracy: 99, correct: 511, total: 514, status: 'passed' as const, issues: '3 Currency Mismatch' },
+  { name: 'Company Name', accuracy: 100, correct: 1000, total: 1000, status: 'passed' as const, issues: 'No Issues' },
+  { name: 'Website', accuracy: 98, correct: 451, total: 462, status: 'passed' as const, issues: '11 Broken / Redirected URLs' },
+  { name: 'Suffix', accuracy: 95, correct: 43, total: 45, status: 'passed' as const, issues: '2 Normalization Issues' },
   { name: 'First Name', accuracy: 99, correct: 500, total: 503, status: 'passed' as const, issues: '3 Parse Warnings' },
+  { name: 'Middle Name', accuracy: 97, correct: 146, total: 150, status: 'passed' as const, issues: '4 Parse Warnings' },
   { name: 'Last Name', accuracy: 99, correct: 500, total: 503, status: 'passed' as const, issues: '3 Parse Warnings' },
   { name: 'Executive Title', accuracy: 98, correct: 493, total: 503, status: 'passed' as const, issues: '10 Title Parse Warnings' },
-  { name: 'Website', accuracy: 98, correct: 451, total: 462, status: 'passed' as const, issues: '11 Broken / Redirected URLs' },
+  { name: 'Number of Employees', accuracy: 98, correct: 532, total: 542, status: 'passed' as const, issues: '10 Outdated / Banded Ranges' },
+  { name: 'Revenue', accuracy: 98, correct: 504, total: 514, status: 'passed' as const, issues: '10 Fiscal Year Missing' },
+  { name: 'Revenue Currency', accuracy: 99, correct: 511, total: 514, status: 'passed' as const, issues: '3 Currency Mismatch' },
   { name: 'Revenue Fiscal Year', accuracy: 97, correct: 200, total: 205, status: 'passed' as const, issues: '5 Format Inconsistencies' },
-  { name: 'Middle Name', accuracy: 97, correct: 146, total: 150, status: 'passed' as const, issues: '4 Parse Warnings' },
   { name: 'Annual Report', accuracy: 98, correct: 51, total: 52, status: 'passed' as const, issues: '1 Broken Link' },
-  { name: 'Suffix', accuracy: 95, correct: 43, total: 45, status: 'passed' as const, issues: '2 Normalization Issues' },
-  { name: 'Company Name', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
-  { name: 'Headquarters Country', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
-  { name: 'Foundation Year', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
-  { name: 'Industry Sector', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
-  { name: 'Street Address', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
-  { name: 'Phone Number', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
-  { name: 'NAICS Code', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
-  { name: 'Net Income', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
 ];
 
 
