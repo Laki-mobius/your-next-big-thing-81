@@ -12,15 +12,8 @@ export default function CoverageModal({ onClose, inline = false }: { onClose: ()
   const [companySize, setCompanySize] = useState('all');
   const [revenue, setRevenue] = useState('all');
 
-  // Ensure Company Name and Address appear first with 100% coverage
-  const adjustedCovData = useMemo(() => {
-    return covData.map(a => {
-      if (a.name === 'Company Name' || a.name === 'Street Address') {
-        return { ...a, v: 100, cnt: '98.7M', st: 'good' as const };
-      }
-      return a;
-    });
-  }, []);
+  // POC scope — show all 4 attributes as-is
+  const adjustedCovData = useMemo(() => covData, []);
 
   const sorted = useMemo(() => {
     const priority = ['Company Name', 'Street Address'];
