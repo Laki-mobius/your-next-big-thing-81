@@ -118,7 +118,7 @@ export default function TotalRecordsModal({ onClose, inline = false }: { onClose
                       <div
                         key={t}
                         className="absolute w-full border-t border-border/50"
-                        style={{ bottom: `${(t / 45) * 100}%` }}
+                        style={{ bottom: `${(t / 200) * 100}%` }}
                       />
                     ))}
                   </div>
@@ -131,7 +131,7 @@ export default function TotalRecordsModal({ onClose, inline = false }: { onClose
                         <div
                           className="w-full max-w-[36px] rounded-full shadow-sm"
                           style={{
-                            height: `${(g.count / 45) * 100}%`,
+                            height: `${(g.count / 200) * 100}%`,
                             minHeight: 8,
                             background: barGradient,
                           }}
