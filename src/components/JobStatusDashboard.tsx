@@ -478,14 +478,9 @@ function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
     return Array.from(set).sort();
   }, [matched, namesPicked]);
 
-  useEffect(() => {
-    setSelectedAttrs(prev => prev.filter(a => availableAttrs.includes(a)));
-  }, [availableAttrs]);
+  useEffect(() => { setSelectedAttrs(availableAttrs); }, [availableAttrs]);
 
-  const toggleAttr = (a: string) =>
-    setSelectedAttrs(prev => prev.includes(a) ? prev.filter(x => x !== a) : [...prev, a]);
-
-  const canRun = wfNames.length > 0 && selectedAttrs.length > 0 && jobName.trim().length > 0;
+  const canRun = wfNames.length > 0 && jobName.trim().length > 0;
 
   const handleRun = () => {
     onRun({
