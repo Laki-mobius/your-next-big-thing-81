@@ -1,7 +1,8 @@
-import { useState, useMemo, useEffect, useCallback } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import {
   Clock, Activity, CheckCircle2, XCircle, Play, ChevronDown,
   ExternalLink, Database, Workflow, RefreshCw, AlertTriangle, Loader2, CalendarClock,
+  Upload, FileSpreadsheet, X,
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -170,6 +171,113 @@ function ScheduleButton({ value, onSave }: { value: ScheduleConfig | null; onSav
   );
 }
 
+/* ───────────────── Entity Identifiers upload ───────────────── */
+function EntityIdentifiersUpload({ file, onFile }: { file: File | null; onFile: (f: File | null) => void }) {
+  const [mode, setMode] = useState<"upload" | "manual">("upload");
+  const [manual, setManual] = useState("");
+  const [dragOver, setDragOver] = useState(false);
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
+  const accept = ".csv,.txt,.xlsx";
+  const handleFiles = (fs: FileList | null) => {
+    if (!fs || !fs[0]) return;
+    const f = fs[0];
+    const ok = /\.(csv|txt|xlsx)$/i.test(f.name);
+    if (!ok) return;
+    onFile(f);
+  };
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-1.5">
+        <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+          Entity Identifiers <span className="text-destructive">*</span>
+        </span>
+        <div className="flex items-center gap-1">
+          <Button
+            type="button"
+            size="sm"
+            variant={mode === "upload" ? "default" : "outline"}
+            className="h-6 text-[10px] px-2 gap-1"
+            onClick={() => setMode("upload")}
+          >
+            <Upload className="w-3 h-3" /> Upload File
+          </Button>
+          <Button
+            type="button"
+            size="sm"
+            variant={mode === "manual" ? "default" : "outline"}
+            className="h-6 text-[10px] px-2"
+            onClick={() => setMode("manual")}
+          >
+            Manual Entry
+          </Button>
+        </div>
+      </div>
+
+      {mode === "upload" ? (
+        file ? (
+          <div className="border rounded-md px-2.5 py-2 flex items-center gap-2 bg-muted/10">
+            <FileSpreadsheet className="w-4 h-4 text-primary shrink-0" />
+            <div className="flex-1 min-w-0">
+              <div className="text-[11px] font-semibold text-foreground truncate">{file.name}</div>
+              <div className="text-[10px] text-muted-foreground">{(file.size / 1024).toFixed(1)} KB</div>
+            </div>
+            <button
+              type="button"
+              className="text-muted-foreground hover:text-destructive"
+              onClick={() => onFile(null)}
+              aria-label="Remove file"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        ) : (
+          <div
+            onDragOver={e => { e.preventDefault(); setDragOver(true); }}
+            onDragLeave={() => setDragOver(false)}
+            onDrop={e => { e.preventDefault(); setDragOver(false); handleFiles(e.dataTransfer.files); }}
+            onClick={() => inputRef.current?.click()}
+            className={cn(
+              "border border-dashed rounded-md px-3 py-4 flex flex-col items-center justify-center gap-1.5 cursor-pointer transition-colors text-center",
+              dragOver ? "border-primary bg-primary/5" : "border-border bg-muted/10 hover:bg-muted/20",
+            )}
+          >
+            <Upload className="w-4 h-4 text-muted-foreground" />
+            <div className="text-[11px] text-muted-foreground">
+              Drop a CSV, TXT or XLSX file, or
+            </div>
+            <Button type="button" size="sm" variant="outline" className="h-6 text-[10px] px-2 mt-0.5"
+              onClick={e => { e.stopPropagation(); inputRef.current?.click(); }}>
+              Browse Files
+            </Button>
+            <input
+              ref={inputRef}
+              type="file"
+              accept={accept}
+              className="hidden"
+              onChange={e => handleFiles(e.target.files)}
+            />
+            <div className="text-[10px] text-muted-foreground mt-1">
+              Accepted: Company name and Company webpage
+            </div>
+          </div>
+        )
+      ) : (
+        <div className="space-y-1">
+          <textarea
+            value={manual}
+            onChange={e => setManual(e.target.value)}
+            placeholder="Enter one per line: Company name, Company webpage"
+            className="w-full min-h-[72px] rounded-md border border-input bg-background px-2.5 py-1.5 text-[11px] resize-y focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          />
+          <div className="text-[10px] text-muted-foreground">Accepted: Company name and Company webpage</div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* ───────────────── Job model ───────────────── */
 type JobStatus = "Queued" | "Running" | "Completed" | "Failed";
 
@@ -211,6 +319,7 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
   const [selectedAttrs, setSelectedAttrs] = useState<string[]>([]);
   const [jobName, setJobName] = useState("");
   const [schedule, setSchedule] = useState<ScheduleConfig | null>(null);
+  const [entityFile, setEntityFile] = useState<File | null>(null);
 
   // Pool of available sources is scoped by the Asset Repository selection
   const scopedRegions = useMemo(
@@ -365,6 +474,8 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
             )}
           </div>
         </div>
+
+        <EntityIdentifiersUpload file={entityFile} onFile={setEntityFile} />
       </div>
       <div className="px-3 py-2.5 border-t bg-muted/10 flex items-center justify-between gap-2">
         <span className="text-[11px] text-muted-foreground truncate">
@@ -393,6 +504,7 @@ function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
   const [selectedAttrs, setSelectedAttrs] = useState<string[]>([]);
   const [jobName, setJobName] = useState("");
   const [schedule, setSchedule] = useState<ScheduleConfig | null>(null);
+  const [entityFile, setEntityFile] = useState<File | null>(null);
 
   const scopedRegions = useMemo(
     () => Array.from(new Set(scopedSources.map(s => s.region))).filter(r => r !== "Any").sort(),
@@ -550,6 +662,8 @@ function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
             )}
           </div>
         </div>
+
+        <EntityIdentifiersUpload file={entityFile} onFile={setEntityFile} />
       </div>
       <div className="px-3 py-2.5 border-t bg-muted/10 flex items-center justify-between gap-2">
         <span className="text-[11px] text-muted-foreground truncate">
