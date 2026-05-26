@@ -2,18 +2,18 @@ import { ModalShell, ModalHeader, SectionLabel } from './ModalParts';
 import { Building2, Building, Network, GitBranch, Landmark } from 'lucide-react';
 
 const companyTypes = [
-  { type: 'Public Companies', count: '43K', sub: '0.03% of total', icon: Building2, iconColor: 'text-muted-foreground' },
-  { type: 'Private Companies', count: '129.5M', sub: '99.6% of total', icon: Building, iconColor: 'text-muted-foreground' },
-  { type: 'Parent Companies', count: '210K', sub: '0.16% of total', icon: Network, iconColor: 'text-muted-foreground' },
-  { type: 'Subsidiaries', count: '148K', sub: '0.11% of total', icon: GitBranch, iconColor: 'text-muted-foreground' },
-  { type: 'Government / State-Owned', count: '99K', sub: '0.08% of total', icon: Landmark, iconColor: 'text-muted-foreground' },
+  { type: 'Public Companies', count: '231', sub: '23.1% of total', icon: Building2, iconColor: 'text-muted-foreground' },
+  { type: 'Private Companies', count: '737', sub: '73.7% of total', icon: Building, iconColor: 'text-muted-foreground' },
+  { type: 'Parent Companies', count: '21', sub: '2.1% of total', icon: Network, iconColor: 'text-muted-foreground' },
+  { type: 'Subsidiaries', count: '9', sub: '0.9% of total', icon: GitBranch, iconColor: 'text-muted-foreground' },
+  { type: 'Government / State-Owned', count: '2', sub: '0.2% of total', icon: Landmark, iconColor: 'text-muted-foreground' },
 ];
 
 const tierSegments = [
-  { label: 'Tier 1', name: 'US', value: '24,800', flex: 1.8, color: '#185FA5' },
-  { label: 'Tier 2', name: 'Non-US', value: '18,200', flex: 1.2, color: '#1A7A4A' },
-  { label: 'Tier 3', name: 'US', value: '72.5M', flex: 5.6, color: '#C97A00' },
-  { label: 'Tier 4', name: 'Non-US', value: '57.5M', flex: 4.4, color: '#534AB7' },
+  { label: 'Tier 1', name: 'US', value: '181', flex: 1.81, color: '#185FA5' },
+  { label: 'Tier 2', name: 'Non-US', value: '50', flex: 0.5, color: '#1A7A4A' },
+  { label: 'Tier 3', name: 'US', value: '120', flex: 1.2, color: '#C97A00' },
+  { label: 'Tier 4', name: 'Non-US', value: '649', flex: 6.49, color: '#534AB7' },
 ] as const;
 
 const publicCompanyFlex = tierSegments[0].flex + tierSegments[1].flex;
@@ -22,20 +22,21 @@ const totalTierFlex = publicCompanyFlex + privateCompanyFlex;
 const privateCompanyStart = (publicCompanyFlex / totalTierFlex) * 100;
 
 const geographyBars = [
-  { region: 'US', count: 42, label: '42M' },
-  { region: 'Canada', count: 9, label: '9M' },
-  { region: 'UK', count: 8, label: '8M' },
-  { region: 'China', count: 14, label: '14M' },
-  { region: 'India', count: 12, label: '12M' },
-  { region: 'Germany', count: 7, label: '7M' },
-  { region: 'Japan', count: 6, label: '6M' },
-  { region: 'France', count: 5, label: '5M' },
-  { region: 'SE Asia', count: 9, label: '9M' },
-  { region: 'Latin Am.', count: 10, label: '10M' },
-  { region: 'Rest of World', count: 8, label: '8M' },
+  { region: 'US', count: 181, label: '181' },
+  { region: 'China', count: 158, label: '158' },
+  { region: 'India', count: 109, label: '109' },
+  { region: 'UK', count: 88, label: '88' },
+  { region: 'Australia', count: 72, label: '72' },
+  { region: 'Germany', count: 65, label: '65' },
+  { region: 'Netherlands', count: 64, label: '64' },
+  { region: 'Japan', count: 53, label: '53' },
+  { region: 'Brazil', count: 26, label: '26' },
+  { region: 'Canada', count: 25, label: '25' },
+  { region: 'Rest of World', count: 159, label: '159' },
 ];
 
-const yTicks = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45];
+const yTicks = [0, 25, 50, 75, 100, 125, 150, 175, 200];
+
 
 export default function TotalRecordsModal({ onClose, inline = false }: { onClose: () => void; inline?: boolean }) {
   return (
