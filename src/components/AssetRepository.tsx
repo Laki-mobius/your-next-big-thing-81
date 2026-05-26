@@ -620,6 +620,25 @@ export default function AssetRepository() {
   );
 }
 
+// ---------- Workflow icon mapping ----------
+function workflowIconFor(name: string) {
+  const n = name.toLowerCase();
+  if (n.includes("annual report")) return FileText;
+  if (n.includes("financial")) return BarChart3;
+  if (n.includes("invoice")) return FileText;
+  if (n.includes("image") || n.includes("unstructured") || n.includes("idp")) return Database;
+  if (n.includes("uk company")) return Building2;
+  if (n.includes("us company")) return Building2;
+  if (n.includes("register")) return Briefcase;
+  if (n.includes("sourcing")) return Users;
+  if (n.includes("enrichment")) return PlusCircle;
+  if (n.includes("exchange") || n.includes("update")) return ArrowLeftRight;
+  if (n.includes("quality")) return ShieldCheck;
+  if (n.includes("refresh")) return RefreshCw;
+  if (n.includes("consolidation")) return GitMerge;
+  return Workflow;
+}
+
 // ---------- Reusable multi-pick block ----------
 function MultiPick({
   label, options, selected, onChange, search = false,
