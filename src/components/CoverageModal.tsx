@@ -15,17 +15,7 @@ export default function CoverageModal({ onClose, inline = false }: { onClose: ()
   // POC scope — show all 4 attributes as-is
   const adjustedCovData = useMemo(() => covData, []);
 
-  const sorted = useMemo(() => {
-    const priority = ['Company Name', 'Street Address'];
-    return [...adjustedCovData].sort((a, b) => {
-      const aIdx = priority.indexOf(a.name);
-      const bIdx = priority.indexOf(b.name);
-      if (aIdx !== -1 && bIdx !== -1) return aIdx - bIdx;
-      if (aIdx !== -1) return -1;
-      if (bIdx !== -1) return 1;
-      return 0;
-    });
-  }, [adjustedCovData]);
+  const sorted = useMemo(() => adjustedCovData, [adjustedCovData]);
 
   const filtered = useMemo(() => {
     return sorted.filter(a =>
