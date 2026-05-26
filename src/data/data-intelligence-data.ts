@@ -190,7 +190,7 @@ export const dataGroups: DataGroup[] = [
       { companyName: 'Elysium Group AG', country: 'Switzerland', industry: 'Consulting', type: 'Private', employees: 3400, revenue: '$710M', founded: 2003, hq: 'Geneva', ticker: '—', website: 'elysiumgroup.ch', lei: '213800ELYSGRP00AG11', sic: '7389', naics: '541611', marketCap: '—' },
       { companyName: 'Vanguard Shipping Ltd', country: 'Singapore', industry: 'Logistics', type: 'Public', employees: 9200, revenue: '$2.6B', founded: 1990, hq: 'Singapore', ticker: 'VGD.SI', website: 'vanguardshipping.sg', lei: '549300VGDSHPNG0LTD44', sic: '4412', naics: '483111', marketCap: '$4.9B' },
     ],
-    totalRecords: 98_700_000,
+    totalRecords: 1_000,
   },
 ];
 
