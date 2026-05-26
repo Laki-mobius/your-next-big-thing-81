@@ -69,8 +69,8 @@ export default function CompletenessModal({ onClose, inline = false }: { onClose
     <ModalShell id="modal-currentness" onClose={onClose} fullHeight inline={inline}>
       <div className="grid grid-cols-[280px_1fr] flex-1 overflow-hidden min-h-0">
         <div className="p-[18px_20px] overflow-y-auto border-r border-border">
-          <HeroCard label="Overall currentness" value="91.8%" subtitle="+0.8% vs previous month" ringPercent={91.8} />
-          <div className="mb-4"><SectionLabel>By segment</SectionLabel><SegmentCards pubLabel="Public" pubValue="93.5%" pubSub="Daily" prvValue="90.7%" prvSub="Weekly" showBars pubBar={93.5} prvBar={90.7} /></div>
+          <HeroCard label="Overall currentness" value="100%" subtitle="All POC captures within last 14 days" ringPercent={100} />
+          <div className="mb-4"><SectionLabel>By segment</SectionLabel><SegmentCards pubLabel="Public" pubValue="100%" pubSub="Last 14 days" prvValue="100%" prvSub="Last 14 days" showBars pubBar={100} prvBar={100} /></div>
           <div><SectionLabel>Tier breakdown</SectionLabel><TierBreakdown tiers={tiers} /></div>
         </div>
 
