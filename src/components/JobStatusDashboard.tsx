@@ -350,29 +350,18 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
   useEffect(() => { setTypes(t => t.filter(x => typeOptions.includes(x))); }, [typeOptions]);
   useEffect(() => { setNames(n => n.filter(x => nameOptions.includes(x))); }, [nameOptions]);
 
-  // Source Name is the FINAL dropdown — URLs & attributes only show once it has selections
-  const namesPicked = names.length > 0;
-
-  const matched: SourceRecord[] = useMemo(
-    () => localFilter({ regions, countries, sourceTypes: types, sourceNames: names }),
-    [regions, countries, types, names, scopedSources],
-  );
+  // Sources are driven entirely by the Asset Repository scoped selection.
+  const matched: SourceRecord[] = scopedSources;
 
   const availableAttrs = useMemo(() => {
-    if (!namesPicked) return [];
     const set = new Set<string>();
     matched.forEach(s => s.attributes.forEach(a => set.add(a)));
     return Array.from(set).sort();
-  }, [matched, namesPicked]);
+  }, [matched]);
 
-  useEffect(() => {
-    setSelectedAttrs(prev => prev.filter(a => availableAttrs.includes(a)));
-  }, [availableAttrs]);
+  useEffect(() => { setSelectedAttrs(availableAttrs); }, [availableAttrs]);
 
-  const toggleAttr = (a: string) =>
-    setSelectedAttrs(prev => prev.includes(a) ? prev.filter(x => x !== a) : [...prev, a]);
-
-  const canRun = matched.length > 0 && selectedAttrs.length > 0 && jobName.trim().length > 0;
+  const canRun = matched.length > 0 && jobName.trim().length > 0;
 
   const handleRun = () => {
     onRun({
@@ -405,74 +394,13 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
             placeholder="e.g. EU Stock Exchanges - Daily"
             className="h-8 text-[12px]" />
         </div>
-        <div className="grid grid-cols-2 gap-2">
-          <MultiSelect label="Region" options={allowedRegions} selected={regions} onChange={setRegions} />
-          <MultiSelect label="Country" options={countryOptions} selected={countries} onChange={setCountries} />
-          <MultiSelect label="Source Type" options={typeOptions} selected={types} onChange={setTypes} />
-          <MultiSelect label="Source Name" options={nameOptions} selected={names} onChange={setNames} />
-        </div>
 
-        <div>
-          <div className="flex items-center justify-between mb-1.5">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Source URLs</span>
-            <Badge variant="secondary" className="text-[10px]">{namesPicked ? matched.length : 0}</Badge>
-          </div>
-          <div className="border rounded-md max-h-28 overflow-y-auto bg-muted/10">
-            {!namesPicked ? (
-              <div className="px-2.5 py-2 text-[11px] text-muted-foreground">Select Source Name(s) to reveal URLs.</div>
-            ) : (
-              <ul className="divide-y">
-                {matched.slice(0, 80).map((s, i) => (
-                  <li key={i} className="flex items-center gap-2 px-2.5 py-1.5 text-[11px]">
-                    <span className="font-medium text-foreground truncate flex-1">{s.sourceName}</span>
-                    <a href={s.sourceUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-primary hover:underline truncate max-w-[55%]">
-                      <span className="truncate">{s.sourceUrl}</span>
-                      <ExternalLink className="w-3 h-3 shrink-0" />
-                    </a>
-                  </li>
-                ))}
-                {matched.length > 80 && (
-                  <li className="px-2.5 py-1.5 text-[10px] text-muted-foreground italic">+ {matched.length - 80} more</li>
-                )}
-              </ul>
-            )}
-          </div>
-        </div>
-
-        <div>
-          <div className="flex items-center justify-between mb-1.5">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Data Attributes</span>
-            <div className="flex items-center gap-2">
-              <button className="text-[10px] text-primary hover:underline" onClick={() => setSelectedAttrs(availableAttrs)} disabled={!availableAttrs.length}>Select all</button>
-              <button className="text-[10px] text-muted-foreground hover:underline" onClick={() => setSelectedAttrs([])}>Clear</button>
-            </div>
-          </div>
-          <div className="border rounded-md max-h-48 overflow-y-auto">
-            {!namesPicked ? (
-              <div className="px-2.5 py-2 text-[11px] text-muted-foreground">Select Source Name(s) to reveal attributes.</div>
-            ) : availableAttrs.length === 0 ? (
-              <div className="px-2.5 py-2 text-[11px] text-muted-foreground">No attributes available.</div>
-            ) : (
-              <Table className="text-[11px]">
-                <TableHeader>
-                  <TableRow className="hover:bg-transparent">
-                    <TableHead className="h-7 w-8 px-2.5"></TableHead>
-                    <TableHead className="h-7 text-[10px] py-1">Attribute</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {availableAttrs.map(a => (
-                    <TableRow key={a} className="cursor-pointer" onClick={() => toggleAttr(a)}>
-                      <TableCell className="py-1 px-2.5">
-                        <Checkbox checked={selectedAttrs.includes(a)} onCheckedChange={() => toggleAttr(a)} />
-                      </TableCell>
-                      <TableCell className="py-1 text-[11px]">{a}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            )}
-          </div>
+        <div className="rounded-md border bg-muted/10 px-2.5 py-2 text-[11px] text-muted-foreground">
+          {matched.length > 0 ? (
+            <>Using <span className="font-semibold text-foreground">{matched.length}</span> source{matched.length !== 1 ? "s" : ""} · <span className="font-semibold text-foreground">{availableAttrs.length}</span> attribute{availableAttrs.length !== 1 ? "s" : ""} from the saved Asset Repository selection.</>
+          ) : (
+            <>No assets selected yet. Configure and save assets in the Asset Repository.</>
+          )}
         </div>
 
         <EntityIdentifiersUpload file={entityFile} onFile={setEntityFile} />
@@ -550,14 +478,9 @@ function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
     return Array.from(set).sort();
   }, [matched, namesPicked]);
 
-  useEffect(() => {
-    setSelectedAttrs(prev => prev.filter(a => availableAttrs.includes(a)));
-  }, [availableAttrs]);
+  useEffect(() => { setSelectedAttrs(availableAttrs); }, [availableAttrs]);
 
-  const toggleAttr = (a: string) =>
-    setSelectedAttrs(prev => prev.includes(a) ? prev.filter(x => x !== a) : [...prev, a]);
-
-  const canRun = wfNames.length > 0 && selectedAttrs.length > 0 && jobName.trim().length > 0;
+  const canRun = wfNames.length > 0 && jobName.trim().length > 0;
 
   const handleRun = () => {
     onRun({
@@ -591,8 +514,6 @@ function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
             className="h-8 text-[12px]" />
         </div>
         <div className="grid grid-cols-2 gap-2">
-          <MultiSelect label="Region" options={allowedRegions} selected={regions} onChange={setRegions} />
-          <MultiSelect label="Country" options={countryOptions} selected={countries} onChange={setCountries} />
           <MultiSelect label="Workflow Type" options={wfTypeOptions} selected={wfTypes} onChange={setWfTypes} />
           <MultiSelect label="Workflow Name" options={wfNameOptions} selected={wfNames} onChange={setWfNames} />
         </div>
@@ -623,42 +544,6 @@ function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
                   );
                 })}
               </ul>
-            )}
-          </div>
-        </div>
-
-        <div>
-          <div className="flex items-center justify-between mb-1.5">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Data Attributes</span>
-            <div className="flex items-center gap-2">
-              <button className="text-[10px] text-primary hover:underline" onClick={() => setSelectedAttrs(availableAttrs)} disabled={!availableAttrs.length}>Select all</button>
-              <button className="text-[10px] text-muted-foreground hover:underline" onClick={() => setSelectedAttrs([])}>Clear</button>
-            </div>
-          </div>
-          <div className="border rounded-md max-h-48 overflow-y-auto">
-            {!namesPicked ? (
-              <div className="px-2.5 py-2 text-[11px] text-muted-foreground">Select Workflow Name(s) to reveal attributes.</div>
-            ) : availableAttrs.length === 0 ? (
-              <div className="px-2.5 py-2 text-[11px] text-muted-foreground">No attributes available.</div>
-            ) : (
-              <Table className="text-[11px]">
-                <TableHeader>
-                  <TableRow className="hover:bg-transparent">
-                    <TableHead className="h-7 w-8 px-2.5"></TableHead>
-                    <TableHead className="h-7 text-[10px] py-1">Attribute</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {availableAttrs.map(a => (
-                    <TableRow key={a} className="cursor-pointer" onClick={() => toggleAttr(a)}>
-                      <TableCell className="py-1 px-2.5">
-                        <Checkbox checked={selectedAttrs.includes(a)} onCheckedChange={() => toggleAttr(a)} />
-                      </TableCell>
-                      <TableCell className="py-1 text-[11px]">{a}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
             )}
           </div>
         </div>
