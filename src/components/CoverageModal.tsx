@@ -43,11 +43,12 @@ export default function CoverageModal({ onClose, inline = false }: { onClose: ()
   }, [search, group, filter, sorted]);
 
   const tiers = [
-    { label: 'T1', name: 'Public — US', value: '98.2%', width: '98.2%', color: '#185FA5', tierClass: 'bg-status-blue-light text-status-blue' },
-    { label: 'T2', name: 'Public — Non-US', value: '95.4%', width: '95.4%', color: '#1A7A4A', tierClass: 'bg-brand-light text-brand' },
-    { label: 'T3', name: 'Private — US', value: '94.0%', width: '94%', color: '#C97A00', tierClass: 'bg-status-amber-light text-status-amber' },
-    { label: 'T4', name: 'Private — Non-US', value: '91.8%', width: '91.8%', color: '#534AB7', tierClass: 'bg-status-purple-light text-status-purple' },
+    { label: 'T1', name: 'Public — US', value: '58.4%', width: '58.4%', color: '#185FA5', tierClass: 'bg-status-blue-light text-status-blue' },
+    { label: 'T2', name: 'Public — Non-US', value: '53.1%', width: '53.1%', color: '#1A7A4A', tierClass: 'bg-brand-light text-brand' },
+    { label: 'T3', name: 'Private — US', value: '50.8%', width: '50.8%', color: '#C97A00', tierClass: 'bg-status-amber-light text-status-amber' },
+    { label: 'T4', name: 'Private — Non-US', value: '48.2%', width: '48.2%', color: '#534AB7', tierClass: 'bg-status-purple-light text-status-purple' },
   ];
+
 
   return (
     <ModalShell id="modal-coverage" onClose={onClose} fullHeight inline={inline}>
