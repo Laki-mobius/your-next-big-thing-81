@@ -94,21 +94,21 @@ export default function AccuracyModal({ onClose, inline = false }: { onClose: ()
         {/* Left Pane – Donut Charts */}
         <div className="w-[260px] shrink-0 flex flex-col gap-3">
           <div className="bg-surface border border-border rounded-lg p-2.5 flex items-center">
-            <CircularGauge value={97} label="Overall Quality" subtitle="Overall Record Accuracy" color="hsl(var(--brand))" icon={<ShieldCheck size={16} />} />
+            <CircularGauge value={83} label="Overall Quality" subtitle="Overall Record Accuracy" color="hsl(var(--brand))" icon={<ShieldCheck size={16} />} />
           </div>
           <div className="bg-surface border border-border rounded-lg p-2.5 flex items-center">
-            <CircularGauge value={99} label="Attribute Fill Rate" subtitle="System Completeness" color="hsl(var(--blue))" icon={<BarChart3 size={16} />} />
+            <CircularGauge value={51} label="Attribute Fill Rate" subtitle="System Completeness" color="hsl(var(--blue))" icon={<BarChart3 size={16} />} />
           </div>
           <div className="bg-surface border border-border rounded-lg p-2.5 flex items-center">
-            <CircularGauge value={98} label="Accuracy vs QC Flag" subtitle="Avg Attribute Correctness" color="hsl(var(--purple))" icon={<Target size={16} />} />
+            <CircularGauge value={93} label="Accuracy vs QC Flag" subtitle="Avg Attribute Correctness" color="hsl(var(--purple))" icon={<Target size={16} />} />
           </div>
 
           {/* Accuracy Split by Company Type */}
           <SectionLabel>Accuracy split by company type</SectionLabel>
           <div className="space-y-2.5">
             {[
-              { label: 'Public Companies', pct: 98, count: '231 records', color: '#185FA5' },
-              { label: 'Private Companies', pct: 96, count: '961 records', color: '#1A7A4A' },
+              { label: 'Public Companies', pct: 88, count: '231 records', color: '#185FA5' },
+              { label: 'Private Companies', pct: 81, count: '769 records', color: '#1A7A4A' },
             ].map(item => (
               <div key={item.label} className="bg-surface border border-border rounded-md p-3">
                 <div className="flex items-center justify-between mb-1.5">
@@ -124,6 +124,7 @@ export default function AccuracyModal({ onClose, inline = false }: { onClose: ()
               </div>
             ))}
           </div>
+
 
           {/* Footer */}
           <div className="flex items-center pt-2 border-t border-border text-[10px] text-muted-foreground mt-auto">
