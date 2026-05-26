@@ -106,6 +106,60 @@ function MultiSelect({
   );
 }
 
+/* ───────────────── Single-select saved config dropdown ───────────────── */
+function SavedConfigSelect({
+  label, configs, value, onLoad, placeholder = "Select…",
+}: {
+  label: string;
+  configs: { id: string; name: string }[];
+  value: string | null;
+  onLoad: (id: string) => void;
+  placeholder?: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const current = configs.find(c => c.id === value);
+  return (
+    <div className="space-y-1">
+      <label className="text-[10px] font-semibold tracking-wide uppercase text-muted-foreground">{label}</label>
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger asChild>
+          <button
+            type="button"
+            className="w-full flex items-center justify-between h-8 px-2.5 text-[12px] rounded-md border border-input bg-background hover:bg-muted/30 transition-colors"
+          >
+            <span className={cn("truncate", !current && "text-muted-foreground")}>{current?.name ?? placeholder}</span>
+            <ChevronDown className="w-3.5 h-3.5 text-muted-foreground shrink-0 ml-1" />
+          </button>
+        </PopoverTrigger>
+        <PopoverContent className="p-0 w-[240px]" align="start">
+          <ScrollArea className="max-h-64">
+            <div className="p-1">
+              {configs.length === 0 && (
+                <div className="px-2 py-2 text-[11px] text-muted-foreground">No saved configurations</div>
+              )}
+              {configs.map(c => (
+                <button
+                  key={c.id}
+                  type="button"
+                  onClick={() => { onLoad(c.id); setOpen(false); }}
+                  className={cn(
+                    "w-full text-left px-2 py-1.5 rounded text-[12px] hover:bg-muted/40 truncate",
+                    c.id === value && "bg-muted/40 font-medium",
+                  )}
+                >
+                  {c.name}
+                </button>
+              ))}
+            </div>
+          </ScrollArea>
+        </PopoverContent>
+      </Popover>
+    </div>
+  );
+}
+
+
+
 /* ───────────────── Schedule dialog ───────────────── */
 interface ScheduleConfig {
   timezone: string;
@@ -309,22 +363,27 @@ const fmtDuration = (start: number, end?: number) => {
 
 /* ───────────────── Pane: Run by Sources ───────────────── */
 function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
-  const { scopedSources } = useAssetSelection();
+  const { scopedSources, savedConfigs, activeConfigId, loadConfig } = useAssetSelection();
   const { toast } = useToast();
 
-  const [selectedNames, setSelectedNames] = useState<string[]>([]);
+
+  
   const [jobName, setJobName] = useState("");
   const [schedule, setSchedule] = useState<ScheduleConfig | null>(null);
   const [entityFile, setEntityFile] = useState<File | null>(null);
 
-  const savedSourceNames = useMemo(
-    () => Array.from(new Set(scopedSources.map(s => s.sourceName))).sort(),
-    [scopedSources],
+  const sourceConfigs = useMemo(
+    () => savedConfigs.filter(c => c.selection.sourceNames.length > 0),
+    [savedConfigs],
   );
 
-  useEffect(() => {
-    setSelectedNames(prev => prev.filter(n => savedSourceNames.includes(n)));
-  }, [savedSourceNames]);
+  const activeIsSource = !!sourceConfigs.find(c => c.id === activeConfigId);
+
+  const selectedNames = useMemo(() => {
+    if (!activeIsSource) return [];
+    const cfg = sourceConfigs.find(c => c.id === activeConfigId);
+    return cfg ? cfg.selection.sourceNames : [];
+  }, [activeIsSource, activeConfigId, sourceConfigs]);
 
   const matched: SourceRecord[] = useMemo(
     () => scopedSources.filter(s => selectedNames.includes(s.sourceName)),
@@ -371,13 +430,14 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
             className="h-8 text-[12px]" />
         </div>
 
-        <MultiSelect
+        <SavedConfigSelect
           label="Saved Sources"
-          options={savedSourceNames}
-          selected={selectedNames}
-          onChange={setSelectedNames}
-          placeholder={savedSourceNames.length ? "Select sources to run" : "No saved sources"}
+          configs={sourceConfigs}
+          value={activeIsSource ? activeConfigId : null}
+          onLoad={loadConfig}
+          placeholder={sourceConfigs.length ? "Select a saved source" : "No saved sources"}
         />
+
 
         <EntityIdentifiersUpload file={entityFile} onFile={setEntityFile} />
       </div>
@@ -398,22 +458,25 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
 
 /* ───────────────── Pane: Run by Workflows ───────────────── */
 function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
-  const { scopedSources, selection } = useAssetSelection();
+  const { scopedSources, savedConfigs, activeConfigId, loadConfig } = useAssetSelection();
   const { toast } = useToast();
 
-  const [selectedWfs, setSelectedWfs] = useState<string[]>([]);
   const [jobName, setJobName] = useState("");
   const [schedule, setSchedule] = useState<ScheduleConfig | null>(null);
   const [entityFile, setEntityFile] = useState<File | null>(null);
 
-  const savedWorkflows = useMemo(
-    () => Array.from(new Set(selection.workflows)).sort(),
-    [selection.workflows],
+  const workflowConfigs = useMemo(
+    () => savedConfigs.filter(c => c.selection.workflows.length > 0),
+    [savedConfigs],
   );
 
-  useEffect(() => {
-    setSelectedWfs(prev => prev.filter(w => savedWorkflows.includes(w)));
-  }, [savedWorkflows]);
+  const activeIsWorkflow = !!workflowConfigs.find(c => c.id === activeConfigId);
+
+  const selectedWfs = useMemo(() => {
+    if (!activeIsWorkflow) return [];
+    const cfg = workflowConfigs.find(c => c.id === activeConfigId);
+    return cfg ? cfg.selection.workflows : [];
+  }, [activeIsWorkflow, activeConfigId, workflowConfigs]);
 
   const matched: SourceRecord[] = useMemo(
     () => scopedSources.filter(s => s.workflows.some(w => selectedWfs.includes(w))),
@@ -460,13 +523,14 @@ function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
             className="h-8 text-[12px]" />
         </div>
 
-        <MultiSelect
+        <SavedConfigSelect
           label="Saved Workflows"
-          options={savedWorkflows}
-          selected={selectedWfs}
-          onChange={setSelectedWfs}
-          placeholder={savedWorkflows.length ? "Select workflows to run" : "No saved workflows"}
+          configs={workflowConfigs}
+          value={activeIsWorkflow ? activeConfigId : null}
+          onLoad={loadConfig}
+          placeholder={workflowConfigs.length ? "Select a saved workflow" : "No saved workflows"}
         />
+
 
         <EntityIdentifiersUpload file={entityFile} onFile={setEntityFile} />
       </div>
