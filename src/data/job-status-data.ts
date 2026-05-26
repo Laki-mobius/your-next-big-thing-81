@@ -135,10 +135,10 @@ export const alertsData: AlertItem[] = [
   { type: 'Insight', severity: 'Info', title: 'Hierarchy Links Re-validated', description: '35,400 parent-subsidiary relationships refreshed this month across all tiers.', time: '1h ago', category: 'macro' },
   { type: 'Insight', severity: 'Medium', title: 'M&A Volume Detected', description: '128 global M&A events identified, affecting 4,500 subsidiary records.', time: '2h ago', category: 'macro' },
   { type: 'Insight', severity: 'Info', title: 'UBO Transparency Index', description: 'Percentage of entities with confirmed Ultimate Beneficial Owners increased by 2.4%.', time: '3h ago', category: 'macro' },
-  { type: 'Insight', severity: 'Info', title: 'Completeness Gain', description: "Average 'Basic Data' coverage for Tier 3 entities improved from 82% to 88%.", time: '4h ago', category: 'macro' },
+  { type: 'Insight', severity: 'Info', title: 'Completeness Gain', description: "Average 'Basic Data' coverage for Tier 3 entities improved from 98% to 98%.", time: '4h ago', category: 'macro' },
   { type: 'Insight', severity: 'Info', title: 'Accuracy Delta', description: "Aggregate accuracy for 'Financial Data' group rose by 1.2% following the Q1 filing cycle.", time: '5h ago', category: 'macro' },
   { type: 'Event', severity: 'Info', title: 'Stale Data Cleanup', description: "150,000 records successfully archived or marked 'Dormant' based on inactivity triggers.", time: '6h ago', category: 'macro' },
-  { type: 'Insight', severity: 'Info', title: 'Automation vs. Manual (HITL)', description: "92% of this month's updates were processed via AI-Workflows; 8% required Human-in-the-Loop validation.", time: '8h ago', category: 'macro' },
+  { type: 'Insight', severity: 'Info', title: 'Automation vs. Manual (HITL)', description: "98% of this month's updates were processed via AI-Workflows; 8% required Human-in-the-Loop validation.", time: '8h ago', category: 'macro' },
   { type: 'Warning', severity: 'Medium', title: 'Source Reliability Alert', description: 'Latency detected in European Registry feeds; refresh cycles for 12,000 records delayed by 48 hours.', time: '10h ago', category: 'macro' },
 ];
 

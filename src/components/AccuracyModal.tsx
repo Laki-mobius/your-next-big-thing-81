@@ -7,10 +7,10 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
 // Only 4 POC attributes have data; remaining shown as 0
 const qcAttributes = [
-  { name: 'Website', accuracy: 95, correct: 441, total: 462, status: 'warning' as const, issues: '21 Broken / Redirected URLs' },
-  { name: 'Revenue Range', accuracy: 92, correct: 474, total: 514, status: 'warning' as const, issues: '40 Fiscal Year Missing' },
-  { name: 'Employee Count', accuracy: 89, correct: 483, total: 542, status: 'warning' as const, issues: '59 Outdated / Banded Ranges' },
-  { name: 'Executive Name', accuracy: 97, correct: 488, total: 503, status: 'passed' as const, issues: '15 Title Parse Warnings' },
+  { name: 'Website', accuracy: 98, correct: 451, total: 462, status: 'passed' as const, issues: '11 Broken / Redirected URLs' },
+  { name: 'Revenue Range', accuracy: 98, correct: 504, total: 514, status: 'passed' as const, issues: '10 Fiscal Year Missing' },
+  { name: 'Employee Count', accuracy: 98, correct: 532, total: 542, status: 'passed' as const, issues: '10 Outdated / Banded Ranges' },
+  { name: 'Executive Name', accuracy: 99, correct: 498, total: 503, status: 'passed' as const, issues: '5 Title Parse Warnings' },
   { name: 'Company Name', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
   { name: 'Headquarters Country', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
   { name: 'Foundation Year', accuracy: 0, correct: 0, total: 0, status: 'failed' as const, issues: '—' },
@@ -101,15 +101,15 @@ export default function AccuracyModal({ onClose, inline = false }: { onClose: ()
             <CircularGauge value={51} label="Attribute Fill Rate" subtitle="System Completeness" color="hsl(var(--blue))" icon={<BarChart3 size={16} />} />
           </div>
           <div className="bg-surface border border-border rounded-lg p-2.5 flex items-center">
-            <CircularGauge value={93} label="Accuracy vs QC Flag" subtitle="Avg Attribute Correctness" color="hsl(var(--purple))" icon={<Target size={16} />} />
+            <CircularGauge value={98} label="Accuracy vs QC Flag" subtitle="Avg Attribute Correctness" color="hsl(var(--purple))" icon={<Target size={16} />} />
           </div>
 
           {/* Accuracy Split by Company Type */}
           <SectionLabel>Accuracy split by company type</SectionLabel>
           <div className="space-y-2.5">
             {[
-              { label: 'Public Companies', pct: 88, count: '231 records', color: '#185FA5' },
-              { label: 'Private Companies', pct: 81, count: '769 records', color: '#1A7A4A' },
+              { label: 'Public Companies', pct: 98, count: '231 records', color: '#185FA5' },
+              { label: 'Private Companies', pct: 98, count: '769 records', color: '#1A7A4A' },
             ].map(item => (
               <div key={item.label} className="bg-surface border border-border rounded-md p-3">
                 <div className="flex items-center justify-between mb-1.5">

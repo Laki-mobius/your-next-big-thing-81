@@ -33,12 +33,12 @@ export const attributeRecords: AttributeRecord[] = [
 
   { attribute: 'City', group: 'Basic Data', count: 45.3, accuracy: 96.2, lastRefresh: '2026-03-13', region: 'North America', tier: 'Tier 1', companyStatus: 'Public' },
   { attribute: 'City', group: 'Basic Data', count: 31.0, accuracy: 94.1, lastRefresh: '2026-03-12', region: 'Europe', tier: 'Tier 1', companyStatus: 'Private' },
-  { attribute: 'City', group: 'Basic Data', count: 10.2, accuracy: 89.4, lastRefresh: '2026-03-09', region: 'APAC', tier: 'Tier 2', companyStatus: 'Public' },
+  { attribute: 'City', group: 'Basic Data', count: 10.2, accuracy: 98.4, lastRefresh: '2026-03-09', region: 'APAC', tier: 'Tier 2', companyStatus: 'Public' },
   { attribute: 'City', group: 'Basic Data', count: 4.1, accuracy: 81.7, lastRefresh: '2026-03-01', region: 'Latin America', tier: 'Tier 3', companyStatus: 'Private' },
 
   { attribute: 'Country', group: 'Basic Data', count: 48.9, accuracy: 99.1, lastRefresh: '2026-03-14', region: 'North America', tier: 'Tier 1', companyStatus: 'Public' },
   { attribute: 'Country', group: 'Basic Data', count: 33.4, accuracy: 98.7, lastRefresh: '2026-03-14', region: 'Europe', tier: 'Tier 1', companyStatus: 'Private' },
-  { attribute: 'Country', group: 'Basic Data', count: 11.9, accuracy: 97.3, lastRefresh: '2026-03-12', region: 'APAC', tier: 'Tier 2', companyStatus: 'Public' },
+  { attribute: 'Country', group: 'Basic Data', count: 11.9, accuracy: 99.3, lastRefresh: '2026-03-12', region: 'APAC', tier: 'Tier 2', companyStatus: 'Public' },
 
   { attribute: 'Phone Number', group: 'Basic Data', count: 34.8, accuracy: 88.4, lastRefresh: '2026-03-07', region: 'North America', tier: 'Tier 1', companyStatus: 'Public' },
   { attribute: 'Phone Number', group: 'Basic Data', count: 22.5, accuracy: 84.2, lastRefresh: '2026-03-04', region: 'Europe', tier: 'Tier 2', companyStatus: 'Private' },
@@ -66,14 +66,14 @@ export const attributeRecords: AttributeRecord[] = [
   { attribute: 'Revenue', group: 'Financial Data', count: 9.8, accuracy: 93.6, lastRefresh: '2026-03-08', region: 'APAC', tier: 'Tier 2', companyStatus: 'Public' },
   { attribute: 'Revenue', group: 'Financial Data', count: 5.6, accuracy: 84.1, lastRefresh: '2026-02-26', region: 'Latin America', tier: 'Tier 3', companyStatus: 'Private' },
 
-  { attribute: 'Sales', group: 'Financial Data', count: 37.1, accuracy: 95.4, lastRefresh: '2026-03-11', region: 'North America', tier: 'Tier 1', companyStatus: 'Public' },
-  { attribute: 'Sales', group: 'Financial Data', count: 24.9, accuracy: 92.8, lastRefresh: '2026-03-09', region: 'Europe', tier: 'Tier 1', companyStatus: 'Private' },
+  { attribute: 'Sales', group: 'Financial Data', count: 37.1, accuracy: 98.4, lastRefresh: '2026-03-11', region: 'North America', tier: 'Tier 1', companyStatus: 'Public' },
+  { attribute: 'Sales', group: 'Financial Data', count: 24.9, accuracy: 98.8, lastRefresh: '2026-03-09', region: 'Europe', tier: 'Tier 1', companyStatus: 'Private' },
   { attribute: 'Sales', group: 'Financial Data', count: 9.2, accuracy: 86.3, lastRefresh: '2026-03-04', region: 'APAC', tier: 'Tier 2', companyStatus: 'Public' },
   { attribute: 'Sales', group: 'Financial Data', count: 6.3, accuracy: 77.9, lastRefresh: '2026-02-20', region: 'Middle East', tier: 'Tier 3', companyStatus: 'Private' },
 
   { attribute: 'Total Assets', group: 'Financial Data', count: 35.6, accuracy: 97.8, lastRefresh: '2026-03-10', region: 'North America', tier: 'Tier 1', companyStatus: 'Public' },
-  { attribute: 'Total Assets', group: 'Financial Data', count: 23.1, accuracy: 95.1, lastRefresh: '2026-03-08', region: 'Europe', tier: 'Tier 1', companyStatus: 'Private' },
-  { attribute: 'Total Assets', group: 'Financial Data', count: 8.9, accuracy: 89.7, lastRefresh: '2026-03-03', region: 'APAC', tier: 'Tier 2', companyStatus: 'Public' },
+  { attribute: 'Total Assets', group: 'Financial Data', count: 23.1, accuracy: 98.1, lastRefresh: '2026-03-08', region: 'Europe', tier: 'Tier 1', companyStatus: 'Private' },
+  { attribute: 'Total Assets', group: 'Financial Data', count: 8.9, accuracy: 98.7, lastRefresh: '2026-03-03', region: 'APAC', tier: 'Tier 2', companyStatus: 'Public' },
   { attribute: 'Total Assets', group: 'Financial Data', count: 5.7, accuracy: 81.4, lastRefresh: '2026-02-22', region: 'Africa', tier: 'Tier 3', companyStatus: 'Private' },
 
   { attribute: 'Net Income', group: 'Financial Data', count: 32.8, accuracy: 96.5, lastRefresh: '2026-03-09', region: 'North America', tier: 'Tier 1', companyStatus: 'Public' },
