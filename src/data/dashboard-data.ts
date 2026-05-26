@@ -1,59 +1,25 @@
 // Static data for XDAS dashboard
 
+// Scoped to the 4 POC attributes from LexisNexis dataset (1,000 records)
 export const covData = [
-  { g: 'Basic Data', name: 'Company Name', src: 'SEC EDGAR / Orbis', v: 99.8, cnt: '98.5M', ref: '2026-03-14', st: 'good' as const },
-  { g: 'Basic Data', name: 'Organizational Type', src: 'Gov. Registries', v: 97.2, cnt: '96.0M', ref: '2026-03-10', st: 'good' as const },
-  { g: 'Basic Data', name: 'Foundation Year', src: 'Orbis / Crunchbase', v: 84.1, cnt: '83.1M', ref: '2026-03-08', st: 'good' as const },
-  { g: 'Basic Data', name: 'Street Address', src: 'Gov. Registries', v: 91.4, cnt: '90.3M', ref: '2026-03-13', st: 'good' as const },
-  { g: 'Basic Data', name: 'City', src: 'Gov. Registries', v: 92.3, cnt: '91.2M', ref: '2026-03-13', st: 'good' as const },
-  { g: 'Basic Data', name: 'Country', src: 'SEC EDGAR / Orbis', v: 99.1, cnt: '97.9M', ref: '2026-03-14', st: 'good' as const },
-  { g: 'Basic Data', name: 'Phone Number', src: 'Company Websites', v: 71.3, cnt: '70.5M', ref: '2026-03-07', st: 'warn' as const },
-  { g: 'Basic Data', name: 'Number of Employees', src: 'Orbis / Bloomberg', v: 76.8, cnt: '75.9M', ref: '2026-03-09', st: 'warn' as const },
-  { g: 'Basic Data', name: 'NAICS Code', src: 'Gov. Registries', v: 83.9, cnt: '82.9M', ref: '2026-03-12', st: 'good' as const },
-  { g: 'Basic Data', name: 'Website', src: 'Company Websites', v: 55.6, cnt: '54.9M', ref: '2026-02-22', st: 'low' as const },
-  { g: 'Financial Data', name: 'Revenue', src: 'SEC EDGAR / Orbis', v: 82.6, cnt: '81.6M', ref: '2026-03-12', st: 'good' as const },
-  { g: 'Financial Data', name: 'Sales', src: 'SEC EDGAR', v: 78.4, cnt: '77.5M', ref: '2026-03-11', st: 'warn' as const },
-  { g: 'Financial Data', name: 'Assets', src: 'SEC EDGAR', v: 74.2, cnt: '73.3M', ref: '2026-03-10', st: 'warn' as const },
-  { g: 'Financial Data', name: 'Net Income', src: 'SEC EDGAR / Orbis', v: 68.5, cnt: '67.7M', ref: '2026-03-09', st: 'warn' as const },
-  { g: 'Financial Data', name: 'Ticker and Exchange', src: 'Bloomberg / SEC', v: 95.1, cnt: '94.0M', ref: '2026-03-14', st: 'good' as const },
-  { g: 'Corporate Hierarchy & Governance', name: 'Executive Name', src: 'Company Websites', v: 63.4, cnt: '62.6M', ref: '2026-03-06', st: 'warn' as const },
-  { g: 'Corporate Hierarchy & Governance', name: 'Board of Directors', src: 'SEC EDGAR', v: 58.3, cnt: '57.6M', ref: '2026-02-28', st: 'low' as const },
-  { g: 'Corporate Hierarchy & Governance', name: 'Parent Company', src: 'Orbis / BvD', v: 54.7, cnt: '54.1M', ref: '2026-02-25', st: 'low' as const },
-  { g: 'Corporate Hierarchy & Governance', name: 'Mergers & Acquisition', src: 'Bloomberg / Orbis', v: 47.2, cnt: '46.6M', ref: '2026-02-20', st: 'low' as const },
-  { g: 'Corporate Hierarchy & Governance', name: 'Competitors', src: 'Alternative Data', v: 39.8, cnt: '39.3M', ref: '2026-02-15', st: 'low' as const },
+  { g: 'Basic Data', name: 'Company Website', src: 'Zoominfo / Website', v: 46.2, cnt: '462', ref: '2026-05-21', st: 'low' as const },
+  { g: 'Financial Data', name: 'Revenue', src: 'Zoominfo / SOS / Annual Report', v: 51.4, cnt: '514', ref: '2026-05-22', st: 'low' as const },
+  { g: 'Basic Data', name: 'Employee Count', src: 'Zoominfo / Website / LinkedIn', v: 54.2, cnt: '542', ref: '2026-05-22', st: 'low' as const },
+  { g: 'Corporate Hierarchy & Governance', name: 'Personnel', src: 'Government Source / Website', v: 50.3, cnt: '503', ref: '2026-05-22', st: 'low' as const },
 ];
 
 export const accData = [
-  { g: 'Basic Data', name: 'Company Name', src: 'SEC EDGAR', v: 99.6, cnt: '98.3M', ref: '2026-03-14', st: 'good' as const },
-  { g: 'Basic Data', name: 'Country', src: 'SEC EDGAR / Orbis', v: 99.1, cnt: '97.9M', ref: '2026-03-14', st: 'good' as const },
-  { g: 'Basic Data', name: 'Foundation Year', src: 'Orbis', v: 95.2, cnt: '94.2M', ref: '2026-03-08', st: 'good' as const },
-  { g: 'Basic Data', name: 'Phone Number', src: 'Company Websites', v: 88.4, cnt: '87.5M', ref: '2026-03-07', st: 'low' as const },
-  { g: 'Basic Data', name: 'NAICS Code', src: 'Gov. Registries', v: 96.7, cnt: '95.6M', ref: '2026-03-12', st: 'good' as const },
-  { g: 'Financial Data', name: 'Revenue', src: 'SEC EDGAR', v: 98.9, cnt: '97.8M', ref: '2026-03-12', st: 'good' as const },
-  { g: 'Financial Data', name: 'Assets', src: 'SEC EDGAR', v: 97.8, cnt: '96.8M', ref: '2026-03-10', st: 'good' as const },
-  { g: 'Financial Data', name: 'Net Income', src: 'SEC EDGAR', v: 96.5, cnt: '95.5M', ref: '2026-03-09', st: 'good' as const },
-  { g: 'Financial Data', name: 'Ticker and Exchange', src: 'Bloomberg', v: 99.4, cnt: '98.3M', ref: '2026-03-14', st: 'good' as const },
-  { g: 'Corporate Hierarchy & Governance', name: 'Executive Name', src: 'Company Websites', v: 84.2, cnt: '83.3M', ref: '2026-03-06', st: 'low' as const },
-  { g: 'Corporate Hierarchy & Governance', name: 'Board of Directors', src: 'SEC EDGAR', v: 91.5, cnt: '90.5M', ref: '2026-02-28', st: 'warn' as const },
-  { g: 'Corporate Hierarchy & Governance', name: 'Parent Company', src: 'Orbis / BvD', v: 88.6, cnt: '87.7M', ref: '2026-02-25', st: 'low' as const },
-  { g: 'Corporate Hierarchy & Governance', name: 'Mergers & Acquisition', src: 'Bloomberg', v: 79.4, cnt: '78.5M', ref: '2026-02-20', st: 'low' as const },
+  { g: 'Basic Data', name: 'Company Website', src: 'Zoominfo / Website', v: 95.4, cnt: '441', ref: '2026-05-21', st: 'good' as const },
+  { g: 'Financial Data', name: 'Revenue', src: 'Zoominfo / SOS / Annual Report', v: 92.2, cnt: '474', ref: '2026-05-22', st: 'warn' as const },
+  { g: 'Basic Data', name: 'Employee Count', src: 'Zoominfo / Website / LinkedIn', v: 89.1, cnt: '483', ref: '2026-05-22', st: 'warn' as const },
+  { g: 'Corporate Hierarchy & Governance', name: 'Personnel', src: 'Government Source / Website', v: 96.6, cnt: '486', ref: '2026-05-22', st: 'good' as const },
 ];
 
 export const compData = [
-  { g: 'Basic Data', name: 'Company Name', v: 99.8, cnt: '98.5M', ref: '2026-03-14' },
-  { g: 'Basic Data', name: 'Country', v: 99.1, cnt: '97.9M', ref: '2026-03-14' },
-  { g: 'Basic Data', name: 'City', v: 92.3, cnt: '91.2M', ref: '2026-03-13' },
-  { g: 'Basic Data', name: 'NAICS Code', v: 83.9, cnt: '82.9M', ref: '2026-03-12' },
-  { g: 'Basic Data', name: 'Phone Number', v: 71.3, cnt: '70.5M', ref: '2026-03-07' },
-  { g: 'Basic Data', name: 'Website', v: 55.6, cnt: '54.9M', ref: '2026-02-22' },
-  { g: 'Financial Data', name: 'Revenue', v: 82.6, cnt: '81.6M', ref: '2026-03-12' },
-  { g: 'Financial Data', name: 'Assets', v: 74.2, cnt: '73.3M', ref: '2026-03-10' },
-  { g: 'Financial Data', name: 'Net Income', v: 68.5, cnt: '67.7M', ref: '2026-03-09' },
-  { g: 'Financial Data', name: 'Ticker and Exchange', v: 95.1, cnt: '94.0M', ref: '2026-03-14' },
-  { g: 'Corporate Hierarchy & Governance', name: 'Executive Name', v: 63.4, cnt: '62.6M', ref: '2026-03-06' },
-  { g: 'Corporate Hierarchy & Governance', name: 'Board of Directors', v: 58.3, cnt: '57.6M', ref: '2026-02-28' },
-  { g: 'Corporate Hierarchy & Governance', name: 'Parent Company', v: 54.7, cnt: '54.1M', ref: '2026-02-25' },
-  { g: 'Corporate Hierarchy & Governance', name: 'Mergers & Acquisition', v: 47.2, cnt: '46.6M', ref: '2026-02-20' },
+  { g: 'Basic Data', name: 'Company Website', v: 100, cnt: '462', ref: '2026-05-21' },
+  { g: 'Financial Data', name: 'Revenue', v: 100, cnt: '514', ref: '2026-05-22' },
+  { g: 'Basic Data', name: 'Employee Count', v: 100, cnt: '542', ref: '2026-05-22' },
+  { g: 'Corporate Hierarchy & Governance', name: 'Personnel', v: 100, cnt: '503', ref: '2026-05-22' },
 ];
 
 export const heatmapRegions = [
