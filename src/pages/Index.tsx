@@ -13,7 +13,7 @@ import CompletenessModal from '@/components/CompletenessModal';
 import AssetRepository from '@/components/AssetRepository';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { AssetSelectionProvider } from '@/contexts/AssetSelectionContext';
-import { pocMetrics, pocCoverageOverall, pocAccuracyOverall, pocCurrentnessOverall } from '@/data/poc-dataset';
+
 
 function DashboardContent() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
