@@ -474,6 +474,8 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
             )}
           </div>
         </div>
+
+        <EntityIdentifiersUpload file={entityFile} onFile={setEntityFile} />
       </div>
       <div className="px-3 py-2.5 border-t bg-muted/10 flex items-center justify-between gap-2">
         <span className="text-[11px] text-muted-foreground truncate">
@@ -502,6 +504,7 @@ function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
   const [selectedAttrs, setSelectedAttrs] = useState<string[]>([]);
   const [jobName, setJobName] = useState("");
   const [schedule, setSchedule] = useState<ScheduleConfig | null>(null);
+  const [entityFile, setEntityFile] = useState<File | null>(null);
 
   const scopedRegions = useMemo(
     () => Array.from(new Set(scopedSources.map(s => s.region))).filter(r => r !== "Any").sort(),
@@ -659,6 +662,8 @@ function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
             )}
           </div>
         </div>
+
+        <EntityIdentifiersUpload file={entityFile} onFile={setEntityFile} />
       </div>
       <div className="px-3 py-2.5 border-t bg-muted/10 flex items-center justify-between gap-2">
         <span className="text-[11px] text-muted-foreground truncate">
