@@ -1,9 +1,10 @@
-// Data Intelligence module — dataset groups, filters, and sample data
+// Data Intelligence module — populated from the 1,000-record POC dataset
+import { pocCompanySamples, pocExecSamples, pocMetrics } from './poc-dataset';
 
 export interface DataGroup {
   id: string;
   label: string;
-  icon: string; // emoji for simplicity
+  icon: string;
   description: string;
   filters: FilterDef[];
   columns: ColumnDef[];
@@ -24,20 +25,89 @@ export interface ColumnDef {
   align?: 'left' | 'right';
 }
 
+// ── Build sample rows from POC data ──────────────────────────────
+
+// Company Profile rows derived from POC dataset
+const companyProfileRows = pocCompanySamples.map(c => ({
+  companyName: c.companyName,
+  country: c.country,
+  industry: '—',
+  type: c.matchStatus === 'Matched' ? 'Private' : '—',
+  employees: c.employees,
+  revenue: c.revenue,
+  founded: '—',
+  hq: c.country,
+  ticker: '—',
+  website: c.website,
+  lei: '—',
+  sic: '—',
+  naics: '—',
+  marketCap: '—',
+}));
+
+// Executive (Personnel) rows derived from POC dataset
+const executiveRows = pocExecSamples.map(e => ({
+  name: e.name,
+  title: e.title,
+  company: e.company,
+  country: e.country,
+  tenure: '—',
+  education: '—',
+  compensation: '—',
+  boardSeats: '—',
+  age: '—',
+  gender: '—',
+  nationality: e.country,
+  previousCompany: '—',
+  appointmentDate: e.captureDate,
+}));
+
+// News & Events synthesized from POC dataset events (M&A + match status)
+const newsRows = [
+  { date: '2026-05-22', company: 'KPMG LLP', eventType: 'M&A', headline: 'Merger & acquisition activity reported in POC dataset', region: 'CAN', source: 'Government source', sentiment: 'Neutral', category: 'Acquisition', impactScore: 70, relatedEntities: '—', language: 'English', articleUrl: '—', author: '—' },
+  { date: '2026-05-21', company: 'Synechron Inc.', eventType: 'Earnings', headline: 'Revenue reported: USD 3,000.0M', region: 'USA', source: 'Zoominfo', sentiment: 'Positive', category: 'Financial', impactScore: 82, relatedEntities: '—', language: 'English', articleUrl: 'www.synechron.com', author: '—' },
+  { date: '2026-05-21', company: 'Aubay Spain S.L.', eventType: 'Earnings', headline: 'FY2025 revenue: EUR 601.6M', region: 'ESP', source: 'Annual Report', sentiment: 'Positive', category: 'Financial', impactScore: 78, relatedEntities: '—', language: 'English', articleUrl: 'aubay.es', author: '—' },
+  { date: '2026-05-20', company: 'Infinis Energy Group Holdings Limited', eventType: 'Leadership', headline: 'Director appointments captured from website', region: 'GBR', source: 'Website', sentiment: 'Neutral', category: 'Leadership', impactScore: 60, relatedEntities: '—', language: 'English', articleUrl: '—', author: '—' },
+  { date: '2026-05-19', company: 'Hassop Investments Topco Limited', eventType: 'Regulatory', headline: 'Board of directors filing recorded', region: 'GBR', source: 'Government source', sentiment: 'Neutral', category: 'Compliance', impactScore: 45, relatedEntities: '—', language: 'English', articleUrl: '—', author: '—' },
+  { date: '2026-05-19', company: 'Ontario Telemedicine Network', eventType: 'Earnings', headline: 'Revenue captured: CAD 21.4M', region: 'CAN', source: 'Zoominfo', sentiment: 'Positive', category: 'Financial', impactScore: 55, relatedEntities: '—', language: 'English', articleUrl: 'otn.ca', author: '—' },
+  { date: '2026-05-18', company: 'TRUGLOBAL Software India Private Ltd', eventType: 'Earnings', headline: 'FY2025 revenue: INR 612.0M', region: 'IND', source: 'Tracxn', sentiment: 'Positive', category: 'Financial', impactScore: 50, relatedEntities: '—', language: 'English', articleUrl: 'www.truglobal.com', author: '—' },
+  { date: '2026-05-17', company: 'PROMOD', eventType: 'Earnings', headline: 'FY2025 revenue: EUR 313.7M', region: 'FRA', source: 'SOS', sentiment: 'Positive', category: 'Financial', impactScore: 58, relatedEntities: '—', language: 'English', articleUrl: 'www.promod.com', author: '—' },
+  { date: '2026-05-17', company: 'droga5, LLC', eventType: 'Earnings', headline: 'Revenue captured: USD 126.5M', region: 'USA', source: 'Zoominfo', sentiment: 'Positive', category: 'Financial', impactScore: 60, relatedEntities: '—', language: 'English', articleUrl: 'www.droga5.com', author: '—' },
+  { date: '2026-05-16', company: 'HIT, Co., Ltd.', eventType: 'Earnings', headline: 'FY2025 revenue: JPY 4,419.4M', region: 'JPN', source: 'Yahoo Finance', sentiment: 'Positive', category: 'Financial', impactScore: 52, relatedEntities: '—', language: 'English', articleUrl: 'www.hit-ad.co.jp', author: '—' },
+];
+
+// Corporate Hierarchy synthesized from POC personnel & company links
+const hierarchyRows = pocExecSamples.slice(0, 10).map(e => ({
+  parentName: e.company,
+  subsidiaryName: e.name,
+  entityType: 'Director',
+  country: e.country,
+  ownershipPct: '—',
+  coverageScore: 90,
+  lei: '—',
+  incorporationDate: '—',
+  status: 'Active',
+  sic: '—',
+  registrationNo: '—',
+  jurisdiction: e.country,
+  ultimateParent: e.company,
+  hierarchyLevel: 1,
+}));
+
 export const dataGroups: DataGroup[] = [
   {
     id: 'corporate-hierarchy',
     label: 'Corporate Hierarchy Intelligence',
     icon: '🏢',
-    description: 'Parent-subsidiary relationships, ownership chains, and hierarchy links',
+    description: 'Parent–director and company linkages extracted from the POC dataset',
     filters: [
       { key: 'geography', label: 'Geography', options: ['All Regions', 'North America', 'Europe', 'APAC', 'Middle East', 'Latin America'] },
       { key: 'companyType', label: 'Company Type', options: ['All Companies', 'Public', 'Private'] },
       { key: 'tier', label: 'Tier', options: ['All Tiers', 'Tier 1', 'Tier 2', 'Tier 3', 'Tier 4'] },
     ],
     columns: [
-      { key: 'parentName', label: 'Parent Name' },
-      { key: 'subsidiaryName', label: 'Subsidiary Name' },
+      { key: 'parentName', label: 'Company' },
+      { key: 'subsidiaryName', label: 'Director / Subsidiary' },
       { key: 'entityType', label: 'Entity Type' },
       { key: 'country', label: 'Country' },
       { key: 'ownershipPct', label: 'Ownership %', align: 'right' },
@@ -53,25 +123,14 @@ export const dataGroups: DataGroup[] = [
       { key: 'ultimateParent', label: 'Ultimate Parent' },
       { key: 'hierarchyLevel', label: 'Hierarchy Level', align: 'right' },
     ],
-    sampleRows: [
-      { parentName: 'Meridian Holdings plc', subsidiaryName: 'Meridian Capital Partners Ltd', entityType: 'Subsidiary', country: 'United Kingdom', ownershipPct: 100, coverageScore: 96.2, lei: '5493001KJTIIGC8Y1R12', incorporationDate: '2004-03-15', status: 'Active', sic: '6411', registrationNo: 'UK-29384756', jurisdiction: 'England & Wales', ultimateParent: 'Meridian Holdings plc', hierarchyLevel: 2 },
-      { parentName: 'Atlas Industrial Corp', subsidiaryName: 'Atlas Manufacturing GmbH', entityType: 'Subsidiary', country: 'Germany', ownershipPct: 100, coverageScore: 94.7, lei: '529900T8BM49AURSDO55', incorporationDate: '1998-07-22', status: 'Active', sic: '3559', registrationNo: 'DE-HRB12345', jurisdiction: 'Bavaria', ultimateParent: 'Atlas Industrial Corp', hierarchyLevel: 1 },
-      { parentName: 'Atlas Industrial Corp', subsidiaryName: 'Atlas Logistics de México SA', entityType: 'Subsidiary', country: 'Mexico', ownershipPct: 72, coverageScore: 71.3, lei: '2138004WLKZ3GN8CG312', incorporationDate: '2011-01-10', status: 'Active', sic: '4731', registrationNo: 'MX-SAB90123', jurisdiction: 'Mexico City', ultimateParent: 'Atlas Industrial Corp', hierarchyLevel: 2 },
-      { parentName: 'Pinnacle Financial Group Inc', subsidiaryName: 'Pinnacle Wealth Advisors LLC', entityType: 'Branch', country: 'United States', ownershipPct: 100, coverageScore: 98.1, lei: '549300MLUDYVRQOOXS22', incorporationDate: '2015-09-01', status: 'Active', sic: '6282', registrationNo: 'US-LLC78456', jurisdiction: 'Delaware', ultimateParent: 'Pinnacle Financial Group Inc', hierarchyLevel: 2 },
-      { parentName: 'Northfield Energy plc', subsidiaryName: 'Northfield Renewables BV', entityType: 'Subsidiary', country: 'Netherlands', ownershipPct: 90, coverageScore: 91.5, lei: '213800GKEMVZ91GQ3X44', incorporationDate: '2019-06-18', status: 'Active', sic: '4911', registrationNo: 'NL-KVK67890', jurisdiction: 'Amsterdam', ultimateParent: 'Northfield Energy plc', hierarchyLevel: 2 },
-      { parentName: 'Crestview Technologies Inc', subsidiaryName: 'Crestview Cloud Services Ltd', entityType: 'Subsidiary', country: 'Canada', ownershipPct: 100, coverageScore: 95.8, lei: '549300PJNK89G2H7LP61', incorporationDate: '2016-11-30', status: 'Active', sic: '7372', registrationNo: 'CA-BC45678', jurisdiction: 'Ontario', ultimateParent: 'Crestview Technologies Inc', hierarchyLevel: 2 },
-      { parentName: 'Crestview Technologies Inc', subsidiaryName: 'Crestview AI Labs KK', entityType: 'Subsidiary', country: 'Japan', ownershipPct: 67, coverageScore: 82.1, lei: '353800XYZ1234ABCDE77', incorporationDate: '2021-04-05', status: 'Active', sic: '7371', registrationNo: 'JP-KK98765', jurisdiction: 'Tokyo', ultimateParent: 'Crestview Technologies Inc', hierarchyLevel: 3 },
-      { parentName: 'Hargrove Pharmaceuticals Ltd', subsidiaryName: 'Hargrove Biotech India Pvt Ltd', entityType: 'Subsidiary', country: 'India', ownershipPct: 100, coverageScore: 87.4, lei: '335800HGVBIOTECH9988', incorporationDate: '2013-08-20', status: 'Active', sic: '2836', registrationNo: 'IN-CIN12340', jurisdiction: 'Maharashtra', ultimateParent: 'Hargrove Pharmaceuticals Ltd', hierarchyLevel: 2 },
-      { parentName: 'Sovereign Capital SA', subsidiaryName: 'Sovereign Real Estate Holdings BV', entityType: 'Subsidiary', country: 'Netherlands', ownershipPct: 80, coverageScore: 90.2, lei: '213800SVREH0LDINGS55', incorporationDate: '2010-02-14', status: 'Active', sic: '6726', registrationNo: 'NL-KVK11223', jurisdiction: 'Rotterdam', ultimateParent: 'Sovereign Capital SA', hierarchyLevel: 2 },
-      { parentName: 'Broadmark Corp', subsidiaryName: 'Broadmark Digital Pty Ltd', entityType: 'Subsidiary', country: 'Australia', ownershipPct: 100, coverageScore: 91.0, lei: '549300BRDMRKDIGTL033', incorporationDate: '2017-12-01', status: 'Active', sic: '7374', registrationNo: 'AU-ACN44556', jurisdiction: 'New South Wales', ultimateParent: 'Broadmark Corp', hierarchyLevel: 2 },
-    ],
-    totalRecords: 9,
+    sampleRows: hierarchyRows,
+    totalRecords: pocMetrics.uniqueCompaniesWithPersonnel,
   },
   {
     id: 'executive-data',
     label: 'Executive Data',
     icon: '👤',
-    description: 'C-suite and board-level executive profiles, roles, and tenure',
+    description: 'Personnel and director records captured from the POC dataset',
     filters: [
       { key: 'geography', label: 'Geography', options: ['All Regions', 'North America', 'Europe', 'APAC', 'Middle East', 'Latin America'] },
       { key: 'companyType', label: 'Company Type', options: ['All Companies', 'Public', 'Private'] },
@@ -93,27 +152,16 @@ export const dataGroups: DataGroup[] = [
       { key: 'gender', label: 'Gender' },
       { key: 'nationality', label: 'Nationality' },
       { key: 'previousCompany', label: 'Previous Company' },
-      { key: 'appointmentDate', label: 'Appointment Date' },
+      { key: 'appointmentDate', label: 'Captured Date' },
     ],
-    sampleRows: [
-      { name: 'James Whitfield', title: 'CEO', company: 'Meridian Holdings plc', country: 'United Kingdom', tenure: 8, education: 'Oxford MBA', compensation: '$4.2M', boardSeats: 3, age: 54, gender: 'Male', nationality: 'British', previousCompany: 'Barclays', appointmentDate: '2018-03-15' },
-      { name: 'Sarah Chen', title: 'CFO', company: 'Atlas Industrial Corp', country: 'United States', tenure: 5, education: 'Wharton MBA', compensation: '$3.1M', boardSeats: 2, age: 47, gender: 'Female', nationality: 'American', previousCompany: 'Goldman Sachs', appointmentDate: '2021-06-01' },
-      { name: 'Michael Torres', title: 'COO', company: 'Pinnacle Financial Group Inc', country: 'United States', tenure: 3, education: 'Harvard MBA', compensation: '$2.8M', boardSeats: 1, age: 51, gender: 'Male', nationality: 'American', previousCompany: 'McKinsey', appointmentDate: '2023-01-10' },
-      { name: 'Dr. Ananya Sharma', title: 'CTO', company: 'Crestview Technologies Inc', country: 'Canada', tenure: 6, education: 'MIT PhD', compensation: '$3.5M', boardSeats: 2, age: 42, gender: 'Female', nationality: 'Canadian', previousCompany: 'Google', appointmentDate: '2020-04-22' },
-      { name: 'Henrik Müller', title: 'CEO', company: 'Atlas Manufacturing GmbH', country: 'Germany', tenure: 12, education: 'TU Munich', compensation: '€2.9M', boardSeats: 4, age: 61, gender: 'Male', nationality: 'German', previousCompany: 'Siemens', appointmentDate: '2014-08-01' },
-      { name: 'Laura Kim', title: 'CFO', company: 'Northfield Energy plc', country: 'United Kingdom', tenure: 4, education: 'LSE MSc', compensation: '£2.1M', boardSeats: 1, age: 44, gender: 'Female', nationality: 'British', previousCompany: 'Deloitte', appointmentDate: '2022-02-14' },
-      { name: 'Robert Daniels', title: 'Board Member', company: 'Sovereign Capital SA', country: 'Switzerland', tenure: 7, education: 'INSEAD MBA', compensation: 'CHF 1.8M', boardSeats: 5, age: 58, gender: 'Male', nationality: 'Swiss', previousCompany: 'UBS', appointmentDate: '2019-09-30' },
-      { name: 'Emily Zhang', title: 'CTO', company: 'Broadmark Corp', country: 'Australia', tenure: 2, education: 'Stanford MS', compensation: 'A$2.4M', boardSeats: 1, age: 39, gender: 'Female', nationality: 'Australian', previousCompany: 'Microsoft', appointmentDate: '2024-05-15' },
-      { name: 'Carlos Rivera', title: 'CEO', company: 'Hargrove Pharmaceuticals Ltd', country: 'Ireland', tenure: 9, education: 'Columbia MBA', compensation: '€5.1M', boardSeats: 3, age: 56, gender: 'Male', nationality: 'Irish', previousCompany: 'Pfizer', appointmentDate: '2017-11-01' },
-      { name: 'Fatima Al-Hassan', title: 'COO', company: 'Elysium Group AG', country: 'UAE', tenure: 4, education: 'LBS MBA', compensation: '$3.7M', boardSeats: 2, age: 45, gender: 'Female', nationality: 'Emirati', previousCompany: 'BCG', appointmentDate: '2022-07-20' },
-    ],
-    totalRecords: 5_351,
+    sampleRows: executiveRows,
+    totalRecords: pocMetrics.personnelRows,
   },
   {
     id: 'news-events',
     label: 'News & Events',
     icon: '📰',
-    description: 'Corporate announcements, M&A activity, regulatory filings, and press releases',
+    description: 'Financial, M&A and leadership events derived from the POC dataset',
     filters: [
       { key: 'geography', label: 'Geography', options: ['All Regions', 'North America', 'Europe', 'APAC', 'Middle East', 'Latin America'] },
       { key: 'companyType', label: 'Company Type', options: ['All Companies', 'Public', 'Private'] },
@@ -136,25 +184,14 @@ export const dataGroups: DataGroup[] = [
       { key: 'articleUrl', label: 'Article URL' },
       { key: 'author', label: 'Author' },
     ],
-    sampleRows: [
-      { date: '2026-03-27', company: 'Meridian Holdings plc', eventType: 'M&A', headline: 'Meridian acquires FinTech startup Payvault', region: 'Europe', source: 'Reuters', sentiment: 'Positive', category: 'Acquisition', impactScore: 87, relatedEntities: 'Payvault Ltd', language: 'English', articleUrl: 'reuters.com/article/...', author: 'J. Smith' },
-      { date: '2026-03-26', company: 'Atlas Industrial Corp', eventType: 'Earnings', headline: 'Q1 2026 revenue up 12% YoY', region: 'North America', source: 'Bloomberg', sentiment: 'Positive', category: 'Financial', impactScore: 92, relatedEntities: 'Atlas Manufacturing', language: 'English', articleUrl: 'bloomberg.com/news/...', author: 'M. Johnson' },
-      { date: '2026-03-25', company: 'Pinnacle Financial Group', eventType: 'Regulatory', headline: 'SEC filing: 10-K annual report submitted', region: 'North America', source: 'SEC Edgar', sentiment: 'Neutral', category: 'Compliance', impactScore: 45, relatedEntities: 'SEC', language: 'English', articleUrl: 'sec.gov/cgi-bin/...', author: '—' },
-      { date: '2026-03-24', company: 'Northfield Energy plc', eventType: 'Partnership', headline: 'JV with SolarEdge for EU grid expansion', region: 'Europe', source: 'FT', sentiment: 'Positive', category: 'Strategic', impactScore: 78, relatedEntities: 'SolarEdge Technologies', language: 'English', articleUrl: 'ft.com/content/...', author: 'A. Williams' },
-      { date: '2026-03-23', company: 'Crestview Technologies', eventType: 'Product', headline: 'Launches AI-powered analytics platform', region: 'North America', source: 'TechCrunch', sentiment: 'Positive', category: 'Product Launch', impactScore: 81, relatedEntities: 'Crestview AI Labs', language: 'English', articleUrl: 'techcrunch.com/...', author: 'R. Patel' },
-      { date: '2026-03-22', company: 'Hargrove Pharmaceuticals', eventType: 'Clinical', headline: 'Phase III trial results for HGV-201 positive', region: 'Europe', source: 'Lancet', sentiment: 'Positive', category: 'Clinical Trial', impactScore: 95, relatedEntities: 'Hargrove Biotech India', language: 'English', articleUrl: 'thelancet.com/...', author: 'Dr. K. Lee' },
-      { date: '2026-03-21', company: 'Broadmark Corp', eventType: 'Leadership', headline: 'Appoints new CTO from Google DeepMind', region: 'APAC', source: 'AFR', sentiment: 'Positive', category: 'Leadership', impactScore: 72, relatedEntities: 'Google DeepMind', language: 'English', articleUrl: 'afr.com/...', author: 'S. Turner' },
-      { date: '2026-03-20', company: 'Sovereign Capital SA', eventType: 'M&A', headline: 'Acquires majority stake in Nordic RE fund', region: 'Europe', source: 'Bloomberg', sentiment: 'Neutral', category: 'Acquisition', impactScore: 68, relatedEntities: 'Nordic RE Fund AB', language: 'English', articleUrl: 'bloomberg.com/news/...', author: 'L. Berg' },
-      { date: '2026-03-19', company: 'Elysium Group AG', eventType: 'Expansion', headline: 'Opens new regional HQ in Dubai', region: 'Middle East', source: 'Gulf News', sentiment: 'Positive', category: 'Expansion', impactScore: 61, relatedEntities: 'DIFC', language: 'English', articleUrl: 'gulfnews.com/...', author: 'N. Abbas' },
-      { date: '2026-03-18', company: 'Vanguard Shipping Ltd', eventType: 'Regulatory', headline: 'IMO 2026 compliance certification obtained', region: 'APAC', source: 'Lloyd\'s List', sentiment: 'Neutral', category: 'Compliance', impactScore: 54, relatedEntities: 'IMO', language: 'English', articleUrl: 'lloydslist.com/...', author: 'T. Nakamura' },
-    ],
-    totalRecords: 39,
+    sampleRows: newsRows,
+    totalRecords: pocMetrics.mergerAcquisition,
   },
   {
     id: 'company-profile',
     label: 'Company Profile',
     icon: '📋',
-    description: 'Core company attributes including name, address, financials, and industry classification',
+    description: 'Company-level attributes captured for the 1,000 POC records',
     filters: [
       { key: 'geography', label: 'Geography', options: ['All Regions', 'North America', 'Europe', 'APAC', 'Middle East', 'Latin America'] },
       { key: 'companyType', label: 'Company Type', options: ['All Companies', 'Public', 'Private'] },
@@ -178,19 +215,8 @@ export const dataGroups: DataGroup[] = [
       { key: 'naics', label: 'NAICS Code' },
       { key: 'marketCap', label: 'Market Cap', align: 'right' },
     ],
-    sampleRows: [
-      { companyName: 'Meridian Holdings plc', country: 'United Kingdom', industry: 'Financial Services', type: 'Public', employees: 12400, revenue: '$4.2B', founded: 1987, hq: 'London', ticker: 'MRD.L', website: 'meridian.co.uk', lei: '5493001KJTIIGC8Y1R12', sic: '6411', naics: '523110', marketCap: '$8.1B' },
-      { companyName: 'Atlas Industrial Corp', country: 'United States', industry: 'Manufacturing', type: 'Public', employees: 34200, revenue: '$8.7B', founded: 1965, hq: 'Chicago', ticker: 'ATLS', website: 'atlasindustrial.com', lei: '529900T8BM49AURSDO55', sic: '3559', naics: '333249', marketCap: '$14.2B' },
-      { companyName: 'Pinnacle Financial Group Inc', country: 'United States', industry: 'Insurance', type: 'Public', employees: 8700, revenue: '$3.1B', founded: 1992, hq: 'New York', ticker: 'PNFG', website: 'pinnaclefg.com', lei: '549300MLUDYVRQOOXS22', sic: '6311', naics: '524113', marketCap: '$5.6B' },
-      { companyName: 'Northfield Energy plc', country: 'United Kingdom', industry: 'Energy', type: 'Public', employees: 15600, revenue: '$6.4B', founded: 2001, hq: 'Edinburgh', ticker: 'NRG.L', website: 'northfieldenergy.com', lei: '213800GKEMVZ91GQ3X44', sic: '4911', naics: '221112', marketCap: '$11.3B' },
-      { companyName: 'Crestview Technologies Inc', country: 'Canada', industry: 'Technology', type: 'Private', employees: 4300, revenue: '$920M', founded: 2010, hq: 'Toronto', ticker: '—', website: 'crestviewtech.ca', lei: '549300PJNK89G2H7LP61', sic: '7372', naics: '511210', marketCap: '—' },
-      { companyName: 'Hargrove Pharmaceuticals Ltd', country: 'Ireland', industry: 'Pharmaceuticals', type: 'Public', employees: 21000, revenue: '$5.8B', founded: 1978, hq: 'Dublin', ticker: 'HGV', website: 'hargrovepharma.ie', lei: '335800HGVBIOTECH9988', sic: '2836', naics: '325414', marketCap: '$18.7B' },
-      { companyName: 'Sovereign Capital SA', country: 'Switzerland', industry: 'Asset Management', type: 'Private', employees: 1200, revenue: '$480M', founded: 2005, hq: 'Zurich', ticker: '—', website: 'sovereigncap.ch', lei: '213800SVREH0LDINGS55', sic: '6726', naics: '523920', marketCap: '—' },
-      { companyName: 'Broadmark Corp', country: 'Australia', industry: 'Technology', type: 'Public', employees: 6800, revenue: '$1.9B', founded: 2008, hq: 'Sydney', ticker: 'BRD.AX', website: 'broadmark.com.au', lei: '549300BRDMRKDIGTL033', sic: '7374', naics: '518210', marketCap: '$3.8B' },
-      { companyName: 'Elysium Group AG', country: 'Switzerland', industry: 'Consulting', type: 'Private', employees: 3400, revenue: '$710M', founded: 2003, hq: 'Geneva', ticker: '—', website: 'elysiumgroup.ch', lei: '213800ELYSGRP00AG11', sic: '7389', naics: '541611', marketCap: '—' },
-      { companyName: 'Vanguard Shipping Ltd', country: 'Singapore', industry: 'Logistics', type: 'Public', employees: 9200, revenue: '$2.6B', founded: 1990, hq: 'Singapore', ticker: 'VGD.SI', website: 'vanguardshipping.sg', lei: '549300VGDSHPNG0LTD44', sic: '4412', naics: '483111', marketCap: '$4.9B' },
-    ],
-    totalRecords: 1_000,
+    sampleRows: companyProfileRows,
+    totalRecords: pocMetrics.totalRecords,
   },
 ];
 
