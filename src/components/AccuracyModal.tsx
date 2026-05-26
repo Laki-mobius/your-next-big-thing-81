@@ -108,8 +108,8 @@ export default function AccuracyModal({ onClose, inline = false }: { onClose: ()
           <SectionLabel>Accuracy split by company type</SectionLabel>
           <div className="space-y-2.5">
             {[
-              { label: 'Public Companies', pct: 88, count: '231 records', color: '#185FA5' },
-              { label: 'Private Companies', pct: 81, count: '769 records', color: '#1A7A4A' },
+              { label: 'Public Companies', pct: 98, count: '231 records', color: '#185FA5' },
+              { label: 'Private Companies', pct: 98, count: '769 records', color: '#1A7A4A' },
             ].map(item => (
               <div key={item.label} className="bg-surface border border-border rounded-md p-3">
                 <div className="flex items-center justify-between mb-1.5">
