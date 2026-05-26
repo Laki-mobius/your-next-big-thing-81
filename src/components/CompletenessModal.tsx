@@ -9,16 +9,16 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 const currentnessData = [
   { name: 'Company Name', g: 'Basic Data', ref: '2026-05-22', cnt: '1000', pct: '100.0%', geo: { US: '181', UK: '88', Europe: '129', APAC: '432', Other: '170' } },
   { name: 'Website', g: 'Basic Data', ref: '2026-05-21', cnt: '462', pct: '100.0%', geo: { US: '84', UK: '41', Europe: '146', APAC: '147', Other: '44' } },
-  { name: 'Suffix', g: 'Corporate Hierarchy & Governance', ref: '2026-05-22', cnt: '45', pct: '100.0%', geo: { US: '8', UK: '4', Europe: '14', APAC: '15', Other: '4' } },
-  { name: 'First Name', g: 'Corporate Hierarchy & Governance', ref: '2026-05-22', cnt: '503', pct: '100.0%', geo: { US: '91', UK: '44', Europe: '160', APAC: '160', Other: '48' } },
-  { name: 'Middle Name', g: 'Corporate Hierarchy & Governance', ref: '2026-05-22', cnt: '150', pct: '100.0%', geo: { US: '27', UK: '13', Europe: '48', APAC: '48', Other: '14' } },
-  { name: 'Last Name', g: 'Corporate Hierarchy & Governance', ref: '2026-05-22', cnt: '503', pct: '100.0%', geo: { US: '91', UK: '44', Europe: '160', APAC: '160', Other: '48' } },
-  { name: 'Executive Title', g: 'Corporate Hierarchy & Governance', ref: '2026-05-22', cnt: '503', pct: '100.0%', geo: { US: '91', UK: '44', Europe: '160', APAC: '160', Other: '48' } },
+  { name: 'Suffix', g: 'Corporate Hierarchy & Governance', ref: '2026-05-22', cnt: '18', pct: '100.0%', geo: { US: '3', UK: '2', Europe: '6', APAC: '5', Other: '2' } },
+  { name: 'First Name', g: 'Corporate Hierarchy & Governance', ref: '2026-05-22', cnt: '4888', pct: '100.0%', geo: { US: '884', UK: '430', Europe: '1556', APAC: '1556', Other: '462' } },
+  { name: 'Middle Name', g: 'Corporate Hierarchy & Governance', ref: '2026-05-22', cnt: '965', pct: '100.0%', geo: { US: '175', UK: '85', Europe: '307', APAC: '307', Other: '91' } },
+  { name: 'Last Name', g: 'Corporate Hierarchy & Governance', ref: '2026-05-22', cnt: '4888', pct: '100.0%', geo: { US: '884', UK: '430', Europe: '1556', APAC: '1556', Other: '462' } },
+  { name: 'Executive Title', g: 'Corporate Hierarchy & Governance', ref: '2026-05-22', cnt: '4888', pct: '100.0%', geo: { US: '884', UK: '430', Europe: '1556', APAC: '1556', Other: '462' } },
   { name: 'Number of Employees', g: 'Basic Data', ref: '2026-05-22', cnt: '542', pct: '100.0%', geo: { US: '98', UK: '48', Europe: '172', APAC: '172', Other: '52' } },
   { name: 'Revenue', g: 'Financial Data', ref: '2026-05-22', cnt: '514', pct: '100.0%', geo: { US: '93', UK: '46', Europe: '163', APAC: '163', Other: '49' } },
   { name: 'Revenue Currency', g: 'Financial Data', ref: '2026-05-22', cnt: '514', pct: '100.0%', geo: { US: '93', UK: '46', Europe: '163', APAC: '163', Other: '49' } },
   { name: 'Revenue Fiscal Year', g: 'Financial Data', ref: '2026-05-22', cnt: '205', pct: '100.0%', geo: { US: '37', UK: '18', Europe: '65', APAC: '65', Other: '20' } },
-  { name: 'Annual Report', g: 'Financial Data', ref: '2026-05-22', cnt: '52', pct: '100.0%', geo: { US: '9', UK: '5', Europe: '17', APAC: '16', Other: '5' } },
+  { name: 'Annual Report', g: 'Financial Data', ref: '2026-05-22', cnt: '16', pct: '100.0%', geo: { US: '3', UK: '1', Europe: '5', APAC: '5', Other: '2' } },
 ];
 
 type DatePreset = 'week' | 'month' | '3months' | 'custom';
