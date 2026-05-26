@@ -12,17 +12,9 @@ export default function CoverageModal({ onClose, inline = false }: { onClose: ()
   const [companySize, setCompanySize] = useState('all');
   const [revenue, setRevenue] = useState('all');
 
-  // Only 4 POC attributes have real values; pin them to the top
+  // Sort by populated count (most-filled at top)
   const sorted = useMemo(() => {
-    const priority = ['Website', 'Revenue', 'Number of Employees', 'Executive Name'];
-    return [...covData].sort((a, b) => {
-      const aIdx = priority.indexOf(a.name);
-      const bIdx = priority.indexOf(b.name);
-      if (aIdx !== -1 && bIdx !== -1) return aIdx - bIdx;
-      if (aIdx !== -1) return -1;
-      if (bIdx !== -1) return 1;
-      return 0;
-    });
+    return [...covData].sort((a, b) => b.v - a.v);
   }, []);
 
   const filtered = useMemo(() => {
