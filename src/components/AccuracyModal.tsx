@@ -6,18 +6,10 @@ import { cn } from '@/lib/utils';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
 const qcAttributes = [
-  { name: 'Company Name', accuracy: 99, correct: 99, total: 100, status: 'passed' as const, issues: '1 Minor Typo' },
-  { name: 'Headquarters Country', accuracy: 98, correct: 98, total: 100, status: 'passed' as const, issues: '2 Abbreviation Issues' },
-  { name: 'Foundation Year', accuracy: 99, correct: 99, total: 100, status: 'passed' as const, issues: '1 Null Value' },
-  { name: 'Industry Sector', accuracy: 95, correct: 95, total: 100, status: 'warning' as const, issues: '5 Misclassifications' },
-  { name: 'Employee Count', accuracy: 91, correct: 91, total: 100, status: 'warning' as const, issues: '9 Outdated Data' },
-  { name: 'Revenue Range', accuracy: 96, correct: 96, total: 100, status: 'passed' as const, issues: '4 Formatting Errors' },
-  { name: 'Street Address', accuracy: 97, correct: 97, total: 100, status: 'passed' as const, issues: '3 Formatting Issues' },
-  { name: 'Phone Number', accuracy: 88, correct: 88, total: 100, status: 'failed' as const, issues: '12 Invalid Formats' },
-  { name: 'NAICS Code', accuracy: 96, correct: 96, total: 100, status: 'passed' as const, issues: '4 Mapping Errors' },
-  { name: 'Website', accuracy: 93, correct: 93, total: 100, status: 'warning' as const, issues: '7 Broken Links' },
-  { name: 'Net Income', accuracy: 97, correct: 97, total: 100, status: 'passed' as const, issues: '3 Rounding Errors' },
-  { name: 'Executive Name', accuracy: 89, correct: 89, total: 100, status: 'failed' as const, issues: '11 Outdated Records' },
+  { name: 'Company Website', accuracy: 95, correct: 441, total: 462, status: 'passed' as const, issues: '21 broken/redirected URLs' },
+  { name: 'Revenue', accuracy: 92, correct: 474, total: 514, status: 'warning' as const, issues: '40 fiscal year missing' },
+  { name: 'Employee Count', accuracy: 89, correct: 483, total: 542, status: 'warning' as const, issues: '59 banded ranges only' },
+  { name: 'Personnel', accuracy: 97, correct: 486, total: 503, status: 'passed' as const, issues: '17 title parse warnings' },
 ];
 
 function CircularGauge({ value, label, subtitle, color, icon }: { value: number; label: string; subtitle: string; color: string; icon: React.ReactNode }) {
