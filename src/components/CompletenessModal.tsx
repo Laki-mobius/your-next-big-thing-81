@@ -9,10 +9,10 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 const currentnessData = [
   { name: 'Company Name', g: 'Basic Data', ref: '2026-05-22', cnt: '1000', pct: '100.0%', geo: { US: '181', UK: '88', Europe: '129', APAC: '432', Other: '170' } },
   { name: 'Website', g: 'Basic Data', ref: '2026-05-21', cnt: '462', pct: '100.0%', geo: { US: '84', UK: '41', Europe: '146', APAC: '147', Other: '44' } },
-  { name: 'Suffix', g: 'Corporate Hierarchy & Governance', ref: '2026-05-22', cnt: '18', pct: '100.0%', geo: { US: '3', UK: '2', Europe: '6', APAC: '5', Other: '2' } },
   { name: 'First Name', g: 'Corporate Hierarchy & Governance', ref: '2026-05-22', cnt: '4888', pct: '100.0%', geo: { US: '884', UK: '430', Europe: '1556', APAC: '1556', Other: '462' } },
   { name: 'Middle Name', g: 'Corporate Hierarchy & Governance', ref: '2026-05-22', cnt: '965', pct: '100.0%', geo: { US: '175', UK: '85', Europe: '307', APAC: '307', Other: '91' } },
   { name: 'Last Name', g: 'Corporate Hierarchy & Governance', ref: '2026-05-22', cnt: '4888', pct: '100.0%', geo: { US: '884', UK: '430', Europe: '1556', APAC: '1556', Other: '462' } },
+  { name: 'Suffix', g: 'Corporate Hierarchy & Governance', ref: '2026-05-22', cnt: '18', pct: '100.0%', geo: { US: '3', UK: '2', Europe: '6', APAC: '5', Other: '2' } },
   { name: 'Executive Title', g: 'Corporate Hierarchy & Governance', ref: '2026-05-22', cnt: '4888', pct: '100.0%', geo: { US: '884', UK: '430', Europe: '1556', APAC: '1556', Other: '462' } },
   { name: 'Number of Employees', g: 'Basic Data', ref: '2026-05-22', cnt: '542', pct: '100.0%', geo: { US: '98', UK: '48', Europe: '172', APAC: '172', Other: '52' } },
   { name: 'Revenue', g: 'Financial Data', ref: '2026-05-22', cnt: '514', pct: '100.0%', geo: { US: '93', UK: '46', Europe: '163', APAC: '163', Other: '49' } },
