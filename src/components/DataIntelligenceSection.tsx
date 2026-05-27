@@ -150,9 +150,46 @@ export default function DataIntelligenceSection() {
     setDownloading(true);
     simulateProgress('download', () => {
       setDownloading(false);
-      toast({ title: 'Download ready', description: `${formatCount(group.totalRecords)} records exported as ${exportFormat.toUpperCase()}.` });
+      const allColumns = [...group.columns, ...group.extraColumns];
+      const rows = group.sampleRows;
+      const filename = `${group.id}-${new Date().toISOString().slice(0, 10)}.${exportFormat}`;
+
+      const escapeCsv = (v: unknown) => {
+        const s = v == null ? '' : String(v);
+        return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+      };
+
+      let content = '';
+      let mime = 'text/csv;charset=utf-8;';
+      if (exportFormat === 'csv') {
+        const header = allColumns.map(c => escapeCsv(c.label)).join(',');
+        const body = rows
+          .map(r => allColumns.map(c => escapeCsv(r[c.key])).join(','))
+          .join('\n');
+        content = `${header}\n${body}`;
+      } else {
+        mime = 'application/json;charset=utf-8;';
+        const payload = rows.map(r => {
+          const obj: Record<string, unknown> = {};
+          allColumns.forEach(c => { obj[c.label] = r[c.key]; });
+          return obj;
+        });
+        content = JSON.stringify(payload, null, 2);
+      }
+
+      const blob = new Blob([content], { type: mime });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      toast({ title: 'Download ready', description: `${rows.length.toLocaleString()} ${group.label} records exported as ${exportFormat.toUpperCase()}.` });
     });
-  }, [group.totalRecords, exportFormat, simulateProgress]);
+  }, [group, exportFormat, simulateProgress]);
 
   const handlePush = useCallback(() => {
     setPushing(true);
