@@ -336,7 +336,7 @@ export default function DataIntelligenceSection() {
                     </tr>
                   </thead>
                   <tbody>
-                    {group.sampleRows.map((row, i) => (
+                    {group.sampleRows.slice(0, 50).map((row, i) => (
                       <tr key={i} className="border-t border-border hover:bg-surface/60 transition-colors">
                         {visibleColumns.map((col, idx) => (
                           <td
@@ -375,8 +375,9 @@ export default function DataIntelligenceSection() {
                 </table>
               </div>
               <p className="text-[10px] text-muted-foreground mt-1.5">
-                Showing {group.sampleRows.length} of {formatCount(group.totalRecords)} records · Full data available via Download or API Push
+                Showing {Math.min(group.sampleRows.length, 50).toLocaleString()} of {group.sampleRows.length.toLocaleString()} records · Full data available via Download or API Push
               </p>
+
             </div>
           )}
 
