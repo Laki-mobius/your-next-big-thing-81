@@ -49,7 +49,7 @@ export default function CoverageModal({ onClose, inline = false }: { onClose: ()
                 <circle cx="33" cy="33" r="26" fill="none" stroke="hsl(var(--border))" strokeWidth="6" />
                 <circle cx="33" cy="33" r="26" fill="none" stroke="hsl(var(--brand))" strokeWidth="6" strokeDasharray={2 * Math.PI * 26} strokeDashoffset={2 * Math.PI * 26 * (1 - 54.6 / 100)} strokeLinecap="round" />
               </svg>
-              <div className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-brand">57%</div>
+              <div className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-brand">55%</div>
             </div>
           </div>
 
