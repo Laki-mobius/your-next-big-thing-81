@@ -89,8 +89,14 @@ export default function AssetRepository() {
   const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
   const [previewWorkflow, setPreviewWorkflow] = useState<string | null>(null);
 
-  // Map workflow names to preview images. Update this map as images are provided.
-  const workflowPreviewImages: Record<string, string> = {};
+  // Map workflow names to preview images.
+  const workflowPreviewImages: Record<string, string> = {
+    "Company Data Enrichment": "/workflow-previews/company-data-enrichment.png",
+    "Image and Unstructured IDP": "/workflow-previews/image-and-unstructured-idp.png",
+    "Invoice Data Extraction": "/workflow-previews/invoice-data-extraction.png",
+    "UK Company Register Data Extraction": "/workflow-previews/uk-company-register-data-extraction.png",
+    "Annual Report Key Financial Data": "/workflow-previews/annual-report-key-financial-data.png",
+  };
   const getWorkflowPreview = (name: string) => workflowPreviewImages[name] || "/placeholder.svg";
 
   // ---------- Derived stats ----------
@@ -534,7 +540,7 @@ export default function AssetRepository() {
                       type="button"
                       onClick={() => toggleWorkflow(wf)}
                       className={cn(
-                        "flex items-start gap-3 p-3 rounded-md border text-left transition-colors",
+                        "relative flex items-start gap-3 p-3 pb-7 rounded-md border text-left transition-colors",
                         selected
                           ? "border-brand bg-brand text-primary-foreground"
                           : "border-border bg-card hover:border-brand-mid/60 hover:bg-brand-light/20",
@@ -552,16 +558,6 @@ export default function AssetRepository() {
                           "text-[12px] font-semibold leading-tight",
                           selected ? "text-primary-foreground" : "text-foreground",
                         )}>{wf}</span>
-                        <button
-                          type="button"
-                          onClick={(e) => { e.stopPropagation(); setPreviewWorkflow(wf); }}
-                          className={cn(
-                            "self-start text-[11px] underline underline-offset-2 hover:no-underline transition-colors",
-                            selected ? "text-primary-foreground/90 hover:text-primary-foreground" : "text-brand hover:text-brand-mid",
-                          )}
-                        >
-                          Workflow Preview
-                        </button>
                       </div>
                       <Checkbox
                         checked={selected}
@@ -569,6 +565,18 @@ export default function AssetRepository() {
                         onClick={e => e.stopPropagation()}
                         className={cn("mt-0.5", selected && "border-primary-foreground data-[state=checked]:bg-primary-foreground data-[state=checked]:text-brand")}
                       />
+                      <span
+                        role="link"
+                        tabIndex={0}
+                        onClick={(e) => { e.stopPropagation(); setPreviewWorkflow(wf); }}
+                        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); e.stopPropagation(); setPreviewWorkflow(wf); } }}
+                        className={cn(
+                          "absolute bottom-1.5 right-2 text-[10px] font-normal cursor-pointer transition-opacity opacity-70 hover:opacity-100 hover:underline",
+                          selected ? "text-primary-foreground" : "text-muted-foreground",
+                        )}
+                      >
+                        Workflow Preview
+                      </span>
                     </button>
                   );
                 })}
