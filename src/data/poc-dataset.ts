@@ -37,7 +37,7 @@ export const pocAttributes: AttrStat[] = [
   { name: 'Personnel', filled: 609, total: 1000, pct: 60.9, primarySource: 'Government Source / Website', capturedRange: '2026-05-12 → 2026-05-23' },
 ];
 
-export const pocCoverageOverall = 54.6; // Weighted attribute coverage across the new dataset
+export const pocCoverageOverall = 52.5; // Weighted attribute coverage across the new dataset
 export const pocAccuracyOverall = 98.2; // Sampled QA accuracy retained
 export const pocCurrentnessOverall = 100; // All captures within last 14 days
 
