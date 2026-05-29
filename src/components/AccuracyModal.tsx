@@ -29,7 +29,7 @@ const qcAttributes = [
   { name: 'Revenue', accuracy: 98, correct: 506, total: 516, status: 'passed' as const, issues: '10 Fiscal Year Missing' },
   { name: 'Revenue Currency', accuracy: 99, correct: 513, total: 516, status: 'passed' as const, issues: '3 Currency Mismatch' },
   { name: 'Revenue Fiscal Year', accuracy: 97, correct: 254, total: 260, status: 'passed' as const, issues: '6 Format Inconsistencies' },
-  { name: 'Annual Report', accuracy: 93, correct: 49, total: 52, status: 'passed' as const, issues: '3 Broken Links' },
+  { name: 'Annual Report', accuracy: 93, correct: 15, total: 16, status: 'passed' as const, issues: '1 Broken Link' },
 ];
 
 

@@ -29,7 +29,7 @@ const currentnessData = [
   { name: 'Revenue', g: 'Financial Data', ref: '2026-05-22', cnt: '516', pct: '100.0%', geo: { US: '93', UK: '46', Europe: '67', APAC: '223', Other: '87' } },
   { name: 'Revenue Currency', g: 'Financial Data', ref: '2026-05-22', cnt: '516', pct: '100.0%', geo: { US: '93', UK: '46', Europe: '67', APAC: '223', Other: '87' } },
   { name: 'Revenue Fiscal Year', g: 'Financial Data', ref: '2026-05-22', cnt: '260', pct: '100.0%', geo: { US: '47', UK: '23', Europe: '34', APAC: '113', Other: '43' } },
-  { name: 'Annual Report', g: 'Financial Data', ref: '2026-05-22', cnt: '52', pct: '100.0%', geo: { US: '9', UK: '5', Europe: '7', APAC: '22', Other: '9' } },
+  { name: 'Annual Report', g: 'Financial Data', ref: '2026-05-22', cnt: '16', pct: '100.0%', geo: { US: '3', UK: '1', Europe: '2', APAC: '7', Other: '3' } },
 ];
 
 type DatePreset = 'week' | 'month' | '3months' | 'custom';
