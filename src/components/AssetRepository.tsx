@@ -87,6 +87,11 @@ export default function AssetRepository() {
   const [renameValue, setRenameValue] = useState("");
   const [renameError, setRenameError] = useState<string | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
+  const [previewWorkflow, setPreviewWorkflow] = useState<string | null>(null);
+
+  // Map workflow names to preview images. Update this map as images are provided.
+  const workflowPreviewImages: Record<string, string> = {};
+  const getWorkflowPreview = (name: string) => workflowPreviewImages[name] || "/placeholder.svg";
 
   // ---------- Derived stats ----------
   const allSourceTypes = useMemo(
@@ -529,7 +534,7 @@ export default function AssetRepository() {
                       type="button"
                       onClick={() => toggleWorkflow(wf)}
                       className={cn(
-                        "flex items-center gap-3 p-3 rounded-md border text-left transition-colors",
+                        "flex items-start gap-3 p-3 rounded-md border text-left transition-colors",
                         selected
                           ? "border-brand bg-brand text-primary-foreground"
                           : "border-border bg-card hover:border-brand-mid/60 hover:bg-brand-light/20",
@@ -542,15 +547,27 @@ export default function AssetRepository() {
                       )}>
                         <Icon className={cn("w-4 h-4", selected ? "text-primary-foreground" : "text-brand")} />
                       </div>
-                      <span className={cn(
-                        "text-[12px] font-semibold flex-1 leading-tight",
-                        selected ? "text-primary-foreground" : "text-foreground",
-                      )}>{wf}</span>
+                      <div className="flex-1 min-w-0 flex flex-col gap-0.5">
+                        <span className={cn(
+                          "text-[12px] font-semibold leading-tight",
+                          selected ? "text-primary-foreground" : "text-foreground",
+                        )}>{wf}</span>
+                        <button
+                          type="button"
+                          onClick={(e) => { e.stopPropagation(); setPreviewWorkflow(wf); }}
+                          className={cn(
+                            "self-start text-[11px] underline underline-offset-2 hover:no-underline transition-colors",
+                            selected ? "text-primary-foreground/90 hover:text-primary-foreground" : "text-brand hover:text-brand-mid",
+                          )}
+                        >
+                          Workflow Preview
+                        </button>
+                      </div>
                       <Checkbox
                         checked={selected}
                         onCheckedChange={() => toggleWorkflow(wf)}
                         onClick={e => e.stopPropagation()}
-                        className={cn(selected && "border-primary-foreground data-[state=checked]:bg-primary-foreground data-[state=checked]:text-brand")}
+                        className={cn("mt-0.5", selected && "border-primary-foreground data-[state=checked]:bg-primary-foreground data-[state=checked]:text-brand")}
                       />
                     </button>
                   );
@@ -644,6 +661,24 @@ export default function AssetRepository() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {/* Workflow preview popup */}
+      <Dialog open={!!previewWorkflow} onOpenChange={(o) => !o && setPreviewWorkflow(null)}>
+        <DialogContent className="max-w-3xl">
+          <DialogHeader>
+            <DialogTitle>{previewWorkflow} — Workflow Preview</DialogTitle>
+          </DialogHeader>
+          <div className="bg-muted/30 border rounded-md p-2 flex items-center justify-center min-h-[300px]">
+            {previewWorkflow && (
+              <img
+                src={getWorkflowPreview(previewWorkflow)}
+                alt={`${previewWorkflow} workflow preview`}
+                className="max-w-full max-h-[70vh] object-contain"
+              />
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
