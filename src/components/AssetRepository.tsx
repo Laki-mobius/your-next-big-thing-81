@@ -87,6 +87,11 @@ export default function AssetRepository() {
   const [renameValue, setRenameValue] = useState("");
   const [renameError, setRenameError] = useState<string | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
+  const [previewWorkflow, setPreviewWorkflow] = useState<string | null>(null);
+
+  // Map workflow names to preview images. Update this map as images are provided.
+  const workflowPreviewImages: Record<string, string> = {};
+  const getWorkflowPreview = (name: string) => workflowPreviewImages[name] || "/placeholder.svg";
 
   // ---------- Derived stats ----------
   const allSourceTypes = useMemo(
