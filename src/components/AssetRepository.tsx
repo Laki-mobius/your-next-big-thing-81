@@ -95,7 +95,10 @@ export default function AssetRepository() {
     "Image and Unstructured IDP": "/workflow-previews/image-and-unstructured-idp.png",
     "Invoice Data Extraction": "/workflow-previews/invoice-data-extraction.png",
     "UK Company Register Data Extraction": "/workflow-previews/uk-company-register-data-extraction.png",
+    "UK Company Data Extraction": "/workflow-previews/company-data-enrichment.png",
+    "US Company Data Extraction": "/workflow-previews/company-data-enrichment.png",
     "Annual Report Key Financial Data": "/workflow-previews/annual-report-key-financial-data.png",
+    "Sourcing Annual Report": "/workflow-previews/sourcing-annual-report.png",
   };
   const getWorkflowPreview = (name: string) => workflowPreviewImages[name] || "/placeholder.svg";
 
