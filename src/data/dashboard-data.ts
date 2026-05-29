@@ -50,7 +50,7 @@ export const accData = [
   { g: 'Financial Data', name: 'Revenue', src: 'Zoominfo / SOS / Annual Report', v: 98.0, cnt: '506', ref: '2026-05-25', st: 'good' as const },
   { g: 'Financial Data', name: 'Revenue Currency', src: 'Zoominfo / SOS / Annual Report', v: 99.5, cnt: '513', ref: '2026-05-25', st: 'good' as const },
   { g: 'Financial Data', name: 'Revenue Fiscal Year', src: 'Annual Report / SOS', v: 97.6, cnt: '254', ref: '2026-05-25', st: 'good' as const },
-  { g: 'Financial Data', name: 'Annual Report', src: 'Annual Report', v: 93.8, cnt: '49', ref: '2026-05-25', st: 'good' as const },
+  { g: 'Financial Data', name: 'Annual Report', src: 'Annual Report', v: 93.8, cnt: '15', ref: '2026-05-25', st: 'good' as const },
 ];
 
 export const compData = [
