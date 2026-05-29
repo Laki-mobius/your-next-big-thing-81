@@ -41,17 +41,18 @@ export default function CoverageModal({ onClose, inline = false }: { onClose: ()
           <div className="rounded-[11px] border border-border bg-surface p-3.5 flex items-center justify-between mb-3.5 transition-all hover:border-brand/40 hover:bg-brand-light hover:shadow-sm">
             <div>
               <div className="text-[10px] font-semibold text-brand uppercase tracking-[0.06em] mb-[3px]">Overall</div>
-              <div className="text-[30px] font-light text-brand tracking-[-1.5px] leading-none">62.3%</div>
-              <div className="text-[11px] text-muted-foreground mt-[3px]">+1.4% vs last month</div>
+              <div className="text-[30px] font-light text-brand tracking-[-1.5px] leading-none">54.6%</div>
+              <div className="text-[11px] text-muted-foreground mt-[3px]">+0.9% vs last month</div>
             </div>
             <div className="relative w-[66px] h-[66px] shrink-0">
               <svg viewBox="0 0 66 66" className="w-[66px] h-[66px] -rotate-90">
                 <circle cx="33" cy="33" r="26" fill="none" stroke="hsl(var(--border))" strokeWidth="6" />
-                <circle cx="33" cy="33" r="26" fill="none" stroke="hsl(var(--brand))" strokeWidth="6" strokeDasharray={2 * Math.PI * 26} strokeDashoffset={2 * Math.PI * 26 * (1 - 62.3 / 100)} strokeLinecap="round" />
+                <circle cx="33" cy="33" r="26" fill="none" stroke="hsl(var(--brand))" strokeWidth="6" strokeDasharray={2 * Math.PI * 26} strokeDashoffset={2 * Math.PI * 26 * (1 - 54.6 / 100)} strokeLinecap="round" />
               </svg>
-              <div className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-brand">62%</div>
+              <div className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-brand">55%</div>
             </div>
           </div>
+
 
           <div className="mb-4">
             <SectionLabel>By segment</SectionLabel>
