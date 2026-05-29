@@ -661,6 +661,24 @@ export default function AssetRepository() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {/* Workflow preview popup */}
+      <Dialog open={!!previewWorkflow} onOpenChange={(o) => !o && setPreviewWorkflow(null)}>
+        <DialogContent className="max-w-3xl">
+          <DialogHeader>
+            <DialogTitle>{previewWorkflow} — Workflow Preview</DialogTitle>
+          </DialogHeader>
+          <div className="bg-muted/30 border rounded-md p-2 flex items-center justify-center min-h-[300px]">
+            {previewWorkflow && (
+              <img
+                src={getWorkflowPreview(previewWorkflow)}
+                alt={`${previewWorkflow} workflow preview`}
+                className="max-w-full max-h-[70vh] object-contain"
+              />
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
