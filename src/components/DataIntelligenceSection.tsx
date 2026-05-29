@@ -151,22 +151,8 @@ export default function DataIntelligenceSection() {
     simulateProgress('download', () => {
       setDownloading(false);
       const allColumns = [...group.columns, ...group.extraColumns];
-      const base = group.sampleRows;
-      // Expand sample rows up to totalRecords by cycling to mimic the full filtered dataset
-      const rows: Record<string, string | number>[] = [];
-      const target = Math.max(base.length, group.totalRecords);
-      for (let i = 0; i < target; i++) {
-        const src = base[i % base.length];
-        if (i < base.length) {
-          rows.push(src);
-        } else {
-          const clone: Record<string, string | number> = { ...src };
-          const idSuffix = ` #${i + 1}`;
-          const firstTextKey = allColumns.find(c => typeof src[c.key] === 'string')?.key;
-          if (firstTextKey) clone[firstTextKey] = `${src[firstTextKey]}${idSuffix}`;
-          rows.push(clone);
-        }
-      }
+      // Export the full uploaded dataset for this group, as-is
+      const rows = group.sampleRows;
       const filename = `${group.id}-${new Date().toISOString().slice(0, 10)}.${exportFormat}`;
 
       const escapeCsv = (v: unknown) => {
@@ -205,6 +191,7 @@ export default function DataIntelligenceSection() {
       toast({ title: 'Download ready', description: `${rows.length.toLocaleString()} ${group.label} records exported as ${exportFormat.toUpperCase()}.` });
     });
   }, [group, exportFormat, simulateProgress]);
+
 
   const handlePush = useCallback(() => {
     setPushing(true);
@@ -349,7 +336,7 @@ export default function DataIntelligenceSection() {
                     </tr>
                   </thead>
                   <tbody>
-                    {group.sampleRows.map((row, i) => (
+                    {group.sampleRows.slice(0, 50).map((row, i) => (
                       <tr key={i} className="border-t border-border hover:bg-surface/60 transition-colors">
                         {visibleColumns.map((col, idx) => (
                           <td
@@ -388,8 +375,9 @@ export default function DataIntelligenceSection() {
                 </table>
               </div>
               <p className="text-[10px] text-muted-foreground mt-1.5">
-                Showing {group.sampleRows.length} of {formatCount(group.totalRecords)} records · Full data available via Download or API Push
+                Showing {Math.min(group.sampleRows.length, 50).toLocaleString()} of {group.sampleRows.length.toLocaleString()} records · Full data available via Download or API Push
               </p>
+
             </div>
           )}
 

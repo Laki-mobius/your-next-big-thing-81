@@ -1,17 +1,24 @@
-// POC dataset metrics extracted from LexisNexis_POC_05222026.xlsx
-// 1,000 company records across 4 attributes: Company Website, Revenue, Employee Count, Personnel
+// POC dataset metrics extracted from LexisNexis_POC_05252026.xlsx
+// 1,000 company records + 5,099 personnel rows (352 from main + 4,747 additional)
+
+import companiesJson from './poc-companies.json';
+import personnelJson from './poc-personnel.json';
+
+export const pocCompaniesRaw = companiesJson as Record<string, string>[];
+export const pocPersonnelRaw = personnelJson as Record<string, string>[];
 
 export const pocMetrics = {
   totalRecords: 1000,
-  matched: 662,
-  matchedNoData: 164,
-  noMatch: 135,
-  mergerAcquisition: 32,
-  possibleMatch: 5,
+  matched: 988, // 986 Matched - Data Enrichment + 2 Matched
+  matchedDataEnrichment: 986,
+  matchedNoData: 0,
+  noMatch: 0,
+  mergerAcquisition: 10,
+  possibleMatch: 0,
   closed: 2,
-  exceptionNotes: 371,
-  personnelRows: 5351,
-  uniqueCompaniesWithPersonnel: 966,
+  exceptionNotes: 846,
+  personnelRows: 5099,
+  uniqueCompaniesWithPersonnel: 609,
 } as const;
 
 export interface AttrStat {
@@ -24,14 +31,14 @@ export interface AttrStat {
 }
 
 export const pocAttributes: AttrStat[] = [
-  { name: 'Company Website', filled: 462, total: 1000, pct: 46.2, primarySource: 'Zoominfo / Website', capturedRange: '2026-05-12 → 2026-05-21' },
-  { name: 'Revenue', filled: 514, total: 1000, pct: 51.4, primarySource: 'Zoominfo / SOS / Annual Report', capturedRange: '2026-05-12 → 2026-05-22' },
-  { name: 'Employee Count', filled: 542, total: 1000, pct: 54.2, primarySource: 'Zoominfo / Website / LinkedIn', capturedRange: '2026-05-12 → 2026-05-22' },
-  { name: 'Personnel', filled: 503, total: 1000, pct: 50.3, primarySource: 'Government Source / Website', capturedRange: '2026-05-12 → 2026-05-22' },
+  { name: 'Company Website', filled: 507, total: 1000, pct: 50.7, primarySource: 'Zoominfo / Website', capturedRange: '2026-05-12 → 2026-05-25' },
+  { name: 'Revenue', filled: 516, total: 1000, pct: 51.6, primarySource: 'Zoominfo / SOS / Annual Report', capturedRange: '2026-05-12 → 2026-05-25' },
+  { name: 'Employee Count', filled: 553, total: 1000, pct: 55.3, primarySource: 'Zoominfo / Website / LinkedIn', capturedRange: '2026-05-12 → 2026-05-25' },
+  { name: 'Personnel', filled: 609, total: 1000, pct: 60.9, primarySource: 'Government Source / Website', capturedRange: '2026-05-12 → 2026-05-23' },
 ];
 
-export const pocCoverageOverall = 62.3; // Overridden per user request
-export const pocAccuracyOverall = 98.2; // Overridden per user request
+export const pocCoverageOverall = 54.6; // Weighted attribute coverage across the new dataset
+export const pocAccuracyOverall = 98.2; // Sampled QA accuracy retained
 export const pocCurrentnessOverall = 100; // All captures within last 14 days
 
 export const pocCountryBreakdown = [
@@ -42,17 +49,16 @@ export const pocCountryBreakdown = [
 ];
 
 export const pocRevenueSources: { name: string; count: number }[] = [
-  { name: 'Zoominfo', count: 227 }, { name: 'SOS', count: 98 }, { name: 'Tracxn', count: 55 },
-  { name: 'Annual Report', count: 52 }, { name: 'Other Source', count: 33 }, { name: 'Website', count: 17 },
-  { name: 'Yahoo Finance', count: 7 }, { name: 'Prospeo', count: 6 }, { name: 'Proff', count: 6 },
-  { name: 'Other Registries', count: 13 },
+  { name: 'Other Source', count: 342 }, { name: 'SOS', count: 98 },
+  { name: 'Annual Report', count: 52 }, { name: 'Website', count: 17 },
+  { name: 'Yahoo Finance', count: 7 },
 ];
 
 export const pocEmployeeSources: { name: string; count: number }[] = [
-  { name: 'Zoominfo', count: 197 }, { name: 'Website', count: 79 }, { name: 'LinkedIn', count: 64 },
-  { name: 'Other Source', count: 53 }, { name: 'SOS', count: 44 }, { name: 'Annual Report', count: 32 },
-  { name: 'Tracxn', count: 29 }, { name: 'Endole', count: 13 }, { name: 'Crunchbase', count: 12 },
-  { name: 'Other', count: 19 },
+  { name: 'Other Source', count: 325 }, { name: 'Website', count: 79 },
+  { name: 'LinkedIn', count: 64 }, { name: 'SOS', count: 44 },
+  { name: 'Annual Report', count: 32 }, { name: 'Yahoo Finance', count: 8 },
+  { name: 'Morningstar', count: 1 },
 ];
 
 export interface CompanyRow {
@@ -61,55 +67,60 @@ export interface CompanyRow {
   employeeSource: string; matchStatus: string; lastCaptured: string;
 }
 
-export const pocCompanySamples: CompanyRow[] = [
-  { companyName: 'National Network Digital Schools', country: 'USA', website: 'www.lincolnlearningsolutions.org', revenue: 'USD 31.6M', employees: '201-500', fiscalYear: '—', revenueSource: 'Zoominfo', employeeSource: 'Zoominfo', matchStatus: 'Matched', lastCaptured: '2026-05-12' },
-  { companyName: 'Ontario Telemedicine Network', country: 'CAN', website: 'otn.ca', revenue: 'CAD 21.4M', employees: '201-500', fiscalYear: '—', revenueSource: 'Zoominfo', employeeSource: 'Zoominfo', matchStatus: 'Matched', lastCaptured: '2026-05-12' },
-  { companyName: 'Aubay Spain S.L.', country: 'ESP', website: 'aubay.es', revenue: 'EUR 601.6M', employees: '51-200', fiscalYear: '2025-12-31', revenueSource: 'Annual Report', employeeSource: 'Zoominfo', matchStatus: 'Matched', lastCaptured: '2026-05-12' },
-  { companyName: 'Synechron Inc.', country: 'USA', website: 'www.synechron.com', revenue: 'USD 3,000.0M', employees: '16,850', fiscalYear: '—', revenueSource: 'Zoominfo', employeeSource: 'Website', matchStatus: 'Matched', lastCaptured: '2026-05-12' },
-  { companyName: 'KPMG LLP', country: 'CAN', website: 'kpmg.com', revenue: 'CAD 2,000.0M', employees: '10,000', fiscalYear: '2025', revenueSource: 'Zoominfo', employeeSource: 'Zoominfo', matchStatus: 'Matched', lastCaptured: '2026-05-12' },
-  { companyName: 'TRUGLOBAL Software India Private Ltd', country: 'IND', website: 'www.truglobal.com', revenue: 'INR 612.0M', employees: '190', fiscalYear: '2025-03-31', revenueSource: 'Tracxn', employeeSource: 'Other', matchStatus: 'Matched', lastCaptured: '2026-05-12' },
-  { companyName: 'Arihant Publications (India) Ltd', country: 'IND', website: 'arihantbooks.com', revenue: 'USD 371.7M', employees: '6,000', fiscalYear: '—', revenueSource: 'Zoominfo', employeeSource: 'Website', matchStatus: 'Matched', lastCaptured: '2026-05-12' },
-  { companyName: 'droga5, LLC', country: 'USA', website: 'www.droga5.com', revenue: 'USD 126.5M', employees: '501-1000', fiscalYear: '—', revenueSource: 'Zoominfo', employeeSource: 'Zoominfo', matchStatus: 'Matched', lastCaptured: '2026-05-12' },
-  { companyName: 'HIT, Co., Ltd.', country: 'JPN', website: 'www.hit-ad.co.jp', revenue: 'JPY 4,419.4M', employees: '89', fiscalYear: '2025-06-30', revenueSource: 'Yahoo Finance', employeeSource: 'Yahoo Finance', matchStatus: 'Matched', lastCaptured: '2026-05-12' },
-  { companyName: 'PROMOD', country: 'FRA', website: 'www.promod.com', revenue: 'EUR 313.7M', employees: '11-50', fiscalYear: '2025', revenueSource: 'SOS', employeeSource: 'Crunchbase', matchStatus: 'Matched', lastCaptured: '2026-05-12' },
-];
+// Map the raw company rows into the simplified CompanyRow shape used by legacy components
+function fmtRevenue(r: Record<string, string>): string {
+  const val = r['Revenue_value']; const cur = r['Revenue_currency'];
+  if (!val) return '';
+  const n = Number(val);
+  if (!isFinite(n)) return `${cur || ''} ${val}`.trim();
+  const m = n / 1_000_000;
+  return `${cur || ''} ${m.toLocaleString(undefined, { maximumFractionDigits: 1 })}M`.trim();
+}
+
+export const pocCompanySamples: CompanyRow[] = pocCompaniesRaw.slice(0, 25).map(r => ({
+  companyName: r['Company_name'] || '',
+  country: r['Country'] || '',
+  website: r['Company_website_url'] || '—',
+  revenue: fmtRevenue(r) || '—',
+  employees: r['Employee_count_value'] || '—',
+  fiscalYear: r['Revenue_fiscal_year'] || '—',
+  revenueSource: r['Revenue_source_type'] || '—',
+  employeeSource: r['Employee_source_type'] || '—',
+  matchStatus: r['Match_status'] || '',
+  lastCaptured: r['Revenue_capture_date'] || r['Company_website_capture_date'] || r['Employee_count_capture_date'] || '',
+}));
 
 export interface ExecRow {
   name: string; title: string; titleFormatted: string;
   company: string; country: string; source: string; captureDate: string;
 }
 
-export const pocExecSamples: ExecRow[] = [
-  { name: 'John Andrew Hill', title: 'Director', titleFormatted: 'Bd of Dirs', company: 'Hassop Investments Topco Limited', country: 'GBR', source: 'Government source', captureDate: '2026-05-13' },
-  { name: 'Holly Louise Pattenden', title: 'Director', titleFormatted: 'Bd of Dirs', company: 'Hassop Investments Topco Limited', country: 'GBR', source: 'Government source', captureDate: '2026-05-13' },
-  { name: 'Bruce Michael Heppenstall', title: 'Chief Executive Officer & Director', titleFormatted: 'Bd of Dirs & CEO', company: 'Infinis Energy Group Holdings Limited', country: 'GBR', source: 'Website', captureDate: '2026-05-12' },
-  { name: 'Keith Alan Reid', title: 'Chief Financial Officer & Director', titleFormatted: 'Bd of Dirs & CFO', company: 'Infinis Energy Group Holdings Limited', country: 'GBR', source: 'Website', captureDate: '2026-05-12' },
-  { name: 'James Huxley Milne', title: 'Chief Commercial Officer & Director', titleFormatted: 'Bd of Dirs & Chief Comml Officer', company: 'Infinis Energy Group Holdings Limited', country: 'GBR', source: 'Website', captureDate: '2026-05-12' },
-  { name: 'Robert Tomlins', title: 'Director of Operations', titleFormatted: 'Dir-Ops', company: 'Infinis Energy Group Holdings Limited', country: 'GBR', source: 'Website', captureDate: '2026-05-12' },
-  { name: 'Andrew Leeding', title: 'Director of Development and Construction', titleFormatted: 'Dir-Dev & Construction', company: 'Infinis Energy Group Holdings Limited', country: 'GBR', source: 'Website', captureDate: '2026-05-12' },
-  { name: 'Su Ruthven', title: 'Director of HSQE & Sustainability', titleFormatted: 'Dir-HSQE & Sustainability', company: 'Infinis Energy Group Holdings Limited', country: 'GBR', source: 'Website', captureDate: '2026-05-12' },
-  { name: 'John Okninski', title: 'Director of HR', titleFormatted: 'Dir-HR', company: 'Infinis Energy Group Holdings Limited', country: 'GBR', source: 'Website', captureDate: '2026-05-12' },
-  { name: 'Tim Short', title: 'Director', titleFormatted: 'Bd of Dirs', company: 'Infinis Energy Group Holdings Limited', country: 'GBR', source: 'Government source', captureDate: '2026-05-12' },
-];
+export const pocExecSamples: ExecRow[] = pocPersonnelRaw.slice(0, 25).map(r => ({
+  name: [r['First name'], r['Middle name'], r['Last name']].filter(Boolean).join(' ').trim(),
+  title: r['Exec_title_raw'] || '',
+  titleFormatted: r['Exec_title_formatted'] || '',
+  company: r['Company_name'] || '',
+  country: r['Country'] || '',
+  source: r['Personnel_Source_Type'] || '—',
+  captureDate: r['Exec_capture_date'] || '',
+}));
 
 export const pocTitleCategories = [
-  { name: 'Board of Directors', count: 1057 },
-  { name: 'Director (Functional)', count: 136 },
-  { name: 'CFO', count: 75 },
-  { name: 'Board & Chairman', count: 62 },
+  { name: 'Board of Directors', count: 1051 },
+  { name: 'Director', count: 187 },
+  { name: 'CFO', count: 77 },
+  { name: 'CEO', count: 69 },
+  { name: 'Board & Chairman', count: 67 },
+  { name: 'Managing Director', count: 59 },
+  { name: 'President', count: 54 },
   { name: 'Secretary', count: 53 },
-  { name: 'CEO', count: 50 },
-  { name: 'President', count: 46 },
-  { name: 'Managing Director', count: 45 },
   { name: 'Co-Managing Director', count: 43 },
-  { name: 'Vice President', count: 32 },
+  { name: 'Vice President', count: 34 },
 ];
 
 export const pocMatchStatusBreakdown = [
-  { label: 'Matched', count: 662, color: '#1A7A4A' },
-  { label: 'Matched – Data Not Found', count: 164, color: '#C97A00' },
-  { label: 'No Match', count: 135, color: '#C0392B' },
-  { label: 'Merger & Acquisition', count: 32, color: '#534AB7' },
-  { label: 'Possible Match', count: 5, color: '#185FA5' },
+  { label: 'Matched - Data Enrichment', count: 986, color: '#1A7A4A' },
+  { label: 'Matched', count: 2, color: '#185FA5' },
+  { label: 'Merger & Acquisition', count: 10, color: '#534AB7' },
   { label: 'Closed', count: 2, color: '#6B7280' },
 ];
