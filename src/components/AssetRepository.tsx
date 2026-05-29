@@ -534,7 +534,7 @@ export default function AssetRepository() {
                       type="button"
                       onClick={() => toggleWorkflow(wf)}
                       className={cn(
-                        "flex items-center gap-3 p-3 rounded-md border text-left transition-colors",
+                        "flex items-start gap-3 p-3 rounded-md border text-left transition-colors",
                         selected
                           ? "border-brand bg-brand text-primary-foreground"
                           : "border-border bg-card hover:border-brand-mid/60 hover:bg-brand-light/20",
@@ -547,15 +547,27 @@ export default function AssetRepository() {
                       )}>
                         <Icon className={cn("w-4 h-4", selected ? "text-primary-foreground" : "text-brand")} />
                       </div>
-                      <span className={cn(
-                        "text-[12px] font-semibold flex-1 leading-tight",
-                        selected ? "text-primary-foreground" : "text-foreground",
-                      )}>{wf}</span>
+                      <div className="flex-1 min-w-0 flex flex-col gap-0.5">
+                        <span className={cn(
+                          "text-[12px] font-semibold leading-tight",
+                          selected ? "text-primary-foreground" : "text-foreground",
+                        )}>{wf}</span>
+                        <button
+                          type="button"
+                          onClick={(e) => { e.stopPropagation(); setPreviewWorkflow(wf); }}
+                          className={cn(
+                            "self-start text-[11px] underline underline-offset-2 hover:no-underline transition-colors",
+                            selected ? "text-primary-foreground/90 hover:text-primary-foreground" : "text-brand hover:text-brand-mid",
+                          )}
+                        >
+                          Workflow Preview
+                        </button>
+                      </div>
                       <Checkbox
                         checked={selected}
                         onCheckedChange={() => toggleWorkflow(wf)}
                         onClick={e => e.stopPropagation()}
-                        className={cn(selected && "border-primary-foreground data-[state=checked]:bg-primary-foreground data-[state=checked]:text-brand")}
+                        className={cn("mt-0.5", selected && "border-primary-foreground data-[state=checked]:bg-primary-foreground data-[state=checked]:text-brand")}
                       />
                     </button>
                   );
