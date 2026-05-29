@@ -41,7 +41,7 @@ function DashboardContent() {
                 />
                 <KpiCard
                   label="Coverage metrics"
-                  value="54.6%"
+                  value="52.5%"
                   delta="0.9%"
                   subtitle="Attribute coverage depth"
                   icon={<svg viewBox="0 0 20 20" fill="none" className="w-[18px] h-[18px]"><rect x="2" y="3" width="16" height="14" rx="2" stroke="currentColor" strokeWidth="1.4" /><path d="M6 7h8M6 10h8M6 13h5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" /></svg>}
