@@ -86,7 +86,7 @@ export default function Sidebar({ collapsed, activeItem, onItemClick }: SidebarP
         >
           <SidebarItem
             icon={<svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5.5" r="2.2" stroke="currentColor" strokeWidth="1.4" /><path d="M3.5 13c0-2.5 2-4 4.5-4s4.5 1.5 4.5 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" /></svg>}
-            label="HITL review"
+            label="HITL Review"
             badge={{ value: 12, variant: 'brand' }}
             collapsed={collapsed}
             active={isHitlActive}
