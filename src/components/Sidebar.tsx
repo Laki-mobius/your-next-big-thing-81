@@ -155,7 +155,7 @@ export default function Sidebar({ collapsed, activeItem, onItemClick }: SidebarP
 
         <SidebarItem
           icon={<svg viewBox="0 0 16 16" fill="none"><rect x="2.5" y="2.5" width="4.5" height="4.5" rx="0.8" stroke="currentColor" strokeWidth="1.4" /><rect x="9" y="2.5" width="4.5" height="4.5" rx="0.8" stroke="currentColor" strokeWidth="1.4" /><rect x="2.5" y="9" width="4.5" height="4.5" rx="0.8" stroke="currentColor" strokeWidth="1.4" /><rect x="9" y="9" width="4.5" height="4.5" rx="0.8" stroke="currentColor" strokeWidth="1.4" /></svg>}
-          label="Asset repository"
+          label="Solution Library"
           active={activeItem === 'assets'}
           collapsed={collapsed}
           onClick={() => onItemClick('assets')}
