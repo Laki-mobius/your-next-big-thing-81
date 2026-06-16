@@ -367,9 +367,6 @@ export default function AssetRepository() {
               )}
             >Sources</button>
 
-                  : "border border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground",
-              )}
-            >Workflows</button>
           </div>
 
           <div className="w-px h-6 bg-border" />
