@@ -308,7 +308,7 @@ export default function AssetRepository() {
     <div className="space-y-3">
       {/* Header */}
       <div className="border-l-[3px] border-primary pl-4">
-        <h1 className="text-[18px] font-bold text-foreground">Asset Repository</h1>
+        <h1 className="text-[18px] font-bold text-foreground">Solution Library</h1>
         <p className="text-[12px] text-muted-foreground mt-0.5">
           Browse verified data sources and workflows. Build a job by selecting assets and saving it for execution.
         </p>
