@@ -729,6 +729,50 @@ export default function AssetRepository() {
   );
 }
 
+// ---------- Workflow details panel ----------
+function WorkflowDetailsPanel({ name, sources }: { name: string; sources: { sourceName: string; attributes: string[] }[] }) {
+  const attributes = Array.from(new Set(sources.flatMap(s => s.attributes))).sort();
+  return (
+    <div className="space-y-3">
+      <div className="flex items-start justify-between gap-3 border-b border-border pb-2">
+        <div>
+          <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Workflow</div>
+          <h3 className="text-[15px] font-bold text-foreground">{name}</h3>
+        </div>
+        <Badge variant="secondary" className="text-[10px]">{sources.length} sources</Badge>
+      </div>
+
+      <DetailRow label="Benchmark" value="—" />
+      <DetailRow label="Short description" value="—" />
+      <DetailRow label="Input" value="—" />
+      <DetailRow label="Output format" value="—" />
+
+      <div>
+        <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Data attributes</div>
+        {attributes.length === 0 ? (
+          <div className="text-[11px] text-muted-foreground italic">No attributes mapped yet.</div>
+        ) : (
+          <div className="flex flex-wrap gap-1.5">
+            {attributes.map(a => (
+              <Badge key={a} variant="outline" className="text-[10px] font-normal">{a}</Badge>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function DetailRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="grid grid-cols-[140px,1fr] gap-2 items-start">
+      <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground pt-0.5">{label}</div>
+      <div className="text-[12px] text-foreground">{value}</div>
+    </div>
+  );
+}
+
+
 // ---------- Workflow icon mapping ----------
 function workflowIconFor(name: string) {
   const n = name.toLowerCase();
