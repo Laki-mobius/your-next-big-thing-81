@@ -732,7 +732,8 @@ export default function AssetRepository() {
 
 // ---------- Workflow details panel ----------
 function WorkflowDetailsPanel({ name, sources }: { name: string; sources: { sourceName: string; attributes: string[] }[] }) {
-  const attributes = Array.from(new Set(sources.flatMap(s => s.attributes))).sort();
+  const details = getWorkflowDetails(name);
+  const attributes = details?.dataAttributes ?? [];
   return (
     <div className="space-y-3">
       <div className="flex items-start justify-between gap-3 border-b border-border pb-2">
@@ -743,10 +744,10 @@ function WorkflowDetailsPanel({ name, sources }: { name: string; sources: { sour
         <Badge variant="secondary" className="text-[10px]">{sources.length} sources</Badge>
       </div>
 
-      <DetailRow label="Benchmark" value="—" />
-      <DetailRow label="Short description" value="—" />
-      <DetailRow label="Input" value="—" />
-      <DetailRow label="Output format" value="—" />
+      <DetailRow label="Benchmark" value={details?.benchmark ?? "—"} />
+      <DetailRow label="Short description" value={details?.shortDescription ?? "—"} />
+      <DetailRow label="Input" value={details?.input ?? "—"} />
+      <DetailRow label="Output format" value={details?.outputFormat ?? "—"} />
 
       <div>
         <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Data attributes</div>
@@ -763,6 +764,7 @@ function WorkflowDetailsPanel({ name, sources }: { name: string; sources: { sour
     </div>
   );
 }
+
 
 function DetailRow({ label, value }: { label: string; value: string }) {
   return (
