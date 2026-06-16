@@ -761,6 +761,8 @@ function WorkflowDetailsPanel({ name }: { name: string }) {
           </div>
         )}
       </div>
+
+      <DetailRow label="Workflow" value={details?.workflow ?? "—"} />
     </div>
   );
 }
