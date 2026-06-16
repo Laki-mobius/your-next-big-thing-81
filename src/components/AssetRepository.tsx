@@ -26,6 +26,7 @@ import { sourceCatalog, allRegions } from "@/data/source-catalog";
 import { useAssetSelection, type AssetSelection } from "@/contexts/AssetSelectionContext";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+import { getWorkflowDetails } from "@/data/workflow-details";
 
 type Tab = "sources" | "workflows";
 
