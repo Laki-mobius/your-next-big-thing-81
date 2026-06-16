@@ -743,7 +743,12 @@ const workflowDiagramImages: Record<string, string> = {
   "Sourcing Annual Report": "/workflow-previews/sourcing-annual-report.png",
   "Invoice Data Extraction": "/workflow-previews/invoice-data-extraction.png",
   "Image and Unstructured IDP": "/workflow-previews/image-and-unstructured-idp.png",
+  "Court Case Data Extraction": "/workflow-previews/court-case-data-extraction.png",
+  "eCrash Report Extraction": "/workflow-previews/ecrash-report-extraction.png",
+  "ESG Data Extraction": "/workflow-previews/esg-data-extraction.png",
+  "Insurance Document Extraction": "/workflow-previews/insurance-document-extraction.png",
 };
+
 
 function WorkflowDetailsPanel({ name }: { name: string }) {
   const details = getWorkflowDetails(name);
