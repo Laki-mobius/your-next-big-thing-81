@@ -554,64 +554,73 @@ export default function AssetRepository() {
           </div>
         ) : (
           <div>
-            {workflowGroups.length === 0 ? (
+            {workflowList.length === 0 ? (
               <div className="text-center py-10 text-[12px] text-muted-foreground">
                 No workflows match the current filters.
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-                {workflowGroups.map(([wf, items]) => {
-                  const selected = selectedWorkflows.includes(wf);
-                  const Icon = workflowIconFor(wf);
-                  return (
-                    <button
-                      key={wf}
-                      type="button"
-                      onClick={() => toggleWorkflow(wf)}
-                      className={cn(
-                        "relative flex items-start gap-3 p-3 pb-7 rounded-md border text-left transition-colors",
-                        selected
-                          ? "border-brand bg-brand text-primary-foreground"
-                          : "border-border bg-card hover:border-brand-mid/60 hover:bg-brand-light/20",
-                      )}
-                      title={`${items.length} sources`}
-                    >
-                      <div className={cn(
-                        "w-9 h-9 rounded-md border flex items-center justify-center shrink-0",
-                        selected ? "bg-primary-foreground/15 border-primary-foreground/30" : "bg-brand-light/60 border-brand-mid/40",
-                      )}>
-                        <Icon className={cn("w-4 h-4", selected ? "text-primary-foreground" : "text-brand")} />
-                      </div>
-                      <div className="flex-1 min-w-0 flex flex-col gap-0.5">
-                        <span className={cn(
-                          "text-[12px] font-semibold leading-tight",
-                          selected ? "text-primary-foreground" : "text-foreground",
-                        )}>{wf}</span>
-                      </div>
-                      <Checkbox
-                        checked={selected}
-                        onCheckedChange={() => toggleWorkflow(wf)}
-                        onClick={e => e.stopPropagation()}
-                        className={cn("mt-0.5", selected && "border-primary-foreground data-[state=checked]:bg-primary-foreground data-[state=checked]:text-brand")}
-                      />
-                      <span
-                        role="link"
-                        tabIndex={0}
-                        onClick={(e) => { e.stopPropagation(); setPreviewWorkflow(wf); }}
-                        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); e.stopPropagation(); setPreviewWorkflow(wf); } }}
-                        className={cn(
-                          "absolute bottom-1.5 right-2 text-[10px] font-normal cursor-pointer transition-opacity opacity-70 hover:opacity-100 hover:underline",
-                          selected ? "text-primary-foreground" : "text-muted-foreground",
-                        )}
-                      >
-                        Workflow Preview
-                      </span>
-                    </button>
-                  );
-                })}
+              <div className="grid grid-cols-12 gap-3">
+                {/* Left: workflow list */}
+                <div className="col-span-12 md:col-span-5 border border-border rounded-md overflow-hidden">
+                  <div className="px-3 py-2 bg-muted/30 border-b border-border text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                    Workflows ({workflowList.length})
+                  </div>
+                  <ScrollArea className="max-h-[520px]">
+                    <ul className="divide-y divide-border">
+                      {workflowList.map(([wf, items]) => {
+                        const selected = selectedWorkflows.includes(wf);
+                        const isActive = activeWorkflowDetail === wf;
+                        const Icon = workflowIconFor(wf);
+                        return (
+                          <li key={wf}>
+                            <div
+                              className={cn(
+                                "flex items-center gap-2 px-3 py-2 cursor-pointer transition-colors",
+                                isActive
+                                  ? "bg-brand-light/60"
+                                  : "hover:bg-brand-light/30",
+                              )}
+                              onClick={() => setActiveWorkflowDetail(wf)}
+                            >
+                              <Checkbox
+                                checked={selected}
+                                onCheckedChange={() => toggleWorkflow(wf)}
+                                onClick={(e) => e.stopPropagation()}
+                              />
+                              <Icon className="w-3.5 h-3.5 text-brand shrink-0" />
+                              <span className={cn(
+                                "text-[12px] flex-1 truncate",
+                                isActive ? "font-semibold text-foreground" : "text-foreground",
+                              )}>{wf}</span>
+                              <span className="text-[10px] text-muted-foreground shrink-0">{items.length} src</span>
+                              <ChevronRight className={cn("w-3.5 h-3.5 text-muted-foreground transition-transform", isActive && "text-brand")} />
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </ScrollArea>
+                </div>
+
+                {/* Right: details panel */}
+                <div className="col-span-12 md:col-span-7 border border-border rounded-md p-4 bg-card min-h-[300px]">
+                  {activeWorkflowDetail ? (
+                    <WorkflowDetailsPanel
+                      name={activeWorkflowDetail}
+                      sources={workflowList.find(([w]) => w === activeWorkflowDetail)?.[1] ?? []}
+                    />
+                  ) : (
+                    <div className="h-full flex flex-col items-center justify-center text-center text-muted-foreground gap-2 py-12">
+                      <Workflow className="w-8 h-8 opacity-40" />
+                      <div className="text-[12px]">Select a workflow to see its details</div>
+                      <div className="text-[10px]">Benchmark, description, inputs, outputs & attributes</div>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
           </div>
+
         )}
       </Card>
 
