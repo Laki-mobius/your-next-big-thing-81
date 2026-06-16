@@ -70,7 +70,9 @@ export default function AssetRepository() {
   } = useAssetSelection();
   const { toast } = useToast();
 
-  const [tab, setTab] = useState<Tab>("sources");
+  const [tab, setTab] = useState<Tab>("workflows");
+  const [activeWorkflowDetail, setActiveWorkflowDetail] = useState<string | null>(null);
+
   const [jobName, setJobName] = useState("");
   const [search, setSearch] = useState("");
   const [selectedSources, setSelectedSources] = useState<string[]>([]);
