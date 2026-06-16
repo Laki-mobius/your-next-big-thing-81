@@ -747,6 +747,10 @@ const workflowDiagramImages: Record<string, string> = {
   "eCrash Report Extraction": "/workflow-previews/ecrash-report-extraction.png",
   "ESG Data Extraction": "/workflow-previews/esg-data-extraction.png",
   "Insurance Document Extraction": "/workflow-previews/insurance-document-extraction.png",
+  "Website Validation and Addition": "/workflow-previews/website-validation-and-addition.png",
+  "KYC Verification": "/workflow-previews/kyc-verification.png",
+  "LIEN Document Processing": "/workflow-previews/lien-document-processing.png",
+  "NAR1 Form FD Extraction": "/workflow-previews/nar1-form-fd-extraction.png",
 };
 
 
