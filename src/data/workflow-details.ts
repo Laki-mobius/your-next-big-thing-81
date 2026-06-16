@@ -4,6 +4,7 @@ export interface WorkflowDetails {
   input: string;
   outputFormat: string;
   dataAttributes: string[];
+  workflow?: string;
 }
 
 const norm = (s: string) =>
