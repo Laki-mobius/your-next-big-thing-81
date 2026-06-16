@@ -349,6 +349,15 @@ export default function AssetRepository() {
           {/* Tabs */}
           <div className="inline-flex gap-1.5">
             <button
+              onClick={() => setTab("workflows")}
+              className={cn(
+                "px-3 h-8 text-[11px] font-semibold rounded-md transition-colors",
+                tab === "workflows"
+                  ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                  : "border border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground",
+              )}
+            >Workflows</button>
+            <button
               onClick={() => setTab("sources")}
               className={cn(
                 "px-3 h-8 text-[11px] font-semibold rounded-md transition-colors",
@@ -357,12 +366,7 @@ export default function AssetRepository() {
                   : "border border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground",
               )}
             >Sources</button>
-            <button
-              onClick={() => setTab("workflows")}
-              className={cn(
-                "px-3 h-8 text-[11px] font-semibold rounded-md transition-colors",
-                tab === "workflows"
-                  ? "bg-primary text-primary-foreground hover:bg-primary/90"
+
                   : "border border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground",
               )}
             >Workflows</button>
