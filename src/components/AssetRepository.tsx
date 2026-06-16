@@ -394,32 +394,34 @@ export default function AssetRepository() {
           </Popover>
 
           {/* Source type chip */}
-          <Popover>
-            <PopoverTrigger asChild>
-              <button className="inline-flex items-center gap-1.5 h-8 px-2.5 rounded-md border border-brand-mid/40 bg-brand-light/40 text-[11px] font-medium text-foreground hover:bg-brand-light/60">
-                Source: {sourceTypes.length === 0 ? "All Types" : `${sourceTypes.length} selected`}
-                {sourceTypes.length > 0
-                  ? <X className="w-3 h-3 text-muted-foreground hover:text-foreground"
-                      onClick={(e) => { e.stopPropagation(); setSourceTypes([]); }} />
-                  : <ChevronDown className="w-3 h-3 text-muted-foreground" />}
-              </button>
-            </PopoverTrigger>
-            <PopoverContent className="w-56 p-2" align="start">
-              <div className="space-y-1">
-                {allSourceTypes.map(t => (
-                  <label key={t} className="flex items-center gap-2 px-2 py-1.5 rounded text-[11px] cursor-pointer hover:bg-muted/40">
-                    <Checkbox
-                      checked={sourceTypes.includes(t)}
-                      onCheckedChange={() =>
-                        setSourceTypes(prev => prev.includes(t) ? prev.filter(x => x !== t) : [...prev, t])
-                      }
-                    />
-                    <span className="flex-1">{t}</span>
-                  </label>
-                ))}
-              </div>
-            </PopoverContent>
-          </Popover>
+          {tab === "sources" && (
+            <Popover>
+              <PopoverTrigger asChild>
+                <button className="inline-flex items-center gap-1.5 h-8 px-2.5 rounded-md border border-brand-mid/40 bg-brand-light/40 text-[11px] font-medium text-foreground hover:bg-brand-light/60">
+                  Source: {sourceTypes.length === 0 ? "All Types" : `${sourceTypes.length} selected`}
+                  {sourceTypes.length > 0
+                    ? <X className="w-3 h-3 text-muted-foreground hover:text-foreground"
+                        onClick={(e) => { e.stopPropagation(); setSourceTypes([]); }} />
+                    : <ChevronDown className="w-3 h-3 text-muted-foreground" />}
+                </button>
+              </PopoverTrigger>
+              <PopoverContent className="w-56 p-2" align="start">
+                <div className="space-y-1">
+                  {allSourceTypes.map(t => (
+                    <label key={t} className="flex items-center gap-2 px-2 py-1.5 rounded text-[11px] cursor-pointer hover:bg-muted/40">
+                      <Checkbox
+                        checked={sourceTypes.includes(t)}
+                        onCheckedChange={() =>
+                          setSourceTypes(prev => prev.includes(t) ? prev.filter(x => x !== t) : [...prev, t])
+                        }
+                      />
+                      <span className="flex-1">{t}</span>
+                    </label>
+                  ))}
+                </div>
+              </PopoverContent>
+            </Popover>
+          )}
         </div>
 
         <Button variant="outline" size="sm" className="h-8 text-[11px] gap-1.5" onClick={exportCsv}>
@@ -593,7 +595,7 @@ export default function AssetRepository() {
                                 "text-[12px] flex-1 truncate",
                                 isActive ? "font-semibold text-foreground" : "text-foreground",
                               )}>{wf}</span>
-                              <span className="text-[10px] text-muted-foreground shrink-0">{items.length} src</span>
+                              
                               <ChevronRight className={cn("w-3.5 h-3.5 text-muted-foreground transition-transform", isActive && "text-brand")} />
                             </div>
                           </li>
@@ -608,7 +610,6 @@ export default function AssetRepository() {
                   {activeWorkflowDetail ? (
                     <WorkflowDetailsPanel
                       name={activeWorkflowDetail}
-                      sources={workflowList.find(([w]) => w === activeWorkflowDetail)?.[1] ?? []}
                     />
                   ) : (
                     <div className="h-full flex flex-col items-center justify-center text-center text-muted-foreground gap-2 py-12">
@@ -731,7 +732,7 @@ export default function AssetRepository() {
 }
 
 // ---------- Workflow details panel ----------
-function WorkflowDetailsPanel({ name, sources }: { name: string; sources: { sourceName: string; attributes: string[] }[] }) {
+function WorkflowDetailsPanel({ name }: { name: string }) {
   const details = getWorkflowDetails(name);
   const attributes = details?.dataAttributes ?? [];
   return (
@@ -741,7 +742,6 @@ function WorkflowDetailsPanel({ name, sources }: { name: string; sources: { sour
           <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Workflow</div>
           <h3 className="text-[15px] font-bold text-foreground">{name}</h3>
         </div>
-        <Badge variant="secondary" className="text-[10px]">{sources.length} sources</Badge>
       </div>
 
       <DetailRow label="Benchmark" value={details?.benchmark ?? "—"} />
