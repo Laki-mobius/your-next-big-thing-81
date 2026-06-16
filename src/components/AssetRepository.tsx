@@ -107,19 +107,35 @@ export default function AssetRepository() {
     () => Array.from(new Set(sourceCatalog.map(s => s.sourceType))).sort(),
     [],
   );
+  const EXTRA_WORKFLOWS = [
+    "NAR1 Form FD Extraction",
+    "ESG Data Extraction",
+    "Website Validation and Addition",
+    "LIEN Document Processing",
+    "KYC Verification",
+    "Insurance Document Extraction",
+    "Court Case Data Extraction",
+  ];
   const allWorkflows = useMemo(() => {
     const set = new Set<string>();
     sourceCatalog.forEach(s => s.workflows.forEach(w => set.add(w)));
+    EXTRA_WORKFLOWS.forEach(w => set.add(w));
     return Array.from(set).sort();
   }, []);
   const allCountries = useMemo(
     () => Array.from(new Set(sourceCatalog.map(s => s.country).filter(Boolean))).sort(),
     [],
   );
+  const totalAttributesCount = useMemo(() => {
+    const set = new Set<string>();
+    sourceCatalog.forEach(s => s.attributes.forEach(a => set.add(a)));
+    return set.size;
+  }, []);
 
   const totalAssets = sourceCatalog.length;
   const activeWorkflowsCount = allWorkflows.length;
   const globalCoverage = allCountries.length;
+
 
   // ---------- Filter pipeline ----------
   const filteredSources = useMemo(() => {
