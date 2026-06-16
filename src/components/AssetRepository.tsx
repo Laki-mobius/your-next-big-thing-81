@@ -595,7 +595,7 @@ export default function AssetRepository() {
                                 "text-[12px] flex-1 truncate",
                                 isActive ? "font-semibold text-foreground" : "text-foreground",
                               )}>{wf}</span>
-                              <span className="text-[10px] text-muted-foreground shrink-0">{items.length} src</span>
+                              
                               <ChevronRight className={cn("w-3.5 h-3.5 text-muted-foreground transition-transform", isActive && "text-brand")} />
                             </div>
                           </li>
@@ -610,7 +610,6 @@ export default function AssetRepository() {
                   {activeWorkflowDetail ? (
                     <WorkflowDetailsPanel
                       name={activeWorkflowDetail}
-                      sources={workflowList.find(([w]) => w === activeWorkflowDetail)?.[1] ?? []}
                     />
                   ) : (
                     <div className="h-full flex flex-col items-center justify-center text-center text-muted-foreground gap-2 py-12">
@@ -733,7 +732,7 @@ export default function AssetRepository() {
 }
 
 // ---------- Workflow details panel ----------
-function WorkflowDetailsPanel({ name, sources }: { name: string; sources: { sourceName: string; attributes: string[] }[] }) {
+function WorkflowDetailsPanel({ name }: { name: string }) {
   const details = getWorkflowDetails(name);
   const attributes = details?.dataAttributes ?? [];
   return (
@@ -743,7 +742,6 @@ function WorkflowDetailsPanel({ name, sources }: { name: string; sources: { sour
           <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Workflow</div>
           <h3 className="text-[15px] font-bold text-foreground">{name}</h3>
         </div>
-        <Badge variant="secondary" className="text-[10px]">{sources.length} sources</Badge>
       </div>
 
       <DetailRow label="Benchmark" value={details?.benchmark ?? "—"} />
