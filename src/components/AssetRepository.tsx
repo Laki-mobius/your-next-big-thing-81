@@ -70,7 +70,9 @@ export default function AssetRepository() {
   } = useAssetSelection();
   const { toast } = useToast();
 
-  const [tab, setTab] = useState<Tab>("sources");
+  const [tab, setTab] = useState<Tab>("workflows");
+  const [activeWorkflowDetail, setActiveWorkflowDetail] = useState<string | null>(null);
+
   const [jobName, setJobName] = useState("");
   const [search, setSearch] = useState("");
   const [selectedSources, setSelectedSources] = useState<string[]>([]);
@@ -107,19 +109,35 @@ export default function AssetRepository() {
     () => Array.from(new Set(sourceCatalog.map(s => s.sourceType))).sort(),
     [],
   );
+  const EXTRA_WORKFLOWS = [
+    "NAR1 Form FD Extraction",
+    "ESG Data Extraction",
+    "Website Validation and Addition",
+    "LIEN Document Processing",
+    "KYC Verification",
+    "Insurance Document Extraction",
+    "Court Case Data Extraction",
+  ];
   const allWorkflows = useMemo(() => {
     const set = new Set<string>();
     sourceCatalog.forEach(s => s.workflows.forEach(w => set.add(w)));
+    EXTRA_WORKFLOWS.forEach(w => set.add(w));
     return Array.from(set).sort();
   }, []);
   const allCountries = useMemo(
     () => Array.from(new Set(sourceCatalog.map(s => s.country).filter(Boolean))).sort(),
     [],
   );
+  const totalAttributesCount = useMemo(() => {
+    const set = new Set<string>();
+    sourceCatalog.forEach(s => s.attributes.forEach(a => set.add(a)));
+    return set.size;
+  }, []);
 
   const totalAssets = sourceCatalog.length;
   const activeWorkflowsCount = allWorkflows.length;
   const globalCoverage = allCountries.length;
+
 
   // ---------- Filter pipeline ----------
   const filteredSources = useMemo(() => {
@@ -149,19 +167,23 @@ export default function AssetRepository() {
     return Array.from(map.entries()).sort((a, b) => a[0].localeCompare(b[0]));
   }, [filteredSources]);
 
-  // ---------- Workflows tab groups ----------
-  const workflowGroups = useMemo(() => {
+  // ---------- Workflows tab list ----------
+  const workflowList = useMemo(() => {
     const map = new Map<string, typeof sourceCatalog>();
+    allWorkflows.forEach(w => map.set(w, []));
     filteredSources.forEach(s => {
       s.workflows.forEach(w => {
-        if (search && !w.toLowerCase().includes(search.toLowerCase()) &&
-            !s.sourceName.toLowerCase().includes(search.toLowerCase())) return;
         if (!map.has(w)) map.set(w, []);
         map.get(w)!.push(s);
       });
     });
-    return Array.from(map.entries()).sort((a, b) => a[0].localeCompare(b[0]));
-  }, [filteredSources, search]);
+    const entries = Array.from(map.entries());
+    const filtered = search
+      ? entries.filter(([w]) => w.toLowerCase().includes(search.toLowerCase()))
+      : entries;
+    return filtered.sort((a, b) => a[0].localeCompare(b[0]));
+  }, [allWorkflows, filteredSources, search]);
+
 
   // ---------- Selection helpers ----------
   const allFilteredNames = useMemo(() => filteredSources.map(s => s.sourceName), [filteredSources]);
@@ -286,21 +308,24 @@ export default function AssetRepository() {
     <div className="space-y-3">
       {/* Header */}
       <div className="border-l-[3px] border-primary pl-4">
-        <h1 className="text-[18px] font-bold text-foreground">Asset Repository</h1>
+        <h1 className="text-[18px] font-bold text-foreground">Solution Library</h1>
         <p className="text-[12px] text-muted-foreground mt-0.5">
           Browse verified data sources and workflows. Build a job by selecting assets and saving it for execution.
         </p>
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-4 gap-3">
         <StatCard label="Total Assets" value={`${totalAssets}+`} sub="Verified global data sources"
           icon={Archive} trend="+12%" />
         <StatCard label="Active Workflows" value={String(activeWorkflowsCount)} sub="Optimized ingestion pipelines"
           icon={Workflow} />
+        <StatCard label="Data Attributes" value={String(totalAttributesCount)} sub="Unique attributes across sources"
+          icon={Database} />
         <StatCard label="Global Coverage" value={`${globalCoverage}+`} sub="Countries across 6 continents"
           icon={Globe} />
       </div>
+
 
       {/* Asset Name row */}
       <Card className="p-3 flex items-center gap-3">
@@ -324,15 +349,6 @@ export default function AssetRepository() {
           {/* Tabs */}
           <div className="inline-flex gap-1.5">
             <button
-              onClick={() => setTab("sources")}
-              className={cn(
-                "px-3 h-8 text-[11px] font-semibold rounded-md transition-colors",
-                tab === "sources"
-                  ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                  : "border border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground",
-              )}
-            >Sources</button>
-            <button
               onClick={() => setTab("workflows")}
               className={cn(
                 "px-3 h-8 text-[11px] font-semibold rounded-md transition-colors",
@@ -341,6 +357,16 @@ export default function AssetRepository() {
                   : "border border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground",
               )}
             >Workflows</button>
+            <button
+              onClick={() => setTab("sources")}
+              className={cn(
+                "px-3 h-8 text-[11px] font-semibold rounded-md transition-colors",
+                tab === "sources"
+                  ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                  : "border border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground",
+              )}
+            >Sources</button>
+
           </div>
 
           <div className="w-px h-6 bg-border" />
@@ -528,64 +554,73 @@ export default function AssetRepository() {
           </div>
         ) : (
           <div>
-            {workflowGroups.length === 0 ? (
+            {workflowList.length === 0 ? (
               <div className="text-center py-10 text-[12px] text-muted-foreground">
                 No workflows match the current filters.
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-                {workflowGroups.map(([wf, items]) => {
-                  const selected = selectedWorkflows.includes(wf);
-                  const Icon = workflowIconFor(wf);
-                  return (
-                    <button
-                      key={wf}
-                      type="button"
-                      onClick={() => toggleWorkflow(wf)}
-                      className={cn(
-                        "relative flex items-start gap-3 p-3 pb-7 rounded-md border text-left transition-colors",
-                        selected
-                          ? "border-brand bg-brand text-primary-foreground"
-                          : "border-border bg-card hover:border-brand-mid/60 hover:bg-brand-light/20",
-                      )}
-                      title={`${items.length} sources`}
-                    >
-                      <div className={cn(
-                        "w-9 h-9 rounded-md border flex items-center justify-center shrink-0",
-                        selected ? "bg-primary-foreground/15 border-primary-foreground/30" : "bg-brand-light/60 border-brand-mid/40",
-                      )}>
-                        <Icon className={cn("w-4 h-4", selected ? "text-primary-foreground" : "text-brand")} />
-                      </div>
-                      <div className="flex-1 min-w-0 flex flex-col gap-0.5">
-                        <span className={cn(
-                          "text-[12px] font-semibold leading-tight",
-                          selected ? "text-primary-foreground" : "text-foreground",
-                        )}>{wf}</span>
-                      </div>
-                      <Checkbox
-                        checked={selected}
-                        onCheckedChange={() => toggleWorkflow(wf)}
-                        onClick={e => e.stopPropagation()}
-                        className={cn("mt-0.5", selected && "border-primary-foreground data-[state=checked]:bg-primary-foreground data-[state=checked]:text-brand")}
-                      />
-                      <span
-                        role="link"
-                        tabIndex={0}
-                        onClick={(e) => { e.stopPropagation(); setPreviewWorkflow(wf); }}
-                        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); e.stopPropagation(); setPreviewWorkflow(wf); } }}
-                        className={cn(
-                          "absolute bottom-1.5 right-2 text-[10px] font-normal cursor-pointer transition-opacity opacity-70 hover:opacity-100 hover:underline",
-                          selected ? "text-primary-foreground" : "text-muted-foreground",
-                        )}
-                      >
-                        Workflow Preview
-                      </span>
-                    </button>
-                  );
-                })}
+              <div className="grid grid-cols-12 gap-3">
+                {/* Left: workflow list */}
+                <div className="col-span-12 md:col-span-5 border border-border rounded-md overflow-hidden">
+                  <div className="px-3 py-2 bg-muted/30 border-b border-border text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                    Workflows ({workflowList.length})
+                  </div>
+                  <ScrollArea className="max-h-[520px]">
+                    <ul className="divide-y divide-border">
+                      {workflowList.map(([wf, items]) => {
+                        const selected = selectedWorkflows.includes(wf);
+                        const isActive = activeWorkflowDetail === wf;
+                        const Icon = workflowIconFor(wf);
+                        return (
+                          <li key={wf}>
+                            <div
+                              className={cn(
+                                "flex items-center gap-2 px-3 py-2 cursor-pointer transition-colors",
+                                isActive
+                                  ? "bg-brand-light/60"
+                                  : "hover:bg-brand-light/30",
+                              )}
+                              onClick={() => setActiveWorkflowDetail(wf)}
+                            >
+                              <Checkbox
+                                checked={selected}
+                                onCheckedChange={() => toggleWorkflow(wf)}
+                                onClick={(e) => e.stopPropagation()}
+                              />
+                              <Icon className="w-3.5 h-3.5 text-brand shrink-0" />
+                              <span className={cn(
+                                "text-[12px] flex-1 truncate",
+                                isActive ? "font-semibold text-foreground" : "text-foreground",
+                              )}>{wf}</span>
+                              <span className="text-[10px] text-muted-foreground shrink-0">{items.length} src</span>
+                              <ChevronRight className={cn("w-3.5 h-3.5 text-muted-foreground transition-transform", isActive && "text-brand")} />
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </ScrollArea>
+                </div>
+
+                {/* Right: details panel */}
+                <div className="col-span-12 md:col-span-7 border border-border rounded-md p-4 bg-card min-h-[300px]">
+                  {activeWorkflowDetail ? (
+                    <WorkflowDetailsPanel
+                      name={activeWorkflowDetail}
+                      sources={workflowList.find(([w]) => w === activeWorkflowDetail)?.[1] ?? []}
+                    />
+                  ) : (
+                    <div className="h-full flex flex-col items-center justify-center text-center text-muted-foreground gap-2 py-12">
+                      <Workflow className="w-8 h-8 opacity-40" />
+                      <div className="text-[12px]">Select a workflow to see its details</div>
+                      <div className="text-[10px]">Benchmark, description, inputs, outputs & attributes</div>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
           </div>
+
         )}
       </Card>
 
@@ -693,6 +728,50 @@ export default function AssetRepository() {
     </div>
   );
 }
+
+// ---------- Workflow details panel ----------
+function WorkflowDetailsPanel({ name, sources }: { name: string; sources: { sourceName: string; attributes: string[] }[] }) {
+  const attributes = Array.from(new Set(sources.flatMap(s => s.attributes))).sort();
+  return (
+    <div className="space-y-3">
+      <div className="flex items-start justify-between gap-3 border-b border-border pb-2">
+        <div>
+          <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Workflow</div>
+          <h3 className="text-[15px] font-bold text-foreground">{name}</h3>
+        </div>
+        <Badge variant="secondary" className="text-[10px]">{sources.length} sources</Badge>
+      </div>
+
+      <DetailRow label="Benchmark" value="—" />
+      <DetailRow label="Short description" value="—" />
+      <DetailRow label="Input" value="—" />
+      <DetailRow label="Output format" value="—" />
+
+      <div>
+        <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Data attributes</div>
+        {attributes.length === 0 ? (
+          <div className="text-[11px] text-muted-foreground italic">No attributes mapped yet.</div>
+        ) : (
+          <div className="flex flex-wrap gap-1.5">
+            {attributes.map(a => (
+              <Badge key={a} variant="outline" className="text-[10px] font-normal">{a}</Badge>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function DetailRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="grid grid-cols-[140px,1fr] gap-2 items-start">
+      <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground pt-0.5">{label}</div>
+      <div className="text-[12px] text-foreground">{value}</div>
+    </div>
+  );
+}
+
 
 // ---------- Workflow icon mapping ----------
 function workflowIconFor(name: string) {
