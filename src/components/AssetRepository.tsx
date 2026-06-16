@@ -732,9 +732,23 @@ export default function AssetRepository() {
 }
 
 // ---------- Workflow details panel ----------
+const workflowDiagramImages: Record<string, string> = {
+  "Company Data Enrichment": "/workflow-previews/company-data-enrichment.png",
+  "UK Company Data Extraction": "/workflow-previews/company-data-enrichment.png",
+  "US Company Data Extraction": "/workflow-previews/company-data-enrichment.png",
+  "UK Company Register Data Extraction": "/workflow-previews/uk-company-register-data-extraction.png",
+  "Annual Report Key Data Extraction": "/workflow-previews/annual-report-key-financial-data.png",
+  "Annual Report Key Financial Data": "/workflow-previews/annual-report-key-financial-data.png",
+  "Sourcing Annual Reports": "/workflow-previews/sourcing-annual-report.png",
+  "Sourcing Annual Report": "/workflow-previews/sourcing-annual-report.png",
+  "Invoice Data Extraction": "/workflow-previews/invoice-data-extraction.png",
+  "Image and Unstructured IDP": "/workflow-previews/image-and-unstructured-idp.png",
+};
+
 function WorkflowDetailsPanel({ name }: { name: string }) {
   const details = getWorkflowDetails(name);
   const attributes = details?.dataAttributes ?? [];
+  const diagram = workflowDiagramImages[name];
   return (
     <div className="space-y-3">
       <div className="flex items-start justify-between gap-3 border-b border-border pb-2">
@@ -762,10 +776,20 @@ function WorkflowDetailsPanel({ name }: { name: string }) {
         )}
       </div>
 
-      <DetailRow label="Workflow" value={details?.workflow ?? "—"} />
+      <div>
+        <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Workflow</div>
+        {diagram ? (
+          <div className="rounded-md border border-border bg-muted/30 p-2">
+            <img src={diagram} alt={`${name} workflow diagram`} className="w-full h-auto rounded" />
+          </div>
+        ) : (
+          <div className="text-[11px] text-muted-foreground italic">No workflow diagram available yet.</div>
+        )}
+      </div>
     </div>
   );
 }
+
 
 
 function DetailRow({ label, value }: { label: string; value: string }) {
