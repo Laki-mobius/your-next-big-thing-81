@@ -293,14 +293,17 @@ export default function AssetRepository() {
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-4 gap-3">
         <StatCard label="Total Assets" value={`${totalAssets}+`} sub="Verified global data sources"
           icon={Archive} trend="+12%" />
         <StatCard label="Active Workflows" value={String(activeWorkflowsCount)} sub="Optimized ingestion pipelines"
           icon={Workflow} />
+        <StatCard label="Data Attributes" value={String(totalAttributesCount)} sub="Unique attributes across sources"
+          icon={Database} />
         <StatCard label="Global Coverage" value={`${globalCoverage}+`} sub="Countries across 6 continents"
           icon={Globe} />
       </div>
+
 
       {/* Asset Name row */}
       <Card className="p-3 flex items-center gap-3">
