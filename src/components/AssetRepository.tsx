@@ -165,19 +165,23 @@ export default function AssetRepository() {
     return Array.from(map.entries()).sort((a, b) => a[0].localeCompare(b[0]));
   }, [filteredSources]);
 
-  // ---------- Workflows tab groups ----------
-  const workflowGroups = useMemo(() => {
+  // ---------- Workflows tab list ----------
+  const workflowList = useMemo(() => {
     const map = new Map<string, typeof sourceCatalog>();
+    allWorkflows.forEach(w => map.set(w, []));
     filteredSources.forEach(s => {
       s.workflows.forEach(w => {
-        if (search && !w.toLowerCase().includes(search.toLowerCase()) &&
-            !s.sourceName.toLowerCase().includes(search.toLowerCase())) return;
         if (!map.has(w)) map.set(w, []);
         map.get(w)!.push(s);
       });
     });
-    return Array.from(map.entries()).sort((a, b) => a[0].localeCompare(b[0]));
-  }, [filteredSources, search]);
+    const entries = Array.from(map.entries());
+    const filtered = search
+      ? entries.filter(([w]) => w.toLowerCase().includes(search.toLowerCase()))
+      : entries;
+    return filtered.sort((a, b) => a[0].localeCompare(b[0]));
+  }, [allWorkflows, filteredSources, search]);
+
 
   // ---------- Selection helpers ----------
   const allFilteredNames = useMemo(() => filteredSources.map(s => s.sourceName), [filteredSources]);
