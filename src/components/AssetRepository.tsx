@@ -26,7 +26,7 @@ import { sourceCatalog, allRegions } from "@/data/source-catalog";
 import { useAssetSelection, type AssetSelection } from "@/contexts/AssetSelectionContext";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
-import { getWorkflowDetails } from "@/data/workflow-details";
+import { getWorkflowDetails, getAllWorkflowAttributeNames } from "@/data/workflow-details";
 
 type Tab = "sources" | "workflows";
 
@@ -132,6 +132,7 @@ export default function AssetRepository() {
   const totalAttributesCount = useMemo(() => {
     const set = new Set<string>();
     sourceCatalog.forEach(s => s.attributes.forEach(a => set.add(a)));
+    getAllWorkflowAttributeNames().forEach(a => set.add(a));
     return set.size;
   }, []);
 
@@ -775,7 +776,11 @@ function WorkflowDetailsPanel({ name }: { name: string }) {
       <div>
         <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Data attributes</div>
         {attributes.length === 0 ? (
-          <div className="text-[11px] text-muted-foreground italic">No attributes mapped yet.</div>
+          name === "ESG Data Extraction" ? (
+            <div className="text-[11px] text-brand font-medium">1,500+ data attributes</div>
+          ) : (
+            <div className="text-[11px] text-muted-foreground italic">No attributes mapped yet.</div>
+          )
         ) : (
           <div className="flex flex-wrap gap-1.5">
             {attributes.map(a => (
