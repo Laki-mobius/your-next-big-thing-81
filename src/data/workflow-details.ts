@@ -18,8 +18,12 @@ const RAW: Record<string, WorkflowDetails> = {
     outputFormat: "JSON, CSV",
     dataAttributes: [
       "Company Name (text)", "Fiscal Year (num)", "Revenue (currency)",
-      "EBITDA (currency)", "Net Income (currency)", "Total Assets (currency)",
-      "Total Liabilities (currency)", "Employee Count (num)", "Auditor Name (text)",
+      "Gross Profit (currency)", "Operating Income (currency)", "EBITDA (currency)",
+      "Net Income (currency)", "Earnings Per Share (currency)", "Dividends Per Share (currency)",
+      "Operating Cash Flow (currency)", "Capital Expenditure (currency)", "Total Assets (currency)",
+      "Total Liabilities (currency)", "Total Equity (currency)", "Report Currency (text)",
+      "Employee Count (num)", "Auditor Name (text)", "CEO Name (text)", "CFO Name (text)",
+      "Headquarters Country (text)", "Stock Exchange (text)", "Ticker Symbol (text)",
     ],
   },
   "Company Data Enrichment": {
@@ -46,7 +50,10 @@ const RAW: Record<string, WorkflowDetails> = {
     dataAttributes: [
       "Document Title (text)", "Document Type (text)", "Extracted Text (long text)",
       "Person Name (text - multi value)", "Organization Name (text - multi value)",
-      "Date (date)", "Address (text - multi value)",
+      "Date (date)", "Address (text - multi value)", "Email Address (text - multi value)",
+      "Phone Number (text - multi value)", "URL (url - multi value)", "Reference Number (text - multi value)",
+      "Currency Amount (currency - multi value)", "Language (text)", "Page Count (num)",
+      "Confidence Score (percentage)", "Source File Name (text)",
     ],
   },
   "Invoice Data Extraction": {
@@ -55,9 +62,13 @@ const RAW: Record<string, WorkflowDetails> = {
     input: "Invoice PDF/Image",
     outputFormat: "JSON, CSV",
     dataAttributes: [
-      "Invoice Number (text)", "Invoice Date (date)", "Vendor Name (text)",
-      "Customer Name (text)", "Currency (text)", "Tax Amount (currency)",
-      "Total Amount (currency)",
+      "Invoice Number (text)", "Invoice Date (date)", "Due Date (date)",
+      "PO Number (text)", "Vendor Name (text)", "Vendor Address (text)",
+      "Vendor Tax ID (text)", "Customer Name (text)", "Customer Address (text)",
+      "Currency (text)", "Subtotal Amount (currency)", "Discount Amount (currency)",
+      "Tax Amount (currency)", "Tax Rate (percentage)", "Total Amount (currency)",
+      "Payment Terms (text)", "Bank Account / IBAN (text)", "Line Items (text - multi value)",
+      "Payment Status (text)",
     ],
   },
   "Sourcing Annual Reports": {
@@ -66,7 +77,10 @@ const RAW: Record<string, WorkflowDetails> = {
     input: "Company Name, Website",
     outputFormat: "JSON, CSV",
     dataAttributes: [
-      "Company Name (text)", "Annual Report url (url)", "Report Year (num)", "Source url (url)",
+      "Company Name (text)", "Company Website (url)", "Annual Report URL (url)",
+      "IR Page URL (url)", "Source URL (url)", "Report Year (num)",
+      "Publication Date (date)", "Report Language (text)", "Report Format (text)",
+      "File Size (text)", "Validation Status (text)", "Confidence Score (percentage)",
     ],
   },
   "UK Company Data Extraction": {
@@ -88,12 +102,16 @@ const RAW: Record<string, WorkflowDetails> = {
   "UK Company Registry Data Extraction": {
     benchmark: "Coverage: 90%, Accuracy: 95%, Runtime (per record): Avg. 10 sec",
     shortDescription: "Extract company registry information from UK filings.",
-    input: "Company Number, Registry URL",
+    input: "Registry URL",
     outputFormat: "JSON, CSV",
     dataAttributes: [
-      "Company Name (text)", "Company Number (text)", "Company Status (text)",
-      "Incorporation Date (date)", "Registered Office Address (text)",
-      "Director Name (text - multi value)",
+      "Company Name (text)", "Company Number (text)", "Company Type (text)",
+      "Company Status (text)", "Incorporation Date (date)", "Dissolved Date (date)",
+      "Previous Company Name (text - multi value)", "Registered Office Address (text)",
+      "Jurisdiction (text)", "SIC Code (text - multi value)", "Nature of Business (text)",
+      "Director Name (text - multi value)", "Shareholder Name (text - multi value)",
+      "PSC Name (text - multi value)", "Last Accounts Date (date)", "Next Accounts Due Date (date)",
+      "Last Confirmation Statement Date (date)",
     ],
   },
   "US Company Data Extraction": {
@@ -118,8 +136,11 @@ const RAW: Record<string, WorkflowDetails> = {
     input: "NAR1 Form PDF",
     outputFormat: "JSON, CSV",
     dataAttributes: [
-      "Company Name (text)", "Registration Number (text)", "Filing Date (date)",
-      "Director Name (text - multi value)", "Registered Address (text)",
+      "Company Name (text)", "Company Type (text)", "Country of Incorporation (text)",
+      "Nature of Business (text)", "Registration Number (text)", "Filing Date (date)",
+      "Financial Year End (date)", "Registered Address (text)", "Director Name (text - multi value)",
+      "Secretary Name (text - multi value)", "Shareholder Name (text - multi value)",
+      "Signatory Name (text)", "Share Capital (currency)", "Number of Shares (num)",
     ],
   },
   "ESG Data Extraction": {
@@ -135,8 +156,11 @@ const RAW: Record<string, WorkflowDetails> = {
     input: "Company Name, Address",
     outputFormat: "JSON, CSV",
     dataAttributes: [
-      "Company Name (text)", "Website url (url)", "Validation Status (text)",
-      "Confidence Score (percentage)",
+      "Company Name (text)", "Website URL (url)", "Domain Name (text)",
+      "Domain Registration Date (date)", "Domain Expiry Date (date)", "SSL Certificate Status (text)",
+      "Website Status (text)", "Company Email (text)", "Phone Number (text)",
+      "Social Media URLs (url - multi value)", "Website Language (text)", "Country (text)",
+      "Validation Status (text)", "Confidence Score (percentage)", "Validation Notes (text)",
     ],
   },
   "LIEN Document Processing": {
@@ -145,8 +169,12 @@ const RAW: Record<string, WorkflowDetails> = {
     input: "Lien Document PDF/Image",
     outputFormat: "JSON, CSV",
     dataAttributes: [
-      "Debtor Name (text)", "Creditor Name (text)", "Document Number (text)",
-      "Filing Date (date)", "Amount (currency)",
+      "Document Number (text)", "Lien Type (text)", "Lien Status (text)",
+      "Debtor Name (text)", "Debtor Address (text)", "Creditor Name (text)",
+      "Creditor Address (text)", "Filing Date (date)", "Expiry Date (date)",
+      "Release Date (date)", "Amount (currency)", "Interest Rate (percentage)",
+      "Property Description (text)", "Property Address (text)", "Jurisdiction (text)",
+      "Recording Office (text)",
     ],
   },
   "KYC Verification": {
@@ -155,8 +183,12 @@ const RAW: Record<string, WorkflowDetails> = {
     input: "ID Proof, Utility Bill, KYC Documents",
     outputFormat: "JSON, CSV",
     dataAttributes: [
-      "Full Name (text)", "Date of Birth (date)", "Address (text)",
-      "ID Number (text)", "Document Type (text)",
+      "Full Name (text)", "Date of Birth (date)", "Place of Birth (text)",
+      "Gender (text)", "Nationality (text)", "Address (text)", "ID Number (text)",
+      "Document Type (text)", "Issue Date (date)", "Expiry Date (date)",
+      "Issuing Authority (text)", "Issuing Country (text)", "MRZ Code (text)",
+      "Email Address (text)", "Phone Number (text)", "Tax ID / PAN (text)",
+      "Verification Status (text)",
     ],
   },
   "Insurance Document Extraction": {
@@ -165,8 +197,12 @@ const RAW: Record<string, WorkflowDetails> = {
     input: "Insurance Policy, Claim Form",
     outputFormat: "JSON, CSV",
     dataAttributes: [
-      "Policy Number (text)", "Insured Name (text)", "Effective Date (date)",
-      "Expiry Date (date)", "Claim Number (text)",
+      "Policy Number (text)", "Policy Type (text)", "Insured Name (text)",
+      "Insured DOB (date)", "Insured Address (text)", "Insurer Name (text)",
+      "Agent Name (text)", "Beneficiary Name (text)", "Effective Date (date)",
+      "Expiry Date (date)", "Premium Amount (currency)", "Coverage Amount (currency)",
+      "Deductible Amount (currency)", "Claim Number (text)", "Claim Date (date)",
+      "Claim Amount (currency)", "Claim Status (text)", "Vehicle / Property Description (text)",
     ],
   },
   "Court Case Data Extraction": {
@@ -175,8 +211,13 @@ const RAW: Record<string, WorkflowDetails> = {
     input: "Court Document PDF/HTML",
     outputFormat: "JSON, CSV",
     dataAttributes: [
-      "Case Number (text)", "Court Name (text)", "Filing Date (date)",
-      "Plaintiff Name (text)", "Defendant Name (text)", "Case Status (text)",
+      "Case Number", "Case Type", "Case Filed Date", "Case Status",
+      "Date Range Number", "Defendant", "Plaintiff (text)", "Attorney for Defendant (text)",
+      "Attorney for Plaintiff (text)", "Presiding Judge (text)", "Court Name (text)",
+      "Jurisdiction (text)", "Count Number", "Offense Date", "Charge",
+      "Statute Number", "Degree", "Hearing Date (date)", "Next Hearing Date (date)",
+      "Disposition", "Disposition Date", "Verdict (text)", "Sentence (text)",
+      "Fine Amount (currency)",
     ],
   },
 };
