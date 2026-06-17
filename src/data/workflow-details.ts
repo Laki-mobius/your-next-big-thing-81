@@ -18,8 +18,12 @@ const RAW: Record<string, WorkflowDetails> = {
     outputFormat: "JSON, CSV",
     dataAttributes: [
       "Company Name (text)", "Fiscal Year (num)", "Revenue (currency)",
-      "EBITDA (currency)", "Net Income (currency)", "Total Assets (currency)",
-      "Total Liabilities (currency)", "Employee Count (num)", "Auditor Name (text)",
+      "Gross Profit (currency)", "Operating Income (currency)", "EBITDA (currency)",
+      "Net Income (currency)", "Earnings Per Share (currency)", "Dividends Per Share (currency)",
+      "Operating Cash Flow (currency)", "Capital Expenditure (currency)", "Total Assets (currency)",
+      "Total Liabilities (currency)", "Total Equity (currency)", "Report Currency (text)",
+      "Employee Count (num)", "Auditor Name (text)", "CEO Name (text)", "CFO Name (text)",
+      "Headquarters Country (text)", "Stock Exchange (text)", "Ticker Symbol (text)",
     ],
   },
   "Company Data Enrichment": {
