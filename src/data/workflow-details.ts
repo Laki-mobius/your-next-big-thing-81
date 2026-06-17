@@ -239,3 +239,14 @@ Object.entries(ALIASES).forEach(([alias, canonical]) => {
 export function getWorkflowDetails(name: string): WorkflowDetails | undefined {
   return INDEX.get(norm(name));
 }
+
+export function getAllWorkflowAttributeNames(): string[] {
+  const set = new Set<string>();
+  Object.values(RAW).forEach(wf => {
+    wf.dataAttributes.forEach(attr => {
+      const clean = attr.replace(/\s*\([^)]+\)\s*(?:-\s*multi\s+value)?\s*$/, "").trim();
+      if (clean) set.add(clean);
+    });
+  });
+  return Array.from(set);
+}
