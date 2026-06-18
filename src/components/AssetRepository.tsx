@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import {
   Archive, Workflow, Globe, Save, Filter as FilterIcon, Download, Search,
-  ExternalLink, X, TrendingUp, ChevronDown, ChevronRight, Check,
+  ExternalLink, X, ChevronDown, ChevronRight, Check,
   Bookmark, Pencil, Trash2, MapPin, PlusCircle, ArrowLeftRight, ShieldCheck,
   RefreshCw, GitMerge, FileText, Database, BarChart3, Briefcase, Users, Building2,
 } from "lucide-react";
@@ -44,23 +44,26 @@ function StatCard({
   trend?: string;
 }) {
   return (
-    <Card className="p-4 bg-brand-light/40 border-brand-mid/30">
+    <div className="bg-card border border-border rounded-lg p-3.5 cursor-default transition-all duration-150 hover:bg-brand-light hover:border-brand-mid hover:shadow-[0_2px_10px_rgba(26,122,74,0.07)] hover:-translate-y-px">
       <div className="flex items-start justify-between mb-2">
-        <span className="text-[10px] font-semibold tracking-wider text-muted-foreground uppercase">{label}</span>
-        <div className="w-7 h-7 rounded-md bg-card border border-brand-mid/40 flex items-center justify-center">
-          <Icon className="w-3.5 h-3.5 text-brand" />
+        <div className="text-sm font-normal text-foreground leading-tight">{label}</div>
+        <div className="text-muted-foreground shrink-0 opacity-55">
+          <Icon className="w-[18px] h-[18px]" />
         </div>
       </div>
-      <div className="flex items-baseline gap-2">
-        <span className="text-[28px] font-bold leading-none text-foreground">{value}</span>
+      <div className="flex items-baseline gap-2 mb-1.5">
+        <div className="text-[28px] font-normal text-foreground tracking-[-1.5px] leading-none">{value}</div>
         {trend && (
-          <span className="flex items-center gap-0.5 text-[10px] font-semibold text-brand">
-            <TrendingUp className="w-2.5 h-2.5" /> {trend}
-          </span>
+          <div className="text-[13px] text-brand font-medium flex items-center gap-0.5 whitespace-nowrap">
+            <svg viewBox="0 0 10 10" fill="none" className="w-[11px] h-[11px]">
+              <path d="M5 8V2M2 5l3-3 3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+            {trend}
+          </div>
         )}
       </div>
-      <div className="text-[11px] text-muted-foreground mt-1.5">{sub}</div>
-    </Card>
+      <div className="text-xs text-muted-foreground">{sub}</div>
+    </div>
   );
 }
 
