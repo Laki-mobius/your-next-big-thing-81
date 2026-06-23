@@ -42,6 +42,21 @@ const RAW: Record<string, WorkflowDetails> = {
       "Instagram url (url)", "YouTube url (url)",
     ],
   },
+  "Company Data Extraction – Labor Market": {
+    benchmark: "Coverage: 80%, Accuracy: 90%, Runtime (per record): Avg. 15 sec",
+    shortDescription: "Extract labor market and workforce intelligence including headcount trends, hiring patterns, attrition, and compensation benchmarks.",
+    input: "Company Name, Website",
+    outputFormat: "JSON, CSV",
+    dataAttributes: [
+      "Industry (text)", "Company Headcount (num)", "Company Name (text)",
+      "Hiring Rate (percentage)", "Attrition Rate (percentage)", "Growth Rate (percentage)",
+      "Job postings (num - multi value)", "Sentiment (text)", "Founders (text - multi value)",
+      "Average Tenure (num)", "Average Salary (currency)", "Geography (text)",
+      "Key Word (text - multi value)", "Skills (text - multi value)",
+      "Activities (text - multi value)", "Previous Company (text - multi value)",
+      "Funding Rounds (text - multi value)", "Investors (text - multi value)",
+    ],
+  },
   "People Data Extraction": {
     benchmark: "Coverage: 80%, Accuracy: 90%, Runtime (per record): Avg. 12 sec",
     shortDescription: "Extract key personnel and executive information from public sources and company websites.",
