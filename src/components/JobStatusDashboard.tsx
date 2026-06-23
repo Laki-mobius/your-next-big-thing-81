@@ -655,6 +655,8 @@ function ExecutionPane({ jobs, tick }: { jobs: RunJob[]; tick: number }) {
 /* ───────────────── Main dashboard ───────────────── */
 export default function JobStatusDashboard() {
   const { hasSelection, scopedSources } = useAssetSelection();
+  const { session } = useAuth();
+  const { toast } = useToast();
   const [jobs, setJobs] = useState<RunJob[]>([]);
   const [tick, setTick] = useState<number>(Date.now());
 
@@ -691,6 +693,50 @@ export default function JobStatusDashboard() {
     }, 900);
     return () => clearInterval(id);
   }, [jobs]);
+
+  // Persist completed workflow jobs to Supabase so HITL review screens
+  // (Record-wise + Attribute Category-wise) can pick them up.
+  useEffect(() => {
+    const uid = session?.user?.id;
+    if (!uid) return;
+    const toPersist = jobs.filter(
+      j => j.status === "Completed" && j.jobResult && !j.persisted,
+    );
+    if (toPersist.length === 0) return;
+
+    (async () => {
+      for (const j of toPersist) {
+        const r = j.jobResult!;
+        const { error } = await supabase.from("jobs").insert({
+          user_id: uid,
+          job_id: r.jobId,
+          name: r.name || j.jobName || "Workflow Job",
+          status: "Completed",
+          progress: 100,
+          records: r.records,
+          runtime: `${Math.max(1, Math.round(((j.endedAt ?? Date.now()) - j.startedAt) / 1000))}s`,
+          error_rate: "0%",
+          tier: r.tier,
+          flow_steps: [],
+          logs: [],
+          csv_columns: r.csvColumns,
+          csv_rows: r.csvRows,
+        });
+        if (error) {
+          toast({ title: "Failed to save job output", description: error.message, variant: "destructive" });
+        }
+      }
+      setJobs(prev =>
+        prev.map(j =>
+          toPersist.find(p => p.id === j.id) ? { ...j, persisted: true } : j,
+        ),
+      );
+      toast({
+        title: "Output sent to HITL Review",
+        description: `${toPersist.length} workflow job${toPersist.length !== 1 ? "s" : ""} available in Record-wise and Attribute Category-wise views.`,
+      });
+    })();
+  }, [jobs, session?.user?.id, toast]);
 
   const enqueue = useCallback((j: RunJob) => {
     setJobs(prev => [j, ...prev]);
