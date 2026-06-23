@@ -229,9 +229,15 @@ function ScheduleButton({ value, onSave }: { value: ScheduleConfig | null; onSav
 }
 
 /* ───────────────── Entity Identifiers upload ───────────────── */
-function EntityIdentifiersUpload({ file, onFile }: { file: File | null; onFile: (f: File | null) => void }) {
+function EntityIdentifiersUpload({
+  file, onFile, manual, onManual,
+}: {
+  file: File | null;
+  onFile: (f: File | null) => void;
+  manual: string;
+  onManual: (v: string) => void;
+}) {
   const [mode, setMode] = useState<"upload" | "manual">("upload");
-  const [manual, setManual] = useState("");
   const [dragOver, setDragOver] = useState(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
 
