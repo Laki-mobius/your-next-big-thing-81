@@ -840,6 +840,7 @@ function workflowIconFor(name: string) {
   if (n.includes("image") || n.includes("unstructured") || n.includes("idp")) return Database;
   if (n.includes("uk company")) return Building2;
   if (n.includes("us company")) return Building2;
+  if (n.includes("company data extraction")) return Building2;
   if (n.includes("people")) return Users;
   if (n.includes("register")) return Briefcase;
   if (n.includes("sourcing")) return Users;
