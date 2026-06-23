@@ -474,6 +474,7 @@ function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
   const [jobName, setJobName] = useState("");
   const [schedule, setSchedule] = useState<ScheduleConfig | null>(null);
   const [entityFile, setEntityFile] = useState<File | null>(null);
+  const [entityManual, setEntityManual] = useState("");
 
   const workflowConfigs = useMemo(
     () => savedConfigs.filter(c => c.selection.workflows.length > 0),
