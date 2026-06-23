@@ -114,6 +114,7 @@ export default function AssetRepository() {
     [],
   );
   const EXTRA_WORKFLOWS = [
+    "People Data Extraction",
     "NAR1 Form FD Extraction",
     "ESG Data Extraction",
     "Website Validation and Addition",
