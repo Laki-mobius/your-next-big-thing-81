@@ -40,6 +40,7 @@ const donutData = [
 ];
 
 export default function AttributeCategoryView() {
+  const { session } = useAuth();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [severityFilter, setSeverityFilter] = useState("all");
@@ -47,6 +48,40 @@ export default function AttributeCategoryView() {
   const [samplingOpen, setSamplingOpen] = useState(false);
   const [distributeOpen, setDistributeOpen] = useState(false);
   const [reviewCategory, setReviewCategory] = useState<AttributeCategory | null>(null);
+  const [jobOutputs, setJobOutputs] = useState<JobOutput[]>([]);
+  const [reviewJob, setReviewJob] = useState<JobOutput | null>(null);
+
+  // Load completed workflow jobs from Supabase so workflow outputs (e.g.
+  // "People Data Extraction" or "Company Data Extraction – Labor Market")
+  // surface here for reviewers.
+  useEffect(() => {
+    if (!session?.user?.id) return;
+    (async () => {
+      const { data } = await supabase
+        .from("jobs")
+        .select("*")
+        .eq("status", "Completed")
+        .order("created_at", { ascending: false });
+      if (!data) return;
+      const outs: JobOutput[] = [];
+      for (const j of data) {
+        const cols = (j.csv_columns as string[] | null) ?? [];
+        const rows = (j.csv_rows as string[][] | null) ?? [];
+        if (cols.length === 0 || rows.length === 0) continue;
+        outs.push({
+          jobId: j.job_id,
+          jobName: j.name,
+          workflowLabel: j.tier || "Workflow",
+          columns: cols,
+          rows: rows,
+          createdAt: new Date(j.created_at).toLocaleString("en-US", {
+            month: "short", day: "2-digit", hour: "2-digit", minute: "2-digit",
+          }),
+        });
+      }
+      setJobOutputs(outs);
+    })();
+  }, [session?.user?.id]);
 
   // Align with POC dataset (1,000 companies + 5,099 personnel rows = 6,099 records)
   const metrics = useMemo(() => {
