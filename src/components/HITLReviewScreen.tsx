@@ -1,5 +1,6 @@
 import { useState, useMemo, useCallback, useEffect } from "react";
-import { sampleRecords, type ValidationRecord, type ValidationAttribute } from "@/data/hitl-validation-data";
+import { type ValidationRecord, type ValidationAttribute } from "@/data/hitl-validation-data";
+import { pocValidationRecords } from "@/data/poc-hitl-data";
 import { pocMetrics } from "@/data/poc-dataset";
 import {
   buildSourceRefsForAttribute,
@@ -145,7 +146,7 @@ function convertJobsToValidationRecords(jobs: any[]): ValidationRecord[] {
 
 export default function HITLReviewScreen() {
   const { session } = useAuth();
-  const [records, setRecords] = useState<ValidationRecord[]>(sampleRecords);
+  const [records, setRecords] = useState<ValidationRecord[]>(pocValidationRecords);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [activeRecordId, setActiveRecordId] = useState<string | null>(null);
   const [search, setSearch] = useState("");
@@ -166,8 +167,8 @@ export default function HITLReviewScreen() {
       if (data && data.length > 0) {
         const jobRecords = convertJobsToValidationRecords(data);
         if (jobRecords.length > 0) {
-          // Merge: job records first, then sample records as fallback
-          setRecords([...jobRecords, ...sampleRecords]);
+          // Merge: job records first, then POC dataset records as the baseline.
+          setRecords([...jobRecords, ...pocValidationRecords]);
         }
       }
     };
