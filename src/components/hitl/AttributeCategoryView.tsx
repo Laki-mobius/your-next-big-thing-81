@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { attributeCategories, attributeCategoryGroups, type AttributeCategory } from "@/data/attribute-category-data";
 import { pocMetrics } from "@/data/poc-dataset";
@@ -7,6 +7,10 @@ import QCSummaryCards from "./QCSummaryCards";
 import SamplingModal from "./SamplingModal";
 import DistributeModal from "./DistributeModal";
 import AttributeCategoryReviewModal from "./AttributeCategoryReviewModal";
+import JobOutputReviewModal, { type JobOutput } from "./JobOutputReviewModal";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
+import { Workflow } from "lucide-react";
 import { toast } from "sonner";
 
 const severityColor: Record<string, string> = {
