@@ -98,6 +98,7 @@ export default function AssetRepository() {
   // Map workflow names to preview images.
   const workflowPreviewImages: Record<string, string> = {
     "Company Data Enrichment": "/workflow-previews/company-data-enrichment.png",
+    "Company Data Extraction – Labor Market": "/workflow-previews/company-data-enrichment.png",
     "People Data Extraction": "/workflow-previews/company-data-enrichment.png",
     "Image and Unstructured IDP": "/workflow-previews/image-and-unstructured-idp.png",
     "Invoice Data Extraction": "/workflow-previews/invoice-data-extraction.png",
