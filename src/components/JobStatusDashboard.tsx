@@ -449,7 +449,7 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
         />
 
 
-        <EntityIdentifiersUpload file={entityFile} onFile={setEntityFile} />
+        <EntityIdentifiersUpload file={entityFile} onFile={setEntityFile} manual={entityManual} onManual={setEntityManual} />
       </div>
       <div className="px-3 py-2.5 border-t bg-muted/10 flex items-center justify-between gap-2">
         <span className="text-[11px] text-muted-foreground truncate">
