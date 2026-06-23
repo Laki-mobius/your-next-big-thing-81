@@ -214,6 +214,44 @@ export default function AttributeCategoryView() {
 
           {/* Scrollable rows */}
           <div className="flex-1 overflow-y-auto">
+            {jobOutputs.length > 0 && (
+              <div>
+                <div className="px-3 py-1.5 text-[10px] font-bold text-brand uppercase tracking-wider bg-brand-light/40">
+                  Workflow Job Outputs
+                </div>
+                {jobOutputs.map(out => (
+                  <div
+                    key={out.jobId}
+                    onClick={() => setReviewJob(out)}
+                    className="flex items-center px-3 py-2 border-b border-border/50 cursor-pointer transition-colors hover:bg-brand-light/30"
+                  >
+                    <div className="w-6 shrink-0 flex items-center justify-center">
+                      <Workflow className="w-3.5 h-3.5 text-brand" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-[12px] font-semibold text-foreground truncate">
+                        {out.workflowLabel}
+                      </div>
+                      <div className="text-[10px] text-muted-foreground truncate">
+                        {out.jobName} · {out.columns.slice(1).join(", ")}
+                      </div>
+                    </div>
+                    <div className="w-[80px] text-right text-[13px] font-semibold text-brand">
+                      {out.rows.length.toLocaleString()}
+                    </div>
+                    <div className="w-[80px] text-center text-[10px] font-bold uppercase text-brand">
+                      EXTRACTED
+                    </div>
+                    <div className="w-[60px] text-center text-[12px] text-foreground">
+                      {out.columns.length - 1}
+                    </div>
+                    <div className="w-[70px] text-right text-[11px] text-muted-foreground truncate">
+                      {out.createdAt}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
             {Object.entries(grouped).map(([group, items]) => (
               <div key={group}>
                 {/* Group header */}
