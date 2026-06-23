@@ -502,20 +502,46 @@ function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
 
   const canRun = selectedWfs.length > 0 && jobName.trim().length > 0;
 
-  const handleRun = () => {
+  const handleRun = async () => {
+    // Determine entity rows from upload or manual entry. Fallback to a
+    // single synthetic company if the user didn't supply any.
+    let header: string[] = [];
+    let entityRows: string[][] = [];
+    if (entityFile) {
+      const parsed = await parseEntityFile(entityFile);
+      header = parsed.header;
+      entityRows = parsed.rows;
+    } else if (entityManual.trim()) {
+      entityRows = parseManualEntities(entityManual);
+    }
+    if (entityRows.length === 0) {
+      entityRows = [["Sample Company Inc.", "sample-company.com"]];
+      header = ["Company", "Website"];
+    }
+
+    const jobId = `WF-${Date.now().toString(36).toUpperCase()}`;
+    const jobResult = buildJobResult({
+      jobId,
+      jobName: jobName.trim(),
+      workflowLabels: selectedWfs,
+      entityRows,
+      inputHeader: header,
+    });
+
     onRun({
-      id: `WF-${Date.now().toString(36).toUpperCase()}`,
+      id: jobId,
       kind: "workflows",
       jobName: jobName.trim(),
-      label: `${selectedWfs.length} workflow${selectedWfs.length !== 1 ? "s" : ""} · ${matched.length} source${matched.length !== 1 ? "s" : ""}`,
+      label: `${selectedWfs.length} workflow${selectedWfs.length !== 1 ? "s" : ""} · ${jobResult.records} record${jobResult.records !== 1 ? "s" : ""}`,
       status: "Queued",
       progress: 0,
       startedAt: Date.now(),
-      sourcesCount: matched.length,
-      attributesCount: availableAttrs.length,
+      sourcesCount: Math.max(matched.length, selectedWfs.length),
+      attributesCount: jobResult.attributesCount,
       attributesExtracted: 0,
       errors: [],
       schedule,
+      jobResult,
     });
     toast({ title: `Job "${jobName.trim()}" saved & queued`, description: schedule ? `Scheduled · ${schedule.frequency} (${schedule.timezone})` : "Running now" });
   };
