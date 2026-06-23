@@ -4427,7 +4427,7 @@ export const sourceCatalog: SourceRecord[] = [
       "Website",
       "NAICS and SIC codes"
     ]
-  }
+  },
   {
     "sourceType": "US Corp Registry",
     "sourceName": "Secretary of State - Alaska",
