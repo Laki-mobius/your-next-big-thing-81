@@ -42,6 +42,19 @@ const RAW: Record<string, WorkflowDetails> = {
       "Instagram url (url)", "YouTube url (url)",
     ],
   },
+  "People Data Extraction": {
+    benchmark: "Coverage: 80%, Accuracy: 90%, Runtime (per record): Avg. 12 sec",
+    shortDescription: "Extract key personnel and executive information from public sources and company websites.",
+    input: "Company Name, Website",
+    outputFormat: "JSON, CSV",
+    dataAttributes: [
+      "Full Name (text)", "Job Title (text)", "Department (text)",
+      "Email (text - multi value)", "Phone Number (text - multi value)",
+      "LinkedIn URL (url)", "Start Date (date)", "Location (text)",
+      "Reports To (text)", "Employment Type (text)", "Seniority Level (text)",
+      "Skills (text - multi value)",
+    ],
+  },
   "Image and Unstructured IDP": {
     benchmark: "Coverage: 75%, Accuracy: 85%, Runtime (per record): Avg. 10 sec",
     shortDescription: "Extract text and key fields from images and unstructured documents.",
