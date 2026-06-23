@@ -358,6 +358,8 @@ interface RunJob {
   attributesExtracted: number;
   errors: string[];
   schedule?: ScheduleConfig | null;
+  jobResult?: JobResult | null;
+  persisted?: boolean;
 }
 
 const fmtTime = (ts?: number) =>
