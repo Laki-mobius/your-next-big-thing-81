@@ -12,7 +12,9 @@ export type WorkflowSourceId =
   | "company_data"
   | "registry_data"
   | "sec_data"
-  | "stock_exchange";
+  | "stock_exchange"
+  | "people_data"
+  | "labor_market";
 
 export interface WorkflowSource {
   id: WorkflowSourceId;
