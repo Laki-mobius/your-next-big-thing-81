@@ -330,7 +330,7 @@ function EntityIdentifiersUpload({
         <div className="space-y-1">
           <textarea
             value={manual}
-            onChange={e => setManual(e.target.value)}
+            onChange={e => onManual(e.target.value)}
             placeholder="Enter one per line: Company name, Company webpage"
             className="w-full min-h-[72px] rounded-md border border-input bg-background px-2.5 py-1.5 text-[11px] resize-y focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           />
