@@ -329,6 +329,7 @@ export default function AttributeCategoryView() {
         <AttributeCategoryReviewModal
           category={reviewCategory}
           onClose={() => setReviewCategory(null)}
+          initialRecords={pocCategoryRecords[reviewCategory.id]}
         />
       )}
     </div>
