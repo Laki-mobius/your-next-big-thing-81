@@ -98,6 +98,7 @@ export default function AssetRepository() {
   // Map workflow names to preview images.
   const workflowPreviewImages: Record<string, string> = {
     "Company Data Enrichment": "/workflow-previews/company-data-enrichment.png",
+    "People Data Extraction": "/workflow-previews/company-data-enrichment.png",
     "Image and Unstructured IDP": "/workflow-previews/image-and-unstructured-idp.png",
     "Invoice Data Extraction": "/workflow-previews/invoice-data-extraction.png",
     "UK Company Register Data Extraction": "/workflow-previews/uk-company-register-data-extraction.png",
@@ -114,6 +115,7 @@ export default function AssetRepository() {
     [],
   );
   const EXTRA_WORKFLOWS = [
+    "People Data Extraction",
     "NAR1 Form FD Extraction",
     "ESG Data Extraction",
     "Website Validation and Addition",
@@ -186,7 +188,13 @@ export default function AssetRepository() {
     const filtered = search
       ? entries.filter(([w]) => w.toLowerCase().includes(search.toLowerCase()))
       : entries;
-    return filtered.sort((a, b) => a[0].localeCompare(b[0]));
+    return filtered.sort((a, b) => {
+      const sortKey = (name: string): string => {
+        if (name === "People Data Extraction") return "Company Data Enrichment \u0001";
+        return name;
+      };
+      return sortKey(a[0]).localeCompare(sortKey(b[0]));
+    });
   }, [allWorkflows, filteredSources, search]);
 
 
@@ -738,6 +746,7 @@ export default function AssetRepository() {
 // ---------- Workflow details panel ----------
 const workflowDiagramImages: Record<string, string> = {
   "Company Data Enrichment": "/workflow-previews/company-data-enrichment.png",
+  "People Data Extraction": "/workflow-previews/company-data-enrichment.png",
   "UK Company Data Extraction": "/workflow-previews/company-data-enrichment.png",
   "US Company Data Extraction": "/workflow-previews/company-data-enrichment.png",
   "UK Company Register Data Extraction": "/workflow-previews/uk-company-register-data-extraction.png",
@@ -828,6 +837,7 @@ function workflowIconFor(name: string) {
   if (n.includes("image") || n.includes("unstructured") || n.includes("idp")) return Database;
   if (n.includes("uk company")) return Building2;
   if (n.includes("us company")) return Building2;
+  if (n.includes("people")) return Users;
   if (n.includes("register")) return Briefcase;
   if (n.includes("sourcing")) return Users;
   if (n.includes("enrichment")) return PlusCircle;
