@@ -4440,7 +4440,1158 @@ export const allWorkflows = uniq(sourceCatalog.flatMap(s => s.workflows)).sort()
 export function filterSources(opts: {
   regions?: string[]; countries?: string[];
   sourceTypes?: string[]; sourceNames?: string[];
-  workflows?: string[];
+  workflows?: string[,
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Alaska",
+  "sourceUrl": "https://www.commerce.alaska.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Alabama",
+  "sourceUrl": "https://www.sos.alabama.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Arkansas",
+  "sourceUrl": "https://www.sos.arkansas.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Arizona",
+  "sourceUrl": "https://azsos.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - California",
+  "sourceUrl": "https://www.sos.ca.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Colorado",
+  "sourceUrl": "https://www.sos.state.co.us",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Connecticut",
+  "sourceUrl": "https://portal.ct.gov/SOTS",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Georgia",
+  "sourceUrl": "https://sos.ga.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Iowa",
+  "sourceUrl": "https://sos.iowa.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Indiana",
+  "sourceUrl": "https://www.in.gov/sos",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Kansas",
+  "sourceUrl": "https://www.kssos.org",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Maryland",
+  "sourceUrl": "https://www.sos.state.md.us",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Michigan",
+  "sourceUrl": "https://www.michigan.gov/sos",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Minnesota",
+  "sourceUrl": "https://www.sos.state.mn.us",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - North Carolina",
+  "sourceUrl": "https://www.sosnc.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - New Hampshire",
+  "sourceUrl": "https://www.sos.nh.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - New Mexico",
+  "sourceUrl": "https://www.sos.state.nm.us",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Nevada",
+  "sourceUrl": "https://www.nvsos.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Pennsylvania",
+  "sourceUrl": "https://www.dos.pa.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Utah",
+  "sourceUrl": "https://www.utah.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Virginia",
+  "sourceUrl": "https://www.sos.virginia.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Washington",
+  "sourceUrl": "https://www.sos.wa.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Wyoming",
+  "sourceUrl": "https://www.wyo.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Hawaii",
+  "sourceUrl": "https://cca.hawaii.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Kentucky",
+  "sourceUrl": "https://www.sos.ky.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Maine",
+  "sourceUrl": "https://www.maine.gov/sos",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Mississippi",
+  "sourceUrl": "https://www.sos.ms.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - North Dakota",
+  "sourceUrl": "https://www.sos.nd.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Ohio",
+  "sourceUrl": "https://www.sos.state.oh.us",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Oklahoma",
+  "sourceUrl": "https://www.sos.ok.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - South Carolina",
+  "sourceUrl": "https://www.scos.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - South Dakota",
+  "sourceUrl": "https://sdsos.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Wisconsin",
+  "sourceUrl": "https://www.wi.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Illinois",
+  "sourceUrl": "https://www.ilsos.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Montana",
+  "sourceUrl": "https://sosmt.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Nebraska",
+  "sourceUrl": "https://www.sos.ne.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - New York",
+  "sourceUrl": "https://www.dos.ny.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Rhode Island",
+  "sourceUrl": "https://www.ri.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - West Virginia",
+  "sourceUrl": "https://www.sos.wv.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - District of Columbia",
+  "sourceUrl": "https://www.dc.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Vermont",
+  "sourceUrl": "https://www.vermont.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Massachusetts",
+  "sourceUrl": "https://www.sec.state.ma.us",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Oregon",
+  "sourceUrl": "https://sos.oregon.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Tennessee",
+  "sourceUrl": "https://www.sos.tn.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Texas",
+  "sourceUrl": "https://www.sos.state.tx.us",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+},
+{
+  "sourceType": "US Corp Registry",
+  "sourceName": "Secretary of State - Delaware",
+  "sourceUrl": "https://icis.corp.delaware.gov",
+  "region": "North America",
+  "country": "United States",
+  "workflows": [
+    "UK Company Register Data Extraction",
+    "UK Company Data Extraction",
+    "Invoice Data Extraction",
+    "Image and Unstructured IDP"
+  ],
+  "attributes": [
+    "Company Name",
+    "Organizational Type",
+    "Foundation Year",
+    "Street Address",
+    "Postal/Zip Code",
+    "City",
+    "State/Province",
+    "Country",
+    "Phone Number",
+    "Website"
+  ]
+}
+];
 }): SourceRecord[] {
   return sourceCatalog.filter(s => {
     if (opts.regions?.length && !opts.regions.includes(s.region)) return false;
