@@ -188,7 +188,13 @@ export default function AssetRepository() {
     const filtered = search
       ? entries.filter(([w]) => w.toLowerCase().includes(search.toLowerCase()))
       : entries;
-    return filtered.sort((a, b) => a[0].localeCompare(b[0]));
+    return filtered.sort((a, b) => {
+      const sortKey = (name: string): string => {
+        if (name === "People Data Extraction") return "Company Data Enrichment \u0001";
+        return name;
+      };
+      return sortKey(a[0]).localeCompare(sortKey(b[0]));
+    });
   }, [allWorkflows, filteredSources, search]);
 
 
