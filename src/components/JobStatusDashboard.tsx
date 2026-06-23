@@ -31,6 +31,9 @@ import {
 import { summaryStats } from "@/data/job-status-data";
 import { useAssetSelection } from "@/contexts/AssetSelectionContext";
 import { useToast } from "@/hooks/use-toast";
+import { buildJobResult, parseEntityFile, parseManualEntities, type JobResult } from "@/data/job-result-generator";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
 
 /* ───────────────── Multi-select dropdown ───────────────── */
 function MultiSelect({
