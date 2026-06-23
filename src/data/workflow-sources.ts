@@ -158,6 +158,34 @@ export const workflowSources: WorkflowSource[] = [
       return `https://www.annualreports.com/HostedData/AnnualReports/PDF/${encodeURIComponent(queryName)}-annual-report.pdf`;
     },
   },
+  {
+    id: "people_data",
+    label: "People Data Extraction",
+    sourceName: "Company Website / LinkedIn",
+    attributes: [
+      "Full Name", "Job Title", "Department", "Email", "Phone Number",
+      "LinkedIn URL", "Start Date", "Location", "Reports To",
+      "Employment Type", "Seniority Level", "Skills",
+    ],
+    buildUrl: (company) => buildCompanyWebsite(company),
+  },
+  {
+    id: "labor_market",
+    label: "Company Data Extraction – Labor Market",
+    sourceName: "Labor Market Intelligence",
+    attributes: [
+      "Industry", "Company Headcount", "Company Name", "Hiring Rate",
+      "Attrition Rate", "Growth Rate", "Job postings", "Sentiment",
+      "Founders", "Average Tenure", "Average Salary", "Geography",
+      "Key Word", "Skills", "Activities", "Previous Company",
+      "Funding Rounds", "Investors",
+    ],
+    buildUrl: (company) => {
+      const host = extractHost(company);
+      const queryName = host ? host.split(".")[0] : company;
+      return `https://www.linkedin.com/company/${encodeURIComponent(queryName)}/`;
+    },
+  },
 ];
 
 export const findWorkflowByLabel = (label: string): WorkflowSource | undefined =>
