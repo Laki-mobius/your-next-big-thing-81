@@ -380,6 +380,7 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
   const [jobName, setJobName] = useState("");
   const [schedule, setSchedule] = useState<ScheduleConfig | null>(null);
   const [entityFile, setEntityFile] = useState<File | null>(null);
+  const [entityManual, setEntityManual] = useState("");
 
   const sourceConfigs = useMemo(
     () => savedConfigs.filter(c => c.selection.sourceNames.length > 0),
