@@ -12,7 +12,9 @@ export type WorkflowSourceId =
   | "company_data"
   | "registry_data"
   | "sec_data"
-  | "stock_exchange";
+  | "stock_exchange"
+  | "people_data"
+  | "labor_market";
 
 export interface WorkflowSource {
   id: WorkflowSourceId;
@@ -154,6 +156,34 @@ export const workflowSources: WorkflowSource[] = [
       const host = extractHost(company);
       const queryName = host ? host.split(".")[0] : company;
       return `https://www.annualreports.com/HostedData/AnnualReports/PDF/${encodeURIComponent(queryName)}-annual-report.pdf`;
+    },
+  },
+  {
+    id: "people_data",
+    label: "People Data Extraction",
+    sourceName: "Company Website / LinkedIn",
+    attributes: [
+      "Full Name", "Job Title", "Department", "Email", "Phone Number",
+      "LinkedIn URL", "Start Date", "Location", "Reports To",
+      "Employment Type", "Seniority Level", "Skills",
+    ],
+    buildUrl: (company) => buildCompanyWebsite(company),
+  },
+  {
+    id: "labor_market",
+    label: "Company Data Extraction – Labor Market",
+    sourceName: "Labor Market Intelligence",
+    attributes: [
+      "Industry", "Company Headcount", "Company Name", "Hiring Rate",
+      "Attrition Rate", "Growth Rate", "Job postings", "Sentiment",
+      "Founders", "Average Tenure", "Average Salary", "Geography",
+      "Key Word", "Skills", "Activities", "Previous Company",
+      "Funding Rounds", "Investors",
+    ],
+    buildUrl: (company) => {
+      const host = extractHost(company);
+      const queryName = host ? host.split(".")[0] : company;
+      return `https://www.linkedin.com/company/${encodeURIComponent(queryName)}/`;
     },
   },
 ];

@@ -31,6 +31,9 @@ import {
 import { summaryStats } from "@/data/job-status-data";
 import { useAssetSelection } from "@/contexts/AssetSelectionContext";
 import { useToast } from "@/hooks/use-toast";
+import { buildJobResult, parseEntityFile, parseManualEntities, type JobResult } from "@/data/job-result-generator";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
 
 /* ───────────────── Multi-select dropdown ───────────────── */
 function MultiSelect({
@@ -226,9 +229,15 @@ function ScheduleButton({ value, onSave }: { value: ScheduleConfig | null; onSav
 }
 
 /* ───────────────── Entity Identifiers upload ───────────────── */
-function EntityIdentifiersUpload({ file, onFile }: { file: File | null; onFile: (f: File | null) => void }) {
+function EntityIdentifiersUpload({
+  file, onFile, manual, onManual,
+}: {
+  file: File | null;
+  onFile: (f: File | null) => void;
+  manual: string;
+  onManual: (v: string) => void;
+}) {
   const [mode, setMode] = useState<"upload" | "manual">("upload");
-  const [manual, setManual] = useState("");
   const [dragOver, setDragOver] = useState(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -321,7 +330,7 @@ function EntityIdentifiersUpload({ file, onFile }: { file: File | null; onFile: 
         <div className="space-y-1">
           <textarea
             value={manual}
-            onChange={e => setManual(e.target.value)}
+            onChange={e => onManual(e.target.value)}
             placeholder="Enter one per line: Company name, Company webpage"
             className="w-full min-h-[72px] rounded-md border border-input bg-background px-2.5 py-1.5 text-[11px] resize-y focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           />
@@ -349,6 +358,8 @@ interface RunJob {
   attributesExtracted: number;
   errors: string[];
   schedule?: ScheduleConfig | null;
+  jobResult?: JobResult | null;
+  persisted?: boolean;
 }
 
 const fmtTime = (ts?: number) =>
@@ -371,6 +382,7 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
   const [jobName, setJobName] = useState("");
   const [schedule, setSchedule] = useState<ScheduleConfig | null>(null);
   const [entityFile, setEntityFile] = useState<File | null>(null);
+  const [entityManual, setEntityManual] = useState("");
 
   const sourceConfigs = useMemo(
     () => savedConfigs.filter(c => c.selection.sourceNames.length > 0),
@@ -439,7 +451,7 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
         />
 
 
-        <EntityIdentifiersUpload file={entityFile} onFile={setEntityFile} />
+        <EntityIdentifiersUpload file={entityFile} onFile={setEntityFile} manual={entityManual} onManual={setEntityManual} />
       </div>
       <div className="px-3 py-2.5 border-t bg-muted/10 flex items-center justify-between gap-2">
         <span className="text-[11px] text-muted-foreground truncate">
@@ -464,6 +476,7 @@ function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
   const [jobName, setJobName] = useState("");
   const [schedule, setSchedule] = useState<ScheduleConfig | null>(null);
   const [entityFile, setEntityFile] = useState<File | null>(null);
+  const [entityManual, setEntityManual] = useState("");
 
   const workflowConfigs = useMemo(
     () => savedConfigs.filter(c => c.selection.workflows.length > 0),
@@ -491,20 +504,46 @@ function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
 
   const canRun = selectedWfs.length > 0 && jobName.trim().length > 0;
 
-  const handleRun = () => {
+  const handleRun = async () => {
+    // Determine entity rows from upload or manual entry. Fallback to a
+    // single synthetic company if the user didn't supply any.
+    let header: string[] = [];
+    let entityRows: string[][] = [];
+    if (entityFile) {
+      const parsed = await parseEntityFile(entityFile);
+      header = parsed.header;
+      entityRows = parsed.rows;
+    } else if (entityManual.trim()) {
+      entityRows = parseManualEntities(entityManual);
+    }
+    if (entityRows.length === 0) {
+      entityRows = [["Sample Company Inc.", "sample-company.com"]];
+      header = ["Company", "Website"];
+    }
+
+    const jobId = `WF-${Date.now().toString(36).toUpperCase()}`;
+    const jobResult = buildJobResult({
+      jobId,
+      jobName: jobName.trim(),
+      workflowLabels: selectedWfs,
+      entityRows,
+      inputHeader: header,
+    });
+
     onRun({
-      id: `WF-${Date.now().toString(36).toUpperCase()}`,
+      id: jobId,
       kind: "workflows",
       jobName: jobName.trim(),
-      label: `${selectedWfs.length} workflow${selectedWfs.length !== 1 ? "s" : ""} · ${matched.length} source${matched.length !== 1 ? "s" : ""}`,
+      label: `${selectedWfs.length} workflow${selectedWfs.length !== 1 ? "s" : ""} · ${jobResult.records} record${jobResult.records !== 1 ? "s" : ""}`,
       status: "Queued",
       progress: 0,
       startedAt: Date.now(),
-      sourcesCount: matched.length,
-      attributesCount: availableAttrs.length,
+      sourcesCount: Math.max(matched.length, selectedWfs.length),
+      attributesCount: jobResult.attributesCount,
       attributesExtracted: 0,
       errors: [],
       schedule,
+      jobResult,
     });
     toast({ title: `Job "${jobName.trim()}" saved & queued`, description: schedule ? `Scheduled · ${schedule.frequency} (${schedule.timezone})` : "Running now" });
   };
@@ -532,7 +571,7 @@ function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
         />
 
 
-        <EntityIdentifiersUpload file={entityFile} onFile={setEntityFile} />
+        <EntityIdentifiersUpload file={entityFile} onFile={setEntityFile} manual={entityManual} onManual={setEntityManual} />
       </div>
       <div className="px-3 py-2.5 border-t bg-muted/10 flex items-center justify-between gap-2">
         <span className="text-[11px] text-muted-foreground truncate">
@@ -616,6 +655,8 @@ function ExecutionPane({ jobs, tick }: { jobs: RunJob[]; tick: number }) {
 /* ───────────────── Main dashboard ───────────────── */
 export default function JobStatusDashboard() {
   const { hasSelection, scopedSources } = useAssetSelection();
+  const { session } = useAuth();
+  const { toast } = useToast();
   const [jobs, setJobs] = useState<RunJob[]>([]);
   const [tick, setTick] = useState<number>(Date.now());
 
@@ -652,6 +693,50 @@ export default function JobStatusDashboard() {
     }, 900);
     return () => clearInterval(id);
   }, [jobs]);
+
+  // Persist completed workflow jobs to Supabase so HITL review screens
+  // (Record-wise + Attribute Category-wise) can pick them up.
+  useEffect(() => {
+    const uid = session?.user?.id;
+    if (!uid) return;
+    const toPersist = jobs.filter(
+      j => j.status === "Completed" && j.jobResult && !j.persisted,
+    );
+    if (toPersist.length === 0) return;
+
+    (async () => {
+      for (const j of toPersist) {
+        const r = j.jobResult!;
+        const { error } = await supabase.from("jobs").insert({
+          user_id: uid,
+          job_id: r.jobId,
+          name: r.name || j.jobName || "Workflow Job",
+          status: "Completed",
+          progress: 100,
+          records: r.records,
+          runtime: `${Math.max(1, Math.round(((j.endedAt ?? Date.now()) - j.startedAt) / 1000))}s`,
+          error_rate: "0%",
+          tier: r.tier,
+          flow_steps: [],
+          logs: [],
+          csv_columns: r.csvColumns,
+          csv_rows: r.csvRows,
+        });
+        if (error) {
+          toast({ title: "Failed to save job output", description: error.message, variant: "destructive" });
+        }
+      }
+      setJobs(prev =>
+        prev.map(j =>
+          toPersist.find(p => p.id === j.id) ? { ...j, persisted: true } : j,
+        ),
+      );
+      toast({
+        title: "Output sent to HITL Review",
+        description: `${toPersist.length} workflow job${toPersist.length !== 1 ? "s" : ""} available in Record-wise and Attribute Category-wise views.`,
+      });
+    })();
+  }, [jobs, session?.user?.id, toast]);
 
   const enqueue = useCallback((j: RunJob) => {
     setJobs(prev => [j, ...prev]);

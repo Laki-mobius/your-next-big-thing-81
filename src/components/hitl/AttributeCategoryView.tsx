@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { attributeCategories, attributeCategoryGroups, type AttributeCategory } from "@/data/attribute-category-data";
 import { pocMetrics } from "@/data/poc-dataset";
@@ -7,6 +7,10 @@ import QCSummaryCards from "./QCSummaryCards";
 import SamplingModal from "./SamplingModal";
 import DistributeModal from "./DistributeModal";
 import AttributeCategoryReviewModal from "./AttributeCategoryReviewModal";
+import JobOutputReviewModal, { type JobOutput } from "./JobOutputReviewModal";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
+import { Workflow } from "lucide-react";
 import { toast } from "sonner";
 
 const severityColor: Record<string, string> = {
@@ -36,6 +40,7 @@ const donutData = [
 ];
 
 export default function AttributeCategoryView() {
+  const { session } = useAuth();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [severityFilter, setSeverityFilter] = useState("all");
@@ -43,6 +48,40 @@ export default function AttributeCategoryView() {
   const [samplingOpen, setSamplingOpen] = useState(false);
   const [distributeOpen, setDistributeOpen] = useState(false);
   const [reviewCategory, setReviewCategory] = useState<AttributeCategory | null>(null);
+  const [jobOutputs, setJobOutputs] = useState<JobOutput[]>([]);
+  const [reviewJob, setReviewJob] = useState<JobOutput | null>(null);
+
+  // Load completed workflow jobs from Supabase so workflow outputs (e.g.
+  // "People Data Extraction" or "Company Data Extraction – Labor Market")
+  // surface here for reviewers.
+  useEffect(() => {
+    if (!session?.user?.id) return;
+    (async () => {
+      const { data } = await supabase
+        .from("jobs")
+        .select("*")
+        .eq("status", "Completed")
+        .order("created_at", { ascending: false });
+      if (!data) return;
+      const outs: JobOutput[] = [];
+      for (const j of data) {
+        const cols = (j.csv_columns as string[] | null) ?? [];
+        const rows = (j.csv_rows as string[][] | null) ?? [];
+        if (cols.length === 0 || rows.length === 0) continue;
+        outs.push({
+          jobId: j.job_id,
+          jobName: j.name,
+          workflowLabel: j.tier || "Workflow",
+          columns: cols,
+          rows: rows,
+          createdAt: new Date(j.created_at).toLocaleString("en-US", {
+            month: "short", day: "2-digit", hour: "2-digit", minute: "2-digit",
+          }),
+        });
+      }
+      setJobOutputs(outs);
+    })();
+  }, [session?.user?.id]);
 
   // Align with POC dataset (1,000 companies + 5,099 personnel rows = 6,099 records)
   const metrics = useMemo(() => {
@@ -175,6 +214,44 @@ export default function AttributeCategoryView() {
 
           {/* Scrollable rows */}
           <div className="flex-1 overflow-y-auto">
+            {jobOutputs.length > 0 && (
+              <div>
+                <div className="px-3 py-1.5 text-[10px] font-bold text-brand uppercase tracking-wider bg-brand-light/40">
+                  Workflow Job Outputs
+                </div>
+                {jobOutputs.map(out => (
+                  <div
+                    key={out.jobId}
+                    onClick={() => setReviewJob(out)}
+                    className="flex items-center px-3 py-2 border-b border-border/50 cursor-pointer transition-colors hover:bg-brand-light/30"
+                  >
+                    <div className="w-6 shrink-0 flex items-center justify-center">
+                      <Workflow className="w-3.5 h-3.5 text-brand" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-[12px] font-semibold text-foreground truncate">
+                        {out.workflowLabel}
+                      </div>
+                      <div className="text-[10px] text-muted-foreground truncate">
+                        {out.jobName} · {out.columns.slice(1).join(", ")}
+                      </div>
+                    </div>
+                    <div className="w-[80px] text-right text-[13px] font-semibold text-brand">
+                      {out.rows.length.toLocaleString()}
+                    </div>
+                    <div className="w-[80px] text-center text-[10px] font-bold uppercase text-brand">
+                      EXTRACTED
+                    </div>
+                    <div className="w-[60px] text-center text-[12px] text-foreground">
+                      {out.columns.length - 1}
+                    </div>
+                    <div className="w-[70px] text-right text-[11px] text-muted-foreground truncate">
+                      {out.createdAt}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
             {Object.entries(grouped).map(([group, items]) => (
               <div key={group}>
                 {/* Group header */}
@@ -327,6 +404,9 @@ export default function AttributeCategoryView() {
           category={reviewCategory}
           onClose={() => setReviewCategory(null)}
         />
+      )}
+      {reviewJob && (
+        <JobOutputReviewModal job={reviewJob} onClose={() => setReviewJob(null)} />
       )}
     </div>
   );
