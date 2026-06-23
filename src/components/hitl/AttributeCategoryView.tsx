@@ -1,10 +1,7 @@
 import { useState, useMemo, useCallback } from "react";
 import { cn } from "@/lib/utils";
-import { attributeCategoryGroups, type AttributeCategory } from "@/data/attribute-category-data";
-import { pocAttributeCategories, pocCategoryRecords } from "@/data/poc-hitl-data";
+import { attributeCategories, attributeCategoryGroups, type AttributeCategory } from "@/data/attribute-category-data";
 import { pocMetrics } from "@/data/poc-dataset";
-
-const attributeCategories = pocAttributeCategories;
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import QCSummaryCards from "./QCSummaryCards";
 import SamplingModal from "./SamplingModal";
@@ -329,7 +326,6 @@ export default function AttributeCategoryView() {
         <AttributeCategoryReviewModal
           category={reviewCategory}
           onClose={() => setReviewCategory(null)}
-          initialRecords={pocCategoryRecords[reviewCategory.id]}
         />
       )}
     </div>

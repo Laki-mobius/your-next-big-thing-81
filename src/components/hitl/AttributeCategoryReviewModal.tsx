@@ -22,8 +22,6 @@ interface CategoryRecord {
 interface Props {
   category: AttributeCategory;
   onClose: () => void;
-  /** When supplied, these real records are used instead of the mock generator. */
-  initialRecords?: CategoryRecord[];
 }
 
 const sources = [
@@ -153,10 +151,8 @@ const generateRecords = (cat: AttributeCategory): CategoryRecord[] => {
 
 const PAGE_SIZE = 15;
 
-export default function AttributeCategoryReviewModal({ category, onClose, initialRecords }: Props) {
-  const [records, setRecords] = useState<CategoryRecord[]>(
-    () => initialRecords && initialRecords.length > 0 ? initialRecords : generateRecords(category)
-  );
+export default function AttributeCategoryReviewModal({ category, onClose }: Props) {
+  const [records, setRecords] = useState(() => generateRecords(category));
   const [selectedRecordId, setSelectedRecordId] = useState<string | null>(null);
   const [expandedRecordIds, setExpandedRecordIds] = useState<Set<string>>(new Set());
   const [activeSourceUrl, setActiveSourceUrl] = useState<string>("");
