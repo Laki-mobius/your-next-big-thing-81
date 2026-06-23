@@ -44,13 +44,20 @@ export default function AttributeCategoryView() {
   const [distributeOpen, setDistributeOpen] = useState(false);
   const [reviewCategory, setReviewCategory] = useState<AttributeCategory | null>(null);
 
-  const metrics = useMemo(() => ({
-    total: attributeCategories.reduce((s, c) => s + c.totalChanges, 0),
-    pending: attributeCategories.filter(c => c.severity === "CRITICAL" || c.severity === "HIGH").reduce((s, c) => s + c.totalChanges, 0),
-    approved: 1240,
-    rejected: 86,
-    preHitlScore: 82,
-  }), []);
+  // Align with POC dataset (1,000 companies + 5,099 personnel rows = 6,099 records)
+  const metrics = useMemo(() => {
+    const totalDataset = pocMetrics.totalRecords + pocMetrics.personnelRows; // 6,099
+    const pendingDataset = pocMetrics.exceptionNotes; // 846
+    const rejectedDataset = pocMetrics.closed; // 2
+    const approvedDataset = totalDataset - pendingDataset - rejectedDataset; // 5,251
+    return {
+      total: totalDataset,
+      pending: pendingDataset,
+      approved: approvedDataset,
+      rejected: rejectedDataset,
+      preHitlScore: 82,
+    };
+  }, []);
 
   const handleSample = useCallback((method: string, value: number) => {
     toast.success(`Sampling complete: ${method === "percentage" ? `${value}% sampled` : method === "random" ? `${value} records sampled` : "Category-based sampling done"}`);
