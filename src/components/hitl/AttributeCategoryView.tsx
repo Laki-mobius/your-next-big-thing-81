@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { attributeCategories, attributeCategoryGroups, type AttributeCategory } from "@/data/attribute-category-data";
+import { pocMetrics } from "@/data/poc-dataset";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import QCSummaryCards from "./QCSummaryCards";
 import SamplingModal from "./SamplingModal";
