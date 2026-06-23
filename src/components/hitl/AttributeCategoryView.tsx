@@ -405,6 +405,9 @@ export default function AttributeCategoryView() {
           onClose={() => setReviewCategory(null)}
         />
       )}
+      {reviewJob && (
+        <JobOutputReviewModal job={reviewJob} onClose={() => setReviewJob(null)} />
+      )}
     </div>
   );
 }
