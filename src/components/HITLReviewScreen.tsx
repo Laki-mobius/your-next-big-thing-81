@@ -1,5 +1,6 @@
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { sampleRecords, type ValidationRecord, type ValidationAttribute } from "@/data/hitl-validation-data";
+import { pocMetrics } from "@/data/poc-dataset";
 import {
   buildSourceRefsForAttribute,
   resolveWorkflowIdsFromLabels,
@@ -185,13 +186,21 @@ export default function HITLReviewScreen() {
   const activeRecord = activeRecordId ? records.find(r => r.id === activeRecordId) : null;
   const reviewingRecord = reviewingRecordId ? records.find(r => r.id === reviewingRecordId) : null;
 
-  const metrics = useMemo(() => ({
-    total: records.length,
-    pending: records.filter(r => r.status === "pending" || r.status === "in_review").length,
-    approved: records.filter(r => r.status === "approved").length,
-    rejected: records.filter(r => r.status === "rejected").length,
-    preHitlScore: 82,
-  }), [records]);
+  // Align HITL totals with the POC dataset reflected in the Metrics Dashboard:
+  // 1,000 company records + 5,099 personnel rows = 6,099 records under review.
+  const metrics = useMemo(() => {
+    const totalDataset = pocMetrics.totalRecords + pocMetrics.personnelRows; // 6,099
+    const pendingDataset = pocMetrics.exceptionNotes; // 846 records flagged for HITL
+    const rejectedDataset = pocMetrics.closed; // 2 closed
+    const approvedDataset = totalDataset - pendingDataset - rejectedDataset; // 5,251
+    return {
+      total: totalDataset,
+      pending: pendingDataset,
+      approved: approvedDataset,
+      rejected: rejectedDataset,
+      preHitlScore: 82,
+    };
+  }, []);
 
   const toggleSelect = useCallback((id: string) => {
     setSelectedIds(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
