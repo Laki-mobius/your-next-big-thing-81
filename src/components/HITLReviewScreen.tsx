@@ -1,5 +1,6 @@
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { sampleRecords, type ValidationRecord, type ValidationAttribute } from "@/data/hitl-validation-data";
+import { pocMetrics } from "@/data/poc-dataset";
 import {
   buildSourceRefsForAttribute,
   resolveWorkflowIdsFromLabels,
