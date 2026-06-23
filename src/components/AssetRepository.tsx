@@ -748,6 +748,7 @@ export default function AssetRepository() {
 // ---------- Workflow details panel ----------
 const workflowDiagramImages: Record<string, string> = {
   "Company Data Enrichment": "/workflow-previews/company-data-enrichment.png",
+  "Company Data Extraction – Labor Market": "/workflow-previews/company-data-enrichment.png",
   "People Data Extraction": "/workflow-previews/company-data-enrichment.png",
   "UK Company Data Extraction": "/workflow-previews/company-data-enrichment.png",
   "US Company Data Extraction": "/workflow-previews/company-data-enrichment.png",
