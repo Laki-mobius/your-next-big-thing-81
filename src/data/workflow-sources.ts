@@ -188,16 +188,36 @@ export const workflowSources: WorkflowSource[] = [
   },
 ];
 
+const workflowKey = (label: string): string =>
+  label
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .replace(/\s+/g, " ");
+
 const WORKFLOW_LABEL_ALIASES: Record<string, WorkflowSourceId> = {
   "company data enrichment": "company_data",
   "company data extraction": "company_data",
   "uk company data extraction": "company_data",
   "us company data extraction": "company_data",
+  "cde": "company_data",
+  "people data extraction": "people_data",
 };
 
+function inferWorkflowIdFromLabel(label: string): WorkflowSourceId | undefined {
+  const key = workflowKey(label);
+  if (WORKFLOW_LABEL_ALIASES[key]) return WORKFLOW_LABEL_ALIASES[key];
+  if (/\bcde\d*\b/.test(key)) return "company_data";
+  if (key.includes("labor") && key.includes("company") && key.includes("data")) return "labor_market";
+  if (key.includes("people") && key.includes("data") && key.includes("extraction")) return "people_data";
+  if (key.includes("company") && key.includes("data") && /(extraction|enrichment|profile)/.test(key)) return "company_data";
+  return undefined;
+}
+
 export const findWorkflowByLabel = (label: string): WorkflowSource | undefined =>
-  workflowSources.find((w) => w.label.trim().toLowerCase() === label.trim().toLowerCase()) ??
-  workflowSources.find((w) => w.id === WORKFLOW_LABEL_ALIASES[label.trim().toLowerCase()]);
+  workflowSources.find((w) => workflowKey(w.label) === workflowKey(label)) ??
+  workflowSources.find((w) => w.id === inferWorkflowIdFromLabel(label));
 
 export const findWorkflowById = (id: string): WorkflowSource | undefined =>
   workflowSources.find((w) => w.id === id);
@@ -227,7 +247,7 @@ export function resolveWorkflowIdsFromLabels(labels: string[]): WorkflowSourceId
   const ids: WorkflowSourceId[] = [];
   for (const label of labels) {
     const wf = findWorkflowByLabel(label);
-    if (wf) ids.push(wf.id);
+    if (wf && !ids.includes(wf.id)) ids.push(wf.id);
   }
   return ids;
 }
