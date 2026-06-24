@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect, useCallback } from "react";
 import {
   Clock, Activity, CheckCircle2, XCircle, Play, ChevronDown,
   ExternalLink, Database, Workflow, RefreshCw, AlertTriangle, Loader2, CalendarClock,
-  Upload, FileSpreadsheet, X,
+  Upload, FileSpreadsheet, X, Download,
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
