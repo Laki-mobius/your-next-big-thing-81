@@ -46,6 +46,17 @@ const WORKFLOW_SOURCES: Record<string, { sourceName: string; sourceUrlHint: stri
       "Hierarchy Level", "Relationship Type", "Performance Expectation",
     ],
   },
+  labor_market: {
+    sourceName: "Labor Market Intelligence",
+    sourceUrlHint: "publicly available labor market intelligence sources including LinkedIn company pages, job boards, Crunchbase, Glassdoor, and similar workforce/talent data sources",
+    attributes: [
+      "Industry", "Company Headcount", "Company Name", "Hiring Rate",
+      "Attrition Rate", "Growth Rate", "Job Postings", "Sentiment",
+      "Founders", "Average Tenure", "Average Salary", "Geography",
+      "Keywords", "Skills", "Activities", "Previous Company",
+      "Funding Rounds", "Investors",
+    ],
+  },
 };
 
 interface RequestBody {
@@ -81,6 +92,11 @@ function buildPrompt(
   attributes: string[],
   workflowIds: string[],
 ): string {
+  // Specialized prompt when ONLY the Labor Market workflow is selected
+  if (workflowIds.length === 1 && workflowIds[0] === "labor_market") {
+    return buildLaborMarketPrompt(entities);
+  }
+
   const sourceLines = workflowIds
     .map((id) => WORKFLOW_SOURCES[id])
     .filter(Boolean)
@@ -100,6 +116,72 @@ ${attributes.map((a, i) => `  ${i + 2}. ${a}`).join("\n")}
 - Use real, factual public data. If a value is unknown or not applicable, return "N/A".
 - Normalize Revenue to USD millions when possible.
 - Foundation Year as 4-digit year. Status as "Active" / "Inactive" / "Dissolved" etc.
+
+Companies (${entities.length}):
+${entities.map((c) => `- ${c}`).join("\n")}
+
+Return ONLY the JSON array.`;
+}
+
+function buildLaborMarketPrompt(entities: string[]): string {
+  const wf = WORKFLOW_SOURCES.labor_market;
+  const sourceLine = `  - ${wf.sourceName} (${wf.sourceUrlHint}) → ${wf.attributes.join(", ")}`;
+
+  return `You are a Labor Market Intelligence Extraction Assistant. For each company below, extract workforce, hiring, talent, and company-growth intelligence attributes ONLY from the selected sources.
+
+Selected sources (each authoritative for its listed attributes):
+${sourceLine}
+
+Attributes to extract (in the exact order below):
+1. Industry (text)
+2. Company Headcount (number)
+3. Company Name (text)
+4. Hiring Rate (percentage)
+5. Attrition Rate (percentage)
+6. Growth Rate (percentage)
+7. Job Postings (number / multi-value if applicable)
+8. Sentiment (text)
+9. Founders (text / multi-value)
+10. Average Tenure (number)
+11. Average Salary (currency)
+12. Geography (text)
+13. Keywords (text / multi-value)
+14. Skills (text / multi-value)
+15. Activities (text / multi-value)
+16. Previous Company (text / multi-value)
+17. Funding Rounds (text / multi-value)
+18. Investors (text / multi-value)
+
+Output Rules:
+- Return ONLY a valid JSON array of arrays. No markdown, explanations, notes, or commentary.
+- Each inner array MUST contain exactly 19 elements in the following order:
+  1. Company Identifier (echo back exactly as provided)
+  2. Industry
+  3. Company Headcount
+  4. Company Name
+  5. Hiring Rate
+  6. Attrition Rate
+  7. Growth Rate
+  8. Job Postings
+  9. Sentiment
+  10. Founders
+  11. Average Tenure
+  12. Average Salary
+  13. Geography
+  14. Keywords
+  15. Skills
+  16. Activities
+  17. Previous Company
+  18. Funding Rounds
+  19. Investors
+- Use real, factual, publicly available data only from the selected sources.
+- Do not infer, estimate, or fabricate values.
+- If a value is unavailable, unknown, or not applicable, return "N/A".
+- For multi-value attributes, return a semicolon-separated string.
+- Company Headcount and Job Postings should be numeric values where available.
+- Hiring Rate, Attrition Rate, and Growth Rate should be returned as percentages.
+- Average Salary should include the currency symbol/code where available.
+- Preserve company names exactly as found in the source.
 
 Companies (${entities.length}):
 ${entities.map((c) => `- ${c}`).join("\n")}
