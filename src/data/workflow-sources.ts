@@ -188,8 +188,16 @@ export const workflowSources: WorkflowSource[] = [
   },
 ];
 
+const WORKFLOW_LABEL_ALIASES: Record<string, WorkflowSourceId> = {
+  "company data enrichment": "company_data",
+  "company data extraction": "company_data",
+  "uk company data extraction": "company_data",
+  "us company data extraction": "company_data",
+};
+
 export const findWorkflowByLabel = (label: string): WorkflowSource | undefined =>
-  workflowSources.find((w) => w.label.trim().toLowerCase() === label.trim().toLowerCase());
+  workflowSources.find((w) => w.label.trim().toLowerCase() === label.trim().toLowerCase()) ??
+  workflowSources.find((w) => w.id === WORKFLOW_LABEL_ALIASES[label.trim().toLowerCase()]);
 
 export const findWorkflowById = (id: string): WorkflowSource | undefined =>
   workflowSources.find((w) => w.id === id);
