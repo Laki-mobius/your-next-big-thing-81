@@ -603,6 +603,40 @@ const statusIcon = (s: JobStatus) => {
   return <Clock className="w-3 h-3" />;
 };
 
+const csvEscape = (v: unknown) => {
+  const s = v == null ? "" : String(v);
+  return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+};
+
+function downloadJobOutput(job: RunJob) {
+  const r = job.jobResult;
+  let csv = "";
+  let filename = `${job.id}-${(job.jobName || job.label || "job").replace(/[^a-z0-9]+/gi, "_")}.csv`;
+  if (r && r.csvColumns?.length && r.csvRows?.length) {
+    csv = [r.csvColumns, ...r.csvRows].map(row => row.map(csvEscape).join(",")).join("\n");
+  } else {
+    csv = [
+      ["Job ID", "Job Name", "Kind", "Status", "Started", "Ended", "Duration", "Sources", "Attributes Extracted", "Attributes Total", "Errors"],
+      [
+        job.id, job.jobName || job.label, job.kind, job.status,
+        fmtTime(job.startedAt), job.endedAt ? fmtTime(job.endedAt) : "",
+        fmtDuration(job.startedAt, job.endedAt),
+        job.sourcesCount, job.attributesExtracted, job.attributesCount,
+        job.errors.join(" | "),
+      ],
+    ].map(row => row.map(csvEscape).join(",")).join("\n");
+  }
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
 function ExecutionPane({ jobs, tick }: { jobs: RunJob[]; tick: number }) {
   return (
     <Card className="flex flex-col h-full p-0 overflow-hidden">
@@ -623,7 +657,9 @@ function ExecutionPane({ jobs, tick }: { jobs: RunJob[]; tick: number }) {
             No jobs yet. Trigger a run from the left panes.
           </div>
         )}
-        {jobs.map(job => (
+        {jobs.map(job => {
+          const canDownload = job.status === "Completed";
+          return (
           <div key={job.id} className="border rounded-md px-2.5 py-1.5 bg-card text-[11px]">
             {/* Line 1: name + status + meta */}
             <div className="flex items-center gap-2 min-w-0">
@@ -636,6 +672,21 @@ function ExecutionPane({ jobs, tick }: { jobs: RunJob[]; tick: number }) {
               <Badge variant="outline" className="text-[9px] h-4 px-1 shrink-0">{job.kind === "sources" ? "SRC" : "WF"}</Badge>
               <span className="font-mono text-[9px] text-muted-foreground shrink-0">{job.id}</span>
               <span className="tabular-nums text-[10px] text-muted-foreground w-9 text-right shrink-0">{job.progress}%</span>
+              <button
+                type="button"
+                onClick={() => canDownload && downloadJobOutput(job)}
+                disabled={!canDownload}
+                title={canDownload ? "Download output (CSV)" : "Available once the job completes"}
+                aria-label="Download job output"
+                className={cn(
+                  "shrink-0 inline-flex items-center justify-center w-5 h-5 rounded border transition-colors",
+                  canDownload
+                    ? "border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground cursor-pointer"
+                    : "border-border text-muted-foreground/40 cursor-not-allowed"
+                )}
+              >
+                <Download className="w-3 h-3" />
+              </button>
             </div>
             {/* Line 2: progress + compact metrics */}
             <div className="flex items-center gap-2 mt-1">
@@ -646,7 +697,8 @@ function ExecutionPane({ jobs, tick }: { jobs: RunJob[]; tick: number }) {
               </span>
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
     </Card>
   );
