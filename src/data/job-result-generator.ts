@@ -438,14 +438,15 @@ export function buildJobResult(opts: {
 
   const rows: string[][] = [];
   let matchedAny = false;
+  const unmatched: string[] = [];
 
   uniqueEntities.forEach(({ company, website }, idx) => {
-    const stored = (usesCompanyDb || usesPeopleDb) ? findStoredCompany(company) : undefined;
+    const stored = (usesCompanyDb || usesPeopleDb) ? findStoredCompany(company, website) : undefined;
 
     if (usesPeopleDb) {
       // One row per personnel record for matched companies, with every stored
       // personnel + company field emitted as a column.
-      if (!stored) return;
+      if (!stored) { unmatched.push(company); return; }
       matchedAny = true;
       const people = personnelForCompany(stored);
       if (people.length === 0) return;
@@ -465,7 +466,7 @@ export function buildJobResult(opts: {
     }
 
     if (usesCompanyDb) {
-      if (!stored) return;
+      if (!stored) { unmatched.push(company); return; }
       matchedAny = true;
       const out: string[] = [];
       for (const k of COMPANY_DB_COLUMNS) out.push(stored[k] ?? "");
@@ -489,6 +490,8 @@ export function buildJobResult(opts: {
     const which = usesPeopleDb && usesCompanyDb
       ? "Company / People Data Extraction"
       : usesPeopleDb ? "People Data Extraction" : "Company Data Extraction";
+    const sample = unmatched.slice(0, 5).map(s => `"${s}"`).join(", ");
+    const moreNote = unmatched.length > 5 ? ` (+${unmatched.length - 5} more)` : "";
     return {
       jobId,
       name: jobName,
@@ -498,9 +501,10 @@ export function buildJobResult(opts: {
       csvColumns: columns,
       csvRows: [],
       failed: true,
-      failureReason: `${which} requires input records that exist in the stored company database. None of the supplied ${uniqueEntities.length || 0} entit${uniqueEntities.length === 1 ? "y" : "ies"} matched a stored company record.`,
+      failureReason: `${which} could not match any of the ${uniqueEntities.length} supplied entit${uniqueEntities.length === 1 ? "y" : "ies"} to a stored company record. Unmatched: ${sample}${moreNote}.`,
     };
   }
+
 
   return {
     jobId,
