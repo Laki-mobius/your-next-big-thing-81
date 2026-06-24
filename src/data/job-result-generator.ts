@@ -258,10 +258,39 @@ export function buildJobResult(opts: {
     (usesCompanyDb || usesPeopleDb) &&
     ids.every(id => id === "company_data" || id === "people_data");
 
+  // Collect ALL stored DB columns so the exported output mirrors what was
+  // captured in the database (not only the 12-15 attributes declared on the
+  // workflow). This satisfies "pull all related attributes / all relevant data".
+  const COMPANY_DB_COLUMNS: string[] = pocCompaniesRaw.length
+    ? Object.keys(pocCompaniesRaw[0]).filter(k => k !== "S.no")
+    : [];
+  const PEOPLE_DB_COLUMNS: string[] = pocPersonnelRaw.length
+    ? Object.keys(pocPersonnelRaw[0]).filter(k => k !== "S.no")
+    : [];
+
+  // Extra (non-DB-backed) workflow attributes selected alongside.
+  const extraAttrs = attrs.filter(a => {
+    const owner = ownerByAttr.get(a);
+    return owner !== "company_data" && owner !== "people_data";
+  });
+
   const websiteIdx = inputHeader.findIndex(c => /website|url|domain|homepage|site/i.test(c));
-  const columns = ["Company"];
-  if (websiteIdx >= 0) columns.push("Website");
-  columns.push(...attrs);
+
+  let columns: string[];
+  if (usesPeopleDb) {
+    // Person row joined with the parent company record + any extra workflow attrs.
+    columns = [
+      ...PEOPLE_DB_COLUMNS,
+      ...COMPANY_DB_COLUMNS.filter(c => !PEOPLE_DB_COLUMNS.includes(c)).map(c => `Company.${c}`),
+      ...extraAttrs,
+    ];
+  } else if (usesCompanyDb) {
+    columns = [...COMPANY_DB_COLUMNS, ...extraAttrs];
+  } else {
+    columns = ["Company"];
+    if (websiteIdx >= 0) columns.push("Website");
+    columns.push(...attrs);
+  }
 
   // De-duplicate input by company name (case-insensitive).
   const seen = new Set<string>();
@@ -285,19 +314,21 @@ export function buildJobResult(opts: {
     const stored = (usesCompanyDb || usesPeopleDb) ? findStoredCompany(company) : undefined;
 
     if (usesPeopleDb) {
-      // One row per personnel record for matched companies.
+      // One row per personnel record for matched companies, with every stored
+      // personnel + company field emitted as a column.
       if (!stored) return;
       matchedAny = true;
       const people = personnelForCompany(stored);
       if (people.length === 0) return;
       for (const person of people) {
-        const out: string[] = [stored["Company_name"] || company];
-        if (websiteIdx >= 0) out.push(website || stored["Company_website_url"] || "");
-        for (const attr of attrs) {
-          const owner = ownerByAttr.get(attr);
-          if (owner === "people_data") out.push(personAttr(attr, person, stored));
-          else if (owner === "company_data") out.push(companyAttr(attr, stored));
-          else out.push(syntheticValue(attr, stored["Company_name"] || company, idx));
+        const out: string[] = [];
+        for (const k of PEOPLE_DB_COLUMNS) out.push(person[k] ?? "");
+        for (const k of COMPANY_DB_COLUMNS) {
+          if (PEOPLE_DB_COLUMNS.includes(k)) continue;
+          out.push(stored[k] ?? "");
+        }
+        for (const attr of extraAttrs) {
+          out.push(syntheticValue(attr, stored["Company_name"] || company, idx));
         }
         rows.push(out);
       }
@@ -307,12 +338,10 @@ export function buildJobResult(opts: {
     if (usesCompanyDb) {
       if (!stored) return;
       matchedAny = true;
-      const out: string[] = [stored["Company_name"] || company];
-      if (websiteIdx >= 0) out.push(website || stored["Company_website_url"] || "");
-      for (const attr of attrs) {
-        const owner = ownerByAttr.get(attr);
-        if (owner === "company_data") out.push(companyAttr(attr, stored));
-        else out.push(syntheticValue(attr, stored["Company_name"] || company, idx));
+      const out: string[] = [];
+      for (const k of COMPANY_DB_COLUMNS) out.push(stored[k] ?? "");
+      for (const attr of extraAttrs) {
+        out.push(syntheticValue(attr, stored["Company_name"] || company, idx));
       }
       rows.push(out);
       return;
