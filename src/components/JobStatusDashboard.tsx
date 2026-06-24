@@ -410,22 +410,65 @@ function RunBySourcesPane({ onRun }: { onRun: (j: RunJob) => void }) {
 
   const canRun = matched.length > 0 && jobName.trim().length > 0;
 
-  const handleRun = () => {
+  const handleRun = async () => {
+    // Parse entity rows from upload / manual entry (same as Workflows pane).
+    let header: string[] = [];
+    let entityRows: string[][] = [];
+    if (entityFile) {
+      const parsed = await parseEntityFile(entityFile);
+      header = parsed.header;
+      entityRows = parsed.rows;
+    } else if (entityManual.trim()) {
+      entityRows = parseManualEntities(entityManual);
+    }
+    if (entityRows.length === 0) {
+      entityRows = [["Sample Company Inc.", "sample-company.com"]];
+      header = ["Company", "Website"];
+    }
+
+    // Union of workflow labels across the matched sources — drives DB lookup
+    // in buildJobResult so the downloaded CSV contains all stored DB columns.
+    const wfLabels = Array.from(
+      new Set(matched.flatMap(s => s.workflows || [])),
+    );
+
+    const jobId = `SRC-${Date.now().toString(36).toUpperCase()}`;
+    const jobResult = buildJobResult({
+      jobId,
+      jobName: jobName.trim(),
+      workflowLabels: wfLabels,
+      entityRows,
+      inputHeader: header,
+    });
+
+    const isFailed = !!jobResult.failed;
     onRun({
-      id: `SRC-${Date.now().toString(36).toUpperCase()}`,
+      id: jobId,
       kind: "sources",
       jobName: jobName.trim(),
-      label: `${matched.length} source${matched.length !== 1 ? "s" : ""} · ${availableAttrs.length} attribute${availableAttrs.length !== 1 ? "s" : ""}`,
-      status: "Queued",
-      progress: 0,
+      label: isFailed
+        ? `${matched.length} source${matched.length !== 1 ? "s" : ""} · failed (no matched records)`
+        : `${matched.length} source${matched.length !== 1 ? "s" : ""} · ${jobResult.records} record${jobResult.records !== 1 ? "s" : ""}`,
+      status: isFailed ? "Failed" : "Queued",
+      progress: isFailed ? 100 : 0,
       startedAt: Date.now(),
+      endedAt: isFailed ? Date.now() : undefined,
       sourcesCount: matched.length,
-      attributesCount: availableAttrs.length,
+      attributesCount: jobResult.attributesCount || availableAttrs.length,
       attributesExtracted: 0,
-      errors: [],
+      errors: isFailed && jobResult.failureReason ? [jobResult.failureReason] : [],
       schedule,
+      jobResult,
     });
-    toast({ title: `Job "${jobName.trim()}" saved & queued`, description: schedule ? `Scheduled · ${schedule.frequency} (${schedule.timezone})` : "Running now" });
+    if (isFailed) {
+      toast({
+        title: `Job "${jobName.trim()}" failed`,
+        description: jobResult.failureReason || "No matching records found in the stored company database.",
+        variant: "destructive",
+      });
+    } else {
+      toast({ title: `Job "${jobName.trim()}" saved & queued`, description: schedule ? `Scheduled · ${schedule.frequency} (${schedule.timezone})` : "Running now" });
+    }
   };
 
   return (
