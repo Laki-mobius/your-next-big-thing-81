@@ -50,19 +50,148 @@ const norm = (s: string) => (s || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
 type CompanyRec = Record<string, string>;
 type PersonRec = Record<string, string>;
 
-/** Find the company in the stored POC dataset that best matches the input. */
-function findStoredCompany(input: string): CompanyRec | undefined {
-  const n = norm(input);
-  if (!n) return undefined;
-  // Exact normalized match first.
-  let hit = pocCompaniesRaw.find(c => norm(c["Company_name"]) === n);
-  if (hit) return hit;
-  // Substring match (either direction).
-  hit = pocCompaniesRaw.find(c => {
-    const cn = norm(c["Company_name"]);
-    return cn && (cn.includes(n) || n.includes(cn));
+// Common legal/entity suffixes and stop tokens to strip before name comparison.
+const SUFFIX_TOKENS = new Set<string>([
+  "inc", "incorporated", "llc", "ltd", "limited", "plc", "gmbh", "sa", "ag",
+  "co", "corp", "corporation", "company", "holdings", "holding", "group",
+  "the", "pte", "pty", "bv", "nv", "srl", "kk", "sas", "sarl", "oy", "ab",
+  "asa", "spzoo", "trust", "trustee", "for", "of", "and",
+]);
+
+const STOP_TOKENS = new Set<string>(["the", "for", "of", "and", "a", "an"]);
+
+const tokenize = (s: string): string[] =>
+  (s || "")
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .split(/[^a-z0-9]+/)
+    .filter(Boolean);
+
+/** Strip stop/suffix tokens and tokens of length ≤ 2; return remaining tokens. */
+const significantTokens = (s: string): string[] =>
+  tokenize(s).filter(t => t.length > 2 && !STOP_TOKENS.has(t) && !SUFFIX_TOKENS.has(t));
+
+/** Normalised name with suffix tokens removed (e.g. "Branford Castle, Inc." → "branfordcastle"). */
+const stripSuffixesNorm = (s: string): string =>
+  tokenize(s).filter(t => !SUFFIX_TOKENS.has(t)).join("");
+
+/** Extract a hostname from anything that looks like a URL/domain. */
+const extractHost = (s: string): string => {
+  if (!s) return "";
+  let v = s.trim().toLowerCase();
+  v = v.replace(/^[a-z]+:\/\//, "");
+  v = v.split(/[\/?#]/)[0];
+  v = v.replace(/^www\./, "");
+  if (/\s/.test(v)) return "";
+  if (!/^[a-z0-9.-]+\.[a-z]{2,}$/.test(v)) return "";
+  return v;
+};
+
+interface CompanyIndexEntry {
+  rec: CompanyRec;
+  name: string;
+  norm: string;
+  stripped: string;
+  tokens: Set<string>;
+  host: string;
+  ids: Set<string>;
+}
+
+let _companyIndex: CompanyIndexEntry[] | null = null;
+function getCompanyIndex(): CompanyIndexEntry[] {
+  if (_companyIndex) return _companyIndex;
+  _companyIndex = pocCompaniesRaw.map(rec => {
+    const name = rec["Company_name"] || "";
+    const ids = new Set<string>();
+    for (const k of ["Client_company_id", "Duns_id", "Dca_id"]) {
+      const v = (rec[k] || "").trim();
+      if (v) ids.add(v.toLowerCase());
+    }
+    return {
+      rec,
+      name,
+      norm: norm(name),
+      stripped: stripSuffixesNorm(name),
+      tokens: new Set(significantTokens(name)),
+      host: extractHost(rec["Company_website_url"] || ""),
+      ids,
+    };
   });
-  return hit;
+  return _companyIndex;
+}
+
+/**
+ * Layered company matcher. Resolves an input via, in order:
+ *  1) exact normalized name
+ *  2) suffix-stripped normalized name
+ *  3) substring (either direction) on normalized + suffix-stripped forms
+ *  4) token-overlap (≥80% of input tokens present; ≥2 overlap when possible)
+ *  5) identifier match (Client_company_id / Duns_id / Dca_id)
+ *  6) website / domain host match
+ */
+function findStoredCompany(input: string, websiteHint?: string): CompanyRec | undefined {
+  if (!input && !websiteHint) return undefined;
+  const idx = getCompanyIndex();
+
+  const inputTrim = (input || "").trim();
+  const n = norm(inputTrim);
+  const stripped = stripSuffixesNorm(inputTrim);
+  const inputTokens = significantTokens(inputTrim);
+  const idKey = inputTrim.toLowerCase();
+  const inputHost = extractHost(inputTrim) || extractHost(websiteHint || "");
+
+  if (n) {
+    const hit = idx.find(e => e.norm === n);
+    if (hit) return hit.rec;
+  }
+  if (stripped) {
+    const hit = idx.find(e => e.stripped && e.stripped === stripped);
+    if (hit) return hit.rec;
+  }
+  if (n) {
+    const hit = idx.find(e => e.norm && (e.norm.includes(n) || n.includes(e.norm)));
+    if (hit) return hit.rec;
+  }
+  if (stripped) {
+    const hit = idx.find(e => e.stripped && (e.stripped.includes(stripped) || stripped.includes(e.stripped)));
+    if (hit) return hit.rec;
+  }
+
+  if (inputTokens.length > 0) {
+    let best: { entry: CompanyIndexEntry; overlap: number } | null = null;
+    for (const e of idx) {
+      if (e.tokens.size === 0) continue;
+      let overlap = 0;
+      for (const t of inputTokens) if (e.tokens.has(t)) overlap++;
+      if (overlap === 0) continue;
+      const coverage = overlap / inputTokens.length;
+      const minOverlap = inputTokens.length === 1 ? 1 : 2;
+      if (overlap < minOverlap) continue;
+      if (coverage < 0.8) continue;
+      if (
+        !best ||
+        overlap > best.overlap ||
+        (overlap === best.overlap && e.name.length < best.entry.name.length)
+      ) {
+        best = { entry: e, overlap };
+      }
+    }
+    if (best) return best.entry.rec;
+  }
+
+  if (idKey) {
+    const hit = idx.find(e => e.ids.has(idKey));
+    if (hit) return hit.rec;
+  }
+
+  if (inputHost) {
+    const hit = idx.find(e =>
+      e.host && (e.host === inputHost || e.host.endsWith("." + inputHost) || inputHost.endsWith("." + e.host))
+    );
+    if (hit) return hit.rec;
+  }
+
+  return undefined;
 }
 
 function personnelForCompany(company: CompanyRec): PersonRec[] {
