@@ -530,22 +530,34 @@ function RunByWorkflowsPane({ onRun }: { onRun: (j: RunJob) => void }) {
       inputHeader: header,
     });
 
+    const isFailed = !!jobResult.failed;
     onRun({
       id: jobId,
       kind: "workflows",
       jobName: jobName.trim(),
-      label: `${selectedWfs.length} workflow${selectedWfs.length !== 1 ? "s" : ""} · ${jobResult.records} record${jobResult.records !== 1 ? "s" : ""}`,
-      status: "Queued",
-      progress: 0,
+      label: isFailed
+        ? `${selectedWfs.length} workflow${selectedWfs.length !== 1 ? "s" : ""} · failed (no matched records)`
+        : `${selectedWfs.length} workflow${selectedWfs.length !== 1 ? "s" : ""} · ${jobResult.records} record${jobResult.records !== 1 ? "s" : ""}`,
+      status: isFailed ? "Failed" : "Queued",
+      progress: isFailed ? 100 : 0,
       startedAt: Date.now(),
+      endedAt: isFailed ? Date.now() : undefined,
       sourcesCount: Math.max(matched.length, selectedWfs.length),
       attributesCount: jobResult.attributesCount,
       attributesExtracted: 0,
-      errors: [],
+      errors: isFailed && jobResult.failureReason ? [jobResult.failureReason] : [],
       schedule,
       jobResult,
     });
-    toast({ title: `Job "${jobName.trim()}" saved & queued`, description: schedule ? `Scheduled · ${schedule.frequency} (${schedule.timezone})` : "Running now" });
+    if (isFailed) {
+      toast({
+        title: `Job "${jobName.trim()}" failed`,
+        description: jobResult.failureReason || "No matching records found in the stored company database.",
+        variant: "destructive",
+      });
+    } else {
+      toast({ title: `Job "${jobName.trim()}" saved & queued`, description: schedule ? `Scheduled · ${schedule.frequency} (${schedule.timezone})` : "Running now" });
+    }
   };
 
   return (
