@@ -365,7 +365,7 @@ export function buildJobResult(opts: {
       name: jobName,
       tier: workflowLabels.join(", "),
       records: 0,
-      attributesCount: attrs.length,
+      attributesCount: columns.length,
       csvColumns: columns,
       csvRows: [],
       failed: true,
@@ -378,7 +378,7 @@ export function buildJobResult(opts: {
     name: jobName,
     tier: workflowLabels.join(", "),
     records: rows.length,
-    attributesCount: attrs.length,
+    attributesCount: columns.length,
     csvColumns: columns,
     csvRows: rows,
   };
