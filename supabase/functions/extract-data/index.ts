@@ -46,6 +46,17 @@ const WORKFLOW_SOURCES: Record<string, { sourceName: string; sourceUrlHint: stri
       "Hierarchy Level", "Relationship Type", "Performance Expectation",
     ],
   },
+  labor_market: {
+    sourceName: "Labor Market Intelligence",
+    sourceUrlHint: "publicly available labor market intelligence sources including LinkedIn company pages, job boards, Crunchbase, Glassdoor, and similar workforce/talent data sources",
+    attributes: [
+      "Industry", "Company Headcount", "Company Name", "Hiring Rate",
+      "Attrition Rate", "Growth Rate", "Job Postings", "Sentiment",
+      "Founders", "Average Tenure", "Average Salary", "Geography",
+      "Keywords", "Skills", "Activities", "Previous Company",
+      "Funding Rounds", "Investors",
+    ],
+  },
 };
 
 interface RequestBody {
